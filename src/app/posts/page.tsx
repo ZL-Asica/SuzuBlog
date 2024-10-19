@@ -54,7 +54,7 @@ export default async function PostsPage() {
                 {/* Date of Publish */}
                 <div className='text-gray-450 mb-2 flex items-center text-sm'>
                   <FaRegClock className='mr-2' />
-                  <span>{post.frontmatter.date}</span>
+                  <span>{post.frontmatter.date.split(' ')[0]}</span>
                 </div>
                 {/* Title in Frontmatter */}
                 <h2 className='mb-2 text-2xl font-bold'>
