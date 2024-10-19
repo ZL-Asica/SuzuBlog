@@ -6,7 +6,7 @@ import { Frontmatter } from '@/types';
 export async function parseMarkdown(
   content: string,
 ): Promise<{ frontmatter: Frontmatter; contentHtml: string }> {
-  const { data, content: markdownContent } = matter(content);
+  const { data: frontmatterData, content: markdownContent } = matter(content);
 
   // Replace all comments but keep <!--more-->
   const contentSanitized = markdownContent.replace(/<!--[^>]*-->/g, (match) => {
@@ -37,7 +37,7 @@ export async function parseMarkdown(
 
   // Override the default `image` method
   renderer.image = function ({ href, title, text }: Tokens.Image) {
-    const imgTitle = title || text || '';
+    const imgTitle = title || text || 'undefined image alt';
     // Return the formatted HTML with lazy loading
     return `<img src="${href}" class="post-content-img" alt="${text}" title="${imgTitle}" loading="lazy" />`;
   };
@@ -53,7 +53,7 @@ export async function parseMarkdown(
   const processedContent = await marked(contentSanitized);
 
   return {
-    frontmatter: data as Frontmatter,
+    frontmatter: frontmatterData as Frontmatter,
     contentHtml: processedContent,
   };
 }

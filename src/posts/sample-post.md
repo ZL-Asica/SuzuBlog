@@ -1,6 +1,6 @@
 ---
 title: '我的第一篇文章'
-date: '2024-01-01'
+date: '2024-01-01 20:00:00'
 thumbnail: '/images/katomegumi.jpg'
 categories:
   - 前端开发

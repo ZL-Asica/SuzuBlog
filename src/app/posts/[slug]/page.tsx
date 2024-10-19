@@ -21,7 +21,7 @@ export default async function PostPage({ params }: PostPageProps) {
           {/* Thumbnail masking effect */}
           <Image
             src={post.frontmatter.thumbnail}
-            alt={post.frontmatter.title}
+            alt={`Thumbnail for ${post.frontmatter.title}`}
             width={1200}
             height={500}
             className='h-full w-full rounded-lg object-cover'
@@ -34,9 +34,9 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className='absolute bottom-0 left-1/2 w-full max-w-3xl -translate-x-1/2 transform p-4 text-white'>
             <h1 className='text-3xl font-bold'>{post.frontmatter.title}</h1>
             <p className='left-1 ml-2 flex items-center'>
-              {post.frontmatter.author || 'ZL Asica'}
+              {post.frontmatter.author}
               <span className='mx-3 text-2xl'>•</span>
-              {post.frontmatter.date}
+              {post.frontmatter.date.split(' ')[0]}
             </p>
           </div>
         </div>
