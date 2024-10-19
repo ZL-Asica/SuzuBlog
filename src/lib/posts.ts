@@ -68,6 +68,13 @@ export async function getAllPosts(): Promise<PostData[]> {
     }),
   );
 
+  // Sort posts by date (newest first)
+  allPosts.sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date);
+    const dateB = new Date(b.frontmatter.date);
+    return dateB.getTime() - dateA.getTime(); // Sort descending (newest first)
+  });
+
   return allPosts;
 }
 
