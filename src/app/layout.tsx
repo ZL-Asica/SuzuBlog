@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+// eslint-disable-next-line camelcase
 import { Roboto, Noto_Sans_SC } from 'next/font/google';
 import './globals.css';
 import ThemeProvider from '@/components/ThemeProvider';

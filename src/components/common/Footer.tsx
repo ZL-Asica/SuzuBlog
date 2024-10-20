@@ -32,7 +32,9 @@ export default function Footer() {
 
   const contactList = Object.entries(config.socialMedia)
     .map(([key, href]) => {
-      if (!href) return null;
+      if (!href) {
+        return null;
+      }
       const IconComponent = socialIcons[key];
       const title = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize key for title
       const contactHref = key === 'email' ? `mailto:${href}` : href;
@@ -43,9 +45,7 @@ export default function Footer() {
       };
     })
     .filter(
-      (
-        contact,
-      ): contact is { href: string; title: string; icon: JSX.Element } =>
+      (contact): contact is { href: string; title: string; icon } =>
         contact !== null,
     ); // Asserts that contact is not null
 
