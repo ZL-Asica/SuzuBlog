@@ -5,6 +5,7 @@ import '@/styles/codeblock.css';
 import '@/styles/postContent.css';
 import 'highlight.js/styles/an-old-hope.css';
 import { getConfig } from '@/lib/getConfig';
+import DisqusComments from '@/components/DisqusComments';
 
 interface PostPageProps {
   params: {
@@ -51,10 +52,7 @@ export default async function PostPage({ params }: PostPageProps) {
       />
 
       {/* Comment */}
-      <div
-        className='mx-auto mt-10 w-full max-w-3xl'
-        dangerouslySetInnerHTML={{ __html: config.slotComment }}
-      />
+      <DisqusComments disqusShortname={config.disqusShortname} />
     </article>
   );
 }

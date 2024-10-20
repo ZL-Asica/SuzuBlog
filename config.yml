@@ -1,43 +1,60 @@
-title: 'Suzu'
-subTitle: 'Next.js Blog Template'
-description: 'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.'
-keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica'
+#######################
+# SITE SETTINGS
+#######################
+title: 'Suzu' # The name of your blog, used in titles and meta tags.
+subTitle: 'Next.js Blog Template' # A short description that appears after the main title.
+description: 'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.' # A longer description for SEO and meta tags.
+keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica' # Comma-separated keywords for SEO purposes.
 author:
-  name: 'ZL Asica'
-  link: 'https://www.zla.app'
-# Please use the ISO 639-1 code for the language
+  name: 'ZL Asica' # Your name, displayed as the author of the blog.
+  link: 'https://www.zla.app' # Link to your personal website or blog.
+# Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
 lang: 'zh'
 
-# Relative path from /public/*, or full URL(include http(s)://)
+# Path to your avatar image. Can be a relative path from /public or a full URL (e.g., https://).
 avatar: '/images/avatar.jpg'
-# This will be both your background and default post thumbnail
+# Used as the background image for your blog,
+# and also as the default thumbnail for posts without thumbnails.
 background: '/images/background.jpg'
-# Shows on home page below your avatar
+# Slogan displayed on your homepage, under your avatar.
 slogan: "As long as the code or the developer is able to run, it's all good."
 
-# Set your social media links
+#######################
+# SOCIAL MEDIA SETTINGS
+#######################
+# Add your social media links here.
+# Leave the field empty if you do not want to display a specific platform.
 socialMedia:
-  github: 'https://www.github.com/ZL-Asica:'
-  linkedin: 'https://www.linkedin.com/in/elara-liu'
-  x: '' # Twitter
-  instagram: 'https://www.instagram.com/zl_asica'
-  youtube: 'https://www.youtube.com/@ZL-Asica'
-  telegram: 'https://t.me/ZL_Asica'
-  bilibili: 'https://space.bilibili.com/29018759'
-  zhihu: 'https://www.zhihu.com/people/zl-asica'
-  email: 'zl@zla.app' # Only put your email address here, no mailto: prefix
-  rss: ''
+  github: 'https://www.github.com/ZL-Asica' # Your GitHub profile URL.
+  linkedin: 'https://www.linkedin.com/in/elara-liu' # Your LinkedIn profile URL.
+  x: '' # Twitter profile URL.
+  instagram: 'https://www.instagram.com/zl_asica' # Instagram profile URL.
+  youtube: 'https://www.youtube.com/@ZL-Asica' # YouTube channel URL.
+  telegram: 'https://t.me/ZL_Asica' # Telegram profile or channel URL.
+  bilibili: 'https://space.bilibili.com/29018759' # Bilibili profile URL.
+  zhihu: 'https://www.zhihu.com/people/zl-asica' # Zhihu profile URL.
+  email: 'zl@zla.app' # Your email address (do NOT include the mailto: prefix).
+  rss: '' # Optional: RSS feed URL ().
 
-# Set your own js script inside <head>
+#######################
+# DISQUS SETTINGS
+#######################
+# Your Disqus shortname (used for integrating Disqus comments).
+# Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
+disqusShortname: 'zla-pub'
+
+#######################
+# CUSTOM CODE BLOCKS
+# ! WARNING: Only modify these if you understand the purpose of custom scripts.
+#######################
+# Add JavaScript URLs or code snippets to be included inside <head> on your site.
 scriptSlotHeader:
   -
 
-# Set your own js script before </body>
+# Add JavaScript URLs or code snippets to be included before the closing </body> tag.
 scriptSlotFooter:
   - 'https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js'
 
-# HTML code inside <footer>
+# Add custom HTML code to be included inside the <footer> section of your site.
 slotFooter: |
-
-# Comment system for blog posts
-slotComment: |
+  <!-- Add your custom footer HTML here -->
