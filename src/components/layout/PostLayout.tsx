@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import DisqusComments from '@/components/DisqusComments';
+import DisqusComments from '@/components/common/DisqusComments';
 import { PostData } from '@/types';
-import { getConfig } from '@/lib/getConfig';
+import { getConfig } from '@/services/getConfig';
 import '@/styles/codeblock.css';
 import '@/styles/postContent.css';
 import 'highlight.js/styles/an-old-hope.css';

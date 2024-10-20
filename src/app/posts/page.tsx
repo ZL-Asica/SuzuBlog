@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts } from '@/services/posts';
 import Link from 'next/link';
 import { PostData } from '@/types';
 import Image from 'next/image';

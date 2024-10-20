@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa6';
 import { SiZhihu } from 'react-icons/si';
 import { MdEmail } from 'react-icons/md';
-import { getConfig } from '@/lib/getConfig';
+import { getConfig } from '@/services/getConfig';
 import Link from 'next/link';
 
 export default function Footer() {

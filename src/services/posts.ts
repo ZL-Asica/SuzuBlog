@@ -2,7 +2,7 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { parseMarkdown } from './markdown';
 import { PostData, Frontmatter } from '@/types';
-import { getConfig } from '@/lib/getConfig';
+import { getConfig } from '@/services/getConfig';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
 

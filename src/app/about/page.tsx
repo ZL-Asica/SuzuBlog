@@ -1,7 +1,7 @@
-import { getPostData } from '@/lib/posts';
+import { getPostData } from '@/services/posts';
 import { PostData } from '@/types';
-import PostLayout from '@/components/PostLayout';
-import { getConfig } from '@/lib/getConfig';
+import PostLayout from '@/components/layout/PostLayout';
+import { getConfig } from '@/services/getConfig';
 
 export default async function AboutPage() {
   const post: PostData = await getPostData('about', 'about');

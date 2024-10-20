@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import PostsPage from './posts/page';
-import { getConfig } from '@/lib/getConfig';
+import { getConfig } from '@/services/getConfig';
 
 export default function Home() {
   const config = getConfig();
