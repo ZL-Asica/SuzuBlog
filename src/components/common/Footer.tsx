@@ -39,15 +39,39 @@ export default function Footer() {
               aria-label={contact.title}
               target='_blank'
               rel='noopener noreferrer'
+              className='transform transition-transform hover:scale-110'
             >
               {contact.icon}
             </a>
           ))}
         </div>
-        <p>
-          © 2024-{currentYear} Suzu Blog.
+        <p style={{ color: '#b9b9b9' }}>
+          © 2017-{currentYear} Suzu Blog
           <br />
-          All rights reserved.
+          Theme{' '}
+          <Link
+            href='https://suzu.zla.app/'
+            target='_blank'
+            aria-label="Suzu's homepage"
+            style={{
+              color: '#b9b9b9',
+              textDecoration: 'underline dotted rgba(0, 0, 0, .1)',
+            }}
+          >
+            Suzu
+          </Link>{' '}
+          by{' '}
+          <Link
+            href='https://www.zla.app/'
+            target='_blank'
+            aria-label="ZL Asica's homepage"
+            style={{
+              color: '#b9b9b9',
+              textDecoration: 'underline dotted rgba(0, 0, 0, .1)',
+            }}
+          >
+            ZL Asica
+          </Link>
         </p>
       </div>
     </footer>

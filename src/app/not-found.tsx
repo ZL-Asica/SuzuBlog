@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Custom404() {
@@ -37,18 +38,12 @@ export default function Custom404() {
           <span className='font-bold'>{countdown}</span> seconds.
         </p>
         <div className='mt-10 flex items-center justify-center gap-x-6'>
-          <a
+          <Link
             href='/'
             className='hover:bg-sakuraPink-dark rounded-md bg-sakuraPink px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Go back home
-          </a>
-          <a
-            href='/'
-            className='text-skyblue hover:text-skyblue-dark text-sm font-semibold'
-          >
-            Contact support <span aria-hidden='true'>&rarr;</span>
-          </a>
+          </Link>
         </div>
       </div>
     </main>
