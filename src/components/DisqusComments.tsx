@@ -19,7 +19,7 @@ export default function DisqusComments({
         disqusScript.parentNode.removeChild(disqusScript);
       }
     };
-  }, []);
+  }, [disqusShortname]);
 
   return (
     <div id='disqus_thread' className='mx-auto mt-10 w-full max-w-3xl'></div>

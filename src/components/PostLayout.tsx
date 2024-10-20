@@ -19,7 +19,7 @@ export default function PostLayout({
 
   // if showComments is defined in the frontmatter, use that value,
   //    otherwise default to true
-  const showComments: Boolean = post.frontmatter.showComments ?? true;
+  const showComments: boolean = post.frontmatter.showComments ?? true;
 
   return (
     <article className='container mx-auto p-5'>
