@@ -2,10 +2,10 @@
 export interface Frontmatter {
   title: string;
   date: string;
-  author?: string;
+  author: string;
+  thumbnail: string;
   tags?: string[];
   categories?: string[];
-  thumbnail?: string;
   redirect?: string;
 }
 

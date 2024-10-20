@@ -56,7 +56,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
 
-        {config.scriptSlotFooter.map((scriptUrl, index) => (
+        {config.scriptSlotFooter?.map((scriptUrl, index) => (
           <Script key={index} src={scriptUrl} strategy='lazyOnload' />
         ))}
       </body>
