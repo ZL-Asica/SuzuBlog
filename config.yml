@@ -37,11 +37,21 @@ socialMedia:
   rss: '' # Optional: RSS feed URL ().
 
 #######################
-# DISQUS SETTINGS
+# PAGES (ABOUT, FRIENDS) SETTINGS
+#######################
+# Have thumbnails for the about and friends pages.
+thumbnailAbout: false
+thumbnailFriends: false
+
+#######################
+# DISQUS (COMMENTS) SETTINGS
 #######################
 # Your Disqus shortname (used for integrating Disqus comments).
 # Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
 disqusShortname: 'zla-pub'
+
+# Enable or disable comments on your about page.
+commentAbout: false
 
 #######################
 # CUSTOM CODE BLOCKS
