@@ -1,16 +1,24 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
+import { Roboto, Noto_Sans_SC } from 'next/font/google';
 import './globals.css';
 import ThemeProvider from '@/components/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
+import Script from 'next/script';
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['100', '400', '700', '900'],
   variable: '--font-roboto',
   style: ['normal', 'italic'],
+});
+
+const notoSansSC = Noto_Sans_SC({
+  subsets: ['latin'],
+  weight: ['100', '400', '700', '900'],
+  variable: '--font-noto-sans-sc',
+  style: ['normal'],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='zh'>
-      <body className={`${roboto.variable} antialiased`}>
+      <body className={`${notoSansSC.variable} ${roboto.variable} antialiased`}>
         <ThemeProvider />
         <Header />
         <main>{children}</main>
