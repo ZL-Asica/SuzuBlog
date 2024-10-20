@@ -1,7 +1,6 @@
 ---
 title: '我的第二篇文章'
 date: '2024-10-01 00:00:00'
-thumbnail: '/images/katomegumi.jpg'
 categories:
   - 全栈
   - 教程

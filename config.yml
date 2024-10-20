@@ -26,7 +26,7 @@ socialMedia:
   bilibili: 'https://space.bilibili.com/29018759'
   zhihu: 'https://www.zhihu.com/people/zl-asica'
   email: 'zl@zla.app' # Only put your email address here, no mailto: prefix
-  rss: '/feed.xml'
+  rss: ''
 
 # Set your own js script inside <head>
 scriptSlotHeader:
