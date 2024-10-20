@@ -4,6 +4,7 @@ import { PostData } from '@/types';
 import '@/styles/codeblock.css';
 import '@/styles/postContent.css';
 import 'highlight.js/styles/an-old-hope.css';
+import { getConfig } from '@/lib/getConfig';
 
 interface PostPageProps {
   params: {
@@ -12,6 +13,7 @@ interface PostPageProps {
 }
 
 export default async function PostPage({ params }: PostPageProps) {
+  const config = getConfig();
   const post: PostData = await getPostData(params.slug);
 
   return (
@@ -46,6 +48,12 @@ export default async function PostPage({ params }: PostPageProps) {
       <div
         className='post-content mx-auto mt-10 w-full max-w-3xl'
         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+      />
+
+      {/* Comment */}
+      <div
+        className='mx-auto mt-10 w-full max-w-3xl'
+        dangerouslySetInnerHTML={{ __html: config.slotComment }}
       />
     </article>
   );

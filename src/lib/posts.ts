@@ -2,6 +2,7 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { parseMarkdown } from './markdown';
 import { PostData, Frontmatter } from '@/types';
+import { getConfig } from '@/lib/getConfig';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
 
@@ -26,6 +27,8 @@ function formatDateTime(dateTime: string): string {
 
 // Get all posts data
 export async function getAllPosts(): Promise<PostData[]> {
+  const config = getConfig();
+
   const fileNames = await fsPromises.readdir(postsDirectory);
 
   const allPosts = await Promise.all(
@@ -41,7 +44,8 @@ export async function getAllPosts(): Promise<PostData[]> {
       // Limit title and author length to prevent overflow
       frontmatter.title =
         frontmatter.title?.slice(0, 100) || fileName.replace(/\.md$/, '');
-      frontmatter.author = frontmatter.author?.slice(0, 30) || 'ZL Asica';
+      frontmatter.author =
+        frontmatter.author?.slice(0, 30) || config.author.name;
 
       // TODO: Add default thumbnail
 

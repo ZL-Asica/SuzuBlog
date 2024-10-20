@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa6';
 import { useState, useRef, useEffect } from 'react';
 
-export default function Header() {
+export default function Header({ siteTitle }: { siteTitle: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -58,7 +58,9 @@ export default function Header() {
     >
       <div className='mx-auto max-w-7xl px-4 py-4'>
         <nav className='flex items-center justify-between'>
-          <h1 className='text-2xl font-bold'>Suzu Blog</h1>
+          <Link href='/'>
+            <h1 className='text-2xl font-bold'>{siteTitle}</h1>
+          </Link>
 
           {/* Hamburger Menu Button */}
           <button

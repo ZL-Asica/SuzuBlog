@@ -1,0 +1,43 @@
+title: 'Suzu'
+subTitle: 'Next.js Blog Template'
+description: 'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.'
+keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica'
+author:
+  name: 'ZL Asica'
+  link: 'https://www.zla.app'
+# Please use the ISO 639-1 code for the language
+lang: 'zh'
+
+# Relative path from /public/*, or full URL(include http(s)://)
+avatar: '/images/avatar.jpg'
+# This will be both your background and default post thumbnail
+background: '/images/background.jpg'
+# Shows on home page below your avatar
+slogan: "As long as the code or the developer is able to run, it's all good."
+
+# Set your social media links
+socialMedia:
+  github: 'https://www.github.com/ZL-Asica:'
+  linkedin: 'https://www.linkedin.com/in/elara-liu'
+  x: '' # Twitter
+  instagram: 'https://www.instagram.com/zl_asica'
+  youtube: 'https://www.youtube.com/@ZL-Asica'
+  telegram: 'https://t.me/ZL_Asica'
+  bilibili: 'https://space.bilibili.com/29018759'
+  zhihu: 'https://www.zhihu.com/people/zl-asica'
+  email: 'zl@zla.app' # Only put your email address here, no mailto: prefix
+  rss: '/feed.xml'
+
+# Set your own js script inside <head>
+scriptSlotHeader:
+  -
+
+# Set your own js script before </body>
+scriptSlotFooter:
+  - 'https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js'
+
+# HTML code inside <footer>
+slotFooter: |
+
+# Comment system for blog posts
+slotComment: |

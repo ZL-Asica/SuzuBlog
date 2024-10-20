@@ -1,18 +1,21 @@
 import Image from 'next/image';
 import PostsPage from './posts/page';
+import { getConfig } from '@/lib/getConfig';
 
 export default function Home() {
+  const config = getConfig();
+
   return (
     <div>
       {/* Top Banner */}
       <div
         className='relative h-[40vh] w-full bg-cover bg-center sm:h-[40vh] md:h-[600px] lg:h-[800px]'
-        style={{ backgroundImage: "url('/images/katomegumi.jpg')" }}
+        style={{ backgroundImage: `url(${config.background})` }}
       >
         {/* Avatar */}
         <div className='absolute left-1/2 top-[40%] -translate-x-1/2 transform'>
           <Image
-            src='/images/avatar.jpg'
+            src={config.avatar}
             alt='Avatar'
             width={150}
             height={150}
@@ -22,8 +25,8 @@ export default function Home() {
       </div>
 
       {/* Slogan */}
-      <div className='mt-4 text-center'>
-        <h1 className='text-2xl font-semibold'>Your Slogan Goes Here</h1>
+      <div className='mt-4 px-6 text-center'>
+        <h1 className='text-2xl font-semibold'>{config.slogan}</h1>
       </div>
 
       {/* Posts List - centered */}

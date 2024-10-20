@@ -5,7 +5,10 @@ import './globals.css';
 import ThemeProvider from '@/components/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
+import { getConfig } from '@/lib/getConfig';
 import Script from 'next/script';
+
+const config = getConfig();
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -22,12 +25,16 @@ const notoSansSC = Noto_Sans_SC({
 });
 
 export const metadata: Metadata = {
-  title: 'Suzu - Next.js Blog Template',
-  description:
-    'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.',
-  keywords:
-    'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica',
-  authors: [{ name: 'ZL Asica' }],
+  title: `${config.title} - ${config.subTitle}`,
+  description: config.description,
+  keywords: config.keywords,
+  authors: [{ url: config.author.link, name: config.author.name }],
+  openGraph: {
+    title: `${config.title} - ${config.subTitle}`,
+    description: config.description,
+    type: 'website',
+    locale: config.lang,
+  },
 };
 
 export default function RootLayout({
@@ -35,13 +42,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const config = getConfig();
+
   return (
-    <html lang='zh'>
-      <body className={`${notoSansSC.variable} ${roboto.variable} antialiased`}>
+    <html lang={config.lang}>
+      {config.scriptSlotHeader?.map((scriptUrl, index) => (
+        <Script key={index} src={scriptUrl} strategy='beforeInteractive' />
+      ))}
+      <body className={`${roboto.variable} ${notoSansSC.variable} antialiased`}>
         <ThemeProvider />
-        <Header />
+        <Header siteTitle={config.title} />
         <main>{children}</main>
         <Footer />
+
+        {config.scriptSlotFooter.map((scriptUrl, index) => (
+          <Script key={index} src={scriptUrl} strategy='lazyOnload' />
+        ))}
       </body>
     </html>
   );
