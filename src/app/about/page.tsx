@@ -7,11 +7,5 @@ export default async function AboutPage() {
   const post: PostData = await getPostData('about', 'about');
   const config = getConfig();
 
-  return (
-    <PostLayout
-      post={post}
-      showComments={config.commentAbout}
-      showThumbnail={config.thumbnailAbout}
-    />
-  );
+  return <PostLayout post={post} showThumbnail={config.thumbnailAbout} />;
 }

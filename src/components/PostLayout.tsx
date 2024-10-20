@@ -8,16 +8,18 @@ import 'highlight.js/styles/an-old-hope.css';
 
 interface PostLayoutProps {
   post: PostData;
-  showComments?: boolean;
   showThumbnail?: boolean;
 }
 
 export default function PostLayout({
   post,
-  showComments = true,
   showThumbnail = true,
 }: PostLayoutProps) {
   const config = getConfig();
+
+  // if showComments is defined in the frontmatter, use that value,
+  //    otherwise default to true
+  const showComments: Boolean = post.frontmatter.showComments ?? true;
 
   return (
     <article className='container mx-auto p-5'>

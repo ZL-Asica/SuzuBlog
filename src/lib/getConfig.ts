@@ -30,7 +30,6 @@ export type Config = {
   };
   thumbnailAbout: boolean;
   disqusShortname: string;
-  commentAbout: boolean;
   scriptSlotHeader: string[];
   scriptSlotFooter: string[];
   slotFooter: string;

@@ -7,6 +7,7 @@ export interface Frontmatter {
   tags?: string[];
   categories?: string[];
   redirect?: string;
+  showComments?: boolean;
 }
 
 // Post data
