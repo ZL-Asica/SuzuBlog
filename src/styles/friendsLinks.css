@@ -1,0 +1,118 @@
+/* Styles for the entire friends-links wrapper */
+.friends-links > .friends-links-list {
+  list-style: none; /* Remove default bullet points */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* Styles for each friend-link-item (individual card) */
+.friends-links > .friends-links-list > .friend-link-item {
+  flex: 1 1 calc(25% - 16px); /* Allow cards to take up 1/4 of the row width, minus spacing */
+  max-width: calc(25% - 16px); /* Set a maximum width for each card */
+  min-width: 150px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  position: relative; /* For absolute positioning of the description */
+}
+
+/* Styles for each link inside the card (friend-link) */
+.friends-links > .friends-links-list > .friend-link-item > .friend-link {
+  display: flex;
+  flex-direction: column; /* Align vertically */
+  align-items: center; /* horizontally */
+  justify-content: center; /* vertically */
+  text-align: center; /* center text */
+  background-color: var(--lightBackground); /* Dark background for the card */
+  padding: 16px; /* padding inside the card */
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease; /* hover transition */
+  text-decoration: none; /* Remove underline from the link */
+  color: var(--lightForeground);
+  height: 225px; /* Set a fixed height for all cards */
+}
+
+/* Hover effect: Move the card up slightly */
+.friends-links > .friends-links-list > .friend-link-item > .friend-link:hover {
+  transform: translateY(-10px); /* Move the card up by 10px on hover */
+}
+
+/* Styles for the image inside each card (friend-link-img) */
+.friends-links
+  > .friends-links-list
+  > .friend-link-item
+  > .friend-link
+  > .friend-link-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* image circular */
+  object-fit: cover; /* Scale the image to cover the container */
+  object-position: center;
+  background-color: var(
+    --darkBackground
+  ); /* Add a background color in case the image doesn't load or is small */
+}
+
+/* Insert description dynamically when hovering (using data-description attribute) */
+.friends-links > .friends-links-list > .friend-link-item:hover::after {
+  content: attr(data-description);
+  position: absolute;
+  bottom: -30px; /* 30px below */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust position to center */
+  background-color: #000; /* Black background for the description */
+  color: #fff; /* White text for the description */
+  padding: 5px 10px; /* padding around the text */
+  border-radius: 5px;
+  white-space: nowrap; /* disable wrap */
+  opacity: 1; /* visible */
+  transition: opacity 0.3s ease;
+  z-index: 10; /* appears above other elements */
+}
+
+/* Default state for the description: hidden (opacity 0) */
+.friends-links > .friends-links-list > .friend-link-item::after {
+  opacity: 0; /* invisible by default */
+  transition: opacity 0.3s ease;
+}
+
+/* On hover, show the description (set opacity to 1) */
+.friends-links > .friends-links-list > .friend-link-item:hover::after {
+  opacity: 1; /* visible when hovering */
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .friends-links > .friends-links-list > .friend-link-item > .friend-link {
+    background-color: var(--darkBackground);
+    color: var(--darkForeground);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  }
+
+  .friends-links
+    > .friends-links-list
+    > .friend-link-item
+    > .friend-link:hover {
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Image background */
+  .friends-links
+    > .friends-links-list
+    > .friend-link-item
+    > .friend-link
+    > .friend-link-img {
+    background-color: var(--lightBackground);
+  }
+
+  /* Description */
+  .friends-links > .friends-links-list > .friend-link-item:hover::after {
+    background-color: var(--darkBackground);
+    color: var(--lightForeground);
+  }
+}

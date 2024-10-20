@@ -2,6 +2,7 @@ import matter from 'gray-matter';
 import { marked, Tokens } from 'marked';
 import hljs from 'highlight.js';
 import { Frontmatter } from '@/types';
+import { renderLinks } from '@/services/friendsLinks';
 
 export async function parseMarkdown(
   content: string,
@@ -9,7 +10,7 @@ export async function parseMarkdown(
   const { data: frontmatterData, content: markdownContent } = matter(content);
 
   // Replace all comments but keep <!--more-->
-  const contentSanitized = markdownContent.replace(/<!--[^>]*-->/g, (match) => {
+  let contentSanitized = markdownContent.replace(/<!--[^>]*-->/g, (match) => {
     return match === '<!--more-->' ? match : '';
   });
 
@@ -19,6 +20,16 @@ export async function parseMarkdown(
   renderer.code = function ({ text, lang }: { text: string; lang?: string }) {
     // Ensure code is a string and handle potential null or undefined lang
     const validCode = typeof text === 'string' ? text : '';
+
+    // Check if the code contains the specific "link-card" HTML structure
+    if (
+      validCode.includes('<div class="friends-links">') &&
+      validCode.includes('</div>')
+    ) {
+      // If it's a link card, return the HTML directly without highlighting
+      return validCode;
+    }
+
     const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext';
 
     // Highlight the code using highlight.js
@@ -41,6 +52,14 @@ export async function parseMarkdown(
     // Return the formatted HTML with lazy loading
     return `<img src="${href}" class="post-content-img" alt="${text}" title="${imgTitle}" loading="lazy" />`;
   };
+
+  // Custom handler to find and replace {% links %}...{% endlinks %} blocks with rendered HTML
+  if (contentSanitized.includes('{% links %}')) {
+    contentSanitized = contentSanitized.replace(
+      /{% links %}([\s\S]*?){% endlinks %}/g,
+      (_, jsonString) => renderLinks(jsonString.trim()),
+    );
+  }
 
   marked.use({
     async: true,

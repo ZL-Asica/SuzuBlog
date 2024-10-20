@@ -2,6 +2,7 @@ import { getPostData } from '@/services/posts';
 import { PostData } from '@/types';
 import PostLayout from '@/components/layout/PostLayout';
 import { getConfig } from '@/services/getConfig';
+import '@/styles/friendsLinks.css';
 
 export default async function FriendsPage() {
   const post: PostData = await getPostData('Friends', 'Friends');
