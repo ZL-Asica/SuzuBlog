@@ -29,6 +29,7 @@ export type Config = {
     rss: string;
   };
   thumbnailAbout: boolean;
+  thumbnailFriends: boolean;
   disqusShortname: string;
   scriptSlotHeader: string[];
   scriptSlotFooter: string[];

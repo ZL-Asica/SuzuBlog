@@ -7,6 +7,7 @@ import {
   FaRegNewspaper,
   FaBars,
   FaAngleUp,
+  FaPeopleGroup,
 } from 'react-icons/fa6';
 import { useState, useRef, useEffect } from 'react';
 
@@ -29,6 +30,7 @@ export default function Header({ siteTitle }: { siteTitle: string }) {
   const menuItems = [
     { href: '/', label: 'Home', icon: <FaHouse /> },
     { href: '/posts', label: 'Posts', icon: <FaRegNewspaper /> },
+    { href: '/friends', label: 'Friends', icon: <FaPeopleGroup /> },
     { href: '/about', label: 'About', icon: <FaInfo /> },
   ];
 
