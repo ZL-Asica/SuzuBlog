@@ -20,6 +20,23 @@ background: '/images/background.jpg'
 slogan: "As long as the code or the developer is able to run, it's all good."
 
 #######################
+# HEADER SETTINGS
+#######################
+# Post Categories: Add your post categories here.
+# Use icons from link below (e.g., 'FaHouse' for 'fa6 FaHouse').
+# https://react-icons.github.io/react-icons/icons/fa6/
+postCategories:
+  - name: '前端' # Category name, same ad frontmatter category, will show in frontend.
+    slug: 'frontend' # (Optional) Category slug, if not set, will be same as name.
+    icon: 'FaHtml5' # (Optional) Font Awesome 6 icon name. If not set, no icon.
+  - name: '全栈'
+    slug: 'fullstack'
+    icon: 'FaCode'
+  - name: '教程'
+    slug: 'tutorial'
+    icon: 'FaGraduationCap'
+
+#######################
 # SOCIAL MEDIA SETTINGS
 #######################
 # Add your social media links here.
@@ -34,7 +51,7 @@ socialMedia:
   bilibili: 'https://space.bilibili.com/29018759' # Bilibili profile URL.
   zhihu: 'https://www.zhihu.com/people/zl-asica' # Zhihu profile URL.
   email: 'zl@zla.app' # Your email address (do NOT include the mailto: prefix).
-  rss: '' # Optional: RSS feed URL ().
+  rss: '' # RSS feed URL (can be relative url).
 
 #######################
 # PAGES (ABOUT, FRIENDS) SETTINGS

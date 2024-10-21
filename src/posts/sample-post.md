@@ -3,7 +3,7 @@ title: '我的第一篇文章'
 date: '2024-01-01 20:10:00'
 thumbnail: '/images/background.jpg'
 categories:
-  - 前端开发
+  - 前端
   - 教程
 tags:
   - Next.js

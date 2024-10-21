@@ -6,7 +6,7 @@ import './globals.css';
 import ThemeProvider from '@/components/layout/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
-import { getConfig } from '@/services/getConfig';
+import { getConfig } from '@/services/config/getConfig';
 import Script from 'next/script';
 
 const config = getConfig();
@@ -52,7 +52,10 @@ export default function RootLayout({
       ))}
       <body className={`${roboto.variable} ${notoSansSC.variable} antialiased`}>
         <ThemeProvider />
-        <Header siteTitle={config.title} />
+        <Header
+          siteTitle={config.title}
+          postCategories={config.postCategories}
+        />
         <main>{children}</main>
         <Footer />
 

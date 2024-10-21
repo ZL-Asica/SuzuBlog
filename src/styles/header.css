@@ -1,0 +1,18 @@
+/* Dropdown menu for hover */
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+.group-hover\:block {
+  display: none;
+}
+
+/* Dropdown menu for hover */
+li.group .group-hover\:block {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
+  min-width: 160px;
+}

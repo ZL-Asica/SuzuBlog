@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { getConfig } from '@/services/getConfig';
+import { getConfig } from '@/services/config/getConfig';
 
 const config = getConfig();
 
