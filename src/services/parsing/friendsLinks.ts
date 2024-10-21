@@ -32,8 +32,10 @@ export const renderLinks = (jsonString: string) => {
       </ul>
     </div>
   `;
-  } catch (e) {
-    console.error('Invalid JSON format in {% links %} block:', e);
-    return '<p>Invalid JSON in links block</p>';
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return `<>Invalid JSON in links block - ${e.message}</>`;
+    }
+    return '<>Invalid JSON in links block</>';
   }
 };

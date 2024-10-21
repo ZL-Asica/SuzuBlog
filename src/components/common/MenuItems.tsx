@@ -12,7 +12,7 @@ import { Category } from '@/types';
 interface DropdownItem {
   href: string;
   label: string;
-  icon: any;
+  icon: React.ReactNode | null;
 }
 
 // Function to generate menu items for both mobile and desktop
@@ -60,6 +60,7 @@ const renderMenuItems = ({
             <div className='ml-4'>
               {item.dropdownItems?.map((dropdownItem: DropdownItem) => (
                 <Link
+                  key={dropdownItem.href}
                   href={dropdownItem.href}
                   className='flex items-center gap-2 p-2'
                   onClick={onClickHandler}
