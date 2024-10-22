@@ -5,15 +5,20 @@ import hljs from 'highlight.js';
 import { marked, Tokens } from 'marked';
 
 function processPostAbstract(contentHtml: string): string {
+  // Remove HTML tags and comments (before more if exist)
   const plainText = contentHtml
     .replace(/<!--more-->/g, '[[MORE_PLACEHOLDER]]')
     .replace(/<[^>]*>/g, '');
 
   const moreIndex = plainText.indexOf('[[MORE_PLACEHOLDER]]');
 
-  return moreIndex > 0
-    ? plainText.slice(0, moreIndex).replace('[[MORE_PLACEHOLDER]]', '')
-    : plainText.slice(0, 150);
+  const contentSliced =
+    moreIndex > 0
+      ? plainText.slice(0, moreIndex).replace('[[MORE_PLACEHOLDER]]', '')
+      : plainText.slice(0, 150);
+
+  // remove newlines and extra spaces
+  return contentSliced.replace(/\s+/g, ' ').trim();
 }
 
 export async function parseMarkdown(content: string): Promise<{
