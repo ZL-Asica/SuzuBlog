@@ -55,11 +55,15 @@ export default function PostLayout({
         /* If no thumbnail, display the title at the top */
         <div className='mx-auto mb-5 w-full max-w-3xl'>
           <h1 className='text-3xl font-bold'>{post.frontmatter.title}</h1>
-          <p className='mt-2 flex items-center'>
-            {post.frontmatter.author}
-            <span className='mx-3 text-2xl'>•</span>
-            {post.frontmatter.date.split(' ')[0]}
-          </p>
+
+          {(post.frontmatter.title === 'About' ||
+            post.frontmatter.title === 'Friends') ?? (
+            <p className='mt-2 flex items-center'>
+              {post.frontmatter.author}
+              <span className='mx-3 text-2xl'>•</span>
+              {post.frontmatter.date.split(' ')[0]}
+            </p>
+          )}
         </div>
       )}
       <div className='mx-auto mt-10 w-full max-w-3xl'>
