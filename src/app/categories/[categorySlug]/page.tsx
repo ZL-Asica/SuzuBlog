@@ -1,6 +1,7 @@
 import PostListLayout from '@/components/layout/PostListLayout';
 import { getConfig } from '@/services/config/getConfig';
 import { getAllPosts } from '@/services/content/posts';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -8,6 +9,28 @@ export async function generateStaticParams() {
   return config.postCategories.map((category) => ({
     categorySlug: category.slug,
   }));
+}
+
+type Props = {
+  params: Promise<{ categorySlug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read post slug
+  const category = (await params).categorySlug;
+
+  const config = getConfig();
+
+  // Find the category based on the slug from params
+  const categoryData = config.postCategories.find(
+    (cat) => cat.slug === category,
+  ) || { name: 'Not Found' };
+  return {
+    title: `分类：${categoryData.name} - ${config.title}`,
+    openGraph: {
+      title: categoryData.name,
+    },
+  };
 }
 
 export default async function CategoryPage(props: {

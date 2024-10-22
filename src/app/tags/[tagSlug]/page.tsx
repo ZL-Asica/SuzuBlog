@@ -1,7 +1,9 @@
 import PostListLayout from '@/components/layout/PostListLayout';
+import { getConfig } from '@/services/config/getConfig';
 import { getAllPosts } from '@/services/content/posts';
 import { convertToPinyin, getUniqueTags } from '@/services/parsing/tagLinks';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next/types';
 
 // Generate static paths for all unique tags
 export async function generateStaticParams() {
@@ -10,6 +12,28 @@ export async function generateStaticParams() {
     // Convert only Chinese tags to pinyin slug
     tagSlug: convertToPinyin(tag),
   }));
+}
+
+type Props = {
+  params: Promise<{ tagSlug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read post slug
+  const tag = (await params).tagSlug;
+
+  const config = getConfig();
+
+  // Find the tag based on the slug from params
+  const uniqueTags = await getUniqueTags();
+  const tagData =
+    uniqueTags.find((t) => convertToPinyin(t) === tag) || 'Not Found';
+  return {
+    title: `标签：${tagData} - ${config.title}`,
+    openGraph: {
+      title: tagData,
+    },
+  };
 }
 
 export default async function TagPage(props: {

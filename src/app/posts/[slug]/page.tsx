@@ -1,6 +1,8 @@
 import PostLayout from '@/components/layout/PostLayout';
+import { getConfig } from '@/services/config/getConfig';
 import { getAllPosts, getPostData } from '@/services/content/posts';
 import { PostData } from '@/types';
+import type { Metadata } from 'next';
 
 // build static params for all posts
 export async function generateStaticParams() {
@@ -8,6 +10,30 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read post slug
+  const post = (await params).slug;
+
+  // get post data
+  const postData = await getPostData(post);
+
+  // thumbnail image
+  const thumbnail = postData.frontmatter.thumbnail;
+
+  const config = getConfig();
+  return {
+    title: `${postData.frontmatter.title} - ${config.title}`,
+    openGraph: {
+      title: postData.frontmatter.title,
+      images: thumbnail,
+    },
+  };
 }
 
 // PostPage component that receives the params directly
