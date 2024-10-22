@@ -47,9 +47,7 @@ export default function RootLayout({
 
   return (
     <html lang={config.lang}>
-      {config.scriptSlotHeader?.map((scriptUrl, index) => (
-        <Script key={index} src={scriptUrl} />
-      ))}
+      <Script src='/custom.js' strategy='lazyOnload' />
       <body className={`${roboto.variable} ${notoSansSC.variable} antialiased`}>
         <ThemeProvider />
         <Header
@@ -58,10 +56,6 @@ export default function RootLayout({
         />
         <main>{children}</main>
         <Footer />
-
-        {config.scriptSlotFooter?.map((scriptUrl, index) => (
-          <Script key={index} src={scriptUrl} />
-        ))}
       </body>
     </html>
   );

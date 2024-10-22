@@ -73,14 +73,6 @@ disqusShortname: 'zla-pub'
 # CUSTOM CODE BLOCKS
 # ! WARNING: Only modify these if you understand the purpose of custom scripts.
 #######################
-# Add JavaScript URLs or code snippets to be included inside <head> on your site.
-scriptSlotHeader:
-  -
-
-# Add JavaScript URLs or code snippets to be included before the closing </body> tag.
-scriptSlotFooter:
-  - 'https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js'
-
 # Add custom HTML code to be included inside the <footer> section of your site.
 slotFooter: |
   <!-- Add your custom footer HTML here -->

@@ -56,8 +56,6 @@ export type Config = {
   thumbnailAbout: boolean;
   thumbnailFriends: boolean;
   disqusShortname: string;
-  scriptSlotHeader: string[];
-  scriptSlotFooter: string[];
   slotFooter: string;
   slotComment: string;
 };
