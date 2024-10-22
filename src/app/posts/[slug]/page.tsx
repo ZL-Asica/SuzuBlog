@@ -29,14 +29,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const thumbnail = postData.frontmatter.thumbnail;
 
   const config = getConfig();
+
+  const metaKeywords =
+    postData.frontmatter.tags?.join(', ') +
+    ', ' +
+    postData.frontmatter.categories?.join(', ') +
+    ', ' +
+    postData.frontmatter.author +
+    ', ' +
+    'blog';
   return {
     title: `${postData.frontmatter.title} - ${config.title}`,
     description: postData.postAbstract,
+    keywords: metaKeywords,
     openGraph: {
       siteName: config.title,
       type: 'article',
       authors: postData.frontmatter.author,
-      tags: postData.frontmatter.tags,
+      tags: metaKeywords,
       modifiedTime: postData.frontmatter.date,
       title: postData.frontmatter.title,
       description: postData.postAbstract,
