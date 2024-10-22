@@ -55,7 +55,7 @@ export default function Header({
       }}
     >
       <nav className='mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
-        <Link href='/' aria-label='Go to home page'>
+        <Link href='/' aria-label={`Navigate to Home Page of ${siteTitle}`}>
           {isHomePage ? (
             <h1 className='text-2xl font-bold'>{siteTitle}</h1>
           ) : (
