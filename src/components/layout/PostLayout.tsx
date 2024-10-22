@@ -1,5 +1,9 @@
+import React, { Suspense } from 'react';
 import Image from 'next/image';
+import { FaFolder, FaTags } from 'react-icons/fa6';
 import DisqusComments from '@/components/common/DisqusComments';
+import CategoryLinks from '@/components/layout/CategoryLinks';
+import TagLinks from '@/components/layout/TagLinks';
 import { PostData } from '@/types';
 import { getConfig } from '@/services/config/getConfig';
 import '@/styles/codeblock.css';
@@ -59,11 +63,30 @@ export default function PostLayout({
         </div>
       )}
 
-      {/* Post content */}
-      <div
-        className='post-content mx-auto mt-10 w-full max-w-3xl'
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
+      <div className='mx-auto mt-10 w-full max-w-3xl'>
+        {/* Show categories and tags if any */}
+        <ul className='mx-auto mt-5 flex flex-col gap-4'>
+          <li className='flex items-center gap-2'>
+            <FaFolder className='mr-1' />
+            <span className='font-semibold'>分类:</span>
+            <CategoryLinks categories={post.frontmatter.categories} />
+          </li>
+          <li className='flex items-center gap-2'>
+            <FaTags className='mr-1' />
+            <span className='font-semibold'>标签:</span>
+            {/* Use Suspense for async TagLinks */}
+            <Suspense fallback={<span>Loading tags...</span>}>
+              <TagLinks tags={post.frontmatter.tags} />
+            </Suspense>
+          </li>
+        </ul>
+
+        {/* Post content */}
+        <div
+          className='post-content mt-8'
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+        />
+      </div>
 
       {/* Comment Section */}
       {showComments && (

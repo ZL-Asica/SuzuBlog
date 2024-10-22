@@ -71,11 +71,7 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
                   {/* Category */}
                   <span className='flex items-center'>
                     <FaFolder className='mr-1' />
-                    {post.frontmatter.categories ? (
-                      <CategoryLinks categories={post.frontmatter.categories} />
-                    ) : (
-                      '未分类'
-                    )}
+                    <CategoryLinks categories={post.frontmatter.categories} />
                   </span>
                 </div>
               </div>

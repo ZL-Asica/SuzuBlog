@@ -4,7 +4,7 @@ import { getConfig } from '@/services/config/getConfig';
 export default function CategoryLinks({
   categories,
 }: {
-  categories: string[];
+  categories: string[] | undefined;
 }) {
   const config = getConfig();
 
