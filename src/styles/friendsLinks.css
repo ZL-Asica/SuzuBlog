@@ -58,6 +58,18 @@
   ); /* Add a background color in case the image doesn't load or is small */
 }
 
+/* Style for each card name (title) */
+.friends-links
+  > .friends-links-list
+  > .friend-link-item
+  > .friend-link-content
+  > .friend-link-title {
+  font-size: 1.2em;
+  margin: 1.2em 0;
+  line-height: 1.4;
+  position: relative;
+}
+
 /* Insert description dynamically when hovering (using data-description attribute) */
 .friends-links > .friends-links-list > .friend-link-item:hover::after {
   content: attr(data-description);
