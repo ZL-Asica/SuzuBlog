@@ -10,6 +10,8 @@ author:
   link: 'https://www.zla.app' # Link to your personal website or blog.
 # Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
 lang: 'zh'
+# Your public root url, used for SEO and meta tags. (Do not include a ending slash)
+siteUrl: 'https://suzu.zla.app'
 
 # Path to your avatar image. Can be a relative path from /public or a full URL (e.g., https://).
 avatar: '/images/avatar.jpg'

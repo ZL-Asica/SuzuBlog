@@ -35,6 +35,7 @@ export type Config = {
     link: string;
   };
   lang: string;
+  siteUrl: string;
   avatar: string;
   background: string;
   slogan: string;
