@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${postData.frontmatter.title} - ${config.title}`,
     description: postData.postAbstract,
     openGraph: {
+      siteName: config.title,
       type: 'article',
       authors: postData.frontmatter.author,
       tags: postData.frontmatter.tags,
@@ -41,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: postData.postAbstract,
       images: thumbnail,
       url: `/posts/${post}`,
+      locale: config.lang,
     },
   };
 }

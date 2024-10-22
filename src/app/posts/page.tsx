@@ -12,9 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `Posts - ${config.title}`,
     description: `Posts page of ${config.title} - ${config.description}`,
     openGraph: {
+      siteName: config.title,
       title: `Posts - ${config.title}`,
       description: `Posts page of ${config.title} - ${config.description}`,
       url: `${config.siteUrl}/posts`,
+      images: config.avatar,
+      type: 'website',
+      locale: config.lang,
     },
   };
 }

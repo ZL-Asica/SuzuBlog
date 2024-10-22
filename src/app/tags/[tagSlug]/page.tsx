@@ -33,8 +33,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `标签：${tagData} - ${config.title}`,
     openGraph: {
+      siteName: config.title,
       title: `标签：${tagData} - ${config.title}`,
       url: `${config.siteUrl}/tags/${tag}`,
+      images: config.avatar,
+      type: 'website',
+      locale: config.lang,
     },
   };
 }

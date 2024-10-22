@@ -13,9 +13,13 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `Friends - ${config.title}`,
     description: `Friends page of ${config.title} - ${config.description}`,
     openGraph: {
+      siteName: config.title,
       title: `Friends - ${config.title}`,
       description: `Friends page of ${config.title} - ${config.description}`,
       url: '/friends',
+      images: config.avatar,
+      type: 'website',
+      locale: config.lang,
     },
   };
 }

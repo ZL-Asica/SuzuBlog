@@ -30,9 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `分类：${categoryData.name} - ${config.title}`,
     openGraph: {
+      siteName: config.title,
       title: `分类：${categoryData.name} - ${config.title}`,
       description: `分类：${categoryData.name} - ${config.description}`,
       url: `/categories/${category}`,
+      images: config.avatar,
+      type: 'website',
+      locale: config.lang,
     },
   };
 }
