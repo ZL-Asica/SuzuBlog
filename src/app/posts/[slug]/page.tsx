@@ -1,8 +1,10 @@
+import Loading from '@/app/loading';
 import PostLayout from '@/components/layout/PostLayout';
 import { getConfig } from '@/services/config/getConfig';
 import { getAllPosts, getPostData } from '@/services/content/posts';
 import { PostData } from '@/types';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 // build static params for all posts
 export async function generateStaticParams() {
@@ -46,5 +48,9 @@ export default async function PostPage(props: {
   const params = await props.params;
   const post: PostData = await getPostData(params.slug);
 
-  return <PostLayout post={post} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <PostLayout post={post} />
+    </Suspense>
+  );
 }

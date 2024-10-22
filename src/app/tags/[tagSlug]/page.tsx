@@ -1,9 +1,11 @@
+import Loading from '@/app/loading';
 import PostListLayout from '@/components/layout/PostListLayout';
 import { getConfig } from '@/services/config/getConfig';
 import { getAllPosts } from '@/services/content/posts';
 import { convertToPinyin, getUniqueTags } from '@/services/parsing/tagLinks';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next/types';
+import { Suspense } from 'react';
 
 // Generate static paths for all unique tags
 export async function generateStaticParams() {
@@ -61,8 +63,9 @@ export default async function TagPage(props: {
   return (
     <div className='container mx-auto p-4'>
       <h1 className='mb-6 text-center text-4xl font-bold'>{tag}</h1>
-
-      <PostListLayout posts={filteredPosts} />
+      <Suspense fallback={<Loading />}>
+        <PostListLayout posts={filteredPosts} />
+      </Suspense>
     </div>
   );
 }

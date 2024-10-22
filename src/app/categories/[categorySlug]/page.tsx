@@ -1,8 +1,10 @@
+import Loading from '@/app/loading';
 import PostListLayout from '@/components/layout/PostListLayout';
 import { getConfig } from '@/services/config/getConfig';
 import { getAllPosts } from '@/services/content/posts';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export async function generateStaticParams() {
   const config = getConfig();
@@ -58,8 +60,9 @@ export default async function CategoryPage(props: {
   return (
     <div className='container mx-auto p-4'>
       <h1 className='mb-6 text-center text-4xl font-bold'>{category.name}</h1>
-
-      <PostListLayout posts={filteredPosts} />
+      <Suspense fallback={<Loading />}>
+        <PostListLayout posts={filteredPosts} />
+      </Suspense>
     </div>
   );
 }
