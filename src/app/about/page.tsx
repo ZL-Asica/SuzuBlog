@@ -12,10 +12,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `About - ${config.title}`,
     description: `About page of ${config.title} - ${config.description}`,
     openGraph: {
+      type: 'profile',
+      username: config.author.name,
       title: `About - ${config.title}`,
       description: `About page of ${config.title} - ${config.description}`,
-      type: 'website',
-      locale: config.lang,
+      images: config.avatar,
+      url: '/about',
     },
   };
 }

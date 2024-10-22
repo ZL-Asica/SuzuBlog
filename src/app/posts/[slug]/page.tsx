@@ -32,11 +32,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${postData.frontmatter.title} - ${config.title}`,
     description: postData.postAbstract,
-    metadataBase: new URL(config.siteUrl),
     openGraph: {
+      type: 'article',
+      authors: postData.frontmatter.author,
+      tags: postData.frontmatter.tags,
+      modifiedTime: postData.frontmatter.date,
       title: postData.frontmatter.title,
       description: postData.postAbstract,
       images: thumbnail,
+      url: `/posts/${post}`,
     },
   };
 }

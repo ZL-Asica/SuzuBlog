@@ -26,15 +26,19 @@ const notoSansSC = Noto_Sans_SC({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(config.siteUrl),
   title: `${config.title} - ${config.subTitle}`,
   description: config.description,
   keywords: config.keywords,
   authors: [{ url: config.author.link, name: config.author.name }],
   openGraph: {
+    siteName: `${config.title} - ${config.subTitle}`,
     title: `${config.title} - ${config.subTitle}`,
+    images: config.avatar,
     description: config.description,
     type: 'website',
     locale: config.lang,
+    url: config.siteUrl,
   },
 };
 

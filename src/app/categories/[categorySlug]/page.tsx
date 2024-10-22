@@ -30,7 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `分类：${categoryData.name} - ${config.title}`,
     openGraph: {
-      title: categoryData.name,
+      title: `分类：${categoryData.name} - ${config.title}`,
+      description: `分类：${categoryData.name} - ${config.description}`,
+      url: `/categories/${category}`,
     },
   };
 }

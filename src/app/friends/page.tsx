@@ -15,8 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: `Friends - ${config.title}`,
       description: `Friends page of ${config.title} - ${config.description}`,
-      type: 'website',
-      locale: config.lang,
+      url: '/friends',
     },
   };
 }

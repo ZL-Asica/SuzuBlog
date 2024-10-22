@@ -14,8 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: `Posts - ${config.title}`,
       description: `Posts page of ${config.title} - ${config.description}`,
-      type: 'website',
-      locale: config.lang,
+      url: `${config.siteUrl}/posts`,
     },
   };
 }
