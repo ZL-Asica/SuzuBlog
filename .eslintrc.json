@@ -1,6 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
-  "plugins": ["import"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "prettier",
+    "plugin:jsx-a11y/recommended"
+  ],
   "rules": {
     // Possible Errors
     "no-console": "warn", // Warn on console usage (can change to 'error' to disallow)
@@ -33,22 +37,6 @@
     "arrow-spacing": ["error", { "before": true, "after": true }], // Enforce spacing around arrows
     "prefer-const": "error", // Prefer const for variables that are never reassigned
     "no-var": "error", // Disallow var (use let or const instead)
-    "template-curly-spacing": ["error", "never"], // Disallow spaces inside template literals
-
-    // Import
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
-        "newlines-between": "always"
-      }
-    ]
+    "template-curly-spacing": ["error", "never"] // Disallow spaces inside template literals
   }
 }
