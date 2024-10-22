@@ -25,6 +25,7 @@ export default async function Home() {
             width={150}
             height={150}
             className='aspect-square h-[60vw] max-h-[150px] w-[60vw] max-w-[150px] rounded-full border-4 border-gray-300 object-cover md:h-[150px] md:w-[150px]'
+            priority={true}
           />
         </div>
       </div>
