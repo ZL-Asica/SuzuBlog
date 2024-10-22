@@ -4,6 +4,7 @@ import renderMenuItems from '@/components/common/MenuItems';
 import '@/styles/header.css';
 import { Category } from '@/types';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { FaAngleUp, FaBars } from 'react-icons/fa6';
 
@@ -17,6 +18,8 @@ export default function Header({
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false); // Detect if in mobile view
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/'; // Check if current page is home page
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -52,8 +55,12 @@ export default function Header({
       }}
     >
       <nav className='mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
-        <Link href='/'>
-          <h1 className='text-2xl font-bold'>{siteTitle}</h1>
+        <Link href='/' aria-label='Go to home page'>
+          {isHomePage ? (
+            <h1 className='text-2xl font-bold'>{siteTitle}</h1>
+          ) : (
+            <p className='text-2xl font-bold'>{siteTitle}</p>
+          )}
         </Link>
 
         {/* Display only in mobile */}

@@ -1,9 +1,14 @@
+import Loading from '@/app/loading';
+import PostListLayout from '@/components/layout/PostListLayout';
 import { getConfig } from '@/services/config/getConfig';
+import { getAllPosts } from '@/services/content/posts';
+import { PostData } from '@/types';
 import Image from 'next/image';
-import PostsPage from './posts/page';
+import { Suspense } from 'react';
 
-export default function Home() {
+export default async function Home() {
   const config = getConfig();
+  const posts: PostData[] = await getAllPosts();
 
   return (
     <div>
@@ -26,12 +31,14 @@ export default function Home() {
 
       {/* Slogan */}
       <div className='mt-4 px-6 text-center'>
-        <h1 className='text-2xl font-semibold'>{config.slogan}</h1>
+        <p className='text-2xl font-semibold'>{config.slogan}</p>
       </div>
 
       {/* Posts List - centered */}
       <div className='container mx-auto mt-10 justify-center p-4'>
-        <PostsPage />
+        <Suspense fallback={<Loading />}>
+          <PostListLayout posts={posts} />
+        </Suspense>
       </div>
     </div>
   );
