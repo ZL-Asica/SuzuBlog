@@ -29,8 +29,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const config = getConfig();
   return {
     title: `${postData.frontmatter.title} - ${config.title}`,
+    description: postData.postAbstract,
+    metadataBase: new URL(config.siteUrl),
     openGraph: {
       title: postData.frontmatter.title,
+      description: postData.postAbstract,
       images: thumbnail,
     },
   };

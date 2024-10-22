@@ -11,17 +11,6 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
   return (
     <div className='grid grid-cols-1 gap-6'>
       {posts.map((post, index) => {
-        const plainText = post.contentHtml
-          .replace(/<!--more-->/g, '[[MORE_PLACEHOLDER]]')
-          .replace(/<[^>]*>/g, '');
-
-        const moreIndex = plainText.indexOf('[[MORE_PLACEHOLDER]]');
-
-        const postAbstract =
-          moreIndex > 0
-            ? plainText.slice(0, moreIndex).replace('[[MORE_PLACEHOLDER]]', '')
-            : plainText.slice(0, 150);
-
         return (
           <div
             key={post.slug}
@@ -59,7 +48,7 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
                   </h2>
                 </Link>
                 {/* Abstract */}
-                <p className='text-sm text-gray-300'>{postAbstract}</p>
+                <p className='text-sm text-gray-300'>{post.postAbstract}</p>
               </div>
               <div className='mt-4'>
                 <div className='text-gray-450 flex items-center justify-between text-sm'>

@@ -4,9 +4,23 @@ import matter from 'gray-matter';
 import hljs from 'highlight.js';
 import { marked, Tokens } from 'marked';
 
-export async function parseMarkdown(
-  content: string,
-): Promise<{ frontmatter: Frontmatter; contentHtml: string }> {
+function processPostAbstract(contentHtml: string): string {
+  const plainText = contentHtml
+    .replace(/<!--more-->/g, '[[MORE_PLACEHOLDER]]')
+    .replace(/<[^>]*>/g, '');
+
+  const moreIndex = plainText.indexOf('[[MORE_PLACEHOLDER]]');
+
+  return moreIndex > 0
+    ? plainText.slice(0, moreIndex).replace('[[MORE_PLACEHOLDER]]', '')
+    : plainText.slice(0, 150);
+}
+
+export async function parseMarkdown(content: string): Promise<{
+  frontmatter: Frontmatter;
+  postAbstract: string;
+  contentHtml: string;
+}> {
   const { data: frontmatterData, content: markdownContent } = matter(content);
 
   // Replace all comments but keep <!--more-->
@@ -71,8 +85,11 @@ export async function parseMarkdown(
   // Process the sanitized content through marked
   const processedContent = await marked(contentSanitized);
 
+  const postAbstract = processPostAbstract(processedContent);
+
   return {
     frontmatter: frontmatterData as Frontmatter,
+    postAbstract: postAbstract,
     contentHtml: processedContent,
   };
 }

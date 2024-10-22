@@ -13,6 +13,7 @@ export interface Frontmatter {
 // Post data
 export interface PostData {
   slug: string;
+  postAbstract: string;
   frontmatter: Frontmatter;
   contentHtml: string;
 }

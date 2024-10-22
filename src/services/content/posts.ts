@@ -95,7 +95,8 @@ export async function getAllPosts(): Promise<PostData[]> {
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = await fsPromises.readFile(fullPath, 'utf8');
 
-      const { frontmatter, contentHtml } = await parseMarkdown(fileContents);
+      const { frontmatter, postAbstract, contentHtml } =
+        await parseMarkdown(fileContents);
 
       const processedFrontmatter = await processFrontmatter(
         frontmatter as Frontmatter,
@@ -107,6 +108,7 @@ export async function getAllPosts(): Promise<PostData[]> {
       return {
         slug: fileName.replace(/\.md$/, ''),
         frontmatter: processedFrontmatter,
+        postAbstract,
         contentHtml,
       };
     }),
@@ -140,7 +142,8 @@ export async function getPostData(
 
   const fileContents = await fsPromises.readFile(fullPath, 'utf8');
 
-  const { frontmatter, contentHtml } = await parseMarkdown(fileContents);
+  const { frontmatter, postAbstract, contentHtml } =
+    await parseMarkdown(fileContents);
 
   const processedFrontmatter = await processFrontmatter(
     frontmatter as Frontmatter,
@@ -151,6 +154,7 @@ export async function getPostData(
 
   return {
     slug,
+    postAbstract,
     frontmatter: processedFrontmatter,
     contentHtml,
   };
