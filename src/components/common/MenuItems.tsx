@@ -52,6 +52,8 @@ const renderMenuItems = ({
               href={item.href}
               className='flex items-center gap-2 p-2'
               onClick={onClickHandler}
+              target='_self'
+              aria-label={`Navigate to ${item.label}`}
             >
               {item.icon}
               {item.label}
@@ -64,6 +66,8 @@ const renderMenuItems = ({
                   href={dropdownItem.href}
                   className='flex items-center gap-2 p-2'
                   onClick={onClickHandler}
+                  target='_self'
+                  aria-label={`Navigate to category ${dropdownItem.label}`}
                 >
                   {dropdownItem.icon}
                   {dropdownItem.label}
@@ -79,6 +83,8 @@ const renderMenuItems = ({
               aria-haspopup='true'
               className='flex items-center gap-2 p-2'
               onClick={onClickHandler}
+              target='_self'
+              aria-label={`Navigate to ${item.label}`}
             >
               {item.icon}
               {item.label}
@@ -91,6 +97,8 @@ const renderMenuItems = ({
                     href={dropdownItem.href}
                     className='flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800'
                     onClick={onClickHandler}
+                    target='_self'
+                    aria-label={`Navigate to category ${dropdownItem.label}`}
                   >
                     {dropdownItem.icon}
                     {dropdownItem.label}
@@ -105,6 +113,8 @@ const renderMenuItems = ({
           href={item.href}
           className='flex items-center gap-2 p-2'
           onClick={onClickHandler}
+          target='_self'
+          aria-label={`Navigate to ${item.label}`}
         >
           {item.icon}
           {item.label}

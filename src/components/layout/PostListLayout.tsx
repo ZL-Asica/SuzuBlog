@@ -20,6 +20,7 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
             <Link
               className='max-h-[400px] w-full md:w-1/2'
               href={`/posts/${post.slug}`}
+              target='_self'
               aria-label={`Read more about ${post.frontmatter.title}`}
             >
               {/* Thumbnail */}
@@ -44,7 +45,7 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
                   <span>{post.frontmatter.date.split(' ')[0]}</span>
                 </div>
                 {/* Title in Frontmatter */}
-                <Link href={`/posts/${post.slug}`}>
+                <Link href={`/posts/${post.slug}`} target='_self'>
                   <h2 className='mb-2 text-2xl font-bold'>
                     {post.frontmatter.title}
                   </h2>
