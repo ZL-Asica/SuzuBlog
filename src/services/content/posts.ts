@@ -125,14 +125,6 @@ export async function getAllPosts(): Promise<PostData[]> {
   const filePath = path.join(process.cwd(), 'public', 'postsData.json');
   fs.writeFileSync(filePath, JSON.stringify(allPosts, null, 2), 'utf8');
 
-  // Get all unique tags
-  const allTags = allPosts.flatMap((post) => post.frontmatter.tags || []);
-  const uniqueTags = Array.from(new Set(allTags));
-
-  // Save tags to a JSON file for sitemap generation
-  const tagsFilePath = path.join(process.cwd(), 'public', 'tagsData.json');
-  fs.writeFileSync(tagsFilePath, JSON.stringify(uniqueTags, null, 2), 'utf8');
-
   return allPosts;
 }
 

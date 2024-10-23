@@ -1,3 +1,4 @@
+import { PostData } from '@/types';
 import fs from 'fs';
 import path from 'path';
 import pinyin from 'pinyin';
@@ -17,8 +18,13 @@ export function convertToPinyin(tag: string): string {
 
 // Helper function to get unique tags from local tags
 export function getUniqueTags() {
-  const filePath = path.join(process.cwd(), 'public', 'tagsData.json');
-  const tags = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const filePath = path.join(process.cwd(), 'public', 'postsData.json');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const posts: PostData[] = JSON.parse(fileContent);
 
-  return tags; // return Array of unique tags
+  // Get all tags from all posts and remove duplicates
+  const allTags = posts.flatMap((post) => post.frontmatter.tags || []);
+  const uniqueTags = Array.from(new Set(allTags));
+
+  return uniqueTags;
 }
