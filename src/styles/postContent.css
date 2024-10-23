@@ -54,6 +54,12 @@
     color: var(--darkForeground);
   }
 
+  p {
+    margin: 1.2em 0;
+    line-height: 1.8;
+    font-size: 1.1em;
+  }
+
   /* Blockquote */
   blockquote {
     padding: 0.5em 1em;
@@ -115,6 +121,7 @@
     color: var(--skyBlue);
     text-decoration: underline;
     transition: color 0.2s ease;
+    margin: 0 0.2em;
   }
 
   a:link {
