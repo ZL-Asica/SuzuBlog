@@ -60,6 +60,10 @@
     font-size: 1.1em;
   }
 
+  .abstract-text {
+    color: var(--lightBackgroundGray);
+  }
+
   /* Blockquote */
   blockquote {
     padding: 0.5em 1em;
@@ -195,6 +199,10 @@
 
     table tr:nth-child(even) {
       background-color: #2c2c2c;
+    }
+
+    .abstract-text {
+      color: var(--darkBackgroundGray);
     }
   }
 

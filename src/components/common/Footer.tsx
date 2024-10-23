@@ -1,4 +1,5 @@
 import { getConfig } from '@/services/config/getConfig';
+import '@/styles/footer.css';
 import Link from 'next/link';
 import {
   FaBilibili,
@@ -50,13 +51,7 @@ export default function Footer() {
     ); // Asserts that contact is not null
 
   return (
-    <footer
-      className='mt-10'
-      style={{
-        backgroundColor: 'var(--background)',
-        color: 'var(--foreground)',
-      }}
-    >
+    <footer className='mt-10'>
       <div className='mx-auto max-w-7xl px-4 py-4 text-center'>
         <div className='mb-5 flex flex-wrap justify-center gap-4'>
           {contactList.map(({ href, title, icon }) => (
@@ -64,7 +59,7 @@ export default function Footer() {
               key={title}
               href={href}
               title={title}
-              aria-label={title}
+              aria-label={`${title} (new tab)`}
               target='_blank'
               rel='noopener noreferrer'
               className='transform transition-transform hover:scale-110'
@@ -73,18 +68,14 @@ export default function Footer() {
             </Link>
           ))}
         </div>
-        <p style={{ color: '#b9b9b9' }}>
+        <p className='footer-text'>
           © 2017-{currentYear} {config.title}
           <br />
           Theme{' '}
           <Link
             href='https://suzu.zla.app/'
             target='_blank'
-            aria-label="Suzu's homepage"
-            style={{
-              color: '#b9b9b9',
-              textDecoration: 'underline dotted rgba(0, 0, 0, .1)',
-            }}
+            aria-label="Suzu's homepage (new tab)"
           >
             Suzu
           </Link>{' '}
@@ -92,11 +83,7 @@ export default function Footer() {
           <Link
             href='https://www.zla.app/'
             target='_blank'
-            aria-label="ZL Asica's homepage"
-            style={{
-              color: '#b9b9b9',
-              textDecoration: 'underline dotted rgba(0, 0, 0, .1)',
-            }}
+            aria-label="ZL Asica's homepage (new tab)"
           >
             ZL Asica
           </Link>

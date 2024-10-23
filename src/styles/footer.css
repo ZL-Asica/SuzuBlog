@@ -1,0 +1,13 @@
+.footer-text {
+  color: var(--lightBackgroundGray);
+}
+
+.footer-text a {
+  text-decoration: underline dotted;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer-text {
+    color: var(--darkBackgroundGray);
+  }
+}

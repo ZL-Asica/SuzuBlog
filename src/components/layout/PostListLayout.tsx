@@ -50,7 +50,7 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
                   </h2>
                 </Link>
                 {/* Abstract */}
-                <p className='text-sm text-gray-300'>{post.postAbstract}</p>
+                <p className='text-sm abstract-text'>{post.postAbstract}</p>
               </div>
               <div className='mt-4 text-gray-450 flex items-center justify-between text-sm'>
                 {/* Read Count */}

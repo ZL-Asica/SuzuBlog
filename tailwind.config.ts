@@ -14,11 +14,14 @@ const config: Config = {
         skyBlue: '#5bcefa',
         lightBackground: '#ffffff',
         lightForeground: '#171717',
+        lightBackgroundGray: '#595959',
         // Dark mode colors
-        darkBackground: '#1a1a1a',
-        darkForeground: '#e0e0e0',
         darkSakuraPink: '#d890a2',
         darkSkyBlue: '#4aa7e0',
+        darkBackground: '#1a1a1a',
+        darkForeground: '#e0e0e0',
+        darkBackgroundGray: '#A6A6A6',
+
         darkCardBackground: '#252525',
       },
       typography: (theme) => ({
