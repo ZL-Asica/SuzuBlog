@@ -61,15 +61,20 @@ export async function parseMarkdown(content: string): Promise<{
   // Override the default `link` method
   renderer.link = function ({ href, title, text }: Tokens.Link) {
     const linkTitle = title || text || 'undefined link title';
-    // Return the formatted HTML with target blank and noreferrer
-    return `<a href="${href}" class="post-content-link" target="_blank" title="${linkTitle}" rel="noopener noreferrer">${text}</a>`;
+    // Check if the link is external by checking if it contains a protocol
+    const target = href.includes('://') ? '_blank' : '_self';
+    // Add aria-label for accessibility
+    const ariaLabel = target === '_blank' ? ' (new tab)' : '';
+
+    // Return the formatted HTML with target, aria-label and noreferrer
+    return `<a href="${href}" class="post-content-link" target="${target}" aria-label="${linkTitle} ${ariaLabel}" rel="noopener noreferrer">${text}</a>`;
   };
 
   // Override the default `image` method
   renderer.image = function ({ href, title, text }: Tokens.Image) {
-    const imgTitle = title || text || 'undefined image alt';
+    const altText = title || text || 'undefined image alt';
     // Return the formatted HTML with lazy loading
-    return `<img src="${href}" class="post-content-img" alt="${text}" title="${imgTitle}" loading="lazy" />`;
+    return `<img src="${href}" class="post-content-img" alt="${altText}" loading="lazy" />`;
   };
 
   // Custom handler to find and replace {% links %}...{% endlinks %} blocks with rendered HTML
