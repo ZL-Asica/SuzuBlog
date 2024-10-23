@@ -1,14 +1,12 @@
 import DisqusComments from '@/components/common/DisqusComments';
-import CategoryLinks from '@/components/layout/CategoryLinks';
-import TagLinks from '@/components/layout/TagLinks';
 import { getConfig } from '@/services/config/getConfig';
 import '@/styles/codeblock.css';
 import '@/styles/postContent.css';
 import { PostData } from '@/types';
 import 'highlight.js/styles/an-old-hope.css';
 import Image from 'next/image';
-import { Suspense } from 'react';
 import { FaFolder, FaTags } from 'react-icons/fa6';
+import ItemLinks from './ItemLinks';
 
 interface PostLayoutProps {
   post: PostData;
@@ -74,14 +72,15 @@ export default function PostLayout({
             <li className='flex items-center gap-2'>
               <FaFolder className='mr-1' />
               <span className='font-semibold'>分类:</span>
-              <CategoryLinks categories={post.frontmatter.categories} />
+              <ItemLinks
+                items={post.frontmatter.categories}
+                type={'category'}
+              />
             </li>
             <li className='flex items-center gap-2'>
               <FaTags className='mr-1' />
               <span className='font-semibold'>标签:</span>
-              <Suspense fallback={<span>Loading tags...</span>}>
-                <TagLinks tags={post.frontmatter.tags} />
-              </Suspense>
+              <ItemLinks items={post.frontmatter.tags} type={'tag'} />
             </li>
           </ul>
         )}

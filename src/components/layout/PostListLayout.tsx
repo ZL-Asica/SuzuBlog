@@ -1,8 +1,8 @@
-import CategoryLinks from '@/components/layout/CategoryLinks';
 import { PostData } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaEye, FaFolder, FaRegClock } from 'react-icons/fa6';
+import ItemLinks from './ItemLinks';
 
 export default function PostListLayout({ posts }: { posts: PostData[] }) {
   // TODO: Replace with actual read count
@@ -62,7 +62,10 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
                 {/* Category */}
                 <span className='flex items-center'>
                   <FaFolder className='mr-1' />
-                  <CategoryLinks categories={post.frontmatter.categories} />
+                  <ItemLinks
+                    items={post.frontmatter.categories}
+                    type='category'
+                  />
                 </span>
               </div>
             </div>

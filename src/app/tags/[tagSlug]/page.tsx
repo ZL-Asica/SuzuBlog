@@ -9,7 +9,7 @@ import { Suspense } from 'react';
 
 // Generate static paths for all unique tags
 export async function generateStaticParams() {
-  const uniqueTags = await getUniqueTags();
+  const uniqueTags = getUniqueTags();
   return uniqueTags.map((tag) => ({
     // Convert only Chinese tags to pinyin slug
     tagSlug: convertToPinyin(tag),
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const config = getConfig();
 
   // Find the tag based on the slug from params
-  const uniqueTags = await getUniqueTags();
+  const uniqueTags = getUniqueTags();
   const tagData =
     uniqueTags.find((t) => convertToPinyin(t) === tag) || 'Not Found';
   return {
@@ -50,7 +50,7 @@ export default async function TagPage(props: {
   const posts = await getAllPosts();
 
   // Retrieve all unique tags from the posts
-  const uniqueTags = await getUniqueTags();
+  const uniqueTags = getUniqueTags();
 
   // Find the tag based on the slug from params
   const tag = uniqueTags.find((tag) => convertToPinyin(tag) === params.tagSlug);
