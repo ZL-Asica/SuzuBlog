@@ -5,7 +5,7 @@ import { getPostData } from '@/services/content';
 
 import PostLayout from '@/components/layout/PostLayout';
 
-export async function generateMetadata(): Promise<Metadata> {
+function generateMetadata(): Metadata {
   const config = getConfig();
   return {
     title: `About - ${config.title}`,
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function AboutPage() {
+async function AboutPage() {
   const post: PostData = await getPostData('About', 'About');
   const config = getConfig();
 
@@ -34,3 +34,5 @@ export default async function AboutPage() {
     />
   );
 }
+
+export { generateMetadata, AboutPage as default };

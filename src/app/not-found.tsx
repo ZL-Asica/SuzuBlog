@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-export default function Custom404() {
+function Custom404() {
   const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
@@ -49,3 +49,5 @@ export default function Custom404() {
     </main>
   );
 }
+
+export default Custom404;

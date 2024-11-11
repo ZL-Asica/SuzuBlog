@@ -13,13 +13,14 @@ async function generateStaticParams() {
   }));
 }
 
-async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+type Properties = {
+  params: Promise<{ slug: string }>;
+};
+
+async function generateMetadata({ params }: Properties): Promise<Metadata> {
   // get post data
-  const postData = await getPostData(params.slug);
+  const { slug } = await params;
+  const postData: PostData = await getPostData(slug);
 
   const config = getConfig();
   const metaKeywords = [
@@ -42,7 +43,7 @@ async function generateMetadata({
       title: postData.frontmatter.title,
       description: postData.postAbstract,
       images: postData.frontmatter.thumbnail,
-      url: `/posts/${params.slug}`,
+      url: `/posts/${slug}`,
       locale: config.lang,
     },
   };

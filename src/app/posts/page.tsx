@@ -23,7 +23,7 @@ export function generateMetadata(): Metadata {
 }
 
 export default async function PostsPage() {
-  const posts = await getAllPosts();
+  const posts: PostData[] = await getAllPosts();
 
   return <PostsClient posts={posts} />;
 }

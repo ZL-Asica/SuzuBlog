@@ -7,7 +7,7 @@ import { getAllPosts } from '@/services/content';
 
 import PostListLayout from '@/components/layout/PostListLayout';
 
-export default async function Home() {
+async function Home() {
   const config = getConfig();
   const posts: PostData[] = await getAllPosts();
 
@@ -45,3 +45,5 @@ export default async function Home() {
     </div>
   );
 }
+
+export default Home;

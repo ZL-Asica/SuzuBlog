@@ -19,7 +19,7 @@ const notoSansSC = Noto_Sans_SC({
   style: ['normal'],
 });
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
   title: `${config.title} - ${config.subTitle}`,
   description: config.description,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -61,3 +61,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export { metadata, RootLayout as default };
