@@ -22,7 +22,6 @@ interface PostData {
 // Category data in config.yml
 type Category = {
   name: string;
-  slug?: string;
   icon?: string;
 };
 

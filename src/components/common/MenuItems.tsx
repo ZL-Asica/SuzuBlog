@@ -32,7 +32,7 @@ const renderMenuItems = ({
       icon: <FaRegNewspaper />,
       isDropdown: true,
       dropdownItems: postCategories.map((category: Category) => ({
-        href: `/categories/${category.slug}`,
+        href: `/posts/?category=${category.name}`,
         label: category.name,
         icon:
           category.icon && Fa6[category.icon as keyof typeof Fa6]

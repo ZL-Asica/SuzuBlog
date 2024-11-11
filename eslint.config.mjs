@@ -1,5 +1,6 @@
 import { zlAsicaTsReactConfig } from 'eslint-config-zl-asica';
 import nextPlugin from '@next/eslint-plugin-next';
+import { PassThrough } from 'stream';
 
 export default [
   ...zlAsicaTsReactConfig,
@@ -27,6 +28,15 @@ export default [
     files: ['src/services/**/*.ts'],
     rules: {
       'unicorn/filename-case': ['error', { cases: { camelCase: true } }],
+    },
+  },
+  {
+    files: ['src/app/**/*.ts', 'src/app/**/*.tsx'],
+    rules: {
+      'unicorn/filename-case': [
+        'error',
+        { cases: { kebabCase: true, pascalCase: true } },
+      ],
     },
   },
 ];

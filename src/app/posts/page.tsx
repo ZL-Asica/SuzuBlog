@@ -1,13 +1,11 @@
-import type { Metadata } from 'next/types';
-import { Suspense } from 'react';
+import type { Metadata } from 'next';
 
-import Loading from '@/app/loading';
+import PostsClient from './PostsClient';
+
 import { getConfig } from '@/services/config';
 import { getAllPosts } from '@/services/content';
 
-import PostListLayout from '@/components/layout/PostListLayout';
-
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   const config = getConfig();
   return {
     title: `Posts - ${config.title}`,
@@ -25,14 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PostsPage() {
-  const posts: PostData[] = await getAllPosts();
+  const posts = await getAllPosts();
 
-  return (
-    <div className='container mx-auto p-4'>
-      <h1 className='mb-6 text-center text-4xl font-bold'>All Posts</h1>
-      <Suspense fallback={<Loading />}>
-        <PostListLayout posts={posts} />
-      </Suspense>
-    </div>
-  );
+  return <PostsClient posts={posts} />;
 }

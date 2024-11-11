@@ -20,8 +20,6 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         '/about',
         '/friends',
         '/posts',
-        '/categories/*',
-        '/tags/*',
         ...postUrls, // Dynamic post URLs
       ],
     },

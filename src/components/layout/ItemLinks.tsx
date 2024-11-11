@@ -1,57 +1,44 @@
-import Link from 'next/link';
+'use client';
 
-import { getConfig } from '@/services/config';
-import { convertToPinyin, getUniqueTags } from '@/services/content';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface ItemLinksProperties {
-  items: string[] | undefined;
+  items?: string[];
   type: 'category' | 'tag';
 }
 
-export default async function ItemLinks({ items, type }: ItemLinksProperties) {
+const getLink = (
+  item: string,
+  type: 'category' | 'tag',
+  searchParameters: URLSearchParams
+) => {
+  const newParameters = new URLSearchParams(searchParameters);
+  newParameters.set(type, item);
+  return `/posts?${newParameters.toString()}`;
+};
+
+export default function ItemLinks({ items, type }: ItemLinksProperties) {
+  const searchParameters = useSearchParams();
+
   if (!items || items.length === 0) {
     return <>{type === 'category' ? '未分类' : '无标签'}</>;
   }
 
-  const config = type === 'category' ? getConfig() : null;
-  const uniqueTags = type === 'tag' ? await getUniqueTags() : null;
-
-  const getLink = (item: string) => {
-    if (type === 'category' && config) {
-      const categoryLink = config.postCategories.find(
-        (cat) => cat.name === item && cat.slug
-      );
-      return categoryLink ? `/categories/${categoryLink.slug}` : null;
-    }
-    if (type === 'tag' && uniqueTags) {
-      return uniqueTags.includes(item)
-        ? `/tags/${convertToPinyin(item)}`
-        : null;
-    }
-    return null;
-  };
-
   return (
     <>
-      {items.map((item, index) => {
-        const link = getLink(item);
-        return (
-          <span key={item}>
-            {link ? (
-              <Link
-                href={link}
-                target='_self'
-                aria-label={`Navigate to ${type} ${item}`}
-              >
-                {item}
-              </Link>
-            ) : (
-              <span>{item}</span>
-            )}
-            {index < items.length - 1 && ', '}
-          </span>
-        );
-      })}
+      {items.map((item, index) => (
+        <span key={item}>
+          <Link
+            href={getLink(item, type, searchParameters)}
+            target='_self'
+            aria-label={`Navigate to ${type} ${item}`}
+          >
+            {item}
+          </Link>
+          {index < items.length - 1 && ', '}
+        </span>
+      ))}
     </>
   );
 }
