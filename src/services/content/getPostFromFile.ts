@@ -35,7 +35,7 @@ async function getPostFromFile(
 }
 
 async function parseMarkdown(
-  content: string,
+  fileContents: string,
   filePath: string,
   slug: string
 ): Promise<{
@@ -43,12 +43,16 @@ async function parseMarkdown(
   postAbstract: string;
   contentHtml: string;
 }> {
-  const { data, content: markdownContent } = matter(content);
+  const { data, content: markdownContent } = matter(fileContents);
+  const [thumbnail, date] = await Promise.all([
+    resolveThumbnail(data.thumbnail),
+    resolveDate(data.date, filePath),
+  ]);
   const frontmatterData: Frontmatter = {
     title: (data.title as string)?.slice(0, 100) || slug,
     author: (data.author as string)?.slice(0, 30) || config.author.name,
-    thumbnail: await resolveThumbnail(data.thumbnail),
-    date: await resolveDate(data.date, filePath),
+    thumbnail,
+    date,
     tags: data.tags || undefined,
     categories: data.categories || undefined,
     redirect: data.redirect || undefined,

@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
 
-import Loading from '@/app/loading';
 import { getConfig } from '@/services/config';
 import { getAllPosts, getPostData } from '@/services/content';
 
@@ -15,30 +13,22 @@ async function generateStaticParams() {
   }));
 }
 
-type Properties = {
-  params: Promise<{ slug: string }>;
-};
-
-async function generateMetadata({ params }: Properties): Promise<Metadata> {
-  // read post slug
-  const { slug } = await params;
-
+async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   // get post data
-  const postData = await getPostData(slug);
-
-  // thumbnail image
-  const thumbnail = postData.frontmatter.thumbnail;
+  const postData = await getPostData(params.slug);
 
   const config = getConfig();
+  const metaKeywords = [
+    ...(postData.frontmatter.tags || []),
+    ...(postData.frontmatter.categories || []),
+    postData.frontmatter.author,
+    'blog',
+  ].join(', ');
 
-  const metaKeywords =
-    postData.frontmatter.tags?.join(', ') +
-    ', ' +
-    postData.frontmatter.categories?.join(', ') +
-    ', ' +
-    postData.frontmatter.author +
-    ', ' +
-    'blog';
   return {
     title: `${postData.frontmatter.title} - ${config.title}`,
     description: postData.postAbstract,
@@ -51,8 +41,8 @@ async function generateMetadata({ params }: Properties): Promise<Metadata> {
       modifiedTime: postData.frontmatter.date,
       title: postData.frontmatter.title,
       description: postData.postAbstract,
-      images: thumbnail,
-      url: `/posts/${slug}`,
+      images: postData.frontmatter.thumbnail,
+      url: `/posts/${params.slug}`,
       locale: config.lang,
     },
   };
@@ -63,11 +53,7 @@ async function PostPage(props: { params: Promise<{ slug: string }> }) {
   const parameters = await props.params;
   const post: PostData = await getPostData(parameters.slug);
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <PostLayout post={post} />
-    </Suspense>
-  );
+  return <PostLayout post={post} />;
 }
 
 export { generateStaticParams, generateMetadata, PostPage as default };

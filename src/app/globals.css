@@ -32,6 +32,15 @@ body {
   }
 }
 
+form,
+input,
+textarea,
+button {
+  font-family: inherit;
+  color: inherit;
+  background: inherit;
+}
+
 /****************************************************
  * Post content styles
  ****************************************************/

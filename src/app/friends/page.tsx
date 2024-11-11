@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
 
-import Loading from '@/app/loading';
 import { getConfig } from '@/services/config';
 import { getPostData } from '@/services/content';
 
@@ -30,11 +28,9 @@ export default async function FriendsPage() {
   const config = getConfig();
 
   return (
-    <Suspense fallback={<Loading />}>
-      <PostLayout
-        post={post}
-        showThumbnail={config.thumbnailFriends}
-      />
-    </Suspense>
+    <PostLayout
+      post={post}
+      showThumbnail={config.thumbnailFriends}
+    />
   );
 }

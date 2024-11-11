@@ -1,11 +1,10 @@
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { FaFolder, FaTags } from 'react-icons/fa6';
 
 import ItemLinks from './ItemLinks';
 
 import { getConfig } from '@/services/config';
-
-import DisqusComments from '@/components/common/DisqusComments';
 
 import '@/styles/codeblock.css';
 import '@/styles/postContent.css';
@@ -15,6 +14,10 @@ interface PostLayoutProperties {
   post: PostData;
   showThumbnail?: boolean;
 }
+
+const DisqusComments = dynamic(
+  () => import('@/components/common/DisqusComments')
+);
 
 function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
   return (

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import { Noto_Sans_SC, Roboto } from 'next/font/google';
+import { Noto_Sans_SC } from 'next/font/google';
 import Script from 'next/script';
 
 import { getConfig } from '@/services/config';
@@ -11,13 +11,6 @@ import Footer from '@/components/common/Footer';
 import './globals.css';
 
 const config = getConfig();
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['100', '400', '700', '900'],
-  variable: '--font-roboto',
-  style: ['normal', 'italic'],
-});
 
 const notoSansSC = Noto_Sans_SC({
   subsets: ['latin'],
@@ -56,7 +49,7 @@ export default function RootLayout({
         src='/custom.js'
         strategy='lazyOnload'
       />
-      <body className={`${roboto.variable} ${notoSansSC.variable} antialiased`}>
+      <body className={`${notoSansSC.variable} antialiased`}>
         <ThemeProvider />
         <Header
           siteTitle={config.title}
