@@ -28,19 +28,21 @@ slogan: "As long as the code or the developer is able to run, it's all good."
 #######################
 # SOCIAL MEDIA SETTINGS
 #######################
-# Add your social media links here.
+# Add your social media usernames.
 # Leave the field empty if you do not want to display a specific platform.
+# The order of the social media icons is determined by the order below.
 socialMedia:
-  github: 'https://www.github.com/ZL-Asica' # Your GitHub profile URL.
-  linkedin: 'https://www.linkedin.com/in/elara-liu' # Your LinkedIn profile URL.
-  x: '' # Twitter profile URL.
-  instagram: 'https://www.instagram.com/zl_asica' # Instagram profile URL.
-  youtube: 'https://www.youtube.com/@ZL-Asica' # YouTube channel URL.
-  telegram: 'https://t.me/ZL_Asica' # Telegram profile or channel URL.
-  bilibili: 'https://space.bilibili.com/29018759' # Bilibili profile URL.
-  zhihu: 'https://www.zhihu.com/people/zl-asica' # Zhihu profile URL.
-  email: 'zl@zla.app' # Your email address (do NOT include the mailto: prefix).
-  rss: '' # RSS feed URL (can be relative url).
+  github_username: ZL-Asica # Your GitHub username. https://github.com/username
+  linkedin_username: elara-liu # Your LinkedIn username. https://www.linkedin.com/in/username
+  instagram_id: zl_asica # Your Instagram username.
+  orcid_id: 0009-0008-7221-2324 # Your ORCID iD.
+  telegram_username: zl_asica # Your Telegram username. https://t.me/username
+  x_username: # Your X (Twitter) username.
+  youtube_id: ZL-Asica # Your YouTube channel ID. https://www.youtube.com/@username
+  zhihu_username: zl_asica # Your Zhihu username. https://www.zhihu.com/people/username
+  bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
+  email: # Your email address.
+  rss: # Your RSS feed URL.
 
 #######################
 # PAGES (ABOUT, FRIENDS) SETTINGS

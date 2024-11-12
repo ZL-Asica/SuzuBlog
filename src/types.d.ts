@@ -19,6 +19,8 @@ interface PostData {
   lastModified: string;
 }
 
+type SocialMedia = Record<string, string>;
+
 // Config value from config.yml
 type Config = {
   title: string;
@@ -34,18 +36,7 @@ type Config = {
   avatar: string;
   background: string;
   slogan: string;
-  socialMedia: {
-    github: string;
-    linkedin: string;
-    x: string;
-    instagram: string;
-    youtube: string;
-    telegram: string;
-    bilibili: string;
-    zhihu: string;
-    email: string;
-    rss: string;
-  };
+  socialMedia: SocialMedia;
   thumbnailAbout: boolean;
   thumbnailFriends: boolean;
   disqusShortname: string;

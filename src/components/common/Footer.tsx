@@ -1,75 +1,31 @@
 import Link from 'next/link';
 import { MdEmail } from 'react-icons/md';
-import { SiZhihu } from 'react-icons/si';
 import {
-  FaBilibili,
   FaGithub,
+  FaLinkedin,
   FaInstagram,
-  FaLinkedinIn,
-  FaRss,
+  FaOrcid,
   FaTelegram,
   FaXTwitter,
   FaYoutube,
+  FaZhihu,
+  FaBilibili,
+  FaRss,
 } from 'react-icons/fa6';
+import { upperFirst } from 'es-toolkit/string';
+import { words, replace, isString } from 'es-toolkit/compat';
 
 import { getConfig } from '@/services/config';
-import '@/styles/footer.css';
 
-export default function Footer() {
+function Footer() {
   const config = getConfig();
   const currentYear = new Date().getFullYear();
-
-  const socialIcons = {
-    instagram: FaInstagram,
-    github: FaGithub,
-    x: FaXTwitter,
-    linkedin: FaLinkedinIn,
-    youtube: FaYoutube,
-    telegram: FaTelegram,
-    bilibili: FaBilibili,
-    zhihu: SiZhihu,
-    email: MdEmail,
-    rss: FaRss,
-  };
-
-  const contactList = Object.entries(config.socialMedia)
-    .map(([key, href]) => {
-      if (!href) {
-        return null;
-      }
-      const IconComponent = socialIcons[key];
-      const title = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize key for title
-      const contactHref = key === 'email' ? `mailto:${href}` : href;
-      return {
-        href: contactHref,
-        title,
-        icon: <IconComponent size={32} />,
-      };
-    })
-    .filter(
-      (contact): contact is { href: string; title: string; icon } =>
-        contact !== null
-    ); // Asserts that contact is not null
 
   return (
     <footer className='mt-10'>
       <div className='mx-auto max-w-7xl px-4 py-4 text-center'>
-        <div className='mb-5 flex flex-wrap justify-center gap-4'>
-          {contactList.map(({ href, title, icon }) => (
-            <Link
-              key={title}
-              href={href}
-              title={title}
-              aria-label={`${title} (new tab)`}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='transform transition-transform hover:scale-110'
-            >
-              {icon}
-            </Link>
-          ))}
-        </div>
-        <p className='footer-text'>
+        <SocialMediaLink socialMedia={config.socialMedia} />
+        <p className='text-gray-800 dark:text-gray-300'>
           © 2017-{currentYear} {config.title}
           <br />
           Theme{' '}
@@ -77,6 +33,7 @@ export default function Footer() {
             href='https://suzu.zla.app/'
             target='_blank'
             aria-label="Suzu's homepage (new tab)"
+            className='decoration-dashed underline-offset-2'
           >
             Suzu
           </Link>{' '}
@@ -85,6 +42,7 @@ export default function Footer() {
             href='https://www.zla.app/'
             target='_blank'
             aria-label="ZL Asica's homepage (new tab)"
+            className='decoration-dashed underline-offset-2'
           >
             ZL Asica
           </Link>
@@ -96,3 +54,88 @@ export default function Footer() {
     </footer>
   );
 }
+
+function SocialMediaLink({ socialMedia }: { socialMedia: SocialMedia }) {
+  return (
+    <div className='mb-5 flex flex-wrap justify-center space-x-4'>
+      {Object.entries(socialMedia)
+        .filter(([key, username]) => key in socialData && isString(username))
+        .map(([key, username]) => {
+          const { urlTemplate, icon: IconComponent } =
+            socialData[key as SocialMediaKey];
+
+          const label = upperFirst(words(key)[0]);
+          return (
+            <Link
+              key={label}
+              href={replace(
+                urlTemplate,
+                '{username}',
+                encodeURIComponent(username)
+              )}
+              target='_blank'
+              rel='noopener noreferrer'
+              aria-label={label}
+              className='group relative inline-block transform transition-all duration-300 ease-out'
+            >
+              <IconComponent
+                size={32}
+                className='transition-transform group-hover:scale-150'
+              />
+            </Link>
+          );
+        })}
+    </div>
+  );
+}
+
+type SocialMediaKey = keyof typeof socialData;
+
+const socialData = {
+  github_username: {
+    urlTemplate: 'https://github.com/{username}',
+    icon: FaGithub,
+  },
+  linkedin_username: {
+    urlTemplate: 'https://www.linkedin.com/in/{username}',
+    icon: FaLinkedin,
+  },
+  instagram_id: {
+    urlTemplate: 'https://www.instagram.com/{username}',
+    icon: FaInstagram,
+  },
+  orcid_id: {
+    urlTemplate: 'https://orcid.org/{username}',
+    icon: FaOrcid,
+  },
+  telegram_username: {
+    urlTemplate: 'https://t.me/{username}',
+    icon: FaTelegram,
+  },
+  x_username: {
+    urlTemplate: 'https://x.com/{username}',
+    icon: FaXTwitter,
+  },
+  youtube_id: {
+    urlTemplate: 'https://www.youtube.com/@{username}',
+    icon: FaYoutube,
+  },
+  zhihu_username: {
+    urlTemplate: 'https://www.zhihu.com/people/{username}',
+    icon: FaZhihu,
+  },
+  bilibili_id: {
+    urlTemplate: 'https://space.bilibili.com/{username}',
+    icon: FaBilibili,
+  },
+  email: {
+    urlTemplate: 'mailto:{username}',
+    icon: MdEmail,
+  },
+  rss: {
+    urlTemplate: '{username}',
+    icon: FaRss,
+  },
+};
+
+export default Footer;
