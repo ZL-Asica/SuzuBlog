@@ -18,36 +18,63 @@ interface HeaderProperties {
   siteTitle: string;
 }
 
-function Header({ siteTitle }: HeaderProperties) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+// Custom hook to check if the screen is mobile size
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
+}
+
+// Custom hook to manage menu focus for accessibility
+function useMenuFocus(isOpen: boolean) {
   const menuReference = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
 
-  const toggleMenu = () => {
-    setIsOpen((previous) => !previous);
-  };
-
-  // Accessibility focus management
   useEffect(() => {
     if (isOpen && menuReference.current) {
       menuReference.current.focus();
     }
   }, [isOpen]);
 
-  // Detect mobile screen size
+  return menuReference;
+}
+
+function Header({ siteTitle }: HeaderProperties) {
+  const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
+  const menuReference = useMenuFocus(isOpen);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  const toggleMenu = () => setIsOpen((previous) => !previous);
+
+  // Close menu when clicking outside
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuReference.current &&
+        !menuReference.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
     };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
     return () => {
-      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <header className='header-container relative z-50 shadow-md'>
@@ -65,10 +92,10 @@ function Header({ siteTitle }: HeaderProperties) {
         </Link>
 
         {/* Mobile View */}
-        {isMobile && (
+        {isMobile ? (
           <>
             <button
-              className='transform text-2xl transition-transform duration-300 md:hidden'
+              className='transform text-2xl transition-transform duration-300'
               onClick={toggleMenu}
               aria-label='Toggle menu'
               aria-expanded={isOpen}
@@ -90,30 +117,28 @@ function Header({ siteTitle }: HeaderProperties) {
               } bg-lightBackground shadow-lg dark:bg-darkBackground`}
             >
               <ul className='flex flex-col gap-2'>
-                {renderMenuItems({
-                  onClickHandler: toggleMenu,
-                })}
+                {renderMenuItems(toggleMenu)}
               </ul>
             </div>
           </>
-        )}
-
-        {/* Desktop View */}
-        {!isMobile && (
-          <ul className='hidden space-x-6 md:flex'>{renderMenuItems({})}</ul>
+        ) : (
+          /* Desktop View */
+          <ul className='hidden space-x-6 md:flex'>{renderMenuItems()}</ul>
         )}
       </nav>
     </header>
   );
 }
 
-const renderMenuItems = ({ onClickHandler }: { onClickHandler?: () => void }) =>
-  [
+function renderMenuItems(onClickHandler?: () => void) {
+  const menuItems = [
     { href: '/', label: 'Home', icon: <FaHouse /> },
     { href: '/posts', label: 'Posts', icon: <FaRegNewspaper /> },
     { href: '/friends', label: 'Friends', icon: <FaPeopleGroup /> },
     { href: '/about', label: 'About', icon: <FaInfo /> },
-  ].map((item) => (
+  ];
+
+  return menuItems.map((item) => (
     <li
       key={item.href}
       className='group relative'
@@ -122,7 +147,6 @@ const renderMenuItems = ({ onClickHandler }: { onClickHandler?: () => void }) =>
         href={item.href}
         className='flex items-center gap-2 p-2'
         onClick={onClickHandler}
-        target='_self'
         aria-label={`Navigate to ${item.label}`}
       >
         {item.icon}
@@ -130,5 +154,6 @@ const renderMenuItems = ({ onClickHandler }: { onClickHandler?: () => void }) =>
       </Link>
     </li>
   ));
+}
 
 export default Header;
