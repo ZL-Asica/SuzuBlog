@@ -112,7 +112,7 @@ img {
 
 /* Links */
 a {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:hover,
@@ -137,11 +137,6 @@ select:checked,
 button:focus-visible {
   background-color: var(--sakuraPink);
   color: var(--background);
-}
-
-.header-container button {
-  color: var(--background);
-  background-color: var(--skyblue);
 }
 
 /****************************************************

@@ -1,18 +1,47 @@
-/* Dropdown menu for hover */
-.group:hover .group-hover\:block {
-  display: block;
-}
+.header-container {
+  a {
+    text-decoration: none;
+  }
+  button {
+    color: var(--background);
+    background-color: var(--foreground);
+  }
 
-.group-hover\:block {
-  display: none;
-}
+  /* Ensure smooth dropdown animation */
+  #mobile-menu {
+    overflow: hidden;
+    transform-origin: top center; /* Set origin for scale effect */
+    transition:
+      max-height 0.3s ease-in-out,
+      opacity 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
+  }
 
-/* Dropdown menu for hover */
-li.group .group-hover\:block {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: none;
-  min-width: 160px;
+  /* Adjust spacing for dropdown arrows */
+  select {
+    padding-right: 1.75rem; /* Ensure spacing from right edge */
+  }
+
+  /* Set default option color */
+  option[value=''][disabled] {
+    color: #888888; /* Lighter gray for default/placeholder text */
+  }
+
+  /* Dropdown menu for hover */
+  .group:hover .group-hover\:block {
+    display: block;
+  }
+
+  .group-hover\:block {
+    display: none;
+  }
+
+  li.group .group-hover\:block {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    min-width: 160px;
+  }
 }

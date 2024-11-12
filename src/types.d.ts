@@ -19,12 +19,6 @@ interface PostData {
   lastModified: string;
 }
 
-// Category data in config.yml
-type Category = {
-  name: string;
-  icon?: string;
-};
-
 // Config value from config.yml
 type Config = {
   title: string;
@@ -40,7 +34,6 @@ type Config = {
   avatar: string;
   background: string;
   slogan: string;
-  postCategories: Category[];
   socialMedia: {
     github: string;
     linkedin: string;

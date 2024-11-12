@@ -24,18 +24,6 @@ slogan: "As long as the code or the developer is able to run, it's all good."
 #######################
 # HEADER SETTINGS
 #######################
-# Post Categories: Add your post categories here.
-# Use icons from link below (e.g., 'FaHouse' for 'fa6 FaHouse').
-# https://react-icons.github.io/react-icons/icons/fa6/
-postCategories:
-  - name: '前端' # Category name, same ad frontmatter category, will show in frontend.
-    icon: 'FaHtml5' # (Optional) Font Awesome 6 icon name. If not set, no icon.
-  - name: '全栈'
-    icon: 'FaCode'
-  - name: '教程'
-    icon: 'FaGraduationCap'
-  - name: '随笔'
-    icon: 'FaPen'
 
 #######################
 # SOCIAL MEDIA SETTINGS

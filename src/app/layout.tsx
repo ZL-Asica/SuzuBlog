@@ -51,10 +51,7 @@ function RootLayout({
       />
       <body className={`${notoSansSC.variable} antialiased`}>
         <ThemeProvider />
-        <Header
-          siteTitle={config.title}
-          postCategories={config.postCategories}
-        />
+        <Header siteTitle={config.title} />
         <main>{children}</main>
         <Footer />
       </body>

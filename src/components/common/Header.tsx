@@ -3,57 +3,54 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { FaAngleUp, FaBars } from 'react-icons/fa6';
+import {
+  FaAngleUp,
+  FaBars,
+  FaHouse,
+  FaInfo,
+  FaPeopleGroup,
+  FaRegNewspaper,
+} from 'react-icons/fa6';
 
-import renderMenuItems from '@/components/common/MenuItems';
 import '@/styles/header.css';
 
-export default function Header({
-  siteTitle,
-  postCategories,
-}: {
+interface HeaderProperties {
   siteTitle: string;
-  postCategories: Category[];
-}) {
+}
+
+function Header({ siteTitle }: HeaderProperties) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); // Detect if in mobile view
+  const [isMobile, setIsMobile] = useState(false);
   const menuReference = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const isHomePage = pathname === '/'; // Check if current page is home page
+  const isHomePage = pathname === '/';
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((previous) => !previous);
   };
 
-  // Ensure focus is managed when the menu is open for accessibility
+  // Accessibility focus management
   useEffect(() => {
     if (isOpen && menuReference.current) {
       menuReference.current.focus();
     }
   }, [isOpen]);
 
-  // Detect screen width and set mobile state
+  // Detect mobile screen size
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Set to true if screen is less than or equal to 768px
+      setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // Set initial state on component mount
-    window.addEventListener('resize', handleResize); // Update state on window resize
-
+    handleResize();
+    window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   return (
-    <header
-      className='header-container relative z-50 shadow-md'
-      style={{
-        backgroundColor: 'var(--background)',
-        color: 'var(--foreground)',
-      }}
-    >
+    <header className='header-container relative z-50 shadow-md'>
       <nav className='mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
         <Link
           href='/'
@@ -67,11 +64,11 @@ export default function Header({
           )}
         </Link>
 
-        {/* Display only in mobile */}
+        {/* Mobile View */}
         {isMobile && (
           <>
             <button
-              className='text-3xl md:hidden'
+              className='transform text-2xl transition-transform duration-300 md:hidden'
               onClick={toggleMenu}
               aria-label='Toggle menu'
               aria-expanded={isOpen}
@@ -80,36 +77,58 @@ export default function Header({
               {isOpen ? <FaAngleUp /> : <FaBars />}
             </button>
 
-            {/* Mobile Navigation */}
-            {isOpen && (
-              <div
-                id='mobile-menu'
-                ref={menuReference}
-                tabIndex={-1}
-                role='menu'
-                aria-hidden={!isOpen}
-                className='absolute left-0 top-16 z-50 w-full bg-lightBackground p-4 shadow-lg dark:bg-darkBackground'
-                style={{ zIndex: 50 }}
-              >
-                <ul className='flex flex-col gap-2'>
-                  {renderMenuItems({
-                    postCategories: postCategories,
-                    isMobile: true,
-                    onClickHandler: toggleMenu,
-                  })}
-                </ul>
-              </div>
-            )}
+            <div
+              id='mobile-menu'
+              ref={menuReference}
+              tabIndex={-1}
+              role='menu'
+              aria-hidden={!isOpen}
+              className={`absolute left-0 top-20 w-full p-4 transition-all duration-300 ease-out ${
+                isOpen
+                  ? 'max-h-screen scale-y-100 opacity-100'
+                  : 'max-h-0 scale-y-0 opacity-0'
+              } bg-lightBackground shadow-lg dark:bg-darkBackground`}
+            >
+              <ul className='flex flex-col gap-2'>
+                {renderMenuItems({
+                  onClickHandler: toggleMenu,
+                })}
+              </ul>
+            </div>
           </>
         )}
 
-        {/* Display only in desktop */}
+        {/* Desktop View */}
         {!isMobile && (
-          <ul className='hidden space-x-6 md:flex'>
-            {renderMenuItems({ postCategories: postCategories })}
-          </ul>
+          <ul className='hidden space-x-6 md:flex'>{renderMenuItems({})}</ul>
         )}
       </nav>
     </header>
   );
 }
+
+const renderMenuItems = ({ onClickHandler }: { onClickHandler?: () => void }) =>
+  [
+    { href: '/', label: 'Home', icon: <FaHouse /> },
+    { href: '/posts', label: 'Posts', icon: <FaRegNewspaper /> },
+    { href: '/friends', label: 'Friends', icon: <FaPeopleGroup /> },
+    { href: '/about', label: 'About', icon: <FaInfo /> },
+  ].map((item) => (
+    <li
+      key={item.href}
+      className='group relative'
+    >
+      <Link
+        href={item.href}
+        className='flex items-center gap-2 p-2'
+        onClick={onClickHandler}
+        target='_self'
+        aria-label={`Navigate to ${item.label}`}
+      >
+        {item.icon}
+        {item.label}
+      </Link>
+    </li>
+  ));
+
+export default Header;
