@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 import { getConfig } from '@/services/config';
 import { getAllPosts } from '@/services/content';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const config = getConfig();
   const siteUrl = config.siteUrl;
 
@@ -46,3 +46,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...postUrls, // Dynamic post URLs
   ];
 }
+
+export default sitemap;

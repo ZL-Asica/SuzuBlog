@@ -7,7 +7,11 @@ import { FaEye, FaFolder, FaRegClock } from 'react-icons/fa6';
 
 import ItemLinks from './ItemLinks';
 
-export default function PostListLayout({ posts }: { posts: PostData[] }) {
+interface PostListLayoutProperties {
+  posts: PostData[];
+}
+
+export default function PostListLayout({ posts }: PostListLayoutProperties) {
   // TODO: Replace with actual read count
   const readCount: number = 29;
 

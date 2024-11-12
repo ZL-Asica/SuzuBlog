@@ -5,7 +5,7 @@ import PostsClient from './PostsClient';
 import { getConfig } from '@/services/config';
 import { getAllPosts } from '@/services/content';
 
-export function generateMetadata(): Metadata {
+function generateMetadata(): Metadata {
   const config = getConfig();
   return {
     title: `Posts - ${config.title}`,
@@ -22,8 +22,10 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function PostsPage() {
+async function PostsPage() {
   const posts: PostData[] = await getAllPosts();
 
   return <PostsClient posts={posts} />;
 }
+
+export { generateMetadata, PostsPage as default };

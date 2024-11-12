@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import { Noto_Sans_SC } from 'next/font/google';
+import type { NextFontWithVariable } from 'next/dist/compiled/@next/font';
 import Script from 'next/script';
 
 import { getConfig } from '@/services/config';
@@ -10,9 +11,9 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import './globals.css';
 
-const config = getConfig();
+const config: Config = getConfig();
 
-const notoSansSC = Noto_Sans_SC({
+const notoSansSC: NextFontWithVariable = Noto_Sans_SC({
   subsets: ['latin'],
   weight: ['100', '400', '700', '900'],
   variable: '--font-noto-sans-sc',

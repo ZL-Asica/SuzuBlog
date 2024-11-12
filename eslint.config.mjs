@@ -22,6 +22,23 @@ export default [
           },
         },
       ],
+      'react-refresh/only-export-components': [
+        'warn',
+        {
+          allowExportNames: [
+            'metadata',
+            'generateMetadata',
+            'generateStaticParams',
+            'generateSitemap',
+            'generateRobotsTxt',
+            'dynamic',
+            'revalidate',
+            'fetchCache',
+            'config',
+            'alternateLinks',
+          ],
+        },
+      ],
     },
   },
   {

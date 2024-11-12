@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 import { getConfig } from '@/services/config';
 import { getAllPosts } from '@/services/content';
 
-export default async function robots(): Promise<MetadataRoute.Robots> {
+async function robots(): Promise<MetadataRoute.Robots> {
   const config = getConfig();
   const siteUrl = config.siteUrl;
 
@@ -26,3 +26,5 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
     sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
+
+export default robots;
