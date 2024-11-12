@@ -1,41 +1,39 @@
 ---
-name: "\U0001F41B Bug report"
-about: Create a report to help us improve
+name: '🐛 Bug report'
+about: Report an issue to improve the functionality and usability of the project.
 title: '[BUG]'
 labels: bug
 assignees: ZL-Asica
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Description:**
+Provide a clear and concise description of the issue.
 
-**To Reproduce**
-Steps to reproduce the behavior:
+**Steps to Reproduce:**
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. Navigate to `...`
+2. Perform action `...`
+3. Observe the behavior `...`
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Expected Behavior:**
+Describe what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Screenshots/Visuals:**
+Attach any screenshots that demonstrate the problem.
 
-**Desktop (please complete the following information):**
+**System Details:**
 
-- OS: [e.g. macOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
-- Network physical location [e.g. U.S., China (Mainland)
+- **OS**: (e.g., macOS Ventura)
+- **Browser**: (e.g., Chrome 118.0)
+- **Version**: (e.g., v1.2.3)
+- **Network**: (e.g., U.S., Mainland China)
 
-**Smartphone (please complete the following information):**
+**Mobile Environment:**
 
-- Device: [e.g. iPhone 16]
-- OS: [e.g. iOS 18.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
+- **Device**: (e.g., iPhone 15)
+- **OS**: (e.g., iOS 18)
+- **Browser**: (e.g., Safari)
+- **Version**: (e.g., v18.3.2)
 
-**Additional context**
-Add any other context about the problem here.
+**Additional Context:**
+Add any extra information here, including related configuration or debugging attempts.

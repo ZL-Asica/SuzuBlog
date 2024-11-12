@@ -26,13 +26,13 @@ jobs:
             });
 
             const labelsToColor = {
-              main: 'f66a0a', // Orange
+              'main': 'f66a0a', // Orange
               'common-components': '1f77b4', // Blue
-              layout: '8c564b', // Brown
-              service: '2ca02c', // Green
-              styles: '9467bd', // Purple
-              content: 'ffdd57', // Yellow
-              types: 'd62728', // Red
+              'posts': '8c564b', // Brown
+              'service': '2ca02c', // Green
+              'styles': '9467bd', // Purple
+              'content': 'ffdd57', // Yellow
+              'types': 'd62728', // Red
             };
 
             const labels = new Set();
@@ -41,22 +41,22 @@ jobs:
               if (file.filename.startsWith('src/app')) {
                 labels.add('main');
               }
-              if (file.filename.startsWith('src/components/layout')) {
-                labels.add('layout');
+              if (file.filename.startsWith('src/components/posts')) {
+                labels.add('posts');
               }
               if (file.filename.startsWith('src/components/common')) {
                 labels.add('common-components');
               }
-              if (file.filename.startsWith('src/service')) {
-                labels.add('service');
+              if (file.filename.startsWith('src/services')) {
+                labels.add('services');
               }
-              if (file.filename.startsWith('src/styles')) {
+              if (file.filename.endsWith('.css')) {
                 labels.add('styles');
               }
               if (file.filename.startsWith('posts')) {
                 labels.add('content');
               }
-              if (file.filename.startsWith('src/types.d.ts')) {
+              if (file.filename.startsWith('src/types.d.ts') || file.filename.endsWith('.d.ts')) {
                 labels.add('types');
               }
             });
