@@ -33,7 +33,8 @@ body {
 }
 
 form,
-input {
+input,
+select {
   font-family: inherit;
   color: inherit;
   background: inherit;
@@ -132,6 +133,7 @@ button {
 }
 
 button:hover,
+select:checked,
 button:focus-visible {
   background-color: var(--sakuraPink);
   color: var(--background);
@@ -159,6 +161,7 @@ button:focus-visible {
 
 /* Enhance focus for form inputs */
 input:focus-visible,
+select:focus-visible,
 textarea:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--sakuraPink);

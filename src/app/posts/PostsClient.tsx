@@ -23,6 +23,28 @@ function PostsClient({ posts }: PostsClientProperties) {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 
+  const categories = defaultTo(
+    [
+      ...new Set(
+        flatMap(posts, (post) =>
+          defaultTo(post.frontmatter.categories, [])
+        ) as string[]
+      ),
+    ],
+    []
+  );
+
+  const tags = defaultTo(
+    [
+      ...new Set(
+        flatMap(posts, (post) =>
+          defaultTo(post.frontmatter.tags, [])
+        ) as string[]
+      ),
+    ],
+    []
+  );
+
   // Filter posts based on search, category, and tag
   const filteredPosts = getFilteredPosts(
     posts,
@@ -41,9 +63,11 @@ function PostsClient({ posts }: PostsClientProperties) {
   return (
     <div className='container mx-auto flex flex-col items-center p-4'>
       {/* Centered Search Input */}
-      <div className='w-full'>
-        <SearchInput initialValue={searchQuery} />
-      </div>
+      <SearchInput
+        initialValue={searchQuery}
+        categories={categories}
+        tags={tags}
+      />
 
       {/* Post List */}
       <PostListLayout posts={currentPosts} />
