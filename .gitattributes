@@ -1,0 +1,56 @@
+* text=auto
+*.sh eol=lf
+*.bat eol=crlf
+
+*.md diff=text
+
+.gitattributes export-ignore
+README.md export-subst
+
+# Node.js / Yarn Related
+pnp.* linguist-generated
+yarn.lock linguist-generated
+package-lock.json linguist-generated
+node_modules/ linguist-generated
+pnpm-lock.yaml linguist-generated
+# Build files
+dist/ linguist-generated
+build/ linguist-generated
+out/ linguist-generated
+# Static files
+*.png linguist-generated
+*.jpg linguist-generated
+*.jpeg linguist-generated
+*.gif linguist-generated
+*.svg linguist-generated
+*.ico linguist-generated
+*.eot linguist-generated
+*.ttf linguist-generated
+*.woff linguist-generated
+*.woff2 linguist-generated
+# CI/CD
+.github/ linguist-generated
+.gitlab-ci.yml linguist-generated
+.circleci/ linguist-generated
+
+# Pic and video
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp4 binary
+*.mov binary
+*.mkv binary
+*.mp3 binary
+
+# Archive
+*.zip binary
+*.rar binary
+*.gz binary
+*.7z binary
+
+# Executable
+*.exe binary
+*.msi binary
+*.dmg binary
+*.iso binary
