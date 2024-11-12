@@ -16,14 +16,15 @@ function BackToTop() {
         setIsVisible(false);
       }
 
-      // Check if at bottom
+      // Handle bottom
       if (
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight
       ) {
         setIsAtBottom(true);
-        // Add 500ms animation delay
-        setTimeout(() => setIsAtBottom(false), 500);
+        // Add 3 seconds delay to remove the animation
+        console.log('At bottom');
+        setTimeout(() => setIsAtBottom(false), 3000);
       }
     };
 
@@ -36,8 +37,8 @@ function BackToTop() {
       onClick={scrollToTop}
       className={`${
         isVisible ? 'opacity-100' : 'opacity-0'
-      } fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-sakuraPink text-white shadow-lg transition-all duration-500 hover:scale-125 ${
-        isAtBottom ? 'scale-150 animate-bounce transition' : ''
+      } fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-sakuraPink text-white shadow-lg transition-all duration-200 hover:scale-125 ${
+        isAtBottom ? 'animate-bounce' : ''
       } `}
       aria-label='Back to Top'
       hidden={!isVisible}
