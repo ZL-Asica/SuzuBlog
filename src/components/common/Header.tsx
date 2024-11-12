@@ -18,67 +18,37 @@ interface HeaderProperties {
   siteTitle: string;
 }
 
-// Custom hook to check if the screen is mobile size
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return isMobile;
-}
-
-// Custom hook to manage menu focus for accessibility
-function useMenuFocus(isOpen: boolean) {
-  const menuReference = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isOpen && menuReference.current) {
-      menuReference.current.focus();
-    }
-  }, [isOpen]);
-
-  return menuReference;
-}
-
 function Header({ siteTitle }: HeaderProperties) {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useIsMobile();
-  const menuReference = useMenuFocus(isOpen);
+  const menuReference = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
   const toggleMenu = () => setIsOpen((previous) => !previous);
 
-  // Close menu when clicking outside
+  // Detect clicks outside of the menu to close it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
+        isOpen &&
         menuReference.current &&
         !menuReference.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }
     };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
   return (
     <header className='header-container relative z-50 shadow-md'>
-      <nav className='mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
+      <nav
+        className={
+          'mx-auto flex max-w-7xl items-center justify-between px-4 py-4'
+        }
+      >
         <Link
           href='/'
           target='_self'
@@ -128,6 +98,22 @@ function Header({ siteTitle }: HeaderProperties) {
       </nav>
     </header>
   );
+}
+
+// Hook to check if the screen is mobile size
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    // Only set up the listener on the client side
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
 }
 
 function renderMenuItems(onClickHandler?: () => void) {
