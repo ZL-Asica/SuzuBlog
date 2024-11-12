@@ -10,13 +10,13 @@ author:
   link: 'https://www.zla.app' # Link to your personal website or blog.
 # Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
 lang: 'zh'
-# Your public root url, used for SEO and meta tags. (Do not include a ending slash)
+# Your public root url, used for SEO and meta tags.
+# !Do not include a ending slash
 siteUrl: 'https://suzu.zla.app'
 
 # Path to your avatar image. Can be a relative path from /public or a full URL (e.g., https://).
 avatar: '/images/avatar.jpg'
-# Used as the background image for your blog,
-# and also as the default thumbnail for posts without thumbnails.
+# Used as the default thumbnail for posts without thumbnails.
 background: '/images/background.jpg'
 # Slogan displayed on your homepage, under your avatar.
 slogan: "As long as the code or the developer is able to run, it's all good."
@@ -41,7 +41,7 @@ socialMedia:
   youtube_id: ZL-Asica # Your YouTube channel ID. https://www.youtube.com/@username
   zhihu_username: zl_asica # Your Zhihu username. https://www.zhihu.com/people/username
   bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
-  email: # Your email address.
+  email: zl@zla.app # Your email address.
   rss: # Your RSS feed URL.
 
 #######################
