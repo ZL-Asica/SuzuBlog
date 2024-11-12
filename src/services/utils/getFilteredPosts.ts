@@ -1,36 +1,57 @@
-// Filter posts based on search query, category, and tag with enhanced capabilities
+import {
+  defaultTo,
+  filter,
+  includes,
+  replace,
+  some,
+  words,
+} from 'es-toolkit/compat';
+import { lowerCase } from 'es-toolkit/string';
+
 function getFilteredPosts(
   posts: PostData[],
   searchQuery: string,
   category?: string,
   tag?: string
 ): PostData[] {
-  const lowerCaseQuery = searchQuery.toLowerCase();
-  const lowerCaseCategory = category?.toLowerCase();
-  const lowerCaseTag = tag?.toLowerCase();
+  // Preprocess search query
+  const queryKeywords = words(lowerCase(searchQuery));
+  const normalizedCategory = lowerCase(defaultTo(category, ''));
+  const normalizedTag = lowerCase(defaultTo(tag, ''));
 
-  // Split search query into multiple words for multi-keyword support
-  const queryKeywords = lowerCaseQuery.split(' ').filter(Boolean);
+  return filter(posts, (post) => {
+    const { contentHtml = '' } = post;
+    const { title, categories = [], tags = [] } = post.frontmatter;
 
-  return posts.filter((post) => {
-    const { title, categories, tags } = post.frontmatter;
+    // Preprocess post fields
+    const normalizedTitle = lowerCase(title);
+    const normalizedAbstract = lowerCase(defaultTo(post.postAbstract, ''));
+    const normalizedContent = lowerCase(replace(contentHtml, /<[^>]*>/g, ''));
+    const normalizedTags = tags.map((tag) => lowerCase(tag));
+    const normalizedCategories = categories.map((category) =>
+      lowerCase(category)
+    );
 
-    // Set matchesQuery to true if no keywords are provided (empty query), otherwise apply keyword filtering
+    // Perform search query
     const matchesQuery =
       queryKeywords.length === 0 ||
-      queryKeywords.some(
-        (keyword) =>
-          title.toLowerCase().includes(keyword) ||
-          post.postAbstract?.toLowerCase().includes(keyword) ||
-          tags?.some((tag) => tag.toLowerCase().includes(keyword))
+      some(queryKeywords, (keyword) =>
+        [
+          normalizedTitle,
+          normalizedAbstract,
+          normalizedContent,
+          ...normalizedTags,
+          ...normalizedCategories,
+        ].some((field) => includes(field, keyword))
       );
 
-    // Enhanced category and tag matching
-    const matchesCategory = lowerCaseCategory
-      ? categories?.some((cat) => cat.toLowerCase().includes(lowerCaseCategory))
+    // Perform category and tag filtering
+    const matchesCategory = normalizedCategory
+      ? some(normalizedCategories, (cat) => includes(cat, normalizedCategory))
       : true;
-    const matchesTag = lowerCaseTag
-      ? tags?.some((t) => t.toLowerCase().includes(lowerCaseTag))
+
+    const matchesTag = normalizedTag
+      ? some(normalizedTags, (tag) => includes(tag, normalizedTag))
       : true;
 
     return matchesQuery && matchesCategory && matchesTag;

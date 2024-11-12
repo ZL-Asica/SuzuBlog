@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FaFolder, FaTags } from 'react-icons/fa6';
+import { includes, lowerCase } from 'es-toolkit/compat';
 
 import ItemLinks from './ItemLinks';
 
@@ -94,7 +95,7 @@ function TitleHeader({
   return (
     <div className='mx-auto mb-5 w-full max-w-3xl'>
       <h1 className='text-3xl font-bold'>{title}</h1>
-      {title !== 'About' && title !== 'Friends' && (
+      {includes(['about', 'friends'], lowerCase(title)) || (
         <MetaInfo
           author={author}
           date={date}

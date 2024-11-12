@@ -24,9 +24,11 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "es-toolkit": "^1.27.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.10.0",
-    "marked": "^14.1.3",
+    "marked": "^15",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
@@ -44,7 +46,7 @@
     "eslint-config-zl-asica": "^1",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
-    "postcss": "^8",
+    "postcss": "^8.4.49",
     "prettier": "^3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.1",

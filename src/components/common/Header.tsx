@@ -48,7 +48,7 @@ export default function Header({
 
   return (
     <header
-      className='relative z-50 shadow-md'
+      className='header-container relative z-50 shadow-md'
       style={{
         backgroundColor: 'var(--background)',
         color: 'var(--foreground)',

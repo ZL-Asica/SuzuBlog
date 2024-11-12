@@ -1,5 +1,6 @@
 'use client';
 
+import { defaultTo } from 'es-toolkit/compat';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -20,14 +21,15 @@ const getLink = (
 
 export default function ItemLinks({ items, type }: ItemLinksProperties) {
   const searchParameters = useSearchParams();
+  const displayItems = defaultTo(items, []);
 
-  if (!items || items.length === 0) {
+  if (displayItems.length === 0) {
     return <>{type === 'category' ? '未分类' : '无标签'}</>;
   }
 
   return (
     <>
-      {items.map((item, index) => (
+      {displayItems.map((item, index) => (
         <span key={item}>
           <Link
             href={getLink(item, type, searchParameters)}
@@ -36,7 +38,7 @@ export default function ItemLinks({ items, type }: ItemLinksProperties) {
           >
             {item}
           </Link>
-          {index < items.length - 1 && ', '}
+          {index < displayItems.length - 1 && ', '}
         </span>
       ))}
     </>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { defaultTo, flatMap } from 'es-toolkit/compat';
 
 import getFilteredPosts from '@/services/utils/getFilteredPosts';
 
@@ -15,9 +16,9 @@ interface PostsClientProperties {
 
 function PostsClient({ posts }: PostsClientProperties) {
   const searchParameters = useSearchParams();
-  const categoryParameter = searchParameters.get('category') || '';
-  const tagParameter = searchParameters.get('tag') || '';
-  const searchQuery = searchParameters.get('query') || '';
+  const categoryParameter = defaultTo(searchParameters.get('category'), '');
+  const tagParameter = defaultTo(searchParameters.get('tag'), '');
+  const searchQuery = defaultTo(searchParameters.get('query'), '');
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
@@ -39,8 +40,6 @@ function PostsClient({ posts }: PostsClientProperties) {
 
   return (
     <div className='container mx-auto flex flex-col items-center p-4'>
-      <h1 className='mb-6 text-center text-4xl font-bold'>All Posts</h1>
-
       {/* Centered Search Input */}
       <div className='w-full'>
         <SearchInput initialValue={searchQuery} />

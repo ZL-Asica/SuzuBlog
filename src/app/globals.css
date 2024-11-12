@@ -122,8 +122,10 @@ a:focus-visible {
 
 /* Buttons */
 button {
-  color: var(--foreground);
+  color: var(--background);
+  background-color: var(--skyblue);
   border: none;
+  text-align: center;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   transition: background-color 0.3s;
@@ -133,6 +135,11 @@ button:hover,
 button:focus-visible {
   background-color: var(--sakuraPink);
   color: var(--background);
+}
+
+.header-container button {
+  color: var(--background);
+  background-color: var(--skyblue);
 }
 
 /****************************************************

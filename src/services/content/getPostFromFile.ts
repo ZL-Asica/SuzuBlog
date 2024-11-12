@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { defaultTo } from 'es-toolkit/compat';
 import matter from 'gray-matter';
 import hljs from 'highlight.js';
 import { marked } from 'marked';
@@ -44,19 +45,15 @@ async function parseMarkdown(
   contentHtml: string;
 }> {
   const { data, content: markdownContent } = matter(fileContents);
-  const [thumbnail, date] = await Promise.all([
-    resolveThumbnail(data.thumbnail),
-    resolveDate(data.date, filePath),
-  ]);
   const frontmatterData: Frontmatter = {
     title: (data.title as string)?.slice(0, 100) || slug,
     author: (data.author as string)?.slice(0, 30) || config.author.name,
-    thumbnail,
-    date,
-    tags: data.tags || undefined,
-    categories: data.categories || undefined,
-    redirect: data.redirect || undefined,
-    showComments: data.showComments ?? true,
+    thumbnail: await resolveThumbnail(data.thumbnail),
+    date: await resolveDate(data.date, filePath),
+    tags: defaultTo(data.tags),
+    categories: defaultTo(data.categories),
+    redirect: defaultTo(data.redirect),
+    showComments: defaultTo(data.showComments, true),
   };
 
   // Clean up HTML comments

@@ -3,13 +3,15 @@
 import { promises as fsPromise } from 'node:fs';
 import path from 'node:path';
 
+import { filter } from 'es-toolkit/compat';
+
 import { getPostFromFile } from '@/services/content/getPostFromFile';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
 async function getAllPosts(): Promise<PostData[]> {
   const fileNames = await fsPromise.readdir(postsDirectory);
-  const markdownFiles = fileNames.filter((fileName) =>
+  const markdownFiles = filter(fileNames, (fileName) =>
     fileName.endsWith('.md')
   );
 

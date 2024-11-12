@@ -17,7 +17,7 @@ export default function PostListLayout({ posts }: { posts: PostData[] }) {
         return (
           <article
             key={post.slug}
-            className={`post-article flex-col shadow-lg transition-shadow duration-300 hover:shadow-2xl md:flex-row ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} mx-auto dark:shadow-[var(--darkForeground)]`}
+            className={`post-article flex-col shadow-lg transition-shadow duration-300 hover:shadow-2xl md:flex-row ${index % 2 === 0 && 'md:flex-row-reverse'} mx-auto dark:shadow-[var(--darkForeground)]`}
           >
             <Link
               className='max-h-[400px] w-full md:w-1/2'

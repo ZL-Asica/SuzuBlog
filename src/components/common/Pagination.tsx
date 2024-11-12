@@ -1,4 +1,5 @@
 import React from 'react';
+import { ceil } from 'es-toolkit/compat';
 
 interface PaginationProperties {
   postsPerPage: number;
@@ -14,9 +15,12 @@ const Pagination = ({
   currentPage,
 }: PaginationProperties) => {
   const pageNumbers = Array.from(
-    { length: Math.ceil(totalPosts / postsPerPage) },
+    { length: ceil(totalPosts / postsPerPage) },
     (_, index) => index + 1
   );
+
+  // If there is only one page, don't show pagination
+  if (pageNumbers.length === 1) return null;
 
   return (
     <nav className='mt-4 flex justify-center'>
