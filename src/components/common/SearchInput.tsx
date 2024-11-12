@@ -120,7 +120,7 @@ const SearchInput = ({
               value={selectedCategory}
               onChange={handleCategoryChange}
               disabled={pending}
-              className={`w-full appearance-none rounded-full border border-gray-300 bg-white px-4 py-2 focus:ring-2 ${
+              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
                 selectedCategory || 'text-gray-400'
               }`}
             >
@@ -152,7 +152,7 @@ const SearchInput = ({
               value={selectedTag}
               onChange={handleTagChange}
               disabled={pending}
-              className={`w-full appearance-none rounded-full border border-gray-300 bg-white px-4 py-2 focus:ring-2 ${
+              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
                 selectedTag || 'text-gray-400'
               }`}
             >
