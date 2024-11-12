@@ -21,8 +21,8 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-roboto), var(--font-noto-sans-sc), 'PingFang SC',
-    'Microsoft YaHei', Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto-sans-sc), 'PingFang SC', 'Microsoft YaHei', Arial,
+    Helvetica, sans-serif;
 }
 
 /* Utility classes for text balancing */
