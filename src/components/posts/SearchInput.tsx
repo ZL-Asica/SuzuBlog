@@ -118,6 +118,7 @@ const SearchInput = ({
           <div className='relative flex-1'>
             <select
               value={selectedCategory}
+              aria-label='Select a category to filter posts'
               onChange={handleCategoryChange}
               disabled={pending}
               className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
@@ -150,6 +151,7 @@ const SearchInput = ({
           <div className='relative flex-1'>
             <select
               value={selectedTag}
+              aria-label='Select a tag to filter posts'
               onChange={handleTagChange}
               disabled={pending}
               className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${

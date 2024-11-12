@@ -80,6 +80,7 @@ function Header({ siteTitle }: HeaderProperties) {
               tabIndex={-1}
               role='menu'
               aria-hidden={!isOpen}
+              inert={!isOpen} // Add inert to prevent focus when menu is closed
               className={`absolute left-0 top-20 w-full p-4 transition-all duration-300 ease-out ${
                 isOpen
                   ? 'max-h-screen scale-y-100 opacity-100'
