@@ -18,19 +18,13 @@
 ```plaintext
 .
 ├── config.yml                # 全局配置文件（站点信息、作者信息等）
-├── eslint.config.mjs         # ESLint 配置文件
-├── prettier.config.cjs       # Prettier 配置文件
-├── postcss.config.mjs        # PostCSS 配置文件
-├── tailwind.config.ts        # Tailwind CSS 配置文件
-├── tsconfig.json             # TypeScript 配置文件
-├── next.config.ts            # Next.js 配置文件
 ├── posts                     # Markdown 格式的文章目录
 ├── public                    # 静态资源目录（favicon, robots.txt, 等）
 ├── src                       # 项目源代码
 │   ├── app                     # Next.js 应用目录（按页面组织）
 │   ├── components              # 复用组件目录
 │   │   ├── common              # 通用组件
-│   │   └── layout              # 布局组件
+│   │   └── posts               # 文章页面组件
 │   ├── services                # 服务目录，包含数据获取和解析逻辑
 │   │   ├── config              # 配置加载
 │   │   ├── content             # 内容处理和文章获取
@@ -38,6 +32,9 @@
 │   │   └── utils               # 实用工具
 │   ├── styles                  # 全局和组件样式
 │   └── types.d.ts              # 全局类型定义
+├── postcss.config.mjs        # PostCSS 配置文件
+├── tailwind.config.ts        # Tailwind CSS 配置文件
+├── next.config.ts            # Next.js 配置文件
 ├── package.json              # 项目依赖和脚本
 └── pnpm-lock.yaml            # pnpm 依赖锁定文件
 ```

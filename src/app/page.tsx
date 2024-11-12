@@ -12,7 +12,7 @@ async function Home() {
   const posts: PostData[] = await getAllPosts();
 
   return (
-    <main>
+    <>
       {/* Top Banner */}
       <div className='relative h-[40vh] w-full bg-cover bg-center'>
         {/* Avatar */}
@@ -39,7 +39,7 @@ async function Home() {
           <PostListLayout posts={posts} />
         </Suspense>
       </div>
-    </main>
+    </>
   );
 }
 
