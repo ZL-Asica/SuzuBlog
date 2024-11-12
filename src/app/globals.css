@@ -34,10 +34,11 @@ body {
 
 form,
 input,
-select {
-  font-family: inherit;
-  color: inherit;
-  background: inherit;
+select,
+header,
+nav {
+  color: var(--foreground);
+  background: var(--background);
 }
 
 /****************************************************
