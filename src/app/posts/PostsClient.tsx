@@ -6,9 +6,9 @@ import { defaultTo, flatMap } from 'es-toolkit/compat';
 
 import getFilteredPosts from '@/services/utils/getFilteredPosts';
 
-import PostListLayout from '@/components/layout/PostListLayout';
-import Pagination from '@/components/common/Pagination';
-import SearchInput from '@/components/common/SearchInput';
+import PostListLayout from '@/components/posts/PostListLayout';
+import Pagination from '@/components/posts/Pagination';
+import SearchInput from '@/components/posts/SearchInput';
 
 interface PostsClientProperties {
   posts: PostData[];

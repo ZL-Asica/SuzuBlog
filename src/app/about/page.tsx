@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { getConfig } from '@/services/config';
 import { getPostData } from '@/services/content';
 
-import PostLayout from '@/components/layout/PostLayout';
+import PostLayout from '@/components/posts/PostLayout';
 
 function generateMetadata(): Metadata {
   const config = getConfig();

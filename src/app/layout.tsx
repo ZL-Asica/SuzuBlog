@@ -6,7 +6,7 @@ import Script from 'next/script';
 
 import { getConfig } from '@/services/config';
 
-import ThemeProvider from '@/components/layout/ThemeProvider';
+import ThemeProvider from '@/components/common/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import './globals.css';

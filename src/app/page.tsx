@@ -5,7 +5,7 @@ import Loading from '@/app/loading';
 import { getConfig } from '@/services/config';
 import { getAllPosts } from '@/services/content';
 
-import PostListLayout from '@/components/layout/PostListLayout';
+import PostListLayout from '@/components/posts/PostListLayout';
 
 async function Home() {
   const config: Config = getConfig();

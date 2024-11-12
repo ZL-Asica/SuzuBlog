@@ -17,7 +17,7 @@ interface PostLayoutProperties {
 }
 
 const DisqusComments = dynamic(
-  () => import('@/components/common/DisqusComments')
+  () => import('@/components/posts/DisqusComments')
 );
 
 function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {

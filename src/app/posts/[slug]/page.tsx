@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { getConfig } from '@/services/config';
 import { getAllPosts, getPostData } from '@/services/content';
 
-import PostLayout from '@/components/layout/PostLayout';
+import PostLayout from '@/components/posts/PostLayout';
 
 // build static params for all posts
 async function generateStaticParams() {
