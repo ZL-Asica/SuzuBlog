@@ -22,8 +22,9 @@ const getLink = (
 export default function ItemLinks({ items, type }: ItemLinksProperties) {
   const searchParameters = useSearchParams();
   const displayItems = defaultTo(items, []);
+  const displayItemsLength = displayItems.length;
 
-  if (displayItems.length === 0) {
+  if (displayItemsLength === 0) {
     return <>{type === 'category' ? '未分类' : '无标签'}</>;
   }
 
@@ -35,10 +36,11 @@ export default function ItemLinks({ items, type }: ItemLinksProperties) {
             href={getLink(item, type, searchParameters)}
             target='_self'
             aria-label={`Navigate to ${type} ${item}`}
+            className='no-underline'
           >
             {item}
           </Link>
-          {index < displayItems.length - 1 && ', '}
+          {index < displayItemsLength - 1 && ', '}
         </span>
       ))}
     </>
