@@ -18,12 +18,29 @@ interface HeaderProperties {
 
 function Header({ siteTitle }: HeaderProperties) {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const isMobile = useIsMobile();
   const menuReference = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
   const toggleMenu = () => setIsOpen((previous) => !previous);
+
+  // Calculate scroll progress
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollProgress(progress);
+    };
+
+    const handleScroll = () => {
+      requestAnimationFrame(updateScrollProgress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Detect clicks outside of the menu to close it
   useEffect(() => {
@@ -42,6 +59,14 @@ function Header({ siteTitle }: HeaderProperties) {
 
   return (
     <header className='relative z-50 shadow-md'>
+      {/* Progress Scroll Bar */}
+      <div
+        className='z-100 fixed left-0 top-0 z-40 h-[3px] w-full bg-sakuraPink transition-all duration-500 ease-out'
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden={true}
+      />
+
+      {/* Navigation Menu */}
       <nav className='z-50 mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
         <Link
           href='/'
