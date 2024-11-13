@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { useFormStatus } from 'react-dom';
-import { defaultTo } from 'es-toolkit/compat';
+import { defaultTo, debounce } from 'es-toolkit/compat';
 import { clsx } from 'clsx';
+
+import { useOutsideClick } from '@/hooks';
 
 interface SearchInputProperties {
   initialValue?: string;
@@ -34,55 +36,53 @@ const SearchInput = ({
     setSelectedTag(searchParameters.get('tag') || '');
   }, [searchParameters, initialValue]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        formReference.current &&
-        !formReference.current.contains(event.target as Node)
-      ) {
-        setExpanded(false);
-      }
-    };
+  useOutsideClick(formReference, () => {
+    if (expanded) setExpanded(false);
+  });
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
-
-  const updateURL = (newQuery: string, category: string, tag: string) => {
-    const params = new URLSearchParams(searchParameters);
-    if (newQuery) params.set('query', newQuery);
-    else params.delete('query');
-    if (category) params.set('category', category);
-    else params.delete('category');
-    if (tag) params.set('tag', tag);
-    else params.delete('tag');
-    globalThis.history.pushState(null, '', `${pathname}?${params.toString()}`);
-  };
+  // Debounced URL update function to reduce excessive URL updates
+  const debouncedUpdateURL = debounce(
+    (newQuery: string, category: string, tag: string) => {
+      const params = new URLSearchParams(searchParameters);
+      if (newQuery) params.set('query', newQuery);
+      else params.delete('query');
+      if (category) params.set('category', category);
+      else params.delete('category');
+      if (tag) params.set('tag', tag);
+      else params.delete('tag');
+      globalThis.history.pushState(
+        null,
+        '',
+        `${pathname}?${params.toString()}`
+      );
+    },
+    200
+  );
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = event.target.value;
     setSearchQuery(newQuery);
     setExpanded(true); // Let the user see the filters when searching
-    updateURL(newQuery, selectedCategory, selectedTag);
+    debouncedUpdateURL(newQuery, selectedCategory, selectedTag);
   };
 
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedCategory(event.target.value);
-    updateURL(searchQuery, event.target.value, selectedTag);
+    debouncedUpdateURL(searchQuery, event.target.value, selectedTag);
   };
 
   const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTag(event.target.value);
-    updateURL(searchQuery, selectedCategory, event.target.value);
+    debouncedUpdateURL(searchQuery, selectedCategory, event.target.value);
   };
 
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('');
     setSelectedTag('');
-    updateURL('', '', '');
+    debouncedUpdateURL('', '', '');
   };
 
   return (
