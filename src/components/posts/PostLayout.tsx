@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FaFolder, FaTags } from 'react-icons/fa6';
-import { includes, lowerCase } from 'es-toolkit/compat';
+import { includes, isEmpty, lowerCase } from 'es-toolkit/compat';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -47,10 +47,12 @@ function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
           categories={post.frontmatter.categories}
           tags={post.frontmatter.tags}
         />
-        <TOC
-          items={post.toc}
-          showThumbnail={showThumbnail}
-        />
+        {!isEmpty(post.toc) && (
+          <TOC
+            items={post.toc}
+            showThumbnail={showThumbnail}
+          />
+        )}
         <Markdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}

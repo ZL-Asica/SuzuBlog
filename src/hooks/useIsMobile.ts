@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useDebouncedResize from '@/hooks/useDebouncedResize';
 
 function useIsMobile(threshold: number) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   const updateIsMobile = () => {
     setIsMobile(window.innerWidth <= threshold);
