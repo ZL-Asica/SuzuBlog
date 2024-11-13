@@ -2,6 +2,7 @@ import { statSync } from 'node:fs';
 
 import { defaultTo, forEach, replace, trim } from 'es-toolkit/compat';
 import { read as matterRead } from 'gray-matter';
+import slugify from 'slugify';
 
 import { getConfig } from '@/services/config';
 
@@ -36,12 +37,16 @@ function getPostFromFile(filePath: string, slug: string): PostData {
     );
   }
 
+  // Generate TOC
+  const toc = generateTOC(markdownParsed);
+
   return {
     slug,
     postAbstract: processPostAbstract(contentRaw, defaultTo(excerpt, '')),
     frontmatter,
     contentRaw,
     lastModified,
+    toc,
   };
 }
 
@@ -61,6 +66,39 @@ function resolveDate(
 function formatDateTime(dateTime: string): string {
   const [date, time = '00:00:00'] = dateTime.split(/[ T]/);
   return `${/^\d{4}-\d{2}-\d{2}$/.test(date) ? date : ''} ${/^\d{2}:\d{2}:\d{2}$/.test(time) ? time : '00:00:00'}`;
+}
+
+// Helper function to generate TOC from markdown content
+function generateTOC(content: string): TocItems[] {
+  const headingRegex = /^(#{2,6})\s+(.*)$/gm;
+  const toc: TocItems[] = [];
+  const headingLevels = { h2: 0, h3: 0, h4: 0, h5: 0, h6: 0 };
+
+  const resetLowerLevels = (level: keyof typeof headingLevels) => {
+    const levels = Object.keys(headingLevels) as (keyof typeof headingLevels)[];
+    const startIndex = levels.indexOf(level) + 1;
+    for (const key of levels.slice(startIndex)) {
+      headingLevels[key] = 0;
+    }
+  };
+
+  let match;
+  while ((match = headingRegex.exec(content)) !== null) {
+    const [, hashes, title] = match;
+    const level = `h${hashes.length}` as keyof typeof headingLevels;
+
+    headingLevels[level] += 1;
+    resetLowerLevels(level);
+    const hierarchicalSlug = Object.values(headingLevels)
+      .slice(0, Object.keys(headingLevels).indexOf(level) + 1)
+      .join('-');
+    const baseSlug = slugify(title, { lower: true });
+    const slug = `${hierarchicalSlug}-${baseSlug}`;
+
+    toc.push({ slug, title, level: Number.parseInt(level.slice(1), 10) });
+  }
+
+  return toc;
 }
 
 // Helper function to create post abstract

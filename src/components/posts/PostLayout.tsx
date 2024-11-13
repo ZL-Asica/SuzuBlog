@@ -11,6 +11,7 @@ import ItemLinks from './ItemLinks';
 import { getConfig } from '@/services/config';
 
 import createMarkdownComponents from '@/components/posts/markdownComponents';
+import TOC from '@/components/posts/TOC';
 
 interface PostLayoutProperties {
   post: PostData;
@@ -45,6 +46,10 @@ function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
         <CategoriesTagsList
           categories={post.frontmatter.categories}
           tags={post.frontmatter.tags}
+        />
+        <TOC
+          items={post.toc}
+          showThumbnail={showThumbnail}
         />
         <Markdown
           remarkPlugins={[remarkGfm]}

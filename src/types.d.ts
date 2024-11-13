@@ -17,6 +17,7 @@ interface PostData {
   frontmatter: Frontmatter;
   contentRaw: string;
   lastModified: string;
+  toc: TocItems[];
 }
 
 type SocialMediaKey = keyof typeof socialData;
@@ -45,3 +46,9 @@ type Config = {
   slotFooter: string;
   slotComment: string;
 };
+
+interface TocItems {
+  slug: string;
+  title: string;
+  level: number;
+}
