@@ -1,16 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import {
-  FaAngleUp,
-  FaBars,
-  FaHouse,
-  FaInfo,
-  FaPeopleGroup,
-  FaRegNewspaper,
-} from 'react-icons/fa6';
+import { useRef, useState } from 'react';
+import { FaAngleUp, FaBars } from 'react-icons/fa6';
+import Link from 'next/link';
+
+import { useIsMobile, useOutsideClick, useScrollProgress } from '@/hooks';
+
+import renderMenuItems from '@/components/helpers/renderMenuItems';
 
 interface HeaderProperties {
   siteTitle: string;
@@ -18,44 +15,17 @@ interface HeaderProperties {
 
 function Header({ siteTitle }: HeaderProperties) {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(768);
+  const scrollProgress = useScrollProgress();
   const menuReference = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
   const toggleMenu = () => setIsOpen((previous) => !previous);
 
-  // Calculate scroll progress
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const totalHeight = document.body.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
-      setScrollProgress(progress);
-    };
-
-    const handleScroll = () => {
-      requestAnimationFrame(updateScrollProgress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Detect clicks outside of the menu to close it
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        isOpen &&
-        menuReference.current &&
-        !menuReference.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen]);
+  useOutsideClick(menuReference, () => {
+    if (isOpen) setIsOpen(false);
+  });
 
   return (
     <header className='relative z-50 shadow-md'>
@@ -63,7 +33,7 @@ function Header({ siteTitle }: HeaderProperties) {
       <div
         className='z-100 fixed left-0 top-0 z-40 h-[3px] w-full bg-sakuraPink transition-all duration-500 ease-out'
         style={{ width: `${scrollProgress}%` }}
-        aria-hidden={true}
+        aria-hidden
       />
 
       {/* Navigation Menu */}
@@ -85,7 +55,7 @@ function Header({ siteTitle }: HeaderProperties) {
           // Mobile View
           <>
             <button
-              className='z-50 bg-darkBackground text-3xl transition-transform duration-300 hover:scale-110 dark:bg-lightBackground'
+              className='z-50 bg-darkBackground text-3xl text-darkForeground transition-transform duration-300 hover:scale-110 dark:bg-lightBackground dark:text-lightForeground'
               onClick={toggleMenu}
               aria-label='Toggle menu'
               aria-expanded={isOpen}
@@ -113,15 +83,13 @@ function Header({ siteTitle }: HeaderProperties) {
               </ul>
             </div>
             {isOpen && (
-              // Overlay when menu is open
               <div
                 className='fixed inset-0 -z-20 bg-black bg-opacity-50 transition-opacity duration-300'
-                aria-hidden={true}
+                aria-hidden
               />
             )}
           </>
         ) : (
-          // Desktop View
           <ul className='hidden space-x-6 md:flex'>
             {renderMenuItems(isMobile)}
           </ul>
@@ -129,52 +97,6 @@ function Header({ siteTitle }: HeaderProperties) {
       </nav>
     </header>
   );
-}
-
-// Hook to check if the screen is mobile size
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    // Only set up the listener on the client side
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return isMobile;
-}
-
-function renderMenuItems(isMobile: boolean, onClickHandler?: () => void) {
-  const menuItems = [
-    { href: '/', label: 'Home', icon: <FaHouse /> },
-    { href: '/posts', label: 'Posts', icon: <FaRegNewspaper /> },
-    { href: '/friends', label: 'Friends', icon: <FaPeopleGroup /> },
-    { href: '/about', label: 'About', icon: <FaInfo /> },
-  ];
-
-  return menuItems.map((item) => (
-    <li
-      key={item.href}
-      className='group relative'
-    >
-      <Link
-        href={item.href}
-        className='relative inline-flex items-center gap-2 p-2 no-underline transition-all duration-300 ease-in-out hover:scale-110'
-        onClick={onClickHandler}
-        aria-label={`Navigate to ${item.label}`}
-      >
-        {item.icon}
-        {item.label}
-        {/* Underline animation */}
-        {!isMobile && (
-          <span className='absolute bottom-0 left-0 h-0.5 w-0 bg-sakuraPink transition-all duration-300 group-hover:w-full'></span>
-        )}
-      </Link>
-    </li>
-  ));
 }
 
 export default Header;
