@@ -30,7 +30,7 @@ async function getAllPosts(): Promise<PostData[]> {
   return allPosts;
 }
 
-async function getPostData(slug: string, page?: string): Promise<PostData> {
+function getPostData(slug: string, page?: string): PostData {
   const filePath = page
     ? path.join(postsDirectory, '_pages', `${page}.md`)
     : path.join(postsDirectory, `${slug}.md`);

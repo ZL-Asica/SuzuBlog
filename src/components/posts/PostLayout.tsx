@@ -10,7 +10,7 @@ import ItemLinks from './ItemLinks';
 
 import { getConfig } from '@/services/config';
 
-import markdownComponents from '@/components/posts/markdownComponents';
+import createMarkdownComponents from '@/components/posts/markdownComponents';
 
 interface PostLayoutProperties {
   post: PostData;
@@ -22,6 +22,8 @@ const DisqusComments = dynamic(
 );
 
 function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
+  const markdownComponents = createMarkdownComponents();
+
   return (
     <article className='container mx-auto p-6'>
       {showThumbnail ? (

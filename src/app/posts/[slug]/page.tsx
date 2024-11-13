@@ -20,7 +20,7 @@ type Properties = {
 async function generateMetadata({ params }: Properties): Promise<Metadata> {
   // get post data
   const { slug } = await params;
-  const postData: PostData = await getPostData(slug);
+  const postData: PostData = getPostData(slug);
 
   const config = getConfig();
   const metaKeywords = [
@@ -52,7 +52,7 @@ async function generateMetadata({ params }: Properties): Promise<Metadata> {
 // PostPage component that receives the params directly
 async function PostPage(props: { params: Promise<{ slug: string }> }) {
   const parameters = await props.params;
-  const post: PostData = await getPostData(parameters.slug);
+  const post: PostData = getPostData(parameters.slug);
 
   return <PostLayout post={post} />;
 }

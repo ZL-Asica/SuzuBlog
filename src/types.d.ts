@@ -19,6 +19,8 @@ interface PostData {
   lastModified: string;
 }
 
+type SocialMediaKey = keyof typeof socialData;
+
 type SocialMedia = Record<string, string>;
 
 // Config value from config.yml

@@ -1,114 +1,92 @@
-import { promises as fsPromises } from 'node:fs';
-import path from 'node:path';
+import { statSync } from 'node:fs';
 
 import { defaultTo, forEach, replace, trim } from 'es-toolkit/compat';
-import matter from 'gray-matter';
+import { read as matterRead } from 'gray-matter';
 
 import { getConfig } from '@/services/config';
-import { fileExists, formatDateTime } from '@/services/utils/fileUtils';
 
 const config = getConfig();
 
-async function getPostFromFile(
-  filePath: string,
-  slug: string
-): Promise<PostData> {
-  const { frontmatter, postAbstract, contentRaw, lastModified } =
-    await parseMarkdown(filePath, slug);
+function getPostFromFile(filePath: string, slug: string): PostData {
+  const {
+    data,
+    content: contentRaw,
+    excerpt,
+  } = matterRead(filePath, { excerpt_separator: '<!--more-->' });
 
-  return {
-    slug,
-    postAbstract,
-    frontmatter,
-    contentRaw,
-    lastModified,
-  };
-}
+  const { date, lastModified } = resolveDate(data.date, filePath);
 
-async function parseMarkdown(
-  filePath: string,
-  slug: string
-): Promise<{
-  frontmatter: Frontmatter;
-  postAbstract: string;
-  contentRaw: string;
-  lastModified: string;
-}> {
-  const fileContents = await fsPromises.readFile(filePath, 'utf8');
-  const { data, content: markdownContent } = matter(fileContents);
-
-  const [thumbnail, { date, lastModified }] = await Promise.all([
-    resolveThumbnail(data.thumbnail),
-    resolveDate(data.date, filePath),
-  ]);
-
-  const frontmatterData: Frontmatter = {
+  const frontmatter: Frontmatter = {
     title: (data.title as string)?.slice(0, 100) || slug,
     author: (data.author as string)?.slice(0, 30) || config.author.name,
-    thumbnail,
-    date,
+    thumbnail: data.thumbnail || config.background,
+    date: date,
     tags: defaultTo(data.tags),
     categories: defaultTo(data.categories),
     redirect: defaultTo(data.redirect),
     showComments: defaultTo(data.showComments, true),
   };
 
-  // Clean up HTML comments and render friend links
-  let contentSanitized = removeHtmlComments(markdownContent);
-  if (contentSanitized.includes('{% links %}')) {
-    contentSanitized = replace(
-      contentSanitized,
+  let markdownParsed = contentRaw;
+  if (contentRaw.includes('{% links %}')) {
+    markdownParsed = replace(
+      contentRaw,
       /{% links %}([\S\s]*?){% endlinks %}/g,
       (_, jsonString) => renderFriendLinks(trim(jsonString))
     );
   }
 
-  const postAbstract = processPostAbstract(
-    contentSanitized.split('<!--more-->')[0]
-  );
-
   return {
-    frontmatter: frontmatterData,
-    postAbstract,
-    contentRaw: markdownContent,
+    slug,
+    postAbstract: processPostAbstract(contentRaw, defaultTo(excerpt, '')),
+    frontmatter,
+    contentRaw,
     lastModified,
   };
 }
 
-function removeHtmlComments(input) {
-  let previous;
-  do {
-    previous = input;
-    replace(input, /<!--[^>]*-->/g, (match) =>
-      match === '<!--more-->' ? match : ''
-    );
-  } while (input !== previous);
-  return input;
-}
-
-// Helper function to resolve thumbnail
-async function resolveThumbnail(thumbnail?: string): Promise<string> {
-  if (thumbnail && !thumbnail.includes('://')) {
-    const thumbnailPath = path.join(process.cwd(), 'public', thumbnail);
-    return (await fileExists(thumbnailPath)) ? thumbnail : config.background;
-  }
-  return thumbnail || config.background;
-}
-
-// Helper function to resolve date
-async function resolveDate(
+// Helper function to resolve and format dates
+function resolveDate(
   originalDate?: string,
   fullPath?: string
-): Promise<{
-  date: string;
-  lastModified: string;
-}> {
-  const stats = await fsPromises.stat(fullPath!);
+): { date: string; lastModified: string } {
+  const stats = statSync(fullPath!);
   const date = originalDate
     ? formatDateTime(originalDate)
-    : replace(stats.mtime.toISOString(), 'T', ' ').split('.')[0];
-  const lastModified = stats.mtime.toISOString();
-  return { date, lastModified };
+    : formatDateTime(stats.mtime.toISOString());
+  return { date, lastModified: stats.mtime.toISOString() };
+}
+
+// Formats date and time to 'YYYY-MM-DD HH:mm:ss'
+function formatDateTime(dateTime: string): string {
+  const [date, time = '00:00:00'] = dateTime.split(/[ T]/);
+  return `${/^\d{4}-\d{2}-\d{2}$/.test(date) ? date : ''} ${/^\d{2}:\d{2}:\d{2}$/.test(time) ? time : '00:00:00'}`;
+}
+
+// Helper function to create post abstract
+function processPostAbstract(contentRaw: string, excerpt: string): string {
+  let contentStripped = excerpt.length > 0 ? excerpt : contentRaw;
+  contentStripped = trim(contentStripped).slice(0, 150);
+
+  const patterns: [RegExp, string][] = [
+    [/#* (.*)/g, '$1'], // Headings
+    [/!\[.*?]\(.*?\)/g, ''], // Images
+    [/\[(.*?)]\(.*?\)/g, '$1'], // Links
+    [/`([^`]+)`/g, '$1'], // Inline code
+    [/(\*\*|__)(.*?)\1/g, '$2'], // Bold formatting
+    [/(\*|_)(.*?)\1/g, '$2'], // Italic formatting
+    [/(\r?\n)+/g, ' '], // Line breaks
+    [/^-{3,}$/gm, ''], // Horizontal rules
+    [/>\s?/g, ''], // Blockquotes
+    [/([*+-])\s/g, ''], // Unordered list markers
+    [/^\d+\.\s+/g, ''], // Ordered list markers
+  ];
+
+  forEach(patterns, ([pattern, replacement]) => {
+    contentStripped = replace(contentStripped, pattern, replacement);
+  });
+
+  return contentStripped;
 }
 
 // Helper function to render friend links
@@ -136,29 +114,6 @@ function renderFriendLinks(jsonString: string): string {
   } catch {
     return '<div>Invalid JSON in links block</div>';
   }
-}
-
-// Helper function to create post abstract
-function processPostAbstract(contentRaw: string): string {
-  let contentStripped = contentRaw;
-  const replacements: [RegExp, string][] = [
-    [/#* (.*)/g, '$1'], // Remove headings
-    [/!\[.*?]\(.*?\)/g, ''], // Remove images
-    [/\[(.*?)]\(.*?\)/g, '$1'], // Remove links but keep text
-    [/`([^`]+)`/g, '$1'], // Remove inline code backticks
-    [/(\*\*|__)(.*?)\1/g, '$2'], // Remove bold formatting
-    [/(\*|_)(.*?)\1/g, '$2'], // Remove italic formatting
-    [/(\r?\n)+/g, ' '], // Replace line breaks with spaces
-    [/^-{3,}$/gm, ''], // Remove horizontal rules
-    [/>\s?/g, ''], // Remove blockquote '>' symbols
-    [/([*+-])\s/g, ''], // Remove unordered list markers
-    [/^\d+\.\s+/g, ''], // Remove ordered list markers
-  ];
-  forEach(replacements, ([pattern, replacement]) => {
-    contentStripped = replace(contentStripped, pattern, replacement);
-  });
-
-  return trim(contentStripped).slice(0, 150);
 }
 
 export default getPostFromFile;
