@@ -7,7 +7,6 @@ const filePath = path.join(process.cwd(), 'config.yml');
 // Watch the config file with debounce
 function watchConfigFile(callback: () => void): void {
   let debounceTimeout: NodeJS.Timeout | null = null;
-
   watch(filePath, () => {
     if (debounceTimeout) clearTimeout(debounceTimeout);
     // Set debounce delay to 100ms
