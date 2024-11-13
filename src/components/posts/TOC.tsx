@@ -12,6 +12,7 @@ interface TOCProperties {
 
 const TOC = ({ items, showThumbnail = true }: TOCProperties) => {
   const {
+    isReady,
     activeSlug,
     isOpen,
     handleToggle,
@@ -20,6 +21,8 @@ const TOC = ({ items, showThumbnail = true }: TOCProperties) => {
     isMobile,
     position,
   } = useTOCLogic(showThumbnail);
+
+  if (!isReady) return null;
 
   return (
     <>

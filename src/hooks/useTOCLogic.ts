@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -17,8 +17,14 @@ function useTOCLogic(
   const [isOpen, setIsOpen] = useState(false);
   const tocReference = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-  const isMobile = useIsMobile(768 + 96);
+  const { isMobile, isReady } = useIsMobile(768 + 96);
   const { position, updatePosition } = useTOCPosition(isMobile, showThumbnail);
+
+  // update once on first render
+  useEffect(() => {
+    updatePosition();
+    updateActiveSlug();
+  }, []);
 
   const handleToggle = () => setIsOpen(!isOpen);
 
@@ -33,8 +39,23 @@ function useTOCLogic(
     if (onLinkClick) onLinkClick(slug);
   };
 
+  // Helper function to update activeSlug based on current scroll position
+  const updateActiveSlug = () => {
+    const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+    let currentSlug = '';
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top <= 10) {
+        currentSlug = heading.id;
+      }
+    }
+    setActiveSlug(currentSlug);
+  };
+
   useDebouncedResize(updatePosition);
-  useDebouncedScroll(updatePosition);
+  useDebouncedScroll(() => {
+    updatePosition();
+    updateActiveSlug();
+  });
   useOutsideClick(tocReference, () => setIsOpen(false));
 
   return {
@@ -45,6 +66,7 @@ function useTOCLogic(
     tocReference,
     isMobile,
     position,
+    isReady,
   };
 }
 

@@ -9,24 +9,22 @@ import {
 import { lowerCase } from 'es-toolkit/string';
 
 function getFilteredPosts(
-  posts: PostData[],
+  posts: PostListData[],
   searchQuery: string,
   category?: string,
   tag?: string
-): PostData[] {
+): PostListData[] {
   // Preprocess search query
   const queryKeywords = words(lowerCase(searchQuery));
   const normalizedCategory = lowerCase(defaultTo(category, ''));
   const normalizedTag = lowerCase(defaultTo(tag, ''));
 
   return filter(posts, (post) => {
-    const { contentRaw = '' } = post;
     const { title, categories = [], tags = [] } = post.frontmatter;
 
     // Preprocess post fields
     const normalizedTitle = lowerCase(title);
     const normalizedAbstract = lowerCase(defaultTo(post.postAbstract, ''));
-    const normalizedContent = lowerCase(replace(contentRaw, /<[^>]*>/g, ''));
     const normalizedTags = tags.map((tag) => lowerCase(tag));
     const normalizedCategories = categories.map((category) =>
       lowerCase(category)
@@ -39,7 +37,6 @@ function getFilteredPosts(
         [
           normalizedTitle,
           normalizedAbstract,
-          normalizedContent,
           ...normalizedTags,
           ...normalizedCategories,
         ].some((field) => includes(field, keyword))

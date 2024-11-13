@@ -8,7 +8,7 @@ import { FaEye, FaFolder, FaRegClock } from 'react-icons/fa6';
 import ItemLinks from './ItemLinks';
 
 interface PostListLayoutProperties {
-  posts: PostData[];
+  posts: PostListData[];
 }
 
 export default function PostListLayout({ posts }: PostListLayoutProperties) {

@@ -1,22 +1,24 @@
 import { useState } from 'react';
 
+import useFixedPosition from '@/hooks/useFixedPosition';
+
 const useTOCPosition = (isMobile: boolean, showThumbnail: boolean) => {
-  const [position, setPosition] = useState({ top: 20, right: '10px' });
+  const { position: fixedPosition, updatePosition: updateRightPosition } =
+    useFixedPosition();
+  const [top, setTop] = useState(20);
 
   const updatePosition = () => {
-    setPosition((previous) => ({
-      ...previous,
-      right:
-        window.innerWidth > 1400 ? `calc((100vw - 1400px) / 2 + 10px)` : '10px',
-      top: isMobile
+    updateRightPosition();
+    setTop(
+      isMobile
         ? 20
         : showThumbnail && window.scrollY >= 420
           ? 20
-          : 500 - window.scrollY,
-    }));
+          : 500 - window.scrollY
+    );
   };
 
-  return { position, updatePosition };
+  return { position: { ...fixedPosition, top }, updatePosition };
 };
 
 export default useTOCPosition;
