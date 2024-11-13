@@ -5,6 +5,7 @@ import { read as matterRead } from 'gray-matter';
 import slugify from 'slugify';
 
 import { getConfig } from '@/services/config';
+import generateHierarchicalSlug from '@/services/utils/generateHierarchicalSlug';
 
 const config = getConfig();
 
@@ -74,26 +75,12 @@ function generateTOC(content: string): TocItems[] {
   const toc: TocItems[] = [];
   const headingLevels = { h2: 0, h3: 0, h4: 0, h5: 0, h6: 0 };
 
-  const resetLowerLevels = (level: keyof typeof headingLevels) => {
-    const levels = Object.keys(headingLevels) as (keyof typeof headingLevels)[];
-    const startIndex = levels.indexOf(level) + 1;
-    for (const key of levels.slice(startIndex)) {
-      headingLevels[key] = 0;
-    }
-  };
-
   let match;
   while ((match = headingRegex.exec(content)) !== null) {
     const [, hashes, title] = match;
     const level = `h${hashes.length}` as keyof typeof headingLevels;
 
-    headingLevels[level] += 1;
-    resetLowerLevels(level);
-    const hierarchicalSlug = Object.values(headingLevels)
-      .slice(0, Object.keys(headingLevels).indexOf(level) + 1)
-      .join('-');
-    const baseSlug = slugify(title, { lower: true });
-    const slug = `${hierarchicalSlug}-${baseSlug}`;
+    const slug = generateHierarchicalSlug(title, level, headingLevels);
 
     toc.push({ slug, title, level: Number.parseInt(level.slice(1), 10) });
   }

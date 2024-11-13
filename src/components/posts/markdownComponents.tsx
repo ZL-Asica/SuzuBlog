@@ -4,7 +4,8 @@ import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Link from 'next/link';
-import slugify from 'slugify';
+
+import generateHierarchicalSlug from '@/services/utils/generateHierarchicalSlug';
 
 const createMarkdownComponents = (): Components => {
   // Set initial heading levels
@@ -14,29 +15,6 @@ const createMarkdownComponents = (): Components => {
     h4: 0,
     h5: 0,
     h6: 0,
-  };
-
-  const resetLowerLevels = (level: keyof typeof headingLevels) => {
-    const levels = Object.keys(headingLevels) as (keyof typeof headingLevels)[];
-    const startIndex = levels.indexOf(level) + 1;
-    for (const key of levels.slice(startIndex)) {
-      headingLevels[key] = 0;
-    }
-  };
-
-  const generateHierarchicalSlug = (
-    children: ReactNode,
-    level: keyof typeof headingLevels
-  ) => {
-    headingLevels[level] += 1;
-    resetLowerLevels(level);
-    const hierarchicalSlug = Object.values(headingLevels)
-      .slice(0, Object.keys(headingLevels).indexOf(level) + 1)
-      .join('-');
-    const baseSlug = slugify(String(children), { lower: true });
-    const slug = `${hierarchicalSlug}-${baseSlug}`;
-
-    return slug;
   };
 
   const headingLink = (slug: string, children: ReactNode) => (
@@ -50,7 +28,11 @@ const createMarkdownComponents = (): Components => {
 
   return {
     h2: ({ children }) => {
-      const slug = generateHierarchicalSlug(children as ReactNode, 'h2');
+      const slug = generateHierarchicalSlug(
+        children as ReactNode,
+        'h2',
+        headingLevels
+      );
       return (
         <div className='group'>
           <h2
@@ -65,7 +47,11 @@ const createMarkdownComponents = (): Components => {
     },
 
     h3: ({ children }) => {
-      const slug = generateHierarchicalSlug(children as ReactNode, 'h3');
+      const slug = generateHierarchicalSlug(
+        children as ReactNode,
+        'h3',
+        headingLevels
+      );
       return (
         <h3
           className='my-4 text-2xl font-bold leading-relaxed'
@@ -77,7 +63,11 @@ const createMarkdownComponents = (): Components => {
     },
 
     h4: ({ children }) => {
-      const slug = generateHierarchicalSlug(children as ReactNode, 'h4');
+      const slug = generateHierarchicalSlug(
+        children as ReactNode,
+        'h4',
+        headingLevels
+      );
       return (
         <h4
           className='my-3 text-xl font-semibold leading-normal'
@@ -89,7 +79,11 @@ const createMarkdownComponents = (): Components => {
     },
 
     h5: ({ children }) => {
-      const slug = generateHierarchicalSlug(children as ReactNode, 'h5');
+      const slug = generateHierarchicalSlug(
+        children as ReactNode,
+        'h5',
+        headingLevels
+      );
       return (
         <h5
           className='my-2 text-lg font-medium leading-normal'
@@ -101,7 +95,11 @@ const createMarkdownComponents = (): Components => {
     },
 
     h6: ({ children }) => {
-      const slug = generateHierarchicalSlug(children as ReactNode, 'h6');
+      const slug = generateHierarchicalSlug(
+        children as ReactNode,
+        'h6',
+        headingLevels
+      );
       return (
         <h6
           className='my-1 text-base font-normal leading-snug'
