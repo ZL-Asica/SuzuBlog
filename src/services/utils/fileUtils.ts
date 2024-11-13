@@ -5,13 +5,13 @@ import path from 'node:path';
 const filePath = path.join(process.cwd(), 'config.yml');
 
 // Watch the config file with debounce
-let debounceTimeout: NodeJS.Timeout | null = null;
 function watchConfigFile(callback: () => void): void {
+  let debounceTimeout: NodeJS.Timeout | null = null;
+
   watch(filePath, () => {
     if (debounceTimeout) clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
-      callback();
-    }, 100);
+    // Set debounce delay to 100ms
+    debounceTimeout = setTimeout(callback, 100);
   });
 }
 

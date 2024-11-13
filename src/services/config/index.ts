@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import { readFileSync } from 'node:fs';
 
 import yaml from 'yaml';
 
@@ -16,7 +16,7 @@ export const getConfig = (): Config => {
     return cachedConfig;
   }
 
-  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const fileContents = readFileSync(filePath, 'utf8');
   const parsedConfig = yaml.parse(fileContents) as Config;
 
   // Validate the config format

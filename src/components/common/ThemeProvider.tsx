@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-export default function ThemeProvider() {
+function ThemeProvider() {
   useEffect(() => {
     // Function to apply the dark class based on system preference
     const applyTheme = (isDark: boolean) => {
@@ -29,3 +29,5 @@ export default function ThemeProvider() {
 
   return null;
 }
+
+export default ThemeProvider;
