@@ -9,7 +9,7 @@ import PostListLayout from '@/components/posts/PostListLayout';
 
 async function Home() {
   const config: Config = getConfig();
-  const posts: PostData[] = await getAllPosts();
+  const posts: PostListData[] = await getAllPosts();
 
   return (
     <>

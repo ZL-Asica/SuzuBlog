@@ -11,12 +11,16 @@ interface Frontmatter {
 }
 
 // Post data
-interface PostData {
+interface PostListData {
   slug: string;
   postAbstract: string;
   frontmatter: Frontmatter;
-  contentRaw: string;
   lastModified: string;
+}
+
+// 完整的文章数据（用于文章详情页）
+interface FullPostData extends PostListData {
+  contentRaw: string;
   toc: TocItems[];
 }
 

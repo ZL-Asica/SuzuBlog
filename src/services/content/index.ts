@@ -3,13 +3,13 @@
 import { promises as fsPromise } from 'node:fs';
 import path from 'node:path';
 
-import { filter } from 'es-toolkit/compat';
+import { filter, replace } from 'es-toolkit/compat';
 
 import getPostFromFile from '@/services/content/getPostFromFile';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-async function getAllPosts(): Promise<PostData[]> {
+async function getAllPosts(): Promise<PostListData[]> {
   const fileNames = await fsPromise.readdir(postsDirectory);
   const markdownFiles = filter(fileNames, (fileName) =>
     fileName.endsWith('.md')
@@ -17,20 +17,23 @@ async function getAllPosts(): Promise<PostData[]> {
 
   const allPosts = await Promise.all(
     markdownFiles.map(async (fileName) => {
-      const fullPath = path.join(postsDirectory, fileName);
-      return getPostFromFile(fullPath, fileName.replace(/\.md$/, ''));
+      const { slug, postAbstract, frontmatter, lastModified } = getPostFromFile(
+        path.join(postsDirectory, fileName),
+        replace(fileName, /\.md$/, ''),
+        false // Fetch only partial data for list view
+      );
+      return { slug, postAbstract, frontmatter, lastModified };
     })
   );
 
-  allPosts.sort(
+  return allPosts.sort(
     (a, b) =>
       new Date(b.frontmatter.date).getTime() -
       new Date(a.frontmatter.date).getTime()
   );
-  return allPosts;
 }
 
-function getPostData(slug: string, page?: string): PostData {
+function getPostData(slug: string, page?: string): FullPostData {
   const filePath = page
     ? path.join(postsDirectory, '_pages', `${page}.md`)
     : path.join(postsDirectory, `${slug}.md`);

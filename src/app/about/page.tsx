@@ -24,7 +24,7 @@ function generateMetadata(): Metadata {
 }
 
 async function AboutPage() {
-  const post: PostData = await getPostData('About', 'About');
+  const post: FullPostData = await getPostData('About', 'About');
   const config = getConfig();
 
   return (

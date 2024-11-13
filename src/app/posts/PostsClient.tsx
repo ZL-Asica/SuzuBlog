@@ -11,7 +11,7 @@ import Pagination from '@/components/posts/Pagination';
 import SearchInput from '@/components/posts/SearchInput';
 
 interface PostsClientProperties {
-  posts: PostData[];
+  posts: PostListData[];
 }
 
 function PostsClient({ posts }: PostsClientProperties) {

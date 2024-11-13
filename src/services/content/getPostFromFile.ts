@@ -2,14 +2,17 @@ import { statSync } from 'node:fs';
 
 import { defaultTo, forEach, replace, trim } from 'es-toolkit/compat';
 import { read as matterRead } from 'gray-matter';
-import slugify from 'slugify';
 
 import { getConfig } from '@/services/config';
 import generateHierarchicalSlug from '@/services/utils/generateHierarchicalSlug';
 
 const config = getConfig();
 
-function getPostFromFile(filePath: string, slug: string): PostData {
+function getPostFromFile(
+  filePath: string,
+  slug: string,
+  fullData: boolean = true
+): FullPostData {
   const {
     data,
     content: contentRaw,
@@ -29,23 +32,24 @@ function getPostFromFile(filePath: string, slug: string): PostData {
     showComments: defaultTo(data.showComments, true),
   };
 
-  let markdownParsed = contentRaw;
-  if (contentRaw.includes('{% links %}')) {
-    markdownParsed = replace(
-      contentRaw,
-      /{% links %}([\S\s]*?){% endlinks %}/g,
-      (_, jsonString) => renderFriendLinks(trim(jsonString))
-    );
+  let toc: TocItems[] = [];
+  if (fullData && !frontmatter.redirect) {
+    let markdownParsed = contentRaw;
+    if (contentRaw.includes('{% links %}')) {
+      markdownParsed = replace(
+        contentRaw,
+        /{% links %}([\S\s]*?){% endlinks %}/g,
+        (_, jsonString) => renderFriendLinks(trim(jsonString))
+      );
+    }
+    toc = generateTOC(markdownParsed);
   }
-
-  // Generate TOC
-  const toc = generateTOC(markdownParsed);
 
   return {
     slug,
     postAbstract: processPostAbstract(contentRaw, defaultTo(excerpt, '')),
     frontmatter,
-    contentRaw,
+    contentRaw: fullData ? contentRaw : '',
     lastModified,
     toc,
   };

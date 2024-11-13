@@ -14,7 +14,7 @@ import createMarkdownComponents from '@/components/posts/markdownComponents';
 import TOC from '@/components/posts/TOC';
 
 interface PostLayoutProperties {
-  post: PostData;
+  post: FullPostData;
   showThumbnail?: boolean;
 }
 

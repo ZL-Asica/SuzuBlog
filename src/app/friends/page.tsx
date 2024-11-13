@@ -24,7 +24,7 @@ function generateMetadata(): Metadata {
 }
 
 async function FriendsPage() {
-  const post: PostData = await getPostData('Friends', 'Friends');
+  const post: FullPostData = await getPostData('Friends', 'Friends');
   const config = getConfig();
 
   return (
