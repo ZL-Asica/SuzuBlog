@@ -1,10 +1,8 @@
 import { promises as fsPromises } from 'node:fs';
 import path from 'node:path';
 
-import { defaultTo, replace, trim, includes } from 'es-toolkit/compat';
+import { defaultTo, forEach, replace, trim } from 'es-toolkit/compat';
 import matter from 'gray-matter';
-import hljs from 'highlight.js';
-import { marked } from 'marked';
 
 import { getConfig } from '@/services/config';
 import { fileExists, formatDateTime } from '@/services/utils/fileUtils';
@@ -15,14 +13,14 @@ async function getPostFromFile(
   filePath: string,
   slug: string
 ): Promise<PostData> {
-  const { frontmatter, postAbstract, contentHtml, lastModified } =
+  const { frontmatter, postAbstract, contentRaw, lastModified } =
     await parseMarkdown(filePath, slug);
 
   return {
     slug,
     postAbstract,
     frontmatter,
-    contentHtml,
+    contentRaw,
     lastModified,
   };
 }
@@ -33,7 +31,7 @@ async function parseMarkdown(
 ): Promise<{
   frontmatter: Frontmatter;
   postAbstract: string;
-  contentHtml: string;
+  contentRaw: string;
   lastModified: string;
 }> {
   const fileContents = await fsPromises.readFile(filePath, 'utf8');
@@ -58,28 +56,21 @@ async function parseMarkdown(
   // Clean up HTML comments and render friend links
   let contentSanitized = removeHtmlComments(markdownContent);
   if (contentSanitized.includes('{% links %}')) {
-    contentSanitized = contentSanitized.replaceAll(
+    contentSanitized = replace(
+      contentSanitized,
       /{% links %}([\S\s]*?){% endlinks %}/g,
-      (_, jsonString) => renderFriendLinks(jsonString.trim())
+      (_, jsonString) => renderFriendLinks(trim(jsonString))
     );
   }
 
-  // Custom renderer for marked
-  const renderer = new marked.Renderer();
-  renderer.code = ({ text, lang }) => highlightCodeBlock(text, lang);
-  renderer.link = ({ href, title, text }) =>
-    createLink(href, text, title ?? '');
-  renderer.image = ({ href, title, text }) =>
-    createImage(href, text, title ?? '');
-
-  marked.use({ async: true, pedantic: false, gfm: true, renderer });
-  const processedContent = await marked(contentSanitized);
-  const postAbstract = processPostAbstract(processedContent);
+  const postAbstract = processPostAbstract(
+    contentSanitized.split('<!--more-->')[0]
+  );
 
   return {
     frontmatter: frontmatterData,
     postAbstract,
-    contentHtml: processedContent,
+    contentRaw: markdownContent,
     lastModified,
   };
 }
@@ -147,40 +138,27 @@ function renderFriendLinks(jsonString: string): string {
   }
 }
 
-// Helper function for syntax highlighting
-function highlightCodeBlock(text: string, lang?: string): string {
-  if (text.includes('friend-link')) return text;
-  const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext';
-  const highlighted = hljs.highlight(text, { language }).value;
-  return `<pre><code class="hljs language-${language}">${highlighted}</code></pre>`;
-}
-
-// Helper function to create links with accessibility and external indication
-function createLink(href: string, text: string, title: string): string {
-  const target = includes(href, '://') ? '_blank' : '_self';
-  const ariaLabel = target === '_blank' ? ' (new tab)' : '';
-  return `<a href="${href}" class="post-content-link" target="${target}" aria-label="${title || text} ${ariaLabel}" rel="noopener noreferrer">${text}</a>`;
-}
-
-// Helper function to create lazy-loaded images
-function createImage(href: string, text: string, title: string): string {
-  return `<img src="${href}" class="post-content-img" alt="${title || text}" loading="lazy" />`;
-}
-
 // Helper function to create post abstract
-function processPostAbstract(contentHtml: string): string {
-  // Clean all but keep <!--more--> to split content
-  const plainText = replace(
-    replace(contentHtml, '<!--more-->', '[[MORE_PLACEHOLDER]]'),
-    /<[^>]*>/g,
-    ''
-  );
+function processPostAbstract(contentRaw: string): string {
+  let contentStripped = contentRaw;
+  const replacements: [RegExp, string][] = [
+    [/#* (.*)/g, '$1'], // Remove headings
+    [/!\[.*?]\(.*?\)/g, ''], // Remove images
+    [/\[(.*?)]\(.*?\)/g, '$1'], // Remove links but keep text
+    [/`([^`]+)`/g, '$1'], // Remove inline code backticks
+    [/(\*\*|__)(.*?)\1/g, '$2'], // Remove bold formatting
+    [/(\*|_)(.*?)\1/g, '$2'], // Remove italic formatting
+    [/(\r?\n)+/g, ' '], // Replace line breaks with spaces
+    [/^-{3,}$/gm, ''], // Remove horizontal rules
+    [/>\s?/g, ''], // Remove blockquote '>' symbols
+    [/([*+-])\s/g, ''], // Remove unordered list markers
+    [/^\d+\.\s+/g, ''], // Remove ordered list markers
+  ];
+  forEach(replacements, ([pattern, replacement]) => {
+    contentStripped = replace(contentStripped, pattern, replacement);
+  });
 
-  // Find the index of <!--more--> and slice the content
-  const moreIndex = defaultTo(plainText.indexOf('[[MORE_PLACEHOLDER]]'), 150);
-
-  // Remove extra spaces and return the abstract
-  return trim(replace(plainText.slice(0, moreIndex), /\s+/g, ' '));
+  return trim(contentStripped).slice(0, 150);
 }
 
 export default getPostFromFile;

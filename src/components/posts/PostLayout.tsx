@@ -2,14 +2,15 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FaFolder, FaTags } from 'react-icons/fa6';
 import { includes, lowerCase } from 'es-toolkit/compat';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 import ItemLinks from './ItemLinks';
 
 import { getConfig } from '@/services/config';
 
-import '@/styles/codeblock.css';
-import '@/styles/postContent.css';
-import 'highlight.js/styles/an-old-hope.css';
+import markdownComponents from '@/components/posts/markdownComponents';
 
 interface PostLayoutProperties {
   post: PostData;
@@ -38,16 +39,23 @@ function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
         />
       )}
 
-      <div className='mx-auto mt-10 w-full max-w-3xl'>
+      <div className='mx-auto my-10 w-full max-w-3xl'>
         <CategoriesTagsList
           categories={post.frontmatter.categories}
           tags={post.frontmatter.tags}
         />
-        <PostContent contentHtml={post.contentHtml} />
-        {post.frontmatter.showComments && (
-          <DisqusComments disqusShortname={getConfig().disqusShortname} />
-        )}
+        <Markdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={markdownComponents}
+          className='mt-5'
+        >
+          {post.contentRaw}
+        </Markdown>
       </div>
+      {post.frontmatter.showComments && (
+        <DisqusComments disqusShortname={getConfig().disqusShortname} />
+      )}
     </article>
   );
 }
@@ -162,15 +170,6 @@ function CategoriesTagsList({
         </li>
       )}
     </ul>
-  );
-}
-
-function PostContent({ contentHtml }: { contentHtml: string }) {
-  return (
-    <div
-      className='post-content mt-8'
-      dangerouslySetInnerHTML={{ __html: contentHtml }}
-    />
   );
 }
 

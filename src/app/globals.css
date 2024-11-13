@@ -42,69 +42,12 @@ nav {
 }
 
 /****************************************************
- * Post content styles
- ****************************************************/
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  clear: both;
-}
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  display: block;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-  unicode-bidi: isolate;
-}
-
-h2 {
-  display: block;
-  font-size: 1.5em;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
-}
-
-h3 {
-  display: block;
-  font-size: 1.17em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-}
-
-h4 {
-  display: block;
-  margin-block-start: 1.33em;
-  margin-block-end: 1.33em;
-}
-
-/****************************************************
  * IMAGES & MEDIA
  ****************************************************/
 
-/* Avoid filter on images in dark mode */
+/* Avoid filter on images */
 img {
   filter: none !important;
-}
-
-/* Add shadow to images in dark mode for better visibility */
-@media (prefers-color-scheme: dark) {
-  img {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
 }
 
 /****************************************************
@@ -124,7 +67,6 @@ a:focus-visible {
 
 /* Buttons */
 button {
-  color: var(--background);
   background-color: var(--skyblue);
   border: none;
   text-align: center;
@@ -134,10 +76,8 @@ button {
 }
 
 button:hover,
-select:checked,
-button:focus-visible {
+select:checked {
   background-color: var(--sakuraPink);
-  color: var(--background);
 }
 
 /****************************************************

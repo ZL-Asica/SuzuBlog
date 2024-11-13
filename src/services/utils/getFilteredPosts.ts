@@ -20,13 +20,13 @@ function getFilteredPosts(
   const normalizedTag = lowerCase(defaultTo(tag, ''));
 
   return filter(posts, (post) => {
-    const { contentHtml = '' } = post;
+    const { contentRaw = '' } = post;
     const { title, categories = [], tags = [] } = post.frontmatter;
 
     // Preprocess post fields
     const normalizedTitle = lowerCase(title);
     const normalizedAbstract = lowerCase(defaultTo(post.postAbstract, ''));
-    const normalizedContent = lowerCase(replace(contentHtml, /<[^>]*>/g, ''));
+    const normalizedContent = lowerCase(replace(contentRaw, /<[^>]*>/g, ''));
     const normalizedTags = tags.map((tag) => lowerCase(tag));
     const normalizedCategories = categories.map((category) =>
       lowerCase(category)

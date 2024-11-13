@@ -15,7 +15,7 @@ interface PostData {
   slug: string;
   postAbstract: string;
   frontmatter: Frontmatter;
-  contentHtml: string;
+  contentRaw: string;
   lastModified: string;
 }
 
