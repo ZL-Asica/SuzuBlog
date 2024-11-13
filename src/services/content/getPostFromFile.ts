@@ -1,7 +1,7 @@
-import fs from 'node:fs';
+import { promises as fsPromises } from 'node:fs';
 import path from 'node:path';
 
-import { defaultTo } from 'es-toolkit/compat';
+import { defaultTo, replace, trim, includes } from 'es-toolkit/compat';
 import matter from 'gray-matter';
 import hljs from 'highlight.js';
 import { marked } from 'marked';
@@ -15,16 +15,8 @@ async function getPostFromFile(
   filePath: string,
   slug: string
 ): Promise<PostData> {
-  const fileContents = await fs.promises.readFile(filePath, 'utf8');
-  const { frontmatter, postAbstract, contentHtml } = await parseMarkdown(
-    fileContents,
-    filePath,
-    slug
-  );
-
-  // Get last modified date
-  const fileStats = await fs.promises.stat(filePath);
-  const lastModified = fileStats.mtime.toISOString();
+  const { frontmatter, postAbstract, contentHtml, lastModified } =
+    await parseMarkdown(filePath, slug);
 
   return {
     slug,
@@ -36,20 +28,27 @@ async function getPostFromFile(
 }
 
 async function parseMarkdown(
-  fileContents: string,
   filePath: string,
   slug: string
 ): Promise<{
   frontmatter: Frontmatter;
   postAbstract: string;
   contentHtml: string;
+  lastModified: string;
 }> {
+  const fileContents = await fsPromises.readFile(filePath, 'utf8');
   const { data, content: markdownContent } = matter(fileContents);
+
+  const [thumbnail, { date, lastModified }] = await Promise.all([
+    resolveThumbnail(data.thumbnail),
+    resolveDate(data.date, filePath),
+  ]);
+
   const frontmatterData: Frontmatter = {
     title: (data.title as string)?.slice(0, 100) || slug,
     author: (data.author as string)?.slice(0, 30) || config.author.name,
-    thumbnail: await resolveThumbnail(data.thumbnail),
-    date: await resolveDate(data.date, filePath),
+    thumbnail,
+    date,
     tags: defaultTo(data.tags),
     categories: defaultTo(data.categories),
     redirect: defaultTo(data.redirect),
@@ -81,6 +80,7 @@ async function parseMarkdown(
     frontmatter: frontmatterData,
     postAbstract,
     contentHtml: processedContent,
+    lastModified,
   };
 }
 
@@ -88,7 +88,7 @@ function removeHtmlComments(input) {
   let previous;
   do {
     previous = input;
-    input = input.replaceAll(/<!--[^>]*-->/g, (match) =>
+    replace(input, /<!--[^>]*-->/g, (match) =>
       match === '<!--more-->' ? match : ''
     );
   } while (input !== previous);
@@ -105,10 +105,19 @@ async function resolveThumbnail(thumbnail?: string): Promise<string> {
 }
 
 // Helper function to resolve date
-async function resolveDate(date?: string, fullPath?: string): Promise<string> {
-  if (date) return formatDateTime(date);
-  const stats = await fs.promises.stat(fullPath!);
-  return stats.mtime.toISOString().replace('T', ' ').split('.')[0];
+async function resolveDate(
+  originalDate?: string,
+  fullPath?: string
+): Promise<{
+  date: string;
+  lastModified: string;
+}> {
+  const stats = await fsPromises.stat(fullPath!);
+  const date = originalDate
+    ? formatDateTime(originalDate)
+    : replace(stats.mtime.toISOString(), 'T', ' ').split('.')[0];
+  const lastModified = stats.mtime.toISOString();
+  return { date, lastModified };
 }
 
 // Helper function to render friend links
@@ -148,7 +157,7 @@ function highlightCodeBlock(text: string, lang?: string): string {
 
 // Helper function to create links with accessibility and external indication
 function createLink(href: string, text: string, title: string): string {
-  const target = href.includes('://') ? '_blank' : '_self';
+  const target = includes(href, '://') ? '_blank' : '_self';
   const ariaLabel = target === '_blank' ? ' (new tab)' : '';
   return `<a href="${href}" class="post-content-link" target="${target}" aria-label="${title || text} ${ariaLabel}" rel="noopener noreferrer">${text}</a>`;
 }
@@ -160,19 +169,18 @@ function createImage(href: string, text: string, title: string): string {
 
 // Helper function to create post abstract
 function processPostAbstract(contentHtml: string): string {
-  // Use negative lookahead to match all comments except <!--more-->
-  const sanitizedContent = contentHtml.replaceAll(/<!--(?!more\b)[^>]*-->/g, '');
-
   // Clean all but keep <!--more--> to split content
-  const plainText = sanitizedContent
-    .replaceAll('<!--more-->', '[[MORE_PLACEHOLDER]]')
-    .replaceAll(/<[^>]*>/g, '');
+  const plainText = replace(
+    replace(contentHtml, '<!--more-->', '[[MORE_PLACEHOLDER]]'),
+    /<[^>]*>/g,
+    ''
+  );
 
   // Find the index of <!--more--> and slice the content
-  const moreIndex = plainText.indexOf('[[MORE_PLACEHOLDER]]') || 0;
+  const moreIndex = defaultTo(plainText.indexOf('[[MORE_PLACEHOLDER]]'), 150);
 
   // Remove extra spaces and return the abstract
-  return plainText.slice(0, moreIndex).replaceAll(/\s+/g, ' ').trim();
+  return trim(replace(plainText.slice(0, moreIndex), /\s+/g, ' '));
 }
 
 export default getPostFromFile;
