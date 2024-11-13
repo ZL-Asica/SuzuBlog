@@ -56,11 +56,8 @@ async function parseMarkdown(
     showComments: defaultTo(data.showComments, true),
   };
 
-  // Clean up HTML comments
-  let contentSanitized = markdownContent.replaceAll(/<!--[^>]*-->/g, (match) =>
-    match === '<!--more-->' ? match : ''
-  );
-
+  // Clean up HTML comments and render friend links
+  let contentSanitized = removeHtmlComments(markdownContent);
   if (contentSanitized.includes('{% links %}')) {
     contentSanitized = contentSanitized.replaceAll(
       /{% links %}([\S\s]*?){% endlinks %}/g,
@@ -85,6 +82,17 @@ async function parseMarkdown(
     postAbstract,
     contentHtml: processedContent,
   };
+}
+
+function removeHtmlComments(input) {
+  let previous;
+  do {
+    previous = input;
+    input = input.replaceAll(/<!--[^>]*-->/g, (match) =>
+      match === '<!--more-->' ? match : ''
+    );
+  } while (input !== previous);
+  return input;
 }
 
 // Helper function to resolve thumbnail
@@ -126,7 +134,7 @@ function renderFriendLinks(jsonString: string): string {
       .join('');
     return `<div class="friends-links"><ul class="friends-links-list" role="list">${linksHtml}</ul></div>`;
   } catch {
-    return '<>Invalid JSON in links block</>';
+    return '<div>Invalid JSON in links block</div>';
   }
 }
 
@@ -152,15 +160,19 @@ function createImage(href: string, text: string, title: string): string {
 
 // Helper function to create post abstract
 function processPostAbstract(contentHtml: string): string {
-  const plainText = contentHtml
+  // Use negative lookahead to match all comments except <!--more-->
+  const sanitizedContent = contentHtml.replaceAll(/<!--(?!more\b)[^>]*-->/g, '');
+
+  // Clean all but keep <!--more--> to split content
+  const plainText = sanitizedContent
     .replaceAll('<!--more-->', '[[MORE_PLACEHOLDER]]')
     .replaceAll(/<[^>]*>/g, '');
-  const moreIndex = plainText.indexOf('[[MORE_PLACEHOLDER]]');
-  return (
-    moreIndex > 0 ? plainText.slice(0, moreIndex) : plainText.slice(0, 150)
-  )
-    .replaceAll(/\s+/g, ' ')
-    .trim();
+
+  // Find the index of <!--more--> and slice the content
+  const moreIndex = plainText.indexOf('[[MORE_PLACEHOLDER]]') || 0;
+
+  // Remove extra spaces and return the abstract
+  return plainText.slice(0, moreIndex).replaceAll(/\s+/g, ' ').trim();
 }
 
-export { getPostFromFile };
+export default getPostFromFile;

@@ -5,7 +5,7 @@ import path from 'node:path';
 
 import { filter } from 'es-toolkit/compat';
 
-import { getPostFromFile } from '@/services/content/getPostFromFile';
+import getPostFromFile from '@/services/content/getPostFromFile';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
