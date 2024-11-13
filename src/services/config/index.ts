@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 
 import yaml from 'yaml';
 
-import { filePath, watchConfigFile } from '@/services/utils/fileUtils';
+import { filePath, watchConfigFile } from '@/services/config/fileUtils';
 
 let cachedConfig: Config | null = null;
 
