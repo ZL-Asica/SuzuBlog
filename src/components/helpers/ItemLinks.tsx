@@ -19,7 +19,7 @@ const getLink = (
   return `/posts?${newParameters.toString()}`;
 };
 
-export default function ItemLinks({ items, type }: ItemLinksProperties) {
+function ItemLinks({ items, type }: ItemLinksProperties) {
   const searchParameters = useSearchParams();
   const displayItems = defaultTo(items, []);
   const displayItemsLength = displayItems.length;
@@ -46,3 +46,5 @@ export default function ItemLinks({ items, type }: ItemLinksProperties) {
     </>
   );
 }
+
+export default ItemLinks;

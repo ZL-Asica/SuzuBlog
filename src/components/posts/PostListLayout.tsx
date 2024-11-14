@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { MdMoreHoriz } from 'react-icons/md';
 import { FaEye, FaFolder, FaRegClock } from 'react-icons/fa6';
 
-import ItemLinks from './ItemLinks';
+import ItemLinks from '../helpers/ItemLinks';
 
 interface PostListLayoutProperties {
   posts: PostListData[];

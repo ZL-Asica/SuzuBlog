@@ -29,7 +29,7 @@ const TOC = ({ items, showThumbnail = true }: TOCProperties) => {
           isOpen ? 'translate-y-2' : 'hover:scale-110'
         }`}
       >
-        <FaListUl size={18} />
+        <FaListUl size={20} />
       </button>
       <nav
         ref={tocReference}
