@@ -9,7 +9,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='mt-10'>
+    <footer className='mb-1 mt-10 w-full'>
       <div className='mx-auto max-w-7xl px-4 py-4 text-center'>
         <SocialMediaLink socialMedia={config.socialMedia} />
         <p className='text-gray-800 dark:text-gray-300'>

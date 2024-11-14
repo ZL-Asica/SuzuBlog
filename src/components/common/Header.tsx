@@ -27,7 +27,7 @@ function Header({ siteTitle }: HeaderProperties) {
   });
 
   return (
-    <header className='relative z-50 shadow-md'>
+    <header className='relative z-50 w-full shadow-md'>
       {/* Progress Scroll Bar */}
       <div
         className='z-100 fixed left-0 top-0 z-40 h-[3px] w-full bg-sakuraPink transition-all duration-500 ease-out'

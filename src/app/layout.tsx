@@ -52,10 +52,12 @@ function RootLayout({
         src='/custom.js'
         strategy='lazyOnload'
       />
-      <body className={`${notoSansSC.variable} antialiased`}>
-        <ThemeProvider />
+      <body
+        className={`${notoSansSC.variable} flex max-h-full min-h-screen flex-col antialiased`}
+      >
+        {/* <ThemeProvider /> */}
         <Header siteTitle={config.title} />
-        <main>{children}</main>
+        <main className='flex-grow'>{children}</main>
         <BackToTop />
         <Footer />
       </body>

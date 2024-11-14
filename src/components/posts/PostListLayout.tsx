@@ -13,7 +13,7 @@ interface PostListLayoutProperties {
 
 export default function PostListLayout({ posts }: PostListLayoutProperties) {
   // TODO: Replace with actual read count
-  const readCount: number = 29;
+  const readCount = '~';
 
   return (
     <div className='grid grid-cols-1 gap-10'>
