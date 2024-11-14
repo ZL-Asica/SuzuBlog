@@ -1,11 +1,10 @@
 import type { Components } from 'react-markdown';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import Image from 'next/image';
-import type { ReactNode } from 'react';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Link from 'next/link';
 
 import { generateHierarchicalSlug } from '@/services/utils';
+
+import CopyCodeBlock from '@/components/helpers/CopyCodeBlock';
 
 const createMarkdownComponents = (): Components => {
   // Set initial heading levels
@@ -133,26 +132,17 @@ const createMarkdownComponents = (): Components => {
     code: ({ className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '');
       return match ? (
-        // <pre>
-        <SyntaxHighlighter
-          style={nord}
-          language={match[1]}
-          PreTag='div'
-          className='scrollbar-custom rounded py-1 pl-2 font-mono hover:shadow-2xl'
-          {...props}
-        >
-          {String(children).replace(/\n$/, '')}
-        </SyntaxHighlighter>
+        <CopyCodeBlock match={match}>{children as ReactNode}</CopyCodeBlock>
       ) : (
-        // </pre>
         <code
-          className='rounded bg-gray-100 px-2 py-1 font-mono text-base dark:bg-gray-800'
+          className='rounded bg-[var(--lightGray)] px-2 py-1 font-mono text-base'
           {...(props as Record<string, unknown>)}
         >
           {children as ReactNode}
         </code>
       );
     },
+
     a: ({ href = '#', children, ...props }) => {
       const isInternalLink = href.startsWith('/') || href.startsWith('#');
       return (
