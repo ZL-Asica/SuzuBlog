@@ -5,8 +5,7 @@ import { useRef, useState } from 'react';
 import { FaAngleUp, FaBars } from 'react-icons/fa6';
 import Link from 'next/link';
 
-import Loading from '@/app/loading';
-import { useIsMobile, useOutsideClick, useScrollProgress } from '@/hooks';
+import { useOutsideClick, useScrollProgress } from '@/hooks';
 
 import renderMenuItems from '@/components/helpers/renderMenuItems';
 
@@ -16,7 +15,6 @@ interface HeaderProperties {
 
 function Header({ siteTitle }: HeaderProperties) {
   const [isOpen, setIsOpen] = useState(false);
-  const { isReady, isMobile } = useIsMobile(768);
   const scrollProgress = useScrollProgress();
   const menuReference = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -27,8 +25,6 @@ function Header({ siteTitle }: HeaderProperties) {
   useOutsideClick(menuReference, () => {
     if (isOpen) setIsOpen(false);
   });
-
-  if (!isReady) return <Loading />;
 
   return (
     <header className='relative z-50 shadow-md'>
@@ -54,49 +50,41 @@ function Header({ siteTitle }: HeaderProperties) {
           )}
         </Link>
 
-        {isMobile ? (
-          // Mobile View
-          <>
-            <button
-              className='z-50 bg-darkBackground text-3xl text-darkForeground transition-transform duration-300 hover:scale-110 dark:bg-lightBackground dark:text-lightForeground'
-              onClick={toggleMenu}
-              aria-label='Toggle menu'
-              aria-expanded={isOpen}
-              aria-controls='mobile-menu'
-            >
-              {isOpen ? <FaAngleUp /> : <FaBars />}
-            </button>
+        <button
+          className='z-50 bg-darkBackground text-3xl text-darkForeground transition-transform duration-300 hover:scale-110 dark:bg-lightBackground dark:text-lightForeground md:hidden'
+          onClick={toggleMenu}
+          aria-label='Toggle menu'
+          aria-expanded={isOpen}
+          aria-controls='mobile-menu'
+        >
+          {isOpen ? <FaAngleUp /> : <FaBars />}
+        </button>
 
-            <div
-              id='mobile-menu'
-              ref={menuReference}
-              tabIndex={-1}
-              role='menu'
-              aria-hidden={!isOpen}
-              inert={!isOpen}
-              className={`absolute left-0 top-20 z-50 w-full bg-lightBackground p-4 shadow-lg transition-all duration-300 ease-out dark:bg-darkBackground ${
-                isOpen
-                  ? 'max-h-screen scale-y-100 transform opacity-100'
-                  : 'max-h-0 scale-y-0 transform opacity-0'
-              }`}
-              style={{ transformOrigin: 'top' }}
-            >
-              <ul className='flex flex-col gap-2'>
-                {renderMenuItems(isMobile, toggleMenu)}
-              </ul>
-            </div>
-            {isOpen && (
-              <div
-                className='fixed inset-0 -z-20 bg-black bg-opacity-50 transition-opacity duration-300'
-                aria-hidden
-              />
-            )}
-          </>
-        ) : (
-          <ul className='hidden space-x-6 md:flex'>
-            {renderMenuItems(isMobile)}
+        <div
+          id='mobile-menu'
+          ref={menuReference}
+          tabIndex={-1}
+          role='menu'
+          aria-hidden={!isOpen}
+          inert={!isOpen}
+          className={`absolute left-0 top-20 z-50 w-full bg-lightBackground p-4 shadow-lg transition-all duration-300 ease-out dark:bg-darkBackground md:hidden ${
+            isOpen
+              ? 'max-h-screen scale-y-100 transform opacity-100'
+              : 'max-h-0 scale-y-0 transform opacity-0'
+          }`}
+          style={{ transformOrigin: 'top' }}
+        >
+          <ul className='flex flex-col gap-2'>
+            {renderMenuItems(true, toggleMenu)}
           </ul>
+        </div>
+        {isOpen && (
+          <div
+            className='fixed inset-0 -z-20 bg-black bg-opacity-50 transition-opacity duration-300'
+            aria-hidden
+          />
         )}
+        <ul className='hidden space-x-6 md:flex'>{renderMenuItems(false)}</ul>
       </nav>
     </header>
   );
