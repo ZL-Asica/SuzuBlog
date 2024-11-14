@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react';
 import type { Components } from 'react-markdown';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { generateHierarchicalSlug } from '@/services/utils';
+import { slugPrefix, generateHierarchicalSlug } from '@/services/utils';
 
 import CopyCodeBlock from '@/components/helpers/CopyCodeBlock';
 
@@ -16,12 +17,12 @@ const createMarkdownComponents = (): Components => {
     h6: 0,
   };
 
-  const headingLink = (slug: string, children: ReactNode) => (
+  const headingLink = (slug: string, level: number, children: ReactNode) => (
     <Link
       href={`#${slug}`}
       className='no-underline'
     >
-      {children}
+      {`${slugPrefix(slug, level)} ${children}`}
     </Link>
   );
 
@@ -35,11 +36,11 @@ const createMarkdownComponents = (): Components => {
       return (
         <div className='group'>
           <h2
-            className='border-foreground text-foreground relative mb-4 mt-4 border-b-2 pb-1 text-3xl font-extrabold leading-loose'
+            className='text-foreground relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose'
             id={slug}
           >
-            {headingLink(slug, children as ReactNode)}
-            <span className='absolute bottom-[-0.1em] left-0 w-[15%] rounded-md border-b-4 border-sakuraPink transition-all duration-300 ease-in-out group-hover:w-[30%]'></span>
+            {headingLink(slug, 2, children as ReactNode)}
+            <span className='absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-[var(--sakuraPink)] transition-all duration-300 ease-in-out group-hover:w-[35%]'></span>
           </h2>
         </div>
       );
@@ -53,10 +54,10 @@ const createMarkdownComponents = (): Components => {
       );
       return (
         <h3
-          className='my-4 text-2xl font-bold leading-relaxed'
+          className='text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed'
           id={slug}
         >
-          {headingLink(slug, children as ReactNode)}
+          {headingLink(slug, 3, children as ReactNode)}
         </h3>
       );
     },
@@ -69,10 +70,10 @@ const createMarkdownComponents = (): Components => {
       );
       return (
         <h4
-          className='my-3 text-xl font-semibold leading-normal'
+          className='text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal'
           id={slug}
         >
-          {headingLink(slug, children as ReactNode)}
+          {headingLink(slug, 4, children as ReactNode)}
         </h4>
       );
     },
@@ -85,10 +86,10 @@ const createMarkdownComponents = (): Components => {
       );
       return (
         <h5
-          className='my-2 text-lg font-medium leading-normal'
+          className='text-foreground my-3 text-lg font-medium leading-normal'
           id={slug}
         >
-          {headingLink(slug, children as ReactNode)}
+          {headingLink(slug, 5, children as ReactNode)}
         </h5>
       );
     },
@@ -101,34 +102,48 @@ const createMarkdownComponents = (): Components => {
       );
       return (
         <h6
-          className='my-1 text-base font-normal leading-snug'
+          className='text-foreground my-2 text-base font-medium leading-normal'
           id={slug}
         >
-          {headingLink(slug, children as ReactNode)}
+          {headingLink(slug, 6, children as ReactNode)}
         </h6>
       );
     },
+
     p: ({ children }) => (
-      <p className='my-4 text-base leading-tight'>{children as ReactNode}</p>
+      <p className='text-foreground my-6 text-base leading-relaxed'>
+        {children as ReactNode}
+      </p>
     ),
+
     blockquote: ({ children }) => (
       <div className='flex justify-center'>
-        <blockquote className='my-1 w-[95%] rounded-md border-l-4 border-sakuraPink bg-gray-50 py-0.5 pl-3 pr-2 italic dark:bg-gray-800'>
+        <blockquote className='my-1 w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] py-0.5 pl-3 pr-2 italic'>
           {children as ReactNode}
         </blockquote>
       </div>
     ),
+
     ul: ({ children }) => (
-      <ul className='my-4 list-inside list-disc pl-4'>
-        {children as ReactNode}
-      </ul>
+      <div className='my-4 ml-6 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-4'>
+        <ul className='list-inside list-disc space-y-2'>
+          {children as ReactNode}
+        </ul>
+      </div>
     ),
     ol: ({ children }) => (
-      <ol className='my-4 list-inside list-decimal pl-4'>
-        {children as ReactNode}
-      </ol>
+      <div className='my-4 ml-6 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-4 hover:border-solid'>
+        <ol className='list-inside list-decimal space-y-2'>
+          {children as ReactNode}
+        </ol>
+      </div>
     ),
-    li: ({ children }) => <li className='mb-2'>{children as ReactNode}</li>,
+    li: ({ children }) => (
+      <li className='text-foreground mb-1 leading-relaxed marker:text-[var(--sakuraPink)]'>
+        {children as ReactNode}
+      </li>
+    ),
+
     code: ({ className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '');
       return match ? (
@@ -155,26 +170,26 @@ const createMarkdownComponents = (): Components => {
               ? undefined
               : `Open ${children?.toString() ?? 'link'} in a new tab`
           }
-          className='mx-1 font-semibold text-darkSkyBlue decoration-dashed underline-offset-2 transition-colors duration-200 ease-in-out hover:text-darkSakuraPink hover:underline hover:decoration-dotted'
+          className='mx-1 font-semibold text-[var(--skyBlue)] decoration-dashed underline-offset-2 transition-colors duration-200 ease-in-out hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted'
           {...(props as Record<string, unknown>)}
         >
           {children as ReactNode}
         </Link>
       );
     },
-    img: ({ src: source = '', alt = '', ...props }) => (
-      <div className='flex justify-center'>
-        <Image
-          src={source}
-          alt={alt}
-          width={600}
-          height={400}
-          priority={false}
-          className='my-6 max-w-full rounded-md'
-          {...(props as Record<string, unknown>)}
-        />
-      </div>
+
+    img: ({ src: source = '', alt = 'Image', ...props }) => (
+      <Image
+        src={source}
+        alt={alt}
+        width={500}
+        height={780}
+        layout='responsive'
+        className='relative mx-auto my-6 w-full max-w-full rounded-md'
+        {...(props as Record<string, unknown>)}
+      />
     ),
+
     pre: ({ children }) => (
       <pre className='relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-md shadow-slate-950 hover:shadow-xl dark:shadow-slate-700'>
         {/* MacOS window buttons */}
@@ -190,28 +205,36 @@ const createMarkdownComponents = (): Components => {
         {children as ReactNode}
       </pre>
     ),
+
     table: ({ children }) => (
-      <table className='my-6 w-full border-collapse overflow-auto rounded-lg font-medium shadow-lg transition-shadow hover:shadow-xl dark:bg-darkBackground'>
-        {children as ReactNode}
-      </table>
+      <div className='my-6 w-full overflow-visible rounded-lg shadow-lg transition-shadow hover:shadow-xl'>
+        <table className='w-full border-separate border-spacing-0 bg-[var(--background)]'>
+          {children as ReactNode}
+        </table>
+      </div>
     ),
-    th: ({ children }) => (
-      <th className='dark:bg-sakuraPink-dark border border-slate-300 bg-darkSakuraPink px-4 py-3 text-left text-gray-200'>
+    th: ({ children, className }) => (
+      <th
+        className={`border border-[var(--gray)] bg-[var(--sakuraPink)] px-4 py-3 text-left font-semibold text-gray-100 dark:bg-[var(--sakuraPink-dark)] ${className}`}
+      >
         {children as ReactNode}
       </th>
     ),
-    td: ({ children }) => (
-      <td className='border border-slate-200 px-4 py-3 text-left font-medium dark:border-darkForeground dark:bg-gray-800'>
+    td: ({ children, className }) => (
+      <td
+        className={`text-foreground border border-[var(--gray)] bg-[var(--lightGray)] px-4 py-3 text-left font-medium ${className}`}
+      >
         {children as ReactNode}
       </td>
     ),
     tr: ({ children, className }) => (
       <tr
-        className={`${className} font-medium even:bg-gray-50 dark:even:bg-gray-700`}
+        className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)]`}
       >
         {children as ReactNode}
       </tr>
     ),
+
     hr: () => (
       <div className='flex justify-center'>
         <hr className='mx-auto my-8 max-w-[75%] border-t-2 border-lightForeground' />
