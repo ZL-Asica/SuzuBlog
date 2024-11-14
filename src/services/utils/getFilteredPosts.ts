@@ -1,11 +1,4 @@
-import {
-  defaultTo,
-  filter,
-  includes,
-  replace,
-  some,
-  words,
-} from 'es-toolkit/compat';
+import { defaultTo, filter, includes, some, words } from 'es-toolkit/compat';
 import { lowerCase } from 'es-toolkit/string';
 
 function getFilteredPosts(

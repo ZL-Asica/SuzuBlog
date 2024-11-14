@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import useDebouncedScroll from '@/hooks/useDebouncedScroll';
 
@@ -18,6 +18,10 @@ const useVisibilityOnScroll = (threshold: number = 100) => {
       setTimeout(() => setIsAtBottom(false), 3000); // Reset after delay
     }
   };
+
+  useEffect(() => {
+    updateVisibility();
+  }, []);
 
   useDebouncedScroll(updateVisibility);
 

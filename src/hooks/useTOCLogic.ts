@@ -55,7 +55,7 @@ function useTOCLogic(
   useDebouncedScroll(() => {
     updatePosition();
     updateActiveSlug();
-  });
+  }, 20);
   useOutsideClick(tocReference, () => setIsOpen(false));
 
   return {

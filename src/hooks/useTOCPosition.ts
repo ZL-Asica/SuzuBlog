@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import useFixedPosition from '@/hooks/useFixedPosition';
 
@@ -17,6 +17,10 @@ const useTOCPosition = (isMobile: boolean, showThumbnail: boolean) => {
           : 500 - window.scrollY
     );
   };
+
+  useEffect(() => {
+    updatePosition();
+  }, []);
 
   return { position: { ...fixedPosition, top }, updatePosition };
 };
