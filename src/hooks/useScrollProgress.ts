@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import useDebouncedScroll from '@/hooks/useDebouncedScroll';
+import { useDebouncedEvent } from '@/hooks';
 
 const useScrollProgress = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -15,7 +15,7 @@ const useScrollProgress = () => {
     updateScrollProgress();
   }, []);
 
-  useDebouncedScroll(() => requestAnimationFrame(updateScrollProgress));
+  useDebouncedEvent(() => requestAnimationFrame(updateScrollProgress), {});
 
   return scrollProgress;
 };

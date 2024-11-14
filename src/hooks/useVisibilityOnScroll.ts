@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import useDebouncedScroll from '@/hooks/useDebouncedScroll';
+import useDebouncedEvent from '@/hooks/useDebouncedEvent';
 
-const useVisibilityOnScroll = (threshold: number = 100) => {
+const useVisibilityOnScroll = (threshold: number = 150) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
 
@@ -23,7 +23,7 @@ const useVisibilityOnScroll = (threshold: number = 100) => {
     updateVisibility();
   }, []);
 
-  useDebouncedScroll(updateVisibility);
+  useDebouncedEvent(updateVisibility, {});
 
   return { isVisible, isAtBottom };
 };

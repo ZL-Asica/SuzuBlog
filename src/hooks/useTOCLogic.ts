@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { useDebouncedResize, useOutsideClick } from '@/hooks';
+import { useDebouncedEvent, useOutsideClick } from '@/hooks';
 
 function useTOCLogic(onLinkClick?: (slug: string) => void) {
   const [activeSlug, setActiveSlug] = useState('');
@@ -40,7 +40,7 @@ function useTOCLogic(onLinkClick?: (slug: string) => void) {
   };
 
   // Update activeSlug on scroll
-  useDebouncedResize(updateActiveSlug, { delay: 20 });
+  useDebouncedEvent(updateActiveSlug, { delay: 20 });
 
   // Close TOC when clicking outside
   useOutsideClick(tocReference, () => {
