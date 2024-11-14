@@ -138,7 +138,7 @@ const createMarkdownComponents = (): Components => {
           style={nord}
           language={match[1]}
           PreTag='div'
-          className='rounded py-1 pl-2 font-mono hover:shadow-2xl'
+          className='scrollbar-custom rounded py-1 pl-2 font-mono hover:shadow-2xl'
           {...props}
         >
           {String(children).replace(/\n$/, '')}
