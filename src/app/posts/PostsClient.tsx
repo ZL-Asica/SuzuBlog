@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { defaultTo, flatMap } from 'es-toolkit/compat';
 
-import getFilteredPosts from '@/services/utils/getFilteredPosts';
+import { getFilteredPosts } from '@/services/utils';
 
 import PostListLayout from '@/components/posts/PostListLayout';
 import Pagination from '@/components/posts/Pagination';

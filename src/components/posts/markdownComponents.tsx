@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Link from 'next/link';
 
-import generateHierarchicalSlug from '@/services/utils/generateHierarchicalSlug';
+import { generateHierarchicalSlug } from '@/services/utils';
 
 const createMarkdownComponents = (): Components => {
   // Set initial heading levels

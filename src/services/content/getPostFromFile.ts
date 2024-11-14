@@ -4,7 +4,7 @@ import { defaultTo, forEach, replace, trim } from 'es-toolkit/compat';
 import { read as matterRead } from 'gray-matter';
 
 import { getConfig } from '@/services/config';
-import generateHierarchicalSlug from '@/services/utils/generateHierarchicalSlug';
+import { generateHierarchicalSlug } from '@/services/utils';
 
 const config = getConfig();
 

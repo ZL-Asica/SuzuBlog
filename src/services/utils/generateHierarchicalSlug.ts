@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { slice, join } from 'es-toolkit/compat';
 import slugify from 'slugify';
 
 const resetLowerLevels = (
@@ -28,4 +29,8 @@ const generateHierarchicalSlug = (
   return slug;
 };
 
-export default generateHierarchicalSlug;
+const slugPrefix = (slug: string, level: number) => {
+  return `${join(slice(slug.split('-'), 0, level - 1), '.')}.`;
+};
+
+export { generateHierarchicalSlug as default, slugPrefix };
