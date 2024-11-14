@@ -25,9 +25,7 @@ const TOCLink = ({ item, activeSlug, handleLinkClick }: TOCLinkProperties) => {
           handleLinkClick(item.slug);
         }}
         className={`block py-1 text-base no-underline transition-colors duration-200 ${
-          isActive
-            ? 'font-bold text-sakuraPink'
-            : 'text-gray-600 dark:text-gray-400'
+          isActive ? 'font-bold text-[var(--sakuraPink)]' : 'text-[var(--gray)]'
         } break-words`}
       >
         {`${slugPrefix}. ${item.title}`}

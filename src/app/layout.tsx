@@ -6,7 +6,6 @@ import Script from 'next/script';
 
 import { getConfig } from '@/services/config';
 
-import ThemeProvider from '@/components/common/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import BackToTop from '@/components/common/BackToTop';
@@ -55,7 +54,6 @@ function RootLayout({
       <body
         className={`${notoSansSC.variable} flex max-h-full min-h-screen flex-col antialiased`}
       >
-        {/* <ThemeProvider /> */}
         <Header siteTitle={config.title} />
         <main className='flex-grow'>{children}</main>
         <BackToTop />

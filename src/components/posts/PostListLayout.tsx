@@ -25,7 +25,7 @@ export default function PostListLayout({ posts }: PostListLayoutProperties) {
             key={index}
             className={`mx-auto flex h-[500px] w-11/12 max-w-[850px] flex-col overflow-hidden rounded-lg shadow-lg md:h-[300px] md:w-full md:flex-row ${
               index % 2 === 0 ? 'md:flex-row-reverse' : ''
-            } dark:shadow-gray-700 dark:drop-shadow-sm`}
+            } shadow-[var(--lightGray)] drop-shadow-sm`}
           >
             {/* Thumbnail */}
             <div
