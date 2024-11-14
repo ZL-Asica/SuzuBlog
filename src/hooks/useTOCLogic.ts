@@ -1,32 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import {
-  useIsMobile,
-  useDebouncedResize,
-  useDebouncedScroll,
-  useOutsideClick,
-  useTOCPosition,
-} from '@/hooks';
+import { useDebouncedResize, useOutsideClick } from '@/hooks';
 
-function useTOCLogic(
-  showThumbnail: boolean,
-  onLinkClick?: (slug: string) => void
-) {
+function useTOCLogic(onLinkClick?: (slug: string) => void) {
   const [activeSlug, setActiveSlug] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const tocReference = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-  const { isMobile, isReady } = useIsMobile(768 + 96);
-  const { position, updatePosition } = useTOCPosition(isMobile, showThumbnail);
 
   // update once on first render
   useEffect(() => {
-    updatePosition();
     updateActiveSlug();
   }, []);
 
-  const handleToggle = () => setIsOpen(!isOpen);
+  const handleToggle = () => setIsOpen((previous) => !previous);
 
   const handleLinkClick = (slug: string) => {
     const targetElement = document.querySelector(`#${CSS.escape(slug)}`);
@@ -35,7 +23,7 @@ function useTOCLogic(
       setActiveSlug(slug);
       router.push(`#${slug}`, { scroll: false });
     }
-    if (isMobile) setIsOpen(false);
+    setIsOpen(false);
     if (onLinkClick) onLinkClick(slug);
   };
 
@@ -51,12 +39,13 @@ function useTOCLogic(
     setActiveSlug(currentSlug);
   };
 
-  useDebouncedResize(updatePosition);
-  useDebouncedScroll(() => {
-    updatePosition();
-    updateActiveSlug();
-  }, 20);
-  useOutsideClick(tocReference, () => setIsOpen(false));
+  // Update activeSlug on scroll
+  useDebouncedResize(updateActiveSlug, { delay: 20 });
+
+  // Close TOC when clicking outside
+  useOutsideClick(tocReference, () => {
+    if (isOpen) setIsOpen(false);
+  });
 
   return {
     activeSlug,
@@ -64,9 +53,6 @@ function useTOCLogic(
     handleToggle,
     handleLinkClick,
     tocReference,
-    isMobile,
-    position,
-    isReady,
   };
 }
 
