@@ -29,6 +29,7 @@ async function FriendsPage() {
 
   return (
     <PostLayout
+      config={config}
       post={post}
       showThumbnail={config.thumbnailFriends}
     />

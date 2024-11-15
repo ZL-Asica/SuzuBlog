@@ -29,6 +29,7 @@ async function AboutPage() {
 
   return (
     <PostLayout
+      config={config}
       post={post}
       showThumbnail={config.thumbnailAbout}
     />

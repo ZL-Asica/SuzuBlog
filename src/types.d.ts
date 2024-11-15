@@ -28,6 +28,11 @@ type SocialMediaKey = keyof typeof socialData;
 
 type SocialMedia = Record<string, string>;
 
+interface CreativeCommons {
+  type: string;
+  link: string;
+}
+
 // Config value from config.yml
 type Config = {
   title: string;
@@ -38,6 +43,7 @@ type Config = {
     name: string;
     link: string;
   };
+  creativeCommons: CreativeCommons;
   lang: string;
   siteUrl: string;
   avatar: string;

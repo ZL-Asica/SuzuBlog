@@ -51,10 +51,16 @@ async function generateMetadata({ params }: Properties): Promise<Metadata> {
 
 // PostPage component that receives the params directly
 async function PostPage(props: { params: Promise<{ slug: string }> }) {
+  const config: Config = getConfig();
   const parameters = await props.params;
   const post: FullPostData = await getPostData(parameters.slug);
 
-  return <PostLayout post={post} />;
+  return (
+    <PostLayout
+      config={config}
+      post={post}
+    />
+  );
 }
 
 export { generateStaticParams, generateMetadata, PostPage as default };

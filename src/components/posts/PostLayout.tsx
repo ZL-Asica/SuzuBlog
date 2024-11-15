@@ -12,8 +12,10 @@ import { getConfig } from '@/services/config';
 
 import createMarkdownComponents from '@/components/posts/markdownComponents';
 import TOC from '@/components/posts/TOC';
+import CopyrightInfo from '@/components/helpers/CopyrightInfo';
 
 interface PostLayoutProperties {
+  config: Config;
   post: FullPostData;
   showThumbnail?: boolean;
 }
@@ -22,7 +24,11 @@ const DisqusComments = dynamic(
   () => import('@/components/posts/DisqusComments')
 );
 
-function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
+function PostLayout({
+  config,
+  post,
+  showThumbnail = true,
+}: PostLayoutProperties) {
   const markdownComponents = createMarkdownComponents();
 
   return (
@@ -61,6 +67,12 @@ function PostLayout({ post, showThumbnail = true }: PostLayoutProperties) {
         >
           {post.contentRaw}
         </Markdown>
+        <CopyrightInfo
+          author={post.frontmatter.author}
+          siteUrl={config.siteUrl}
+          title={post.frontmatter.title}
+          creativeCommons={config.creativeCommons}
+        />
       </div>
       {post.frontmatter.showComments && (
         <DisqusComments disqusShortname={getConfig().disqusShortname} />
