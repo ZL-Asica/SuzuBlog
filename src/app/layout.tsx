@@ -43,7 +43,7 @@ function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const config = getConfig();
+  const config: Config = getConfig();
 
   return (
     <html lang={config.lang}>
@@ -57,7 +57,7 @@ function RootLayout({
         <Header siteTitle={config.title} />
         <main className='flex-grow'>{children}</main>
         <BackToTop />
-        <Footer />
+        <Footer config={config} />
       </body>
     </html>
   );

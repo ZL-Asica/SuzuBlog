@@ -15,9 +15,21 @@ import { upperFirst } from 'es-toolkit/string';
 import { words, replace, isString } from 'es-toolkit/compat';
 import Link from 'next/link';
 
-function SocialMediaLink({ socialMedia }: { socialMedia: SocialMedia }) {
+interface socialMediaLinkProperties {
+  socialMedia: SocialMedia;
+  iconSize?: number;
+  className?: string;
+}
+
+function SocialMediaLink({
+  socialMedia,
+  iconSize = 32,
+  className = '',
+}: socialMediaLinkProperties) {
   return (
-    <div className='mb-5 flex flex-wrap justify-center space-x-4'>
+    <div
+      className={`mb-5 flex flex-wrap justify-center space-x-4 ${className}`}
+    >
       {Object.entries(socialMedia)
         .filter(([key, username]) => key in socialData && isString(username))
         .map(([key, username]) => {
@@ -39,7 +51,7 @@ function SocialMediaLink({ socialMedia }: { socialMedia: SocialMedia }) {
               className='group relative inline-block transform transition-all duration-300 ease-out'
             >
               <IconComponent
-                size={32}
+                size={iconSize}
                 className='transition-transform group-hover:scale-150'
               />
             </Link>
