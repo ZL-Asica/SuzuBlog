@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { getConfig } from '@/services/config';
 
 import SocialMediaLink from '@/components/helpers/renderSocialMediaLink';
 
-function Home() {
+async function Home() {
   const config: Config = getConfig();
 
   return (
@@ -24,23 +23,13 @@ function Home() {
       </div>
 
       <div className='mt-20 text-center'>
-        <p className='text-foreground mb-10 text-3xl font-bold'>
+        <p className='text-foreground mb-28 text-3xl font-bold'>
           {config.slogan}
         </p>
-
-        <Link
-          href={'/posts'}
-          className='bg-[var(--sakuraPink) text-lg font-medium hover:bg-[var(--skyblue)]'
-        >
-          <button className='text-black'>
-            Check out my latest posts here!
-          </button>
-        </Link>
 
         <SocialMediaLink
           socialMedia={config.socialMedia}
           iconSize={40}
-          className='mt-10'
         />
       </div>
     </div>
