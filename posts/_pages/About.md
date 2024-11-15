@@ -22,13 +22,4 @@ showComments: false # Set whether you want have comment for this page
 
 ## 关于此博客
 
-此博客基于[Next.js](https://nextjs.org/) 搭建，部署在GitHub Pages，并且采用 [Markdown](https://www.markdownguide.org/) 语法来写文章。想要访问我的Hexo站点可以[点击这里](https://www.zl-asica.pub/)。
-
-## 给予我鼓励
-
-各位大佬打赏一下我吧ヾ(=･ω･=)o，目前支持支付宝、微信、和paypal国际版哦
-
-PayPal国际站的赞助可以[点击此处跳转](https://paypal.me/ZLasica)！
-
-支付宝 ![支付宝](https://s2.loli.net/2023/11/19/KojHf6wu8J9ySp2.jpg '支付宝')
-微信![微信](https://s2.loli.net/2023/11/19/AePokujq2EwM6yX.jpg '微信')
+此博客基于[Next.js](https://nextjs.org/) 搭建，部署在 Vercel，并且采用 [Markdown](https://www.markdownguide.org/) 语法来写文章。想要访问我的Hexo站点可以[点击这里](https://www.zl-asica.com/)。
