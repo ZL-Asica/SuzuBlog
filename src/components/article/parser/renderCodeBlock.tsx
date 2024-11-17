@@ -1,8 +1,16 @@
 'use client';
 
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import type { Prism as SyntaxHighlighterBase } from 'react-syntax-highlighter';
+
+const SyntaxHighlighter = dynamic(
+  () => import('react-syntax-highlighter').then((module_) => module_.Prism),
+  {
+    ssr: false,
+  }
+) as typeof SyntaxHighlighterBase;
 
 interface CopyCodeBlockProperties {
   match: RegExpExecArray;
@@ -21,6 +29,7 @@ const CopyCodeBlock = ({
 
   // Copy code block to clipboard
   const handleCopy = () => {
+    if (isCopied) return;
     navigator.clipboard.writeText(String(children).replace(/\n$/, ''));
     setIsCopied(true);
     // Hide the 'Copied!' message after 3 seconds
