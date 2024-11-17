@@ -20,6 +20,10 @@ async function robots(): Promise<MetadataRoute.Robots> {
         '/about',
         '/friends',
         '/posts',
+        '/posts?',
+        '/images',
+        '/icons',
+        '/_next',
         ...postUrls, // Dynamic post URLs
       ],
     },

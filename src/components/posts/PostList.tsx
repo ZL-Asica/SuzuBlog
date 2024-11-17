@@ -4,8 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MdMoreHoriz } from 'react-icons/md';
 import { FaRegClock } from 'react-icons/fa6';
+import { Suspense } from 'react';
 
 import { CategoriesTagsList } from '@/components/article';
+import LoadingIndicator from '@/components/common/LoadingIndicator';
 
 interface PostListProperties {
   posts: PostListData[];
@@ -84,11 +86,13 @@ const PostList = ({ posts, translation }: PostListProperties) => {
                   />
                 </Link>
                 {/* Category */}
-                <CategoriesTagsList
-                  type='category'
-                  translation={translation}
-                  items={post.frontmatter.categories}
-                />
+                <Suspense fallback={<LoadingIndicator />}>
+                  <CategoriesTagsList
+                    type='category'
+                    translation={translation}
+                    items={post.frontmatter.categories}
+                  />
+                </Suspense>
               </div>
             </div>
           </article>

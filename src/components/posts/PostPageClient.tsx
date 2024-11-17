@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { defaultTo, flatMap } from 'es-toolkit/compat';
+import { useEffect, useState } from 'react';
+import { useSearchParams, usePathname } from 'next/navigation';
+import { defaultTo, flatMap, find } from 'es-toolkit/compat';
 
 import PostListLayout from './PostList';
 import Pagination from './Pagination';
@@ -17,9 +17,9 @@ interface PostPageClientProperties {
 
 const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
   const searchParameters = useSearchParams();
-  const categoryParameter = defaultTo(searchParameters.get('category'), '');
-  const tagParameter = defaultTo(searchParameters.get('tag'), '');
-  const searchQuery = defaultTo(searchParameters.get('query'), '');
+  const pathname = usePathname();
+
+  const searchQuery = defaultTo(searchParameters.get('query'));
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
@@ -45,6 +45,49 @@ const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
     ],
     []
   );
+
+  // Validate category and tag parameters
+  const categoryInParameters = searchParameters.get('category');
+  const categoryParameter = find(
+    categories,
+    (category) => category === categoryInParameters
+  );
+
+  const tagInParameters = searchParameters.get('tag');
+  const tagParameter = find(tags, (tag) => tag === tagInParameters);
+
+  // Update URL if parameters are sanitized or invalid
+  useEffect(() => {
+    const params = new URLSearchParams(searchParameters.toString());
+
+    if (categoryInParameters && categoryInParameters !== categoryParameter) {
+      if (categoryParameter) {
+        params.set('category', categoryParameter);
+      } else {
+        params.delete('category');
+      }
+    }
+
+    if (tagInParameters && tagInParameters !== tagParameter) {
+      if (tagParameter) {
+        params.set('tag', tagParameter);
+      } else {
+        params.delete('tag');
+      }
+    }
+
+    const newUrl = `${pathname}?${params.toString()}`;
+    if (globalThis.location.search !== `?${params.toString()}`) {
+      globalThis.history.replaceState(null, '', newUrl);
+    }
+  }, [
+    categoryInParameters,
+    tagInParameters,
+    categoryParameter,
+    tagParameter,
+    pathname,
+    searchParameters,
+  ]);
 
   // Filter posts based on search, category, and tag
   const filteredPosts = getFilteredPosts(

@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Head from 'next/head';
+import { Suspense } from 'react';
 
 import { getConfig } from '@/services/config';
 import { getAllPosts } from '@/services/content';
 
 import PostsPageClient from '@/components/posts/PostPageClient';
+import LoadingIndicator from '@/components/common/LoadingIndicator';
 
 function generateMetadata(): Metadata {
   const config = getConfig();
@@ -56,10 +58,12 @@ async function PostsPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <PostsPageClient
-        posts={posts}
-        translation={translation}
-      />
+      <Suspense fallback={<LoadingIndicator />}>
+        <PostsPageClient
+          posts={posts}
+          translation={translation}
+        />
+      </Suspense>
     </>
   );
 }

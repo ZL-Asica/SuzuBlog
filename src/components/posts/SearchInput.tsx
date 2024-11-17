@@ -7,6 +7,7 @@ import { defaultTo, debounce } from 'es-toolkit/compat';
 import { clsx } from 'clsx';
 
 import { useOutsideClick } from '@/hooks';
+import { sanitizeQuery } from '@/services/utils';
 
 interface SearchInputProperties {
   initialValue?: string;
@@ -62,7 +63,7 @@ const SearchInput = ({
   );
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = event.target.value;
+    const newQuery = sanitizeQuery(event.target.value);
     setSearchQuery(newQuery);
     setExpanded(true); // Let the user see the filters when searching
     debouncedUpdateURL(newQuery, selectedCategory, selectedTag);

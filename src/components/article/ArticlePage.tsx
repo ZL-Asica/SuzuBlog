@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { includes, isEmpty, lowerCase } from 'es-toolkit/compat';
+import { Suspense } from 'react';
 
 import MarkdownContent from './parser';
 import CopyrightInfo from './CopyrightInfo';
 import TOC from './TOC';
 import CategoriesTagsList from './CategoriesTagsList';
+
+import LoadingIndicator from '@/components/common/LoadingIndicator';
 
 const DisqusComments = dynamic(
   () => import('@/components/article/DisqusComments')
@@ -43,20 +46,22 @@ const ArticlePage = ({
       )}
 
       <div className='mx-auto my-10 w-full max-w-3xl'>
-        {(post.frontmatter.categories || post.frontmatter.tags) && (
-          <ul className='mx-auto mt-5 flex flex-col gap-4'>
-            <CategoriesTagsList
-              type={'category'}
-              translation={translation}
-              items={post.frontmatter.categories}
-            />
-            <CategoriesTagsList
-              type={'tag'}
-              translation={translation}
-              items={post.frontmatter.tags}
-            />
-          </ul>
-        )}
+        <Suspense fallback={<LoadingIndicator />}>
+          {(post.frontmatter.categories || post.frontmatter.tags) && (
+            <ul className='mx-auto mt-5 flex flex-col gap-4'>
+              <CategoriesTagsList
+                type={'category'}
+                translation={translation}
+                items={post.frontmatter.categories}
+              />
+              <CategoriesTagsList
+                type={'tag'}
+                translation={translation}
+                items={post.frontmatter.tags}
+              />
+            </ul>
+          )}
+        </Suspense>
         {!isEmpty(post.toc) && (
           <TOC
             items={post.toc}

@@ -1,47 +1,49 @@
-import { defaultTo, filter, includes, some, words } from 'es-toolkit/compat';
-import { lowerCase } from 'es-toolkit/string';
-
 function getFilteredPosts(
   posts: PostListData[],
-  searchQuery: string,
+  searchQuery?: string,
   category?: string,
   tag?: string
 ): PostListData[] {
   // Preprocess search query
-  const queryKeywords = words(lowerCase(searchQuery));
-  const normalizedCategory = lowerCase(defaultTo(category, ''));
-  const normalizedTag = lowerCase(defaultTo(tag, ''));
+  const queryKeywords =
+    searchQuery
+      ?.toLowerCase()
+      .split(/\s+/) // Split by whitespace
+      .filter(Boolean) || [];
 
-  return filter(posts, (post) => {
+  const normalizedCategory = category?.toLowerCase();
+  const normalizedTag = tag?.toLowerCase();
+
+  return posts.filter((post) => {
     const { title, categories = [], tags = [] } = post.frontmatter;
 
     // Preprocess post fields
-    const normalizedTitle = lowerCase(title);
-    const normalizedAbstract = lowerCase(defaultTo(post.postAbstract, ''));
-    const normalizedTags = tags.map((tag) => lowerCase(tag));
+    const normalizedTitle = title.toLowerCase();
+    const normalizedAbstract = (post.postAbstract || '').toLowerCase();
+    const normalizedTags = tags.map((tag) => tag.toLowerCase());
     const normalizedCategories = categories.map((category) =>
-      lowerCase(category)
+      category.toLowerCase()
     );
 
     // Perform search query
     const matchesQuery =
       queryKeywords.length === 0 ||
-      some(queryKeywords, (keyword) =>
+      queryKeywords.some((keyword) =>
         [
           normalizedTitle,
           normalizedAbstract,
           ...normalizedTags,
           ...normalizedCategories,
-        ].some((field) => includes(field, keyword))
+        ].some((field) => field.includes(keyword))
       );
 
     // Perform category and tag filtering
     const matchesCategory = normalizedCategory
-      ? some(normalizedCategories, (cat) => includes(cat, normalizedCategory))
+      ? normalizedCategories.some((cat) => cat.includes(normalizedCategory))
       : true;
 
     const matchesTag = normalizedTag
-      ? some(normalizedTags, (tag) => includes(tag, normalizedTag))
+      ? normalizedTags.some((tag) => tag.includes(normalizedTag))
       : true;
 
     return matchesQuery && matchesCategory && matchesTag;
