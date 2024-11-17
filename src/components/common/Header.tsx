@@ -29,31 +29,28 @@ const Header = ({ config }: HeaderProperties) => {
   });
 
   return (
-    <header className='relative z-50 w-full shadow-md'>
+    <header className='relative z-50 w-full bg-[var(--background)] shadow-md'>
       {/* Progress Scroll Bar */}
       <div
-        className='z-100 fixed left-0 top-0 z-40 h-[3px] w-full bg-[var(--sakuraPink)] transition-all duration-500 ease-out'
+        className='fixed left-0 top-0 h-[3px] w-full bg-[var(--sakuraPink)] transition-all duration-500 ease-out'
         style={{ width: `${scrollProgress}%` }}
         aria-hidden
       />
 
       {/* Navigation Menu */}
-      <nav className='z-50 mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
+      <nav className='mx-auto flex max-w-7xl items-center justify-between px-4 py-4'>
+        {/* Logo */}
         <Link
           href='/'
-          target='_self'
           aria-label={`Navigate to Home Page of ${siteTitle}`}
-          className='relative z-50 inline-flex items-center no-underline transition-colors duration-300 ease-in-out hover:scale-x-105'
+          className='text-2xl font-bold text-[var(--foreground)] no-underline transition-all duration-300 hover:text-[var(--sakuraPink)]'
         >
-          {isHomePage ? (
-            <h1 className='text-2xl font-bold'>{siteTitle}</h1>
-          ) : (
-            <p className='text-2xl font-bold'>{siteTitle}</p>
-          )}
+          {isHomePage ? <h1>{siteTitle}</h1> : <p>{siteTitle}</p>}
         </Link>
 
+        {/* Mobile Menu Button */}
         <button
-          className='z-50 bg-[var(--foreground)] text-3xl text-[var(--background)] transition-transform duration-300 hover:scale-110 md:hidden'
+          className={`z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--foreground)] text-2xl text-[var(--background)] shadow-md transition-transform duration-300 hover:scale-110 md:hidden`}
           onClick={toggleMenu}
           aria-label='Toggle menu'
           aria-expanded={isOpen}
@@ -62,37 +59,38 @@ const Header = ({ config }: HeaderProperties) => {
           {isOpen ? <FaAngleUp /> : <FaBars />}
         </button>
 
+        {/* Mobile Menu */}
         <div
           id='mobile-menu'
           ref={menuReference}
-          tabIndex={-1}
           role='menu'
           aria-hidden={!isOpen}
-          inert={!isOpen}
-          className={`absolute left-0 top-20 z-50 w-full bg-[var(--background)] p-4 shadow-lg transition-all duration-300 ease-out md:hidden ${
-            isOpen
-              ? 'max-h-screen scale-y-100 transform opacity-100'
-              : 'max-h-0 scale-y-0 transform opacity-0'
+          className={`fixed right-0 top-0 z-50 h-full w-1/2 bg-[var(--background)] shadow-lg transition-all duration-300 ease-out md:hidden ${
+            isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
-          style={{ transformOrigin: 'top' }}
         >
           <HeaderMenu
             translation={translation}
-            isMobile={true}
-            ulClassName='flex flex-col gap-2'
+            isMobile
+            ulClassName='flex flex-col items-start gap-4 p-6'
             onClickHandler={toggleMenu}
           />
         </div>
+
+        {/* Backdrop */}
         {isOpen && (
           <div
-            className='fixed inset-0 -z-20 bg-black bg-opacity-50 transition-opacity duration-300'
+            className='fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300'
+            onClick={toggleMenu}
             aria-hidden
           />
         )}
+
+        {/* Desktop Menu */}
         <HeaderMenu
           translation={translation}
           isMobile={false}
-          ulClassName='hidden space-x-6 md:flex'
+          ulClassName='hidden md:flex md:gap-6'
         />
       </nav>
     </header>

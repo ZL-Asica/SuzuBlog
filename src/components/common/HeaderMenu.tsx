@@ -22,7 +22,7 @@ interface HeaderMenuProperties {
 const HeaderMenu = ({
   translation,
   isMobile,
-  ulClassName,
+  ulClassName = '',
   onClickHandler,
 }: HeaderMenuProperties) => {
   const menuItems: MenuItem[] = [
@@ -41,25 +41,35 @@ const HeaderMenu = ({
   ];
 
   return (
-    <ul className={ulClassName}>
-      {menuItems.map((item) => (
-        <li
-          key={item.href}
-          className='group relative'
-        >
-          <Link
-            href={item.href}
-            className='relative inline-flex items-center gap-2 p-2 no-underline transition-all duration-300 ease-in-out hover:scale-110'
-            onClick={onClickHandler}
-            aria-label={`${translation.navigate} ${item.label}`}
+    <ul className={`gap-4 ${ulClassName}`}>
+      {menuItems.map((item, index) => (
+        <>
+          {/* Link as Full Width */}
+          <li
+            key={item.href}
+            className='group relative flex w-full items-center justify-center rounded-lg hover:bg-[var(--lightGray)]'
           >
-            {item.icon}
-            {item.label}
-            {!isMobile && (
-              <span className='absolute bottom-0 left-0 h-0.5 w-0 bg-[var(--sakuraPink)] transition-all duration-300 group-hover:w-full'></span>
-            )}
-          </Link>
-        </li>
+            <Link
+              href={item.href}
+              title={item.label}
+              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all duration-300 ease-in-out group-hover:text-[var(--sakuraPink)]`}
+              onClick={onClickHandler}
+              aria-label={`${translation.navigate} ${item.label}`}
+            >
+              <span className='inline-block transition-transform duration-300 ease-in-out group-hover:scale-125'>
+                {item.icon}
+              </span>
+              {item.label}
+            </Link>
+          </li>
+
+          {/* Divider */}
+          {isMobile && index < menuItems.length - 1 && (
+            <li className='w-full'>
+              <div className='h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]'></div>
+            </li>
+          )}
+        </>
       ))}
     </ul>
   );
