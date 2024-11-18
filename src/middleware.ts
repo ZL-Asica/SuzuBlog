@@ -11,7 +11,9 @@ function middleware(request: NextRequest) {
     // Remove all search parameters for non-`/posts` paths
     if (url.searchParams.toString()) {
       url.search = '';
-      return NextResponse.redirect(url);
+      const response = NextResponse.redirect(url, 301);
+      response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+      return response;
     }
     return NextResponse.next();
   }
@@ -29,13 +31,15 @@ function middleware(request: NextRequest) {
     }
   }
 
-  const hasChanges =
-    updatedSearchParameters.toString() !== url.searchParams.toString();
+  const updatedSearchString = updatedSearchParameters.toString();
+
+  const hasChanges = updatedSearchString !== url.searchParams.toString();
 
   // If parameters changed, redirect to the updated URL
   if (hasChanges) {
-    url.search = updatedSearchParameters.toString();
-    const response = NextResponse.redirect(url);
+    url.search = updatedSearchString;
+    const statusCode = updatedSearchString === '' ? 301 : 307;
+    const response = NextResponse.redirect(url, statusCode);
     response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
     return response;
   }
