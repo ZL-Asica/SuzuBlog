@@ -15,6 +15,8 @@ const zh: Translation = {
     tagsAria: '选择一个标签来筛选文章',
     clear: '清空筛选条件',
     loading: '搜索中...',
+    submit: '搜索',
+    noResultsFound: '没有匹配的文章',
   },
   friends: {
     title: '朋友',

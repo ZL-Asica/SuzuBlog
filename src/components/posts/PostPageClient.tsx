@@ -1,14 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams, usePathname } from 'next/navigation';
-import { defaultTo, flatMap, find } from 'es-toolkit/compat';
+import { useSearchParams } from 'next/navigation';
 
 import PostListLayout from './PostList';
 import Pagination from './Pagination';
 import SearchInput from './SearchInput';
 
-import { getFilteredPosts } from '@/services/utils';
+import {
+  getFilteredPosts,
+  validateParameters,
+  updateURL,
+} from '@/services/utils';
 
 interface PostPageClientProperties {
   posts: PostListData[];
@@ -17,79 +20,29 @@ interface PostPageClientProperties {
 
 const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
   const searchParameters = useSearchParams();
-  const pathname = usePathname();
-
-  const searchQuery = defaultTo(searchParameters.get('query'));
+  const searchQuery = searchParameters.get('query') || '';
+  const categoryParameter = searchParameters.get('category') || '';
+  const tagParameter = searchParameters.get('tag') || '';
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
+  const categories = [
+    ...new Set(posts.flatMap((post) => post.frontmatter.categories || [])),
+  ];
+  const tags = [
+    ...new Set(posts.flatMap((post) => post.frontmatter.tags || [])),
+  ];
 
-  const categories = defaultTo(
-    [
-      ...new Set(
-        flatMap(posts, (post) =>
-          defaultTo(post.frontmatter.categories, [])
-        ) as string[]
-      ),
-    ],
-    []
-  );
-
-  const tags = defaultTo(
-    [
-      ...new Set(
-        flatMap(posts, (post) =>
-          defaultTo(post.frontmatter.tags, [])
-        ) as string[]
-      ),
-    ],
-    []
-  );
-
-  // Validate category and tag parameters
-  const categoryInParameters = searchParameters.get('category');
-  const categoryParameter = find(
-    categories,
-    (category) => category === categoryInParameters
-  );
-
-  const tagInParameters = searchParameters.get('tag');
-  const tagParameter = find(tags, (tag) => tag === tagInParameters);
-
-  // Update URL if parameters are sanitized or invalid
   useEffect(() => {
-    const params = new URLSearchParams(searchParameters.toString());
+    const sanitizedParameters = validateParameters(
+      searchParameters,
+      categories,
+      tags
+    );
+    const currentUrl = new URL(globalThis.location.href);
+    updateURL(currentUrl, sanitizedParameters);
+  }, [searchParameters]);
 
-    if (categoryInParameters && categoryInParameters !== categoryParameter) {
-      if (categoryParameter) {
-        params.set('category', categoryParameter);
-      } else {
-        params.delete('category');
-      }
-    }
-
-    if (tagInParameters && tagInParameters !== tagParameter) {
-      if (tagParameter) {
-        params.set('tag', tagParameter);
-      } else {
-        params.delete('tag');
-      }
-    }
-
-    const newUrl = `${pathname}?${params.toString()}`;
-    if (globalThis.location.search !== `?${params.toString()}`) {
-      globalThis.history.replaceState(null, '', newUrl);
-    }
-  }, [
-    categoryInParameters,
-    tagInParameters,
-    categoryParameter,
-    tagParameter,
-    pathname,
-    searchParameters,
-  ]);
-
-  // Filter posts based on search, category, and tag
   const filteredPosts = getFilteredPosts(
     posts,
     searchQuery,
@@ -97,24 +50,28 @@ const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
     tagParameter
   );
 
-  // Pagination logic
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const currentPosts = filteredPosts.slice(
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage
+  );
 
   return (
     <div className='container mx-auto flex animate-fadeInDown flex-col items-center p-4'>
       {/* Centered Search Input */}
       <SearchInput
-        initialValue={searchQuery}
         categories={categories}
         tags={tags}
         translation={translation}
+        initialValue={searchQuery}
       />
 
       {/* Post List */}
+      {filteredPosts.length === 0 && (
+        <h2 className='my-4 text-3xl font-bold'>
+          {translation.search.noResultsFound}
+        </h2>
+      )}
+
       <PostListLayout
         posts={currentPosts}
         translation={translation}
@@ -124,8 +81,8 @@ const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={filteredPosts.length}
-        paginate={paginate}
         currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       />
     </div>
   );

@@ -1,110 +1,110 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useSearchParams, usePathname } from 'next/navigation';
-import { useFormStatus } from 'react-dom';
-import { defaultTo, debounce } from 'es-toolkit/compat';
+import { useSearchParams } from 'next/navigation';
+import Form from 'next/form';
 import { clsx } from 'clsx';
 
 import { useOutsideClick } from '@/hooks';
-import { sanitizeQuery } from '@/services/utils';
+import { validateParameters, updateURL } from '@/services/utils';
 
 interface SearchInputProperties {
-  initialValue?: string;
   categories: string[];
   tags: string[];
   translation: Translation;
+  initialValue: string;
 }
 
 const SearchInput = ({
-  initialValue = '',
   categories,
   tags,
   translation,
+  initialValue,
 }: SearchInputProperties) => {
-  const pathname = usePathname();
   const searchParameters = useSearchParams();
-  const { pending } = useFormStatus();
+  const formReference = useRef<HTMLFormElement>(null);
 
   const [searchQuery, setSearchQuery] = useState(initialValue);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
   const [expanded, setExpanded] = useState(false);
 
-  const formReference = useRef<HTMLFormElement>(null);
-
+  // Initialize search parameters
   useEffect(() => {
-    setSearchQuery(defaultTo(searchParameters.get('query'), initialValue));
-    setSelectedCategory(searchParameters.get('category') || '');
-    setSelectedTag(searchParameters.get('tag') || '');
+    const sanitizedParameters = validateParameters(
+      searchParameters,
+      categories,
+      tags
+    );
+    const currentUrl = new URL(globalThis.location.href);
+    updateURL(currentUrl, sanitizedParameters);
   }, [searchParameters, initialValue]);
 
+  // Close the form when clicking outside
   useOutsideClick(formReference, () => {
-    if (expanded) setExpanded(false);
+    if (expanded && !selectedCategory && !selectedTag) {
+      setExpanded(false);
+    }
   });
 
-  // Debounced URL update function to reduce excessive URL updates
-  const debouncedUpdateURL = debounce(
-    (newQuery: string, category: string, tag: string) => {
-      const params = new URLSearchParams(searchParameters);
-      if (newQuery) params.set('query', newQuery);
-      else params.delete('query');
-      if (category) params.set('category', category);
-      else params.delete('category');
-      if (tag) params.set('tag', tag);
-      else params.delete('tag');
-      globalThis.history.pushState(
-        null,
-        '',
-        `${pathname}?${params.toString()}`
-      );
-    },
-    30
-  );
+  // Handle form submission
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = sanitizeQuery(event.target.value);
-    setSearchQuery(newQuery);
-    setExpanded(true); // Let the user see the filters when searching
-    debouncedUpdateURL(newQuery, selectedCategory, selectedTag);
+    const formData = new FormData(event.currentTarget);
+    const params = new URLSearchParams();
+
+    for (const [key, value] of formData.entries()) {
+      if (value) params.append(key, value.toString());
+    }
+
+    updateURL(new URL(globalThis.location.href), params);
   };
 
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedCategory(event.target.value);
-    debouncedUpdateURL(searchQuery, event.target.value, selectedTag);
   };
 
   const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTag(event.target.value);
-    debouncedUpdateURL(searchQuery, selectedCategory, event.target.value);
   };
 
-  const clearFilters = () => {
+  const handleReset = () => {
     setSearchQuery('');
     setSelectedCategory('');
     setSelectedTag('');
-    debouncedUpdateURL('', '', '');
+    updateURL(new URL(globalThis.location.href), new URLSearchParams());
   };
 
   return (
-    <form
+    <Form
       ref={formReference}
-      onSubmit={(event) => event.preventDefault()}
+      action='/posts'
       className='mb-6 w-full max-w-lg space-y-4 rounded-lg p-4'
+      replace
+      onSubmit={handleFormSubmit}
     >
-      {/* Search Input */}
+      {/* Search Input with Submit Button */}
       <div className='relative w-full'>
-        <input
-          type='text'
-          placeholder={`🔍 ${translation.search.prompt}`}
-          value={searchQuery}
-          onChange={handleSearchChange}
-          onFocus={() => setExpanded(true)}
-          disabled={pending}
-          className='w-full rounded-full border border-gray-300 px-4 py-2 transition-all duration-300 focus:ring-2'
-        />
+        <div className='relative flex items-center'>
+          <input
+            type='text'
+            name='query'
+            placeholder={`🔍 ${translation.search.prompt}`}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            onFocus={() => setExpanded(true)}
+            className='w-full rounded-full border border-gray-300 px-4 py-2 pr-16 transition-all duration-300 focus:ring-2'
+          />
+          <button
+            type='submit'
+            className='absolute right-2 rounded-full px-4 py-1 transition'
+          >
+            {translation.search.submit}
+          </button>
+        </div>
       </div>
 
       {/* Expandable Filters */}
@@ -120,10 +120,10 @@ const SearchInput = ({
         <div className='mt-1 flex w-full space-x-10 px-2'>
           <div className='relative flex-1'>
             <select
+              name='category'
               value={selectedCategory}
               aria-label={translation.search.categoriesAria}
               onChange={handleCategoryChange}
-              disabled={pending}
               className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
                 selectedCategory || 'text-gray-400'
               }`}
@@ -131,7 +131,6 @@ const SearchInput = ({
               <option
                 value=''
                 className='text-gray-400'
-                disabled={!selectedCategory}
               >
                 {translation.search.allCategories}
               </option>
@@ -145,7 +144,6 @@ const SearchInput = ({
                 </option>
               ))}
             </select>
-            {/* Custom down arrow */}
             <span className='pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500'>
               ▼
             </span>
@@ -153,10 +151,10 @@ const SearchInput = ({
 
           <div className='relative flex-1'>
             <select
+              name='tag'
               value={selectedTag}
               aria-label={translation.search.tagsAria}
               onChange={handleTagChange}
-              disabled={pending}
               className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
                 selectedTag || 'text-gray-400'
               }`}
@@ -164,7 +162,6 @@ const SearchInput = ({
               <option
                 value=''
                 className='text-gray-400'
-                disabled={!selectedTag}
               >
                 {translation.search.allTags}
               </option>
@@ -178,7 +175,6 @@ const SearchInput = ({
                 </option>
               ))}
             </select>
-            {/* Custom down arrow */}
             <span className='pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500'>
               ▼
             </span>
@@ -187,19 +183,14 @@ const SearchInput = ({
 
         {/* Clear Filters Button */}
         <button
-          type='button'
-          onClick={clearFilters}
-          disabled={pending}
+          type='reset'
+          onClick={handleReset}
           className='mt-2 rounded-full px-4 py-2 transition'
         >
           {translation.search.clear}
         </button>
-
-        {pending && (
-          <p className='animate-pulse text-sm'>{translation.search.loading}</p>
-        )}
       </div>
-    </form>
+    </Form>
   );
 };
 

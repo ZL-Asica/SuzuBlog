@@ -15,6 +15,8 @@ const en: Translation = {
     tagsAria: 'Select a tag to filter posts',
     clear: 'Clear Filters',
     loading: 'Searching...',
+    submit: 'Search',
+    noResultsFound: 'No Posts Matched',
   },
   friends: {
     title: 'Friends',

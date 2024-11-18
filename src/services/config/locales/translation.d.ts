@@ -15,6 +15,8 @@ interface Translation {
     tagsAria: string;
     clear: string;
     loading: string;
+    submit: string;
+    noResultsFound: string;
   };
   friends: {
     title: string;

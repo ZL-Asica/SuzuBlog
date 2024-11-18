@@ -15,6 +15,8 @@ const ja: Translation = {
     tagsAria: 'タグを選択して投稿を絞り込む',
     clear: 'フィルタをクリア',
     loading: '検索中...',
+    submit: '検索',
+    noResultsFound: '該当する投稿がありません',
   },
   friends: {
     title: '友達',

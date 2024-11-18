@@ -3,15 +3,15 @@ import { ceil } from 'es-toolkit/compat';
 interface PaginationProperties {
   postsPerPage: number;
   totalPosts: number;
-  paginate: (pageNumber: number) => void;
+  setCurrentPage: (pageNumber: number) => void;
   currentPage: number;
 }
 
 const Pagination = ({
   postsPerPage,
   totalPosts,
-  paginate,
   currentPage,
+  setCurrentPage,
 }: PaginationProperties) => {
   const pageNumbers = Array.from(
     { length: ceil(totalPosts / postsPerPage) },
@@ -29,7 +29,7 @@ const Pagination = ({
             key={number}
             className={currentPage === number ? 'font-bold' : ''}
           >
-            <button onClick={() => paginate(number)}>{number}</button>
+            <button onClick={() => setCurrentPage(number)}>{number}</button>
           </li>
         ))}
       </ul>
