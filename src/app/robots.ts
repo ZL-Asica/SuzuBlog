@@ -20,11 +20,12 @@ async function robots(): Promise<MetadataRoute.Robots> {
         '/about',
         '/friends',
         '/posts',
+        ...postUrls, // Dynamic post URLs
+        // Below are disallow
         '/posts?',
         '/images',
         '/icons',
         '/_next',
-        ...postUrls, // Dynamic post URLs
       ],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
