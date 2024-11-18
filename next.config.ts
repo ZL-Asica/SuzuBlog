@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
     dirs: ['src'],
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 86_400,
     localPatterns: [
       {
         pathname: '/images/**',
