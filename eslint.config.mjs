@@ -11,7 +11,9 @@ export default [
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
+      'unicorn/expiring-todo-comments': 'off',
       'unicorn/filename-case': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
     },
   },
 ];

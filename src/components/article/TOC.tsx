@@ -9,10 +9,16 @@ import { useTOCLogic, useVisibilityOnScroll } from '@/hooks';
 interface TOCProperties {
   items: TocItems[];
   translation: Translation;
+  autoSlug?: boolean;
   showThumbnail?: boolean;
 }
 
-const TOC = ({ items, translation, showThumbnail = true }: TOCProperties) => {
+const TOC = ({
+  items,
+  translation,
+  autoSlug = true,
+  showThumbnail = true,
+}: TOCProperties) => {
   const { activeSlug, isOpen, handleToggle, handleLinkClick, tocReference } =
     useTOCLogic();
   const { isVisible } = useVisibilityOnScroll(showThumbnail ? undefined : 0);
@@ -47,6 +53,7 @@ const TOC = ({ items, translation, showThumbnail = true }: TOCProperties) => {
             item={item}
             activeSlug={activeSlug}
             handleLinkClick={handleLinkClick}
+            autoSlug={autoSlug}
           />
         ))}
       </nav>

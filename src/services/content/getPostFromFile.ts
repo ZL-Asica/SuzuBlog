@@ -30,6 +30,7 @@ function getPostFromFile(
     categories: defaultTo(data.categories),
     redirect: defaultTo(data.redirect),
     showComments: defaultTo(data.showComments, true),
+    autoSlug: defaultTo(data.autoSlug, true),
   };
 
   let toc: TocItems[] = [];

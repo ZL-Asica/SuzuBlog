@@ -15,7 +15,10 @@ interface MarkdownContentProperties {
 }
 
 const MarkdownContent = ({ post, translation }: MarkdownContentProperties) => {
-  const markdownComponents = createMarkdownComponents(translation);
+  const markdownComponents = createMarkdownComponents(
+    translation,
+    post.frontmatter.autoSlug
+  );
   return (
     <Markdown
       remarkPlugins={[remarkGfm, remarkMath, remarkGemoji]}

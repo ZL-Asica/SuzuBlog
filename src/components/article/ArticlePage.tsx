@@ -66,6 +66,7 @@ const ArticlePage = ({
           <TOC
             items={post.toc}
             translation={translation}
+            autoSlug={post.frontmatter.autoSlug}
             showThumbnail={showThumbnail}
           />
         )}

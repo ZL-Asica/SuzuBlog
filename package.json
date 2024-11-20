@@ -40,36 +40,37 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "slugify": "^1.6.6",
-    "yaml": "^2.6.0"
+    "yaml": "^2.6.1"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.0.3",
     "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.1",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@zl-asica/prettier-config": "^1.0.7",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
-    "eslint": "^9.14.0",
+    "eslint": "^9.15.0",
     "eslint-config-zl-asica": "^1.0.18",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.49",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^10.1.0",
+    "postcss-preset-env": "^10.1.1",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "rss": "^1.2.2",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix",
+      "prettier --write"
     ],
-    "*.{js,jsx,css,ts,tsx,json,mjs}": [
-      "prettier --write ."
+    "**/*.{css,json,md}": [
+      "prettier --write"
     ]
   },
   "overrides": {
@@ -77,19 +78,20 @@
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20",
+    "pnpm": ">=9"
   },
-  "packageManager": "pnpm@9.13.2",
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      ">0.5%",
+      "last 2 versions",
+      "not dead"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.14.1"
 }

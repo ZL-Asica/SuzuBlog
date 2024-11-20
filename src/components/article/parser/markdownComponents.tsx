@@ -3,12 +3,15 @@ import type { Components } from 'react-markdown';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import CopyCodeBlock from './renderCodeBlock';
+import CodeBlock from './renderCodeBlock';
 import renderFriendLinks from './renderFriendLinks';
 
 import { slugPrefix, generateHierarchicalSlug } from '@/services/utils';
 
-const createMarkdownComponents = (translation: Translation): Components => {
+const createMarkdownComponents = (
+  translation: Translation,
+  autoSlug: boolean = true
+): Components => {
   // Set initial heading levels
   const headingLevels = {
     h2: 0,
@@ -18,14 +21,17 @@ const createMarkdownComponents = (translation: Translation): Components => {
     h6: 0,
   };
 
-  const headingLink = (slug: string, level: number, children: ReactNode) => (
-    <Link
-      href={`#${slug}`}
-      className='no-underline'
-    >
-      {`${slugPrefix(slug, level)} ${children}`}
-    </Link>
-  );
+  const headingLink = (slug: string, level: number, children: ReactNode) => {
+    const titleSlug = autoSlug ? `${slugPrefix(slug, level)} ` : '';
+    return (
+      <Link
+        href={`#${slug}`}
+        className='no-underline'
+      >
+        {`${titleSlug}${children}`}
+      </Link>
+    );
+  };
 
   return {
     h2: ({ children }) => {
@@ -148,12 +154,12 @@ const createMarkdownComponents = (translation: Translation): Components => {
     code: ({ className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '');
       return match ? (
-        <CopyCodeBlock
+        <CodeBlock
           match={match}
           translation={translation}
         >
           {children as ReactNode}
-        </CopyCodeBlock>
+        </CodeBlock>
       ) : (
         <code
           className='rounded bg-[var(--lightGray)] px-2 py-1 font-mono text-base'

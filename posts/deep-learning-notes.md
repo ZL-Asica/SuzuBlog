@@ -6,6 +6,7 @@ categories:
   - 机器学习
 tags:
   - 深度学习
+autoSlug: false
 ---
 
 > This notes' content are all based on https://www.coursera.org/specializations/deep-learning

@@ -6,10 +6,17 @@ interface TOCLinkProperties {
   item: TocItems;
   activeSlug: string;
   handleLinkClick: (slug: string) => void;
+  autoSlug: boolean;
 }
 
-const TOCLink = ({ item, activeSlug, handleLinkClick }: TOCLinkProperties) => {
+const TOCLink = ({
+  item,
+  activeSlug,
+  handleLinkClick,
+  autoSlug,
+}: TOCLinkProperties) => {
   const isActive = activeSlug === item.slug;
+  const titleSlug = autoSlug ? `${slugPrefix(item.slug, item.level)} ` : '';
 
   return (
     <div
@@ -27,7 +34,7 @@ const TOCLink = ({ item, activeSlug, handleLinkClick }: TOCLinkProperties) => {
           isActive ? 'font-bold text-[var(--sakuraPink)]' : 'text-[var(--gray)]'
         } break-words`}
       >
-        {`${slugPrefix(item.slug, item.level)} ${item.title}`}
+        {`${titleSlug}${item.title}`}
       </Link>
     </div>
   );

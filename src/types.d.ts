@@ -8,6 +8,7 @@ interface Frontmatter {
   categories?: string[];
   redirect?: string;
   showComments?: boolean;
+  autoSlug?: boolean;
 }
 
 // Post data

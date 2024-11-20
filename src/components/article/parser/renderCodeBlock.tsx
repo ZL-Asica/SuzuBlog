@@ -2,35 +2,22 @@
 
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
-import type { Prism as SyntaxHighlighterBase } from 'react-syntax-highlighter';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
-const SyntaxHighlighter = dynamic(
-  () => import('react-syntax-highlighter').then((module_) => module_.Prism),
-  {
-    ssr: false,
-  }
-) as typeof SyntaxHighlighterBase;
-
-interface CopyCodeBlockProperties {
+interface CodeBlockProperties {
   match: RegExpExecArray;
   translation: Translation;
   children: React.ReactNode;
 }
 
-const CopyCodeBlock = ({
-  match,
-  translation,
-  children,
-}: CopyCodeBlockProperties) => {
+const CodeBlock = ({ match, translation, children }: CodeBlockProperties) => {
   const [isCopied, setIsCopied] = useState(false);
-  const copyTranslation = translation.post.copy;
-  const copiedTranslation = translation.post.copied;
+  const cleanedChildren = String(children).replace(/\n$/, '');
 
   // Copy code block to clipboard
   const handleCopy = () => {
     if (isCopied) return;
-    navigator.clipboard.writeText(String(children).replace(/\n$/, ''));
+      navigator.clipboard.writeText(cleanedChildren);
     setIsCopied(true);
     // Hide the 'Copied!' message after 3 seconds
     setTimeout(() => setIsCopied(false), 3000);
@@ -43,7 +30,7 @@ const CopyCodeBlock = ({
         onClick={handleCopy}
         className='absolute -top-7 right-2 rounded bg-[var(--skyblue)] px-2 py-1 text-xs hover:bg-opacity-80'
       >
-        {isCopied ? copiedTranslation : copyTranslation}
+        {isCopied ? translation.post.copied : translation.post.copy}
       </button>
 
       {/* Code block */}
@@ -59,10 +46,10 @@ const CopyCodeBlock = ({
         PreTag='div'
         className='scrollbar-custom rounded py-1 pl-2 font-mono hover:shadow-2xl'
       >
-        {String(children).replace(/\n$/, '')}
+        {cleanedChildren}
       </SyntaxHighlighter>
     </div>
   );
 };
 
-export default CopyCodeBlock;
+export default CodeBlock;

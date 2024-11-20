@@ -31,7 +31,7 @@ const slugPrefix = (slug: string, level: number) => {
   return `${slug
     .split('-')
     .slice(0, level - 1)
-    .join('-')}.`;
+    .join('.')}.`;
 };
 
 export { generateHierarchicalSlug as default, slugPrefix };
