@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@zl-asica/react':
-        specifier: ^0.3.0
-        version: 0.3.0(react@19.0.0-rc-66855b96-20241106)
+        specifier: ^0.3.4
+        version: 0.3.4(react@19.0.0-rc-66855b96-20241106)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -779,8 +779,8 @@ packages:
     peerDependencies:
       prettier: ^3.0.0
 
-  '@zl-asica/react@0.3.0':
-    resolution: {integrity: sha512-gYe/CYo84QKnlWW0IPgtLdZd8shK9cMG7p95NWhIgR0azI90X+v0A61Npe+doNkvGVFGuYRWO1qHzyB2yttWGA==}
+  '@zl-asica/react@0.3.4':
+    resolution: {integrity: sha512-FPQfMvh92HHtV7kBXx0yQItQeHaQBS1hSdVtWybV02Y2IRdvJwZVofKnlSC6qIP7f5yo+0WXcx5SgTEPpl8Lew==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0
@@ -3986,7 +3986,7 @@ snapshots:
     dependencies:
       prettier: 3.3.3
 
-  '@zl-asica/react@0.3.0(react@19.0.0-rc-66855b96-20241106)':
+  '@zl-asica/react@0.3.4(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
       react: 19.0.0-rc-66855b96-20241106
 

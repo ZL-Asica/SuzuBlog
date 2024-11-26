@@ -24,7 +24,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@zl-asica/react": "^0.3.0",
+    "@zl-asica/react": "^0.3.4",
     "clsx": "^2.1.1",
     "es-toolkit": "^1.27.0",
     "gray-matter": "^4.0.3",
