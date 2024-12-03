@@ -26,7 +26,7 @@
   "dependencies": {
     "@zl-asica/react": "^0.3.10",
     "clsx": "^2.1.1",
-    "es-toolkit": "^1.28.0",
+    "es-toolkit": "^1.29.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.11",
     "next": "15.0.3",
