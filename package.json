@@ -53,7 +53,7 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "eslint": "^9.16.0",
-    "eslint-config-zl-asica": "^1.0.19",
+    "eslint-config-zl-asica": "^1.0.20",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.49",
