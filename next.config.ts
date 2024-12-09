@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   eslint: {
-    dirs: ['src'],
+    dirs: ['src']
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -10,15 +10,15 @@ const nextConfig: NextConfig = {
     localPatterns: [
       {
         pathname: '/images/**',
-        search: '',
-      },
+        search: ''
+      }
     ],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
-      },
-    ],
+        hostname: '**'
+      }
+    ]
   },
   experimental: {
     optimizePackageImports: [
@@ -28,9 +28,9 @@ const nextConfig: NextConfig = {
       'remark-gemoji',
       'remark-gfm',
       'remark-math',
-      'slugify',
-    ],
-  },
+      'slugify'
+    ]
+  }
 };
 
 export default nextConfig;

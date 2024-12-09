@@ -50,7 +50,7 @@ function useTOCLogic(onLinkClick?: (slug: string) => void) {
     isOpen,
     toggleOpen,
     handleLinkClick,
-    tocReference,
+    tocReference
   };
 }
 

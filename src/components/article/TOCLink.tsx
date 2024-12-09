@@ -9,12 +9,7 @@ interface TOCLinkProperties {
   autoSlug: boolean;
 }
 
-const TOCLink = ({
-  item,
-  activeSlug,
-  handleLinkClick,
-  autoSlug,
-}: TOCLinkProperties) => {
+const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProperties) => {
   const isActive = activeSlug === item.slug;
   const titleSlug = autoSlug ? `${slugPrefix(item.slug, item.level)} ` : '';
 

@@ -65,7 +65,7 @@ const Header = ({ config }: HeaderProperties) => {
           }`}
         >
           <HeaderMenu
-            translation={translation}
+            config={config}
             isMobile
             ulClassName='flex flex-col items-start gap-4 p-6'
             onClickHandler={toggleOpen}
@@ -83,7 +83,7 @@ const Header = ({ config }: HeaderProperties) => {
 
         {/* Desktop Menu */}
         <HeaderMenu
-          translation={translation}
+          config={config}
           isMobile={false}
           ulClassName='hidden md:flex md:gap-6'
         />

@@ -19,7 +19,7 @@ const SearchInput = ({
   categories,
   tags,
   translation,
-  initialValue,
+  initialValue
 }: SearchInputProperties) => {
   const searchParameters = useSearchParams();
   const formReference = useRef<HTMLFormElement>(null);
@@ -31,11 +31,7 @@ const SearchInput = ({
 
   // Initialize search parameters
   useEffect(() => {
-    const sanitizedParameters = validateParameters(
-      searchParameters,
-      categories,
-      tags
-    );
+    const sanitizedParameters = validateParameters(searchParameters, categories, tags);
     const currentUrl = new URL(globalThis.location.href);
     updateURL(currentUrl, sanitizedParameters);
   }, [searchParameters, initialValue]);
@@ -61,9 +57,7 @@ const SearchInput = ({
     updateURL(new URL(globalThis.location.href), params);
   };
 
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
   };
 
@@ -113,7 +107,7 @@ const SearchInput = ({
           'flex flex-col items-center space-y-4 overflow-hidden transition-all duration-300',
           {
             'max-h-0 opacity-0': !expanded,
-            'max-h-96 opacity-100': expanded,
+            'max-h-96 opacity-100': expanded
           }
         )}
       >

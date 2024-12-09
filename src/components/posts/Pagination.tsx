@@ -11,7 +11,7 @@ const Pagination = ({
   postsPerPage,
   totalPosts,
   currentPage,
-  setCurrentPage,
+  setCurrentPage
 }: PaginationProperties) => {
   const pageNumbers = Array.from(
     { length: ceil(totalPosts / postsPerPage) },

@@ -23,11 +23,7 @@ interface PostLayoutProperties {
   showThumbnail?: boolean;
 }
 
-const ArticlePage = ({
-  config,
-  post,
-  showThumbnail = true,
-}: PostLayoutProperties) => {
+const ArticlePage = ({ config, post, showThumbnail = true }: PostLayoutProperties) => {
   const translation = config.translation;
 
   return (
@@ -104,7 +100,7 @@ const Thumbnail = ({
   src,
   author,
   date,
-  thumbnailTranslation,
+  thumbnailTranslation
 }: {
   title: string;
   src: string;
@@ -136,7 +132,7 @@ const TitleHeader = ({
   title,
   author,
   date,
-  slug,
+  slug
 }: {
   title: string;
   author: string;
@@ -160,7 +156,7 @@ const MetaInfo = ({
   title,
   author,
   date,
-  isOverlay,
+  isOverlay
 }: {
   title?: string;
   author: string;

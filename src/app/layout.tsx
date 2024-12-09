@@ -17,12 +17,12 @@ const config: Config = getConfig();
 
 const notoSansSC = Noto_Sans_SC({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
-  variable: '--font-noto-sans-sc',
+  variable: '--font-noto-sans-sc'
 });
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
-  variable: '--font-jetbrains-mono',
+  variable: '--font-jetbrains-mono'
 });
 
 const metadata: Metadata = {
@@ -38,18 +38,18 @@ const metadata: Metadata = {
     description: config.description,
     type: 'website',
     locale: config.lang,
-    url: config.siteUrl,
+    url: config.siteUrl
   },
   twitter: {
     card: 'summary',
     title: `${config.title} - ${config.subTitle}`,
     description: config.description,
-    images: config.avatar,
-  },
+    images: config.avatar
+  }
 };
 
 function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {

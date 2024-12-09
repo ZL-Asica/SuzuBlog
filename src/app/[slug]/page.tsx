@@ -13,7 +13,7 @@ async function generateStaticParams() {
   const posts = await getAllPosts();
   await generateRssFeed(posts, getConfig());
   return posts.map((post) => ({
-    slug: post.slug,
+    slug: post.slug
   }));
 }
 
@@ -31,7 +31,7 @@ async function generateMetadata({ params }: Properties): Promise<Metadata> {
     ...(postData?.frontmatter.tags || []),
     ...(postData?.frontmatter.categories || []),
     postData?.frontmatter.author || config.author.name,
-    'blog',
+    'blog'
   ].join(', ');
 
   return {
@@ -48,14 +48,14 @@ async function generateMetadata({ params }: Properties): Promise<Metadata> {
       description: postData?.postAbstract || config.description,
       images: postData?.frontmatter.thumbnail,
       url: `/${slug}`,
-      locale: config.lang,
+      locale: config.lang
     },
     twitter: {
       card: 'summary',
       title: postData?.frontmatter.title || config.title,
       description: postData?.postAbstract || config.description,
-      images: postData?.frontmatter.thumbnail,
-    },
+      images: postData?.frontmatter.thumbnail
+    }
   };
 }
 
@@ -82,13 +82,13 @@ async function PostPage(props: { params: Promise<{ slug: string }> }) {
     description: post?.postAbstract || config.description,
     author: {
       '@type': 'Person',
-      name: post?.frontmatter.author || config.author.name,
+      name: post?.frontmatter.author || config.author.name
     },
     datePublished: post?.frontmatter.date,
     dateModified: post?.lastModified || post?.frontmatter.date,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${config.siteUrl}/${post.slug}`,
+      '@id': `${config.siteUrl}/${post.slug}`
     },
     image: post?.frontmatter.thumbnail,
     publisher: {
@@ -96,9 +96,9 @@ async function PostPage(props: { params: Promise<{ slug: string }> }) {
       name: config.title,
       logo: {
         '@type': 'ImageObject',
-        url: config.avatar,
-      },
-    },
+        url: config.avatar
+      }
+    }
   };
 
   return (

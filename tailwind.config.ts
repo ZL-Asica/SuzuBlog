@@ -5,7 +5,7 @@ const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
@@ -22,11 +22,11 @@ const config: Config = {
         darkForeground: '#e0e0e0',
         darkBackgroundGray: '#A6A6A6',
 
-        darkCardBackground: '#252525',
+        darkCardBackground: '#252525'
       },
       fontFamily: {
         sans: ['var(--font-noto-sans-sc)', 'Arial', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)'],
+        mono: ['var(--font-jetbrains-mono)']
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -35,10 +35,10 @@ const config: Config = {
             a: {
               color: theme('colors.skyBlue'),
               '&:hover': {
-                color: theme('colors.sakuraPink'),
-              },
-            },
-          },
+                color: theme('colors.sakuraPink')
+              }
+            }
+          }
         },
         dark: {
           css: {
@@ -46,8 +46,8 @@ const config: Config = {
             a: {
               color: theme('colors.darkSkyBlue'),
               '&:hover': {
-                color: theme('colors.darkSakuraPink'),
-              },
+                color: theme('colors.darkSakuraPink')
+              }
             },
             h1: { color: theme('colors.darkForeground') },
             h2: { color: theme('colors.darkForeground') },
@@ -55,29 +55,29 @@ const config: Config = {
             h4: { color: theme('colors.darkForeground') },
             p: { color: theme('colors.darkForeground') },
             strong: { color: theme('colors.darkForeground') },
-            code: { color: theme('colors.darkForeground') },
-          },
-        },
+            code: { color: theme('colors.darkForeground') }
+          }
+        }
       }),
       keyframes: {
         fadeInDown: {
           '0%': {
             opacity: '0',
-            transform: 'translateY(-20px)',
+            transform: 'translateY(-20px)'
           },
           '100%': {
             opacity: '1',
-            transform: 'translateY(0)',
-          },
-        },
+            transform: 'translateY(0)'
+          }
+        }
       },
       animation: {
-        fadeInDown: 'fadeInDown 0.5s ease-out',
-      },
-    },
+        fadeInDown: 'fadeInDown 0.5s ease-out'
+      }
+    }
   },
   darkMode: 'class',
-  plugins: [typography],
+  plugins: [typography]
 };
 
 export default config;

@@ -24,9 +24,9 @@ const Footer = ({ config }: FooterProperties) => {
         <p className='text-base text-[var(--gray)]'>
           Theme{' '}
           <Link
-            href='https://github.com/ZL-Asica/SuzuBlog'
+            href='https://suzu.zla.app'
             target='_blank'
-            aria-label="Suzu's GitHub repo (new tab)"
+            aria-label="Suzu's Documentation (new tab)"
             rel='noopener noreferrer'
             className='decoration-dashed underline-offset-2'
           >
