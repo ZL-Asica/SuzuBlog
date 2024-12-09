@@ -20,8 +20,8 @@ avatar: '/images/avatar.jpg'
 background: '/images/background.jpg'
 # Slogan displayed on your homepage, under your avatar.
 slogan: "As long as the code or the developer is able to run, it's all good."
-# Google Analytics tracking ID (e.g., 'G-XXXXXXXXXX').
-googleAnalytics: G-659VZ9NH28
+# Google Analytics tracking ID (e.g., 'G-XXXXXXXXXX'). Leave empty if you do not want to use Google Analytics.
+googleAnalytics:
 
 #######################
 # POSTS SETTINGS
@@ -68,7 +68,7 @@ thumbnailFriends: false
 # Priority: Twikoo > Disqus
 #######################
 # Your Twikoo environment ID.
-twikooEnvId: https://xxxx.vercel.app
+twikooEnvId:
 # Your Disqus shortname (used for integrating Disqus comments).
 # Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
 disqusShortname: zla-pub

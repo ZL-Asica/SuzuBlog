@@ -21,6 +21,7 @@ const CopyrightInfo = ({
 }: CopyrightInfoProperties) => {
   const pathname = usePathname();
   const copyright = translation.post.copyright;
+
   return (
     <div className='relative w-full rounded-3xl bg-[var(--lightGray)] p-6'>
       {/* Creative Commons Logo */}

@@ -28,12 +28,15 @@ const CategoriesTagsList = ({
     );
   }
 
-  // Get link with new category or tag
-  const getLink = (item: string) => {
+  // Precompute links to reduce inline computation
+  const links = items.map((item) => {
     const newParameters = new URLSearchParams(searchParameters);
     newParameters.set(type, item);
-    return `/posts?${newParameters.toString()}`;
-  };
+    return {
+      item,
+      href: `/posts?${newParameters.toString()}`,
+    };
+  });
 
   const typeTranslation =
     type === 'category' ? translation.post.categories : translation.post.tags;
@@ -48,10 +51,10 @@ const CategoriesTagsList = ({
       )}
       {/* List */}
       <span>
-        {items.map((item, index) => (
+        {links.map(({ item, href }, index) => (
           <span key={item}>
             <Link
-              href={getLink(item)}
+              href={href}
               target='_self'
               title={`${translation.navigate} ${typeTranslation} ${item}`}
               aria-label={`${translation.navigate} ${typeTranslation} ${item}`}
