@@ -1,7 +1,8 @@
-import Image from 'next/image';
 import { includes, isEmpty, lowerCase } from 'es-toolkit/compat';
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
+
+import { CustomImage } from '../ui';
 
 import MarkdownContent from './parser';
 import TOC from './TOC';
@@ -35,6 +36,7 @@ const ArticlePage = ({ config, post, showThumbnail = true }: PostLayoutPropertie
           author={post.frontmatter.author}
           date={post.frontmatter.date}
           thumbnailTranslation={translation.post.thumbnail}
+          fallbackImage={config.background}
         />
       ) : (
         <TitleHeader
@@ -100,22 +102,25 @@ const Thumbnail = ({
   src,
   author,
   date,
-  thumbnailTranslation
+  thumbnailTranslation,
+  fallbackImage
 }: {
   title: string;
   src: string;
   author: string;
   date: string;
   thumbnailTranslation: string;
+  fallbackImage: string;
 }) => {
   return (
     <div className='relative h-96 w-full'>
-      <Image
+      <CustomImage
         src={src}
         alt={`${thumbnailTranslation} ${title}`}
         width={1200}
         height={500}
         className='h-full w-full rounded-lg object-cover'
+        blurDataURL={fallbackImage}
       />
       <div className='absolute inset-0 rounded-lg bg-black bg-opacity-40'></div>
       <MetaInfo

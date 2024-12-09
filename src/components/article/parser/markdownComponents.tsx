@@ -1,12 +1,13 @@
 import { isValidElement, type ReactNode } from 'react';
 import type { Components } from 'react-markdown';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import CodeBlock from './renderCodeBlock';
 import renderFriendLinks from './renderFriendLinks';
 
 import { slugPrefix, generateHierarchicalSlug } from '@/services/utils';
+
+import { CustomImage } from '@/components/ui';
 
 const createMarkdownComponents = (
   translation: Translation,
@@ -167,7 +168,7 @@ const createMarkdownComponents = (
     },
 
     img: ({ src: source = '', alt = 'Image', ...props }) => (
-      <Image
+      <CustomImage
         src={source}
         alt={alt}
         width={500}

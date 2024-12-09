@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegClock, FaEllipsis } from 'react-icons/fa6';
 import { Suspense } from 'react';
 
 import { CategoriesTagsList } from '@/components/article';
+import { CustomImage } from '@/components/ui';
 import LoadingIndicator from '@/components/common/LoadingIndicator';
 
 interface PostListProperties {
@@ -38,7 +38,7 @@ const PostList = ({ posts, translation }: PostListProperties) => {
                 target='_self'
                 aria-label={`${translation.post.readMore} ${postTitle}`}
               >
-                <Image
+                <CustomImage
                   src={post.frontmatter.thumbnail}
                   alt={`${translation.post.thumbnail} ${postTitle}`}
                   width={780}
