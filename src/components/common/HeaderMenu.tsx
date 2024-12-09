@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import type { ReactElement } from 'react';
 import { Fragment, useEffect, useState } from 'react';
 import {
   FaHouse,
@@ -9,28 +8,31 @@ import {
   FaPeopleGroup,
   FaInfo,
   FaRegSun,
-  FaMoon
+  FaMoon,
+  FaTrainSubway
 } from 'react-icons/fa6';
 
 interface MenuItem {
   href: string;
   label: string;
-  icon: ReactElement;
+  icon: React.ReactElement;
 }
 
 interface HeaderMenuProperties {
-  translation: Translation;
+  config: Config;
   isMobile: boolean;
   ulClassName?: string;
   onClickHandler?: () => void;
 }
 
 const HeaderMenu = ({
-  translation,
+  config,
   isMobile,
-  ulClassName = '',
+  ulClassName,
   onClickHandler
 }: HeaderMenuProperties) => {
+  const translation = config.translation;
+
   const menuItems: MenuItem[] = [
     { href: '/', label: translation.home.title, icon: <FaHouse /> },
     {
@@ -49,43 +51,37 @@ const HeaderMenu = ({
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
-    const userPreferredTheme = localStorage.getItem('suzu-color-theme');
+    const themeColor = localStorage.getItem('suzu-color-theme');
     const systemPrefersDark = globalThis.matchMedia(
       '(prefers-color-scheme: dark)'
     ).matches;
 
-    // Determine initial theme
-    const initialTheme = userPreferredTheme
-      ? userPreferredTheme === 'dark'
-      : systemPrefersDark;
-    setIsDarkTheme(initialTheme);
-
-    // Update the HTML class based on the initial theme
-    document.documentElement.classList.toggle('dark', initialTheme);
+    if (themeColor) {
+      setIsDarkTheme(themeColor === 'dark');
+      document.documentElement.classList.toggle('dark', themeColor === 'dark');
+    } else {
+      setIsDarkTheme(systemPrefersDark);
+      document.documentElement.classList.toggle('dark', systemPrefersDark);
+    }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = !isDarkTheme;
-    setIsDarkTheme(newTheme);
+    const newTheme = isDarkTheme ? 'light' : 'dark';
 
-    // Update HTML class and localStorage
-    document.documentElement.classList.toggle('dark', newTheme);
-    localStorage.setItem('suzu-color-theme', newTheme ? 'dark' : 'light');
+    setIsDarkTheme(newTheme === 'dark');
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('suzu-color-theme', newTheme === 'dark' ? 'dark' : 'light');
   };
 
   return (
     <ul className={`gap-4 ${ulClassName}`}>
-      {menuItems.map((item, index) => (
-        <Fragment key={index}>
-          {/* Link as Full Width */}
-          <li
-            key={index}
-            className='group relative flex w-full items-center justify-center rounded-lg hover:bg-[var(--lightGray)]'
-          >
+      {menuItems.map((item) => (
+        <Fragment key={item.href}>
+          <li className='group relative flex w-full items-center justify-center rounded-lg hover:bg-[var(--lightGray)]'>
             <Link
               href={item.href}
               title={item.label}
-              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all duration-300 ease-in-out group-hover:text-[var(--sakuraPink)]`}
+              className='relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all duration-300 ease-in-out group-hover:text-[var(--sakuraPink)]'
               onClick={onClickHandler}
               aria-label={`${translation.navigate} ${item.label}`}
             >
@@ -95,8 +91,6 @@ const HeaderMenu = ({
               {item.label}
             </Link>
           </li>
-
-          {/* Divider */}
           {isMobile && (
             <li className='w-full'>
               <div className='h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]'></div>
@@ -104,24 +98,48 @@ const HeaderMenu = ({
           )}
         </Fragment>
       ))}
-      <li className='group mx-auto flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800'>
-        <button
-          className='flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
-          aria-label="$t('aria.theme')"
-          onClick={() => {
-            toggleTheme();
-            if (onClickHandler) onClickHandler();
-          }}
-        >
-          <span className='flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]'>
-            {isDarkTheme ? (
-              <FaRegSun className='h-full w-full' />
-            ) : (
-              <FaMoon className='h-full w-full' />
-            )}
-          </span>
-        </button>
-      </li>
+
+      <div
+        className={`${
+          isMobile
+            ? 'flex h-full w-full flex-grow items-center justify-center'
+            : 'flex gap-4'
+        }`}
+      >
+        {config.travellings && (
+          <li className='group mx-auto flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800'>
+            <Link
+              className='flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
+              aria-label="$t('aria.travellings')"
+              href='https://www.travellings.cn/go.html'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              <span className='flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]'>
+                <FaTrainSubway className='h-full w-full' />
+              </span>
+            </Link>
+          </li>
+        )}
+        <li className='group mx-auto flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800'>
+          <button
+            className='flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
+            aria-label="$t('aria.theme')"
+            onClick={() => {
+              toggleTheme();
+              if (onClickHandler) onClickHandler();
+            }}
+          >
+            <span className='flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]'>
+              {isDarkTheme ? (
+                <FaRegSun className='h-full w-full' />
+              ) : (
+                <FaMoon className='h-full w-full' />
+              )}
+            </span>
+          </button>
+        </li>
+      </div>
     </ul>
   );
 };
