@@ -3,7 +3,7 @@ title: WordPress，你好！
 date: '2020-03-01 00:00:00'
 thumbnail: /images/projects/wp-logo.png
 categories:
-  - 随想
+  - 随笔
 tags:
   - WordPress
 ---
