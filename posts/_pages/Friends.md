@@ -1,6 +1,7 @@
 ---
 title: 友人帐
 thumbnail: '' # (Optional) You can put your personal about thumbnail
+showLicense: false
 showComments: true # Set whether you want have comment for this page
 ---
 
@@ -15,15 +16,15 @@ showComments: true # Set whether you want have comment for this page
 "des": "白鲸字幕组是一个非盈利性质的多语言字幕组。"
 },
 {
-"title": "AIfans",
-"link": "https://aifans.zla.app/",
-"img": "https://r2.img.zla.app/2024/12/03/6cd045.webp",
-"des": "KizunaAI 中文粉丝站"
+"title": "SuzuBlog",
+"link": "https://suzu.zla.app/",
+"img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
+"des": "也就是这个站点所使用的博客系统"
 },
 {
 "title": "个人学术网站",
 "link": "https://www.zla.app/",
-"img": "https://r2.img.zla.app/2024/12/02/ae779a.webp",
+"img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
 "des": "我的个人学术网站(英文)。"
 },
 {
@@ -142,6 +143,18 @@ showComments: true # Set whether you want have comment for this page
 "link": "https://blog.crrashh.com",
 "img": "https://i.cdn.crrashh.com/avatar.jpg",
 "des": "以万象之不息，致不息之万象。"
+},
+{
+"title": "s22y",
+"link": "http://blog.sooooooooooooooooootheby.top/",
+"img": "https://blog.sooooooooooooooooootheby.top/logo_small.webp",
+"des": "去码头整点薯条。"
+},
+{
+"title": "晓雨杂记",
+"link": "https://www.lihaoyu.cn",
+"img": "https://cdn.v2ex.com/gravatar/636d113ce37111d08f08faee780ce9b8?size=512",
+"des": "也许我们会分别，但我们将永远不会忘记彼此"
 }
 ]
 ```
@@ -156,7 +169,7 @@ showComments: true # Set whether you want have comment for this page
 {
   "title": "ZLA 小站",
   "link": "https://www.zla.pub/",
-  "img": "https://cdn.v2ex.com/gravatar/cba8b28739dd6225f6fe961762bdb0b71b858d68c83d946a37cee3b0e0daece5?size=512",
+  "img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
   "des": "不要哭，不要笑，不要恨，要理解。"
 }
 ```
@@ -166,7 +179,7 @@ showComments: true # Set whether you want have comment for this page
 ```plaintext
 名称: ZLA 小站
 地址: https://www.zla.pub/
-图标: https://cdn.v2ex.com/gravatar/cba8b28739dd6225f6fe961762bdb0b71b858d68c83d946a37cee3b0e0daece5?size=512
+图标: https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512
 描述: 不要哭，不要笑，不要恨，要理解。
 RSS: https://www.zla.pub/feed.xml
 ```
