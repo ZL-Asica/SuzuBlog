@@ -31,6 +31,13 @@ creativeCommons:
   link: https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans
 
 #######################
+# HEADER SETTINGS
+#######################
+# If you want to join the travellings community, set the following field to true.
+# For more information, visit https://www.travellings.cn/en_US/
+travellings: true
+
+#######################
 # FOOTER SETTINGS
 #######################
 # If you want to have a start year of your blog, set the year here.
