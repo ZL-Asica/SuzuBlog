@@ -1,14 +1,21 @@
 import Image from 'next/image';
 import { includes, isEmpty, lowerCase } from 'es-toolkit/compat';
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 import MarkdownContent from './parser';
-import CopyrightInfo from './CopyrightInfo';
 import TOC from './TOC';
 import CategoriesTagsList from './CategoriesTagsList';
-import { TwikooComments, DisqusComments } from './comments';
 
 import LoadingIndicator from '@/components/common/LoadingIndicator';
+
+const CopyrightInfo = dynamic(() => import('./CopyrightInfo'));
+const TwikooComments = dynamic(() =>
+  import('./comments').then((module_) => module_.TwikooComments)
+);
+const DisqusComments = dynamic(() =>
+  import('./comments').then((module_) => module_.DisqusComments)
+);
 
 interface PostLayoutProperties {
   config: Config;

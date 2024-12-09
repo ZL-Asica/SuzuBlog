@@ -55,10 +55,34 @@ function RootLayout({
 }>) {
   const config: Config = getConfig();
   const googleAnalytics: string = config.googleAnalytics || '';
-  const jsFiles: string[] = config.headerJavascript || [];
 
   return (
     <html lang={config.lang}>
+      <meta
+        name='Powered-By'
+        content='SuzuBlog'
+      />
+      <meta
+        name='Strict-Transport-Security'
+        content='max-age=63072000; includeSubDomains; preload'
+      />
+      <link
+        rel='icon'
+        type='image/png'
+        href='/icons/favicon-96x96.png'
+        sizes='96x96'
+      />
+      <link
+        rel='icon'
+        type='image/svg+xml'
+        href='/icons/favicon.svg'
+      />
+      <link
+        rel='apple-touch-icon'
+        sizes='180x180'
+        href='/icons/apple-touch-icon.png'
+      />
+
       {/* If rss set in config */}
       {config.socialMedia.rss && (
         <link
@@ -69,7 +93,7 @@ function RootLayout({
         />
       )}
       {/* Custom js */}
-      {jsFiles.map((jsFile, index) => (
+      {config.headerJavascript.map((jsFile, index) => (
         <Script
           key={index}
           src={jsFile}
@@ -98,22 +122,6 @@ function RootLayout({
           </Script>
         </>
       )}
-      <link
-        rel='icon'
-        type='image/png'
-        href='/icons/favicon-96x96.png'
-        sizes='96x96'
-      />
-      <link
-        rel='icon'
-        type='image/svg+xml'
-        href='/icons/favicon.svg'
-      />
-      <link
-        rel='apple-touch-icon'
-        sizes='180x180'
-        href='/icons/apple-touch-icon.png'
-      />
 
       <body
         className={`${notoSansSC.variable} ${jetBrainsMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
