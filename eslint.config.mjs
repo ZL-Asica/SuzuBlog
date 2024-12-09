@@ -7,13 +7,14 @@ export default [
   // Next.js Plugin Config
   {
     plugins: {
-      '@next/next': nextPlugin,
+      '@next/next': nextPlugin
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
+      'array-element-newline': 'off',
       'unicorn/expiring-todo-comments': 'off',
       'unicorn/filename-case': 'off',
-      '@typescript-eslint/no-unused-expressions': 'off',
-    },
-  },
+      '@typescript-eslint/no-unused-expressions': 'off'
+    }
+  }
 ];

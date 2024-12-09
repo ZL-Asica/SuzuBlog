@@ -17,7 +17,7 @@ const CopyrightInfo = ({
   siteUrl,
   title,
   creativeCommons,
-  translation,
+  translation
 }: CopyrightInfoProperties) => {
   const pathname = usePathname();
   const copyright = translation.post.copyright;

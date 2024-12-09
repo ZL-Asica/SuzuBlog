@@ -1,10 +1,10 @@
 const en: Translation = {
   home: {
-    title: 'Home',
+    title: 'Home'
   },
   posts: {
     title: 'Posts',
-    description: "'s posts page, where you can see all the posts.",
+    description: "'s posts page, where you can see all the posts."
   },
   search: {
     title: 'Search',
@@ -16,17 +16,17 @@ const en: Translation = {
     clear: 'Clear Filters',
     loading: 'Searching...',
     submit: 'Search',
-    noResultsFound: 'No Posts Matched',
+    noResultsFound: 'No Posts Matched'
   },
   friends: {
     title: 'Friends',
     description: "'s friends page, where you can see all the friends.",
-    avatar: 'Avatar',
+    avatar: 'Avatar'
   },
   about: {
     title: 'About',
     description:
-      "'s about page, where you can see some information about the webmaster. Check out the webmaster's personal story.",
+      "'s about page, where you can see some information about the webmaster. Check out the webmaster's personal story."
   },
   post: {
     thumbnail: 'Thumbnail: ',
@@ -45,12 +45,12 @@ const en: Translation = {
       link: 'Link: ',
       copyright: {
         start: 'This article is licensed under ',
-        end: '',
-      },
-    },
+        end: ''
+      }
+    }
   },
   newTab: 'Open in new tab: ',
-  navigate: 'Navigate to',
+  navigate: 'Navigate to'
 };
 
 export default en;

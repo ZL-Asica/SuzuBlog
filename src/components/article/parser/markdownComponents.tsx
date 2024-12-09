@@ -18,7 +18,7 @@ const createMarkdownComponents = (
     h3: 0,
     h4: 0,
     h5: 0,
-    h6: 0,
+    h6: 0
   };
 
   const headingLink = (slug: string, level: number, children: ReactNode) => {
@@ -35,11 +35,7 @@ const createMarkdownComponents = (
 
   return {
     h2: ({ children }) => {
-      const slug = generateHierarchicalSlug(
-        children as ReactNode,
-        'h2',
-        headingLevels
-      );
+      const slug = generateHierarchicalSlug(children as ReactNode, 'h2', headingLevels);
       return (
         <div className='group'>
           <h2
@@ -54,11 +50,7 @@ const createMarkdownComponents = (
     },
 
     h3: ({ children }) => {
-      const slug = generateHierarchicalSlug(
-        children as ReactNode,
-        'h3',
-        headingLevels
-      );
+      const slug = generateHierarchicalSlug(children as ReactNode, 'h3', headingLevels);
       return (
         <h3
           className='text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed'
@@ -70,11 +62,7 @@ const createMarkdownComponents = (
     },
 
     h4: ({ children }) => {
-      const slug = generateHierarchicalSlug(
-        children as ReactNode,
-        'h4',
-        headingLevels
-      );
+      const slug = generateHierarchicalSlug(children as ReactNode, 'h4', headingLevels);
       return (
         <h4
           className='text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal'
@@ -86,11 +74,7 @@ const createMarkdownComponents = (
     },
 
     h5: ({ children }) => {
-      const slug = generateHierarchicalSlug(
-        children as ReactNode,
-        'h5',
-        headingLevels
-      );
+      const slug = generateHierarchicalSlug(children as ReactNode, 'h5', headingLevels);
       return (
         <h5
           className='text-foreground my-3 text-lg font-medium leading-normal'
@@ -102,11 +86,7 @@ const createMarkdownComponents = (
     },
 
     h6: ({ children }) => {
-      const slug = generateHierarchicalSlug(
-        children as ReactNode,
-        'h6',
-        headingLevels
-      );
+      const slug = generateHierarchicalSlug(children as ReactNode, 'h6', headingLevels);
       return (
         <h6
           className='text-foreground my-2 text-base font-medium leading-normal'
@@ -133,16 +113,12 @@ const createMarkdownComponents = (
 
     ul: ({ children }) => (
       <div className='my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-4'>
-        <ul className='list-inside list-disc space-y-2'>
-          {children as ReactNode}
-        </ul>
+        <ul className='list-inside list-disc space-y-2'>{children as ReactNode}</ul>
       </div>
     ),
     ol: ({ children }) => (
       <div className='my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-4'>
-        <ol className='list-inside list-decimal space-y-2'>
-          {children as ReactNode}
-        </ol>
+        <ol className='list-inside list-decimal space-y-2'>{children as ReactNode}</ol>
       </div>
     ),
     li: ({ children }) => (
@@ -207,8 +183,7 @@ const createMarkdownComponents = (
         // avoid className not exist
         isValidElement(children) &&
         (children.props as { className?: string }).className &&
-        (children.props as { className?: string }).className ===
-          'language-Links'
+        (children.props as { className?: string }).className === 'language-Links'
       ) {
         return renderFriendLinks(
           (children.props as { children: string }).children,
@@ -217,8 +192,7 @@ const createMarkdownComponents = (
       }
 
       const language =
-        isValidElement(children) &&
-        (children.props as { className?: string }).className
+        isValidElement(children) && (children.props as { className?: string }).className
           ? ((children.props as { className?: string })?.className ?? '')
               .replace('language-', '')
               .toUpperCase()
@@ -268,9 +242,7 @@ const createMarkdownComponents = (
       </td>
     ),
     tr: ({ children, className }) => (
-      <tr
-        className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)]`}
-      >
+      <tr className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)]`}>
         {children as ReactNode}
       </tr>
     ),
@@ -279,7 +251,7 @@ const createMarkdownComponents = (
       <div className='flex justify-center'>
         <hr className='mx-auto my-8 max-w-[75%] border-t-2 border-lightForeground' />
       </div>
-    ),
+    )
   };
 };
 

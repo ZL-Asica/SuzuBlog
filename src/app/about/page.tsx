@@ -23,14 +23,14 @@ async function generateMetadata(): Promise<Metadata> {
       url: '/about',
       images: config.avatar,
       type: 'profile',
-      locale: config.lang,
+      locale: config.lang
     },
     twitter: {
       card: 'summary',
       title: `${aboutPage?.frontmatter.title || aboutTranslation.title} - ${config.title}`,
       description: `${config.title}${aboutTranslation.description} - ${config.description}`,
-      images: config.avatar,
-    },
+      images: config.avatar
+    }
   };
 }
 
@@ -49,7 +49,7 @@ async function AboutPage() {
     description: `${config.title}${aboutTranslation.description} - ${config.description}`,
     url: `${config.siteUrl}/about`,
     image: config.avatar,
-    sameAs: config.author.link,
+    sameAs: config.author.link
   };
 
   return (

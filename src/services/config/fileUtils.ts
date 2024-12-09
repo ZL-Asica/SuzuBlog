@@ -9,12 +9,7 @@ import * as translations from './locales';
 const CONFIG_FILE_PATH = path.join(process.cwd(), 'config.yml');
 
 // Friend links markdown file path
-const FRIEND_LINKS_FILE_PATH = path.join(
-  process.cwd(),
-  'posts',
-  '_pages',
-  'Friends.md'
-);
+const FRIEND_LINKS_FILE_PATH = path.join(process.cwd(), 'posts', '_pages', 'Friends.md');
 
 /**
  * Fetches translation content for a given language.
@@ -46,5 +41,5 @@ export {
   CONFIG_FILE_PATH,
   FRIEND_LINKS_FILE_PATH,
   getTranslationContent,
-  watchConfigFile,
+  watchConfigFile
 };

@@ -16,7 +16,7 @@ function getPostFromFile(
   const {
     data,
     content: contentRaw,
-    excerpt,
+    excerpt
   } = matterRead(filePath, { excerpt_separator: '<!--more-->' });
 
   const { date, lastModified } = resolveDate(data.date, filePath);
@@ -31,7 +31,7 @@ function getPostFromFile(
     redirect: defaultTo(data.redirect),
     showComments: defaultTo(data.showComments, true),
     showLicense: defaultTo(data.showLicense, true),
-    autoSlug: defaultTo(data.autoSlug, true),
+    autoSlug: defaultTo(data.autoSlug, true)
   };
 
   let toc: TocItems[] = [];
@@ -45,7 +45,7 @@ function getPostFromFile(
     frontmatter,
     contentRaw: fullData ? contentRaw : '',
     lastModified,
-    toc,
+    toc
   };
 }
 
@@ -102,7 +102,7 @@ function processPostAbstract(contentRaw: string, excerpt: string): string {
     [/^-{3,}$/gm, ''], // Horizontal rules
     [/>\s?/g, ''], // Blockquotes
     [/([*+-])\s/g, ''], // Unordered list markers
-    [/^\d+\.\s+/g, ''], // Ordered list markers
+    [/^\d+\.\s+/g, ''] // Ordered list markers
   ];
 
   forEach(patterns, ([pattern, replacement]) => {

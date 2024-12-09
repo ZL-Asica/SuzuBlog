@@ -17,7 +17,7 @@ async function generateRssFeed(posts: PostListData[], config: Config) {
     copyright: `All rights reserved ${new Date().getFullYear()} by ${config.author.name}`,
     author: config.author.name,
     pubDate: new Date(),
-    generator: 'Next.js + RSS for Node provided by ZL Asica',
+    generator: 'Next.js + RSS for Node provided by ZL Asica'
   };
 
   // Initialize feed using RSS
@@ -30,7 +30,7 @@ async function generateRssFeed(posts: PostListData[], config: Config) {
       url: `${siteUrl}/${post.slug}`,
       date: post.frontmatter.date,
       author: post.frontmatter.author,
-      categories: post.frontmatter.categories,
+      categories: post.frontmatter.categories
     });
   }
 

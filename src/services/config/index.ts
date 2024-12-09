@@ -6,7 +6,7 @@ import {
   CONFIG_FILE_PATH,
   FRIEND_LINKS_FILE_PATH,
   getTranslationContent,
-  watchConfigFile,
+  watchConfigFile
 } from './fileUtils';
 
 let cachedConfig: Config | null = null;
@@ -32,7 +32,7 @@ const getConfig = (): Config => {
   cachedConfig = {
     ...userConfig,
     translation: translations,
-    friendLinks,
+    friendLinks
   };
 
   return cachedConfig;
@@ -101,7 +101,7 @@ const parseFriendLinks = (fileContent: string): FriendLink[] => {
       } catch (error) {
         console.error('Invalid JSON in Links block:', {
           error,
-          block: jsonContent,
+          block: jsonContent
         });
       }
     }

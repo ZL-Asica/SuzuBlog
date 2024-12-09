@@ -34,7 +34,7 @@ const CodeBlock = ({ match, translation, children }: CodeBlockProperties) => {
         lineNumberStyle={{
           color: '#88C0D0',
           fontSize: '0.8em',
-          paddingRight: '10px',
+          paddingRight: '10px'
         }}
         PreTag='div'
         className='scrollbar-custom rounded py-1 pl-2 font-mono hover:shadow-2xl'

@@ -52,6 +52,7 @@ interface UserConfig {
   avatar: string;
   background: string;
   slogan: string;
+  travellings: boolean;
   startYear: number;
   socialMedia: SocialMedia;
   thumbnailAbout: boolean;
