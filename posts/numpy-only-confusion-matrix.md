@@ -19,7 +19,7 @@ tags:
 
 我们可以使用这个矩阵直观地看到每个数据的真实值和我们模型的预测值的关系。
 
-![来源：https://b23.tv/dTJ48UB](https://fp1.fghrsh.net/2023/01/16/6132f3e171abcd5d08eb7df684b9cb7a.png!q80.jpeg)
+![来源：https://b23.tv/dTJ48UB](https://r2.img.zla.app/2024/12/09/c9de49.webp)
 
 ## 如何实现
 

@@ -36,7 +36,7 @@ tags:
 sudo apt-get install qbittorrent-nox
 ```
 
-![安卓qBt-nox](https://fp1.fghrsh.net/2020/02/04/f4b82fbb1936712b043a5ea0272a3e63.png!q80.jpeg)
+![qbt-1](https://r2.img.zla.app/2024/12/09/e17dcb.webp)
 
 ## 使用方法
 
@@ -92,7 +92,7 @@ netfilter-persistent reload
 sudo nano /etc/rc.local
 ```
 
-![rc.local](https://fp1.fghrsh.net/2020/02/04/5cea310aaadcc20740841adbf049375f.png!q80.jpeg)
+![qbt-2](https://r2.img.zla.app/2024/12/09/020fef.webp)
 
 在 exit 0 前加入
 
@@ -106,24 +106,24 @@ sudo qbittorrent-nox --webui-port=8070 -d
 
 打开任意浏览器，在浏览器地址栏内输入 `http://你的公网IP:8070` 回车
 
-![qBt-WebUI](https://fp1.fghrsh.net/2019/11/22/a1c85c6089558f02d212b41de11bfe98.png!q80.jpeg)
+![qbt-3](https://r2.img.zla.app/2024/12/09/7868ab.png)
 
 默认用户名为 **admin** 密码为 **adminadmin**
 
 点击上方工具栏的 tool-Options-WebUI
 
-![Tool](https://fp1.fghrsh.net/2019/11/22/6d4a904b3384ef641b1eaacc703291bf.png!q80.jpeg)
+![Tools](https://r2.img.zla.app/2024/12/09/8c1c3e.png)
 
-![Options](https://fp1.fghrsh.net/2019/11/22/c31f466ac8c748c3032434e2b82ef0cc.png!q80.jpeg)
+![Options](https://r2.img.zla.app/2024/12/09/2facc4.png)
 
-![WebUI](https://fp1.fghrsh.net/2019/11/22/100dc513c296e492d0f7c3a6ed2dc8ec.png!q80.jpeg)
+![WebUI](https://r2.img.zla.app/2024/12/09/0a8d62.png)
 
 在上方可以更改语言为简体中文，更改后会重新进入 qBt 的 WebUI
 
-![更改语言](https://fp1.fghrsh.net/2019/11/22/6ea7fda7f2aa05c86bb7c1d745dc9ecd.png!q80.jpeg)
+![更改语言](https://r2.img.zla.app/2024/12/09/213056.png)
 
 下方可以更改默认的账户和密码，强烈建议更改，请勿使用默认设置！！！
 
-![更改密码](https://fp1.fghrsh.net/2019/11/22/ac5f9c550b39aebb1eabb90b7233f09a.png!q80.jpeg)
+![更改密码](https://r2.img.zla.app/2024/12/09/6ca5dc.png)
 
 至此，树莓派安装 qBittorrent-nox 实现种子服务器自动下载上传教程已全部结束，qBittorrent-nox 的使用方式与 PC 端的方法一致。
