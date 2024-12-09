@@ -7,11 +7,7 @@ import PostListLayout from './PostList';
 import Pagination from './Pagination';
 import SearchInput from './SearchInput';
 
-import {
-  getFilteredPosts,
-  validateParameters,
-  updateURL,
-} from '@/services/utils';
+import { getFilteredPosts, validateParameters, updateURL } from '@/services/utils';
 
 interface PostPageClientProperties {
   posts: PostListData[];
@@ -27,18 +23,12 @@ const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
   const categories = [
-    ...new Set(posts.flatMap((post) => post.frontmatter.categories || [])),
+    ...new Set(posts.flatMap((post) => post.frontmatter.categories || []))
   ];
-  const tags = [
-    ...new Set(posts.flatMap((post) => post.frontmatter.tags || [])),
-  ];
+  const tags = [...new Set(posts.flatMap((post) => post.frontmatter.tags || []))];
 
   useEffect(() => {
-    const sanitizedParameters = validateParameters(
-      searchParameters,
-      categories,
-      tags
-    );
+    const sanitizedParameters = validateParameters(searchParameters, categories, tags);
     const currentUrl = new URL(globalThis.location.href);
     updateURL(currentUrl, sanitizedParameters);
   }, [searchParameters]);
@@ -67,9 +57,7 @@ const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
 
       {/* Post List */}
       {filteredPosts.length === 0 && (
-        <h2 className='my-4 text-3xl font-bold'>
-          {translation.search.noResultsFound}
-        </h2>
+        <h2 className='my-4 text-3xl font-bold'>{translation.search.noResultsFound}</h2>
       )}
 
       <PostListLayout

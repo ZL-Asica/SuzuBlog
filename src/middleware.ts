@@ -30,10 +30,7 @@ function middleware(request: NextRequest) {
 
   for (const [key, value] of url.searchParams.entries()) {
     if (allowedKeys.has(key)) {
-      updatedSearchParameters.set(
-        key,
-        key === 'query' ? sanitizeQuery(value) : value
-      );
+      updatedSearchParameters.set(key, key === 'query' ? sanitizeQuery(value) : value);
     }
   }
 
@@ -68,8 +65,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!api|_next/static|_next/image|_vercel|favicon.ico|sitemap.xml|robots.txt|feed.xml|manifest.webmanifest).*)',
-  ],
+    '/((?!api|_next/static|_next/image|_vercel|favicon.ico|sitemap.xml|robots.txt|feed.xml|manifest.webmanifest).*)'
+  ]
 };
 
 export default middleware;

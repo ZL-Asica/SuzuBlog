@@ -13,7 +13,7 @@ interface CategoriesTagsListProperties {
 const CategoriesTagsList = ({
   type,
   translation,
-  items = [],
+  items = []
 }: CategoriesTagsListProperties) => {
   const searchParameters = useSearchParams();
 
@@ -21,9 +21,7 @@ const CategoriesTagsList = ({
   if (items.length === 0) {
     return (
       <span>
-        {type === 'category'
-          ? translation.post.noCategories
-          : translation.post.noTags}
+        {type === 'category' ? translation.post.noCategories : translation.post.noTags}
       </span>
     );
   }
@@ -34,7 +32,7 @@ const CategoriesTagsList = ({
     newParameters.set(type, item);
     return {
       item,
-      href: `/posts?${newParameters.toString()}`,
+      href: `/posts?${newParameters.toString()}`
     };
   });
 
@@ -44,11 +42,7 @@ const CategoriesTagsList = ({
   return (
     <span className='flex items-center'>
       {/* Render Type icon */}
-      {type === 'category' ? (
-        <FaFolder className='mr-1' />
-      ) : (
-        <FaTags className='mr-1' />
-      )}
+      {type === 'category' ? <FaFolder className='mr-1' /> : <FaTags className='mr-1' />}
       {/* List */}
       <span>
         {links.map(({ item, href }, index) => (

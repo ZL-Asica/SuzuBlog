@@ -11,9 +11,7 @@ const postsDirectory = path.join(process.cwd(), 'posts');
 
 async function getAllPosts(): Promise<PostListData[]> {
   const fileNames = await fsPromise.readdir(postsDirectory);
-  const markdownFiles = filter(fileNames, (fileName) =>
-    fileName.endsWith('.md')
-  );
+  const markdownFiles = filter(fileNames, (fileName) => fileName.endsWith('.md'));
 
   const allPosts = await Promise.all(
     markdownFiles.map(async (fileName) => {
@@ -28,8 +26,7 @@ async function getAllPosts(): Promise<PostListData[]> {
 
   return allPosts.sort(
     (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime()
+      new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
   );
 }
 

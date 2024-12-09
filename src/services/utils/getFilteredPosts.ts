@@ -21,9 +21,7 @@ function getFilteredPosts(
     const normalizedTitle = title.toLowerCase();
     const normalizedAbstract = (post.postAbstract || '').toLowerCase();
     const normalizedTags = tags.map((tag) => tag.toLowerCase());
-    const normalizedCategories = categories.map((category) =>
-      category.toLowerCase()
-    );
+    const normalizedCategories = categories.map((category) => category.toLowerCase());
 
     // Perform search query
     const matchesQuery =
@@ -33,7 +31,7 @@ function getFilteredPosts(
           normalizedTitle,
           normalizedAbstract,
           ...normalizedTags,
-          ...normalizedCategories,
+          ...normalizedCategories
         ].some((field) => field.includes(keyword))
       );
 

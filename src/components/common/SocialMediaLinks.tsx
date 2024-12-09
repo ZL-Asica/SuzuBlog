@@ -9,7 +9,7 @@ import {
   FaYoutube,
   FaZhihu,
   FaBilibili,
-  FaRss,
+  FaRss
 } from 'react-icons/fa6';
 import { upperFirst } from 'es-toolkit/string';
 import { words, replace } from 'es-toolkit/compat';
@@ -24,7 +24,7 @@ interface socialMediaLinksProperties {
 const SocialMediaLinks = ({
   socialMedia,
   iconSize = 32,
-  className = '',
+  className = ''
 }: socialMediaLinksProperties) => {
   return (
     <div
@@ -33,8 +33,7 @@ const SocialMediaLinks = ({
       {Object.entries(socialMedia)
         .filter(([key, _]) => key in socialData)
         .map(([key, username]) => {
-          const { urlTemplate, icon: IconComponent } =
-            socialData[key as SocialMediaKey];
+          const { urlTemplate, icon: IconComponent } = socialData[key as SocialMediaKey];
 
           const label = upperFirst(words(key)[0]);
           if (key === 'rss' && username !== '' && username !== 'false') {
@@ -67,48 +66,48 @@ const SocialMediaLinks = ({
 const socialData = {
   github_username: {
     urlTemplate: 'https://github.com/{username}',
-    icon: FaGithub,
+    icon: FaGithub
   },
   linkedin_username: {
     urlTemplate: 'https://www.linkedin.com/in/{username}',
-    icon: FaLinkedin,
+    icon: FaLinkedin
   },
   instagram_id: {
     urlTemplate: 'https://www.instagram.com/{username}',
-    icon: FaInstagram,
+    icon: FaInstagram
   },
   orcid_id: {
     urlTemplate: 'https://orcid.org/{username}',
-    icon: FaOrcid,
+    icon: FaOrcid
   },
   telegram_username: {
     urlTemplate: 'https://t.me/{username}',
-    icon: FaTelegram,
+    icon: FaTelegram
   },
   bluesky_username: {
     urlTemplate: 'https://bsky.app/profile/{username}',
-    icon: FaBluesky,
+    icon: FaBluesky
   },
   youtube_id: {
     urlTemplate: 'https://www.youtube.com/@{username}',
-    icon: FaYoutube,
+    icon: FaYoutube
   },
   zhihu_username: {
     urlTemplate: 'https://www.zhihu.com/people/{username}',
-    icon: FaZhihu,
+    icon: FaZhihu
   },
   bilibili_id: {
     urlTemplate: 'https://space.bilibili.com/{username}',
-    icon: FaBilibili,
+    icon: FaBilibili
   },
   email: {
     urlTemplate: 'mailto:{username}',
-    icon: MdEmail,
+    icon: MdEmail
   },
   rss: {
     urlTemplate: '{username}',
-    icon: FaRss,
-  },
+    icon: FaRss
+  }
 };
 
 export default SocialMediaLinks;

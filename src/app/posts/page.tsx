@@ -22,14 +22,14 @@ function generateMetadata(): Metadata {
       url: `${config.siteUrl}/posts`,
       images: config.avatar,
       type: 'website',
-      locale: config.lang,
+      locale: config.lang
     },
     twitter: {
       card: 'summary',
       title: `${translation.posts.title} - ${config.title}`,
       description: `${config.title}${translation.posts.description} - ${config.description}`,
-      images: config.avatar,
-    },
+      images: config.avatar
+    }
   };
 }
 
@@ -46,8 +46,8 @@ async function PostsPage() {
     description: config.title + translation.posts.description,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${config.siteUrl}/posts`,
-    },
+      '@id': `${config.siteUrl}/posts`
+    }
   };
 
   return (

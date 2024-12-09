@@ -21,14 +21,14 @@ async function generateMetadata(): Promise<Metadata> {
       url: '/friends',
       images: config.avatar,
       type: 'website',
-      locale: config.lang,
+      locale: config.lang
     },
     twitter: {
       card: 'summary',
       title: `${friendPage?.frontmatter.title || friendTranslation.title} - ${config.title}`,
       description: `${config.title}${friendTranslation.description} - ${config.description}`,
-      images: config.avatar,
-    },
+      images: config.avatar
+    }
   };
 }
 
@@ -50,8 +50,8 @@ async function FriendsPage() {
     hasPart: friends.map((friend) => ({
       '@type': 'WebSite',
       name: friend.title,
-      url: friend.link,
-    })),
+      url: friend.link
+    }))
   };
 
   return (

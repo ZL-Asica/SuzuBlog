@@ -56,9 +56,7 @@ const PostList = ({ posts, translation }: PostListProperties) => {
                 {/* Date of Publish */}
                 <div className='mb-1 flex items-center'>
                   <FaRegClock className='mr-2' />
-                  <span className='text-sm'>
-                    {post.frontmatter.date.split(' ')[0]}
-                  </span>
+                  <span className='text-sm'>{post.frontmatter.date.split(' ')[0]}</span>
                 </div>
                 {/* Title in Frontmatter */}
                 <Link

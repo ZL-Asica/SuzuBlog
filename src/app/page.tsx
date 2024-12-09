@@ -19,8 +19,8 @@ async function Home() {
       '@type': 'Organization',
       name: config.author.name,
       url: config.author.link,
-      logo: config.avatar,
-    },
+      logo: config.avatar
+    }
   };
 
   return (
@@ -46,9 +46,7 @@ async function Home() {
         </div>
 
         <div className='mt-20 text-center'>
-          <p className='text-foreground mb-28 text-3xl font-bold'>
-            {config.slogan}
-          </p>
+          <p className='text-foreground mb-28 text-3xl font-bold'>{config.slogan}</p>
 
           <SocialMediaLinks
             socialMedia={config.socialMedia}

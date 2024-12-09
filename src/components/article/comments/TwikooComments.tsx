@@ -11,7 +11,7 @@ const TwikooComments = ({ environmentId }: TwikooCommentsProperties) => {
     import('twikoo').then((twikoo) => {
       twikoo.init({
         envId: environmentId,
-        el: '#twikoo-comments',
+        el: '#twikoo-comments'
       });
     });
   }, []);

@@ -26,10 +26,7 @@ const validateParameters = (
   return newParameters;
 };
 
-const updateURL = (
-  currentUrl: URL,
-  updatedParameters: URLSearchParams
-): void => {
+const updateURL = (currentUrl: URL, updatedParameters: URLSearchParams): void => {
   const newSearch = updatedParameters.toString();
   if (currentUrl.search !== `?${newSearch}`) {
     currentUrl.search = newSearch;

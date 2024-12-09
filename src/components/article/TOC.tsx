@@ -18,10 +18,9 @@ const TOC = ({
   items,
   translation,
   autoSlug = true,
-  showThumbnail = true,
+  showThumbnail = true
 }: TOCProperties) => {
-  const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } =
-    useTOCLogic();
+  const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic();
   const isVisible = !useIsTop(showThumbnail ? 150 : 50);
 
   return (

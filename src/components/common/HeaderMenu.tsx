@@ -9,7 +9,7 @@ import {
   FaPeopleGroup,
   FaInfo,
   FaRegSun,
-  FaMoon,
+  FaMoon
 } from 'react-icons/fa6';
 
 interface MenuItem {
@@ -29,21 +29,21 @@ const HeaderMenu = ({
   translation,
   isMobile,
   ulClassName = '',
-  onClickHandler,
+  onClickHandler
 }: HeaderMenuProperties) => {
   const menuItems: MenuItem[] = [
     { href: '/', label: translation.home.title, icon: <FaHouse /> },
     {
       href: '/posts',
       label: translation.posts.title,
-      icon: <FaRegNewspaper />,
+      icon: <FaRegNewspaper />
     },
     {
       href: '/friends',
       label: translation.friends.title,
-      icon: <FaPeopleGroup />,
+      icon: <FaPeopleGroup />
     },
-    { href: '/about', label: translation.about.title, icon: <FaInfo /> },
+    { href: '/about', label: translation.about.title, icon: <FaInfo /> }
   ];
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
