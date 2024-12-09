@@ -155,6 +155,30 @@ showComments: true # Set whether you want have comment for this page
 "link": "https://www.lihaoyu.cn",
 "img": "https://cdn.v2ex.com/gravatar/636d113ce37111d08f08faee780ce9b8?size=512",
 "des": "也许我们会分别，但我们将永远不会忘记彼此"
+},
+{
+"title": "旺东自留地",
+"link": "https://wang618.cn",
+"img": "https://wang618.cn/logo.gif",
+"des": "爱分享、爱生活、爱摸鱼"
+},
+{
+"title": "echeverra",
+"link": "https://echeverra.cn",
+"img": "https://echeverra.cn/favicon.jpg",
+"des": "let's go, together!"
+},
+{
+"title": "Bensz",
+"link": "https://blognas.hwb0307.com",
+"img": "https://blognas.hwb0307.com/logo.jpg",
+"des": "百代繁华一朝都，谁非过客；千秋明月吹角寒，花是主人。"
+},
+{
+"title": "HKK’s Diary",
+"link": "https://ihkk.net",
+"img": "https://ihkk.net/wp-content/uploads/avatars/1/1649268643-bpfull.jpg",
+"des": "美好回忆中毒症。"
 }
 ]
 ```
