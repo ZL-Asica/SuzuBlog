@@ -1,6 +1,7 @@
 import { replace } from 'es-toolkit/compat';
-import Image from 'next/image';
 import Link from 'next/link';
+
+import { CustomImage } from '@/components/ui';
 
 const renderFriendLinks = (linksChildren: string, transition: Translation) => {
   let links: FriendLink[] = [];
@@ -33,8 +34,8 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
               rel='noopener noreferrer'
               className='friend-link flex h-[225px] flex-col items-center justify-center rounded-lg p-4 text-center no-underline shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg'
             >
-              <Image
-                src={link.img || ''}
+              <CustomImage
+                src={link.img}
                 width={100}
                 height={100}
                 alt={`${transition.friends.avatar}: ${link.title || ''}`}

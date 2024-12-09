@@ -18,7 +18,7 @@ showLicense: false # Set whether you want to show license for this page
 {
 "title": "AIfans",
 "link": "https://aifans.zla.app/",
-"img": "https://r2.img.zla.app/2024/12/03/6cd045.webp",
+"img": "https://r2.img.zla.app/2024/12/03/",
 "des": "KizunaAI 中文粉丝站"
 },
 {
