@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdMoreHoriz } from 'react-icons/md';
-import { FaRegClock } from 'react-icons/fa6';
+import { FaRegClock, FaEllipsis } from 'react-icons/fa6';
 import { Suspense } from 'react';
 
 import { CategoriesTagsList } from '@/components/article';
@@ -78,7 +77,7 @@ const PostList = ({ posts, translation }: PostListProperties) => {
                   aria-label={`${postTitle}`}
                   className='self-start transition duration-500 hover:scale-110'
                 >
-                  <MdMoreHoriz
+                  <FaEllipsis
                     size={32}
                     className='cursor-pointer'
                   />

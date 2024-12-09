@@ -1,4 +1,3 @@
-import { MdEmail } from 'react-icons/md';
 import {
   FaGithub,
   FaLinkedin,
@@ -9,6 +8,7 @@ import {
   FaYoutube,
   FaZhihu,
   FaBilibili,
+  FaEnvelope,
   FaRss
 } from 'react-icons/fa6';
 import { upperFirst } from 'es-toolkit/string';
@@ -102,7 +102,7 @@ const socialData = {
   },
   email: {
     urlTemplate: 'mailto:{username}',
-    icon: MdEmail
+    icon: FaEnvelope
   },
   rss: {
     urlTemplate: '{username}',
