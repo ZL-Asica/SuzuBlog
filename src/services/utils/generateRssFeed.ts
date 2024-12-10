@@ -36,11 +36,9 @@ async function generateRssFeed(posts: PostListData[], config: Config) {
 
   // Output to public/feed.xml
   const outputPath = path.join(process.cwd(), 'public', 'feed.xml');
-  const staticOutputPath = path.join(process.cwd(), '.next', 'static', 'feed.xml');
   fs.writeFileSync(outputPath, feed.xml({ indent: true }), 'utf8');
-  fs.writeFileSync(staticOutputPath, feed.xml({ indent: true }), 'utf8');
 
-  console.info('RSS feed generated at /feed.xml 🎉 ');
+  console.info('RSS feed generated at /feed.xml 🎉\n');
 }
 
 export default generateRssFeed;

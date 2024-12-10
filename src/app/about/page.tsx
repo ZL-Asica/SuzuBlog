@@ -15,6 +15,7 @@ async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${aboutPage?.frontmatter.title || aboutPage?.frontmatter.title || aboutTranslation.title} - ${config.title}`,
     description: `${config.title}${aboutTranslation.description} - ${config.description}`,
+    alternates: { canonical: `${config.siteUrl}/about` },
     openGraph: {
       siteName: config.title,
       title: `${aboutPage?.frontmatter.title || aboutTranslation.title} - ${config.title}`,

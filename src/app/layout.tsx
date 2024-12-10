@@ -30,6 +30,10 @@ const metadata: Metadata = {
   title: `${config.title} - ${config.subTitle}`,
   description: config.description,
   keywords: config.keywords,
+  generator: 'SuzuBlog with Next.js',
+  creator: 'ZL Asica',
+  publisher: config.author.name,
+  alternates: { canonical: config.siteUrl },
   authors: [{ url: config.author.link, name: config.author.name }],
   openGraph: {
     siteName: `${config.title} - ${config.subTitle}`,

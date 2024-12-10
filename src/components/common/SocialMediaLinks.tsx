@@ -50,6 +50,7 @@ const SocialMediaLinks = ({
               target='_blank'
               rel='noopener noreferrer'
               aria-label={label}
+              prefetch={false}
               className='group relative inline-block transform transition-all duration-700 ease-out'
             >
               <IconComponent
