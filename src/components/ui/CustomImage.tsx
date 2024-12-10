@@ -27,11 +27,7 @@ const CustomImage = ({ src, alt, ...props }: ImageProperties) => {
       priority={props.priority || true}
       placeholder='blur'
       blurDataURL={fallbackImage}
-      onLoadingComplete={(result) => {
-        if (result.naturalHeight === 0) {
-          setImgSource(fallbackImage);
-        }
-      }}
+      onError={() => setImgSource(fallbackImage)}
       {...props}
     />
   );

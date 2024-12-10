@@ -1,6 +1,6 @@
 'use client';
 
-import { FaListUl } from 'react-icons/fa';
+import { FaListUl } from 'react-icons/fa6';
 import { useIsTop } from '@zl-asica/react';
 
 import TOCLink from './TOCLink';
@@ -37,7 +37,7 @@ const TOC = ({
       >
         <FaListUl size={20} />
       </button>
-      <nav
+      <menu
         ref={tocReference}
         hidden={!isVisible}
         className={`fixed bottom-40 top-auto z-40 max-h-[60vh] w-auto max-w-56 overflow-auto rounded-lg bg-[var(--lightGray)] p-3 shadow-md transition-all xl:bottom-auto xl:top-36 ${
@@ -47,18 +47,21 @@ const TOC = ({
         <h2 className='mb-4 text-lg font-semibold text-[var(--sakuraPink)]'>
           {translation.post.toc}
         </h2>
-        {items.map((item) => (
-          <TOCLink
-            key={item.slug}
-            item={item}
-            activeSlug={activeSlug}
-            handleLinkClick={handleLinkClick}
-            autoSlug={autoSlug}
-          />
-        ))}
-      </nav>
+        <ul className='m-0 list-none p-0'>
+          {items.map((item) => (
+            <TOCLink
+              key={item.slug}
+              item={item}
+              activeSlug={activeSlug}
+              handleLinkClick={handleLinkClick}
+              autoSlug={autoSlug}
+            />
+          ))}
+        </ul>
+      </menu>
     </div>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default TOC;

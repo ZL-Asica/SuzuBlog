@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { parseInt } from 'es-toolkit/compat';
+import { backToTop } from '@zl-asica/react';
 
 import PostListLayout from './PostList';
 import Pagination from './Pagination';
@@ -12,16 +14,32 @@ import { getFilteredPosts, validateParameters, updateURL } from '@/services/util
 interface PostPageClientProperties {
   posts: PostListData[];
   translation: Translation;
+  postsPerPage: number;
 }
 
-const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
+const PostPageClient = ({
+  posts,
+  translation,
+  postsPerPage
+}: PostPageClientProperties) => {
   const searchParameters = useSearchParams();
   const searchQuery = searchParameters.get('query') || '';
   const categoryParameter = searchParameters.get('category') || '';
   const tagParameter = searchParameters.get('tag') || '';
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParameters.get('page') || '1', 10)
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    backToTop(10)();
+
+    const currentUrl = new URL(globalThis.location.href);
+    currentUrl.searchParams.set('page', page.toString());
+    globalThis.history.pushState(null, '', currentUrl);
+  };
+
   const categories = [
     ...new Set(posts.flatMap((post) => post.frontmatter.categories || []))
   ];
@@ -70,7 +88,7 @@ const PostPageClient = ({ posts, translation }: PostPageClientProperties) => {
         postsPerPage={postsPerPage}
         totalPosts={filteredPosts.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        setCurrentPage={handlePageChange}
       />
     </div>
   );

@@ -48,6 +48,10 @@ interface Translation {
       };
     };
   };
+  aria: {
+    travellings: string;
+    theme: string;
+  };
   newTab: string;
   navigate: string;
 }

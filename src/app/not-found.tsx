@@ -25,27 +25,21 @@ function Custom404() {
   }, []);
 
   return (
-    <main className='grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8'>
-      <div className='text-center'>
-        <p className='text-base font-semibold'>404</p>
-        <h1 className='mt-4 text-3xl font-bold tracking-tight sm:text-5xl'>
-          Page not found
-        </h1>
-        <p className='mt-6 text-base leading-7'>
-          Sorry, we couldn’t find the page you’re looking for.
-          <br />
-          You will be redirected to the home page in{' '}
-          <span className='font-bold'>{countdown}</span> seconds.
-        </p>
-        <div className='mt-10 flex items-center justify-center gap-x-6'>
-          <Link
-            href='/'
-            className='hover:bg-sakuraPink-dark rounded-md bg-sakuraPink px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-          >
-            Go back home
-          </Link>
-        </div>
-      </div>
+    <main className='mx-8 mt-[30vh] flex flex-col items-center justify-center text-center'>
+      <h1 className='mb-4 text-3xl font-bold text-[var(--sakuraPink)]'>
+        404 - 页面迷路啦 (；′⌒`)
+      </h1>
+      <p className='mb-6 text-base leading-7'>
+        抱歉，您要找的页面已经不见了，或者它从未存在过 🔍
+        <br />
+        <span className='text-[var(--skyblue)]'>{countdown}</span> 秒后将自动返回首页
+      </p>
+      <Link
+        href='/'
+        className='rounded bg-[var(--skyblue)] px-4 py-2 text-white no-underline transition-all duration-500 hover:scale-110 hover:bg-[var(--skyblue)] hover:text-black'
+      >
+        返回首页
+      </Link>
     </main>
   );
 }

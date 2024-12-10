@@ -9,6 +9,7 @@ interface Frontmatter {
   redirect?: string;
   showComments?: boolean;
   showLicense?: boolean;
+  showThumbnail?: boolean;
   autoSlug?: boolean;
 }
 
@@ -45,20 +46,19 @@ interface UserConfig {
     name: string;
     link: string;
   };
-  googleAnalytics: string;
+  googleAnalytics: string | null;
+  postsPerPage: number | null;
   creativeCommons: CreativeCommons;
   lang: string;
   siteUrl: string;
   avatar: string;
   background: string;
   slogan: string;
-  travellings: boolean;
-  startYear: number;
+  travellings: boolean | null;
+  startYear: number | null;
   socialMedia: SocialMedia;
-  thumbnailAbout: boolean;
-  thumbnailFriends: boolean;
-  twikooEnvId: string;
-  disqusShortname: string;
+  twikooEnvId: string | null;
+  disqusShortname: string | null;
   slotFooter: string;
   headerJavascript: string[];
   slotComment: string;

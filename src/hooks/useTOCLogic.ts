@@ -1,11 +1,13 @@
-import { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { useClickOutside, useEventListener, useToggle } from '@zl-asica/react';
+'use client';
 
-function useTOCLogic(onLinkClick?: (slug: string) => void) {
+import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { useClickOutside, useToggle } from '@zl-asica/react';
+
+const useTOCLogic = () => {
   const [activeSlug, setActiveSlug] = useState('');
   const [isOpen, toggleOpen] = useToggle();
-  const tocReference = useRef<HTMLDivElement | null>(null);
+  const tocReference = useRef<HTMLElement>(null);
   const router = useRouter();
 
   const handleLinkClick = (slug: string) => {
@@ -16,10 +18,8 @@ function useTOCLogic(onLinkClick?: (slug: string) => void) {
       router.push(`#${slug}`, { scroll: false });
     }
     if (isOpen) toggleOpen();
-    if (onLinkClick) onLinkClick(slug);
   };
 
-  // Helper function to update activeSlug based on current scroll position
   const updateActiveSlug = () => {
     const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
     let currentSlug = '';
@@ -28,19 +28,40 @@ function useTOCLogic(onLinkClick?: (slug: string) => void) {
         currentSlug = heading.id;
       }
     }
-    setActiveSlug(currentSlug);
+    if (currentSlug !== activeSlug) {
+      setActiveSlug(currentSlug);
+    }
   };
 
-  // Update activeSlug on scroll
-  useEventListener(
-    'scroll',
-    updateActiveSlug,
-    { current: globalThis },
-    { passive: true },
-    100
-  );
+  useEffect(() => {
+    if (tocReference.current && activeSlug) {
+      const activeLink = tocReference.current.querySelector(
+        `a[href="#${CSS.escape(activeSlug)}"]`
+      ) as HTMLElement | null;
+      if (activeLink) {
+        const container = tocReference.current;
+        const { offsetTop: linkTop } = activeLink;
+        const containerScroll = container.scrollTop;
+        const containerHeight = container.clientHeight;
 
-  // Close TOC when clicking outside
+        // Ensure the active link is visible and vertically centered
+        const offset = linkTop - containerHeight / 2;
+        if (containerScroll !== offset) {
+          container.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+  }, [activeSlug]);
+
+  useEffect(() => {
+    const handleScroll = () => updateActiveSlug();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeSlug]);
+
   useClickOutside(tocReference, () => {
     if (isOpen) toggleOpen();
   });
@@ -52,6 +73,6 @@ function useTOCLogic(onLinkClick?: (slug: string) => void) {
     handleLinkClick,
     tocReference
   };
-}
+};
 
 export default useTOCLogic;

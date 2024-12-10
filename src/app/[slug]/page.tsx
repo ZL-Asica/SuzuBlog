@@ -38,6 +38,8 @@ async function generateMetadata({ params }: Properties): Promise<Metadata> {
     title: `${postData?.frontmatter.title} - ${config.title}`,
     description: postData?.postAbstract || config.description,
     keywords: metaKeywords,
+    alternates: { canonical: `${config.siteUrl}/${slug}` },
+    publisher: postData?.frontmatter.author || config.author.name,
     openGraph: {
       siteName: config.title,
       type: 'article',

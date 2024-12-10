@@ -15,6 +15,7 @@ function generateMetadata(): Metadata {
   return {
     title: `${translation.posts.title} - ${config.title}`,
     description: `${config.title}${translation.posts.description} - ${config.description}`,
+    alternates: { canonical: `${config.siteUrl}/posts` },
     openGraph: {
       siteName: config.title,
       title: `${translation.posts.title} - ${config.title}`,
@@ -62,6 +63,7 @@ async function PostsPage() {
         <PostsPageClient
           posts={posts}
           translation={translation}
+          postsPerPage={Math.min(15, config.postsPerPage ?? 5)}
         />
       </Suspense>
     </>

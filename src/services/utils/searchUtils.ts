@@ -1,9 +1,10 @@
-import { removeSpecialCharacters } from '@zl-asica/react';
-
 const sanitizeQuery = (query: string | null): string => {
   // Remove non-alphanumeric characters and trim the query
   if (query === null) return '';
-  return removeSpecialCharacters(query).trim().slice(0, 30);
+  return query
+    .replaceAll(/[^\p{L}\p{N}\s]/gu, '')
+    .trim()
+    .slice(0, 30);
 };
 
 const validateParameters = (
@@ -20,6 +21,9 @@ const validateParameters = (
       newParameters.set(key, value);
     } else if (key === 'query') {
       newParameters.set(key, sanitizeQuery(value));
+    } else if (key === 'page') {
+      const page = Number.parseInt(value, 10);
+      newParameters.set(key, Number.isNaN(page) || page < 1 ? '1' : page.toString());
     }
   }
 

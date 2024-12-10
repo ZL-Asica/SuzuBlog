@@ -4,11 +4,11 @@
 
 > **Suzu** - "鈴" in Japanese, meaning "bell" - is a minimalist blog template built with **Next.js** and pure **Markdown**.
 
-[![Build by Vercel][github-build-badge]][github-build-link]
 [![GitHub License][license-badge]][license-link]
 [![Node.js][node-badge]][node-link]
-[![pnpm Version][pnpm-badge]][pnpm-link] |
+[![pnpm Version][pnpm-badge]][pnpm-link]
 [![Next.js][nextjs-badge]][nextjs-link]
+[![Tailwind CSS][tailwind-badge]][tailwind-link] |
 [![Vercel][vercel-badge]][vercel-link]
 [![Eslint][eslint-badge]][eslint-link]
 [![Prettier][prettier-badge]][prettier-link]
@@ -95,8 +95,6 @@ After years of frustration with the maintenance, security risks, and performance
 
 [eslint-badge]: https://img.shields.io/badge/eslint-4B32C3?logo=eslint&logoColor=white
 [eslint-link]: https://www.npmjs.com/package/eslint-config-zl-asica
-[github-build-badge]: https://img.shields.io/github/deployments/ZL-Asica/SuzuBlog/Production?logo=github&label=Build
-[github-build-link]: https://github.com/ZL-Asica/SuzuBlog/deployments
 [license-badge]: https://img.shields.io/github/license/ZL-Asica/SuzuBlog
 [license-link]: https://github.com/ZL-Asica/SuzuBlog/blob/main/LICENSE
 [nextjs-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
@@ -107,5 +105,7 @@ After years of frustration with the maintenance, security risks, and performance
 [pnpm-link]: https://pnpm.io/
 [prettier-badge]: https://img.shields.io/badge/Prettier-F7B93E?logo=Prettier&logoColor=white
 [prettier-link]: https://www.npmjs.com/package/@zl-asica/prettier-config
+[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white
+[tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
 [vercel-link]: https://vercel.com

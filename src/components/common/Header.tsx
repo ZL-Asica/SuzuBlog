@@ -15,7 +15,6 @@ interface HeaderProperties {
 const Header = ({ config }: HeaderProperties) => {
   const [isOpen, toggleOpen] = useToggle();
   const siteTitle = config.title;
-  const translation = config.translation;
   const scrollProgress = useScrollPosition(undefined, true);
   const menuReference = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -76,7 +75,11 @@ const Header = ({ config }: HeaderProperties) => {
         {isOpen && (
           <div
             className='fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300'
-            onClick={toggleOpen}
+            onClick={(event_) => {
+              event_.preventDefault();
+              event_.stopPropagation();
+              toggleOpen();
+            }}
             aria-hidden
           />
         )}

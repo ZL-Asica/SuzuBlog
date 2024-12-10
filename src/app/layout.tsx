@@ -30,6 +30,10 @@ const metadata: Metadata = {
   title: `${config.title} - ${config.subTitle}`,
   description: config.description,
   keywords: config.keywords,
+  generator: 'SuzuBlog with Next.js',
+  creator: 'ZL Asica',
+  publisher: config.author.name,
+  alternates: { canonical: config.siteUrl },
   authors: [{ url: config.author.link, name: config.author.name }],
   openGraph: {
     siteName: `${config.title} - ${config.subTitle}`,
@@ -54,18 +58,10 @@ function RootLayout({
   children: React.ReactNode;
 }>) {
   const config: Config = getConfig();
-  const googleAnalytics: string = config.googleAnalytics || '';
+  const googleAnalytics = config.googleAnalytics;
 
   return (
     <html lang={config.lang}>
-      <meta
-        name='Powered-By'
-        content='SuzuBlog'
-      />
-      <meta
-        name='Strict-Transport-Security'
-        content='max-age=63072000; includeSubDomains; preload'
-      />
       <link
         rel='icon'
         type='image/png'

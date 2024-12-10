@@ -16,7 +16,7 @@
   "funding": "https://github.com/sponsors/ZL-Asica",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "NODE_NO_WARNINGS=1 next build",
     "start": "next start",
     "format": "prettier --write .",
     "lint": "next lint",
@@ -30,8 +30,8 @@
     "clsx": "^2.1.1",
     "es-toolkit": "^1.29.0",
     "gray-matter": "^4.0.3",
-    "katex": "^0.16.11",
-    "next": "15.0.4",
+    "katex": "^0.16.15",
+    "next": "15.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-icons": "^5.4.0",
@@ -47,18 +47,18 @@
     "yaml": "^2.6.1"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.0.4",
+    "@next/eslint-plugin-next": "^15.1.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "@zl-asica/prettier-config": "^1.0.9",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "eslint": "^9.16.0",
     "eslint-config-zl-asica": "^1.0.20",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.2.11",
     "postcss": "^8.4.49",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^10.1.1",
@@ -76,10 +76,6 @@
     "**/*.{css,json,md}": [
       "prettier --write"
     ]
-  },
-  "engines": {
-    "node": ">=20",
-    "pnpm": ">=9"
   },
   "browserslist": {
     "production": [

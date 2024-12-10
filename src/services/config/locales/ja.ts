@@ -49,6 +49,10 @@ const ja: Translation = {
       }
     }
   },
+  aria: {
+    travellings: '開通の道',
+    theme: 'テーマ'
+  },
   newTab: '新しいタブで開く: ',
   navigate: '移動先'
 };
