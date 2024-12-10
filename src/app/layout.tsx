@@ -54,7 +54,7 @@ function RootLayout({
   children: React.ReactNode;
 }>) {
   const config: Config = getConfig();
-  const googleAnalytics: string = config.googleAnalytics || '';
+  const googleAnalytics = config.googleAnalytics;
 
   return (
     <html lang={config.lang}>

@@ -4,13 +4,20 @@ import { NextResponse } from 'next/server';
 import { sanitizeQuery } from '@/services/utils';
 
 function middleware(request: NextRequest) {
+  request.headers.set('X-Themed-By', 'SuzuBlog');
+  request.headers.set('X-Theme-Author', 'ZL Asica');
+  request.headers.set('X-Theme-URL', 'https://suzu.zla.app');
+
   const url = request.nextUrl.clone();
-  if (
-    !url.searchParams ||
-    !url.pathname ||
-    !url.search ||
-    url.pathname.startsWith('/feed.xml')
-  ) {
+
+  if (url.pathname.startsWith('/feed')) {
+    if (url.searchParams.toString()) {
+      return NextResponse.rewrite(new URL('/feed.xml', request.url));
+    }
+    return NextResponse.next();
+  }
+
+  if (!url.searchParams || !url.pathname || !url.search) {
     return NextResponse.next();
   }
 
@@ -26,7 +33,7 @@ function middleware(request: NextRequest) {
 
   // Filter and sanitize search parameters for `/posts`
   const updatedSearchParameters = new URLSearchParams();
-  const allowedKeys = new Set(['category', 'tag', 'query']);
+  const allowedKeys = new Set(['category', 'tag', 'query', 'page']);
 
   for (const [key, value] of url.searchParams.entries()) {
     if (allowedKeys.has(key)) {
@@ -65,7 +72,7 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!api|_next/static|_next/image|_vercel|favicon.ico|sitemap.xml|robots.txt|feed.xml|manifest.webmanifest).*)'
+    '/((?!api|_next/static|_next/image|_vercel|favicon.ico|sitemap.xml|robots.txt).*)'
   ]
 };
 

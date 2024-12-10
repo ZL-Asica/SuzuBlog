@@ -26,6 +26,9 @@ googleAnalytics:
 #######################
 # POSTS SETTINGS
 #######################
+# How many posts you want to display per page. (default(not set): 5, max: 15)
+postsPerPage:
+# Your custom CC license for the posts.
 creativeCommons:
   type: CC BY-SA 4.0 Deed
   link: https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans
