@@ -62,6 +62,7 @@ async function PostsPage() {
         <PostsPageClient
           posts={posts}
           translation={translation}
+          postsPerPage={Math.min(15, config.postsPerPage ?? 5)}
         />
       </Suspense>
     </>

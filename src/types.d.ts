@@ -46,6 +46,7 @@ interface UserConfig {
     link: string;
   };
   googleAnalytics: string | null;
+  postsPerPage: number | null;
   creativeCommons: CreativeCommons;
   lang: string;
   siteUrl: string;

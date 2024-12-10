@@ -33,7 +33,7 @@ function middleware(request: NextRequest) {
 
   // Filter and sanitize search parameters for `/posts`
   const updatedSearchParameters = new URLSearchParams();
-  const allowedKeys = new Set(['category', 'tag', 'query']);
+  const allowedKeys = new Set(['category', 'tag', 'query', 'page']);
 
   for (const [key, value] of url.searchParams.entries()) {
     if (allowedKeys.has(key)) {
