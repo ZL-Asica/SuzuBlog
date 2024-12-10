@@ -49,6 +49,10 @@ const en: Translation = {
       }
     }
   },
+  aria: {
+    travellings: 'travellings',
+    theme: 'Theme'
+  },
   newTab: 'Open in new tab: ',
   navigate: 'Navigate to'
 };
