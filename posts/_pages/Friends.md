@@ -55,6 +55,12 @@ showComments: true # Set whether you want have comment for this page
 "des": ""
 },
 {
+"title": "Keishiの博客",
+"link": "https://keishi.cn",
+"img": "https://img.keishi.cn/img/2021logo.jpg",
+"des": "积极看待，行有所止."
+},
+{
 "title": "折影轻梦",
 "link": "https://nexmoe.com/",
 "img": "https://cravatar.cn/avatar/c7fd185f8c967dec20c29c75a40b9e09?s=500",
@@ -67,10 +73,22 @@ showComments: true # Set whether you want have comment for this page
 "des": "愿我的祝福与你同在！"
 },
 {
+"title": "北雁云依",
+"link": "https://stblog.penclub.club/",
+"img": "https://stblog.penclub.club/%E5%A4%B4%E5%83%8F%E5%9C%86.webp",
+"des": "把信拿去吧，你可以假戏真做"
+},
+{
 "title": "CrazyWong",
 "link": "https://blog.crazywong.com/",
 "img": "https://blog.crazywong.com/img/avatar.png",
 "des": "热衷学习，热衷生活"
+},
+{
+"title": "Siren's Playground",
+"link": "https://siren-wang.github.io/",
+"img": "https://r2.img.zla.app/2024/12/10/4b7617.webp",
+"des": "Paint the world colorful."
 },
 {
 "title": "Elykia",

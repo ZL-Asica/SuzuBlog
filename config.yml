@@ -21,7 +21,7 @@ background: '/images/background.jpg'
 # Slogan displayed on your homepage, under your avatar.
 slogan: 人和代码，有一个能跑就行～
 # Google Analytics tracking ID (e.g., 'G-XXXXXXXXXX').
-googleAnalytics: G-659VZ9NH28
+googleAnalytics:
 
 #######################
 # POSTS SETTINGS
