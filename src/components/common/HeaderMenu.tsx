@@ -92,54 +92,49 @@ const HeaderMenu = ({
             </Link>
           </li>
           {isMobile && (
-            <li className='w-full'>
-              <div className='h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]'></div>
+            <li
+              className='w-full'
+              aria-hidden
+            >
+              <div className='h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]' />
             </li>
           )}
         </Fragment>
       ))}
 
-      <div
-        className={`${
-          isMobile
-            ? 'flex h-full w-full flex-grow items-center justify-center'
-            : 'flex gap-4'
-        }`}
+      <li
+        className={`${isMobile ? 'mt-4 flex w-full justify-around' : 'flex justify-center gap-4'}`}
       >
         {config.travellings && (
-          <li className='group mx-auto flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800'>
-            <Link
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
-              aria-label="$t('aria.travellings')"
-              href='https://www.travellings.cn/go.html'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <span className='flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]'>
-                <FaTrainSubway className='h-full w-full' />
-              </span>
-            </Link>
-          </li>
-        )}
-        <li className='group mx-auto flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800'>
-          <button
-            className='flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
-            aria-label="$t('aria.theme')"
-            onClick={() => {
-              toggleTheme();
-              if (onClickHandler) onClickHandler();
-            }}
+          <Link
+            className='group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
+            title={translation.aria.travellings}
+            href='https://www.travellings.cn/go.html'
+            rel='noopener noreferrer'
+            target='_blank'
           >
             <span className='flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]'>
-              {isDarkTheme ? (
-                <FaRegSun className='h-full w-full' />
-              ) : (
-                <FaMoon className='h-full w-full' />
-              )}
+              <FaTrainSubway className='h-full w-full' />
             </span>
-          </button>
-        </li>
-      </div>
+          </Link>
+        )}
+        <button
+          className='group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
+          aria-label={translation.aria.theme}
+          onClick={() => {
+            toggleTheme();
+            if (onClickHandler) onClickHandler();
+          }}
+        >
+          <span className='flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]'>
+            {isDarkTheme ? (
+              <FaRegSun className='h-full w-full' />
+            ) : (
+              <FaMoon className='h-full w-full' />
+            )}
+          </span>
+        </button>
+      </li>
     </ul>
   );
 };

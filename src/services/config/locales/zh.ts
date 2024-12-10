@@ -48,6 +48,10 @@ const zh: Translation = {
       }
     }
   },
+  aria: {
+    travellings: '开往',
+    theme: '主题'
+  },
   newTab: '在新标签页打开：',
   navigate: '重定向到'
 };
