@@ -4,10 +4,6 @@ import { NextResponse } from 'next/server';
 import { sanitizeQuery } from '@/services/utils';
 
 function middleware(request: NextRequest) {
-  request.headers.set('X-Themed-By', 'SuzuBlog');
-  request.headers.set('X-Theme-Author', 'ZL Asica');
-  request.headers.set('X-Theme-URL', 'https://suzu.zla.app');
-
   const url = request.nextUrl.clone();
 
   if (url.pathname.startsWith('/feed')) {

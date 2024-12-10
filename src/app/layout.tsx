@@ -58,14 +58,6 @@ function RootLayout({
 
   return (
     <html lang={config.lang}>
-      <meta
-        name='Powered-By'
-        content='SuzuBlog'
-      />
-      <meta
-        name='Strict-Transport-Security'
-        content='max-age=63072000; includeSubDomains; preload'
-      />
       <link
         rel='icon'
         type='image/png'
