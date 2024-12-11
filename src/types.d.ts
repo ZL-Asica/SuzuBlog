@@ -9,6 +9,7 @@ interface Frontmatter {
   redirect?: string;
   showComments?: boolean;
   showLicense?: boolean;
+  showThumbnail?: boolean;
   autoSlug?: boolean;
 }
 
@@ -56,8 +57,6 @@ interface UserConfig {
   travellings: boolean | null;
   startYear: number | null;
   socialMedia: SocialMedia;
-  thumbnailAbout: boolean;
-  thumbnailFriends: boolean;
   twikooEnvId: string | null;
   disqusShortname: string | null;
   slotFooter: string;

@@ -66,7 +66,6 @@ async function FriendsPage() {
       <ArticlePage
         config={config}
         post={post}
-        showThumbnail={config.thumbnailFriends}
       />
     </>
   );

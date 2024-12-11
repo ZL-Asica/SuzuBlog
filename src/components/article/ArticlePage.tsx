@@ -21,15 +21,14 @@ const DisqusComments = dynamic(() =>
 interface PostLayoutProperties {
   config: Config;
   post: FullPostData;
-  showThumbnail?: boolean;
 }
 
-const ArticlePage = ({ config, post, showThumbnail = true }: PostLayoutProperties) => {
+const ArticlePage = ({ config, post }: PostLayoutProperties) => {
   const translation = config.translation;
 
   return (
     <article className='container mx-auto animate-fadeInDown p-6 pb-2'>
-      {showThumbnail ? (
+      {post.frontmatter.showThumbnail ? (
         <Thumbnail
           title={post.frontmatter.title}
           src={post.frontmatter.thumbnail}
@@ -69,7 +68,7 @@ const ArticlePage = ({ config, post, showThumbnail = true }: PostLayoutPropertie
             items={post.toc}
             translation={translation}
             autoSlug={post.frontmatter.autoSlug}
-            showThumbnail={showThumbnail}
+            showThumbnail={post.frontmatter.showThumbnail}
           />
         )}
         <MarkdownContent

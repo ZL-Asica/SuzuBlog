@@ -64,7 +64,6 @@ async function AboutPage() {
       <ArticlePage
         config={config}
         post={post}
-        showThumbnail={config.thumbnailAbout}
       />
     </>
   );

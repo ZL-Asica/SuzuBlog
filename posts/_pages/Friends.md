@@ -3,6 +3,7 @@ title: Some Customized Title # (Optional) Default is Friends
 thumbnail: '' # (Optional) You can put your personal about thumbnail
 showComments: true # Set whether you want have comment for this page
 showLicense: false # Set whether you want to show license for this page
+showThumbnail: false # Whether you want to show 'in page' thumbnail.
 ---
 
 ## 我的项目

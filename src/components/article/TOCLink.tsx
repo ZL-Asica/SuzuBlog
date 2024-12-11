@@ -1,4 +1,4 @@
-import Link from 'next/link';
+'use client';
 
 import { slugPrefix } from '@/services/utils';
 
@@ -14,24 +14,24 @@ const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkPropert
   const titleSlug = autoSlug ? `${slugPrefix(item.slug, item.level)} ` : '';
 
   return (
-    <div
+    <li
       key={item.slug}
+      className={`list-none py-1 text-base transition-colors duration-200 ${
+        isActive ? 'font-bold text-[var(--sakuraPink)]' : 'text-[var(--gray)]'
+      } `}
       style={{ marginLeft: `${(item.level - 2) * 0.8}em` }}
     >
-      <Link
+      <a
         href={`#${item.slug}`}
-        scroll={false}
         onClick={(event) => {
           event.preventDefault();
           handleLinkClick(item.slug);
         }}
-        className={`block py-1 text-base no-underline transition-colors duration-200 ${
-          isActive ? 'font-bold text-[var(--sakuraPink)]' : 'text-[var(--gray)]'
-        } break-words`}
+        className={`block break-words no-underline`}
       >
         {`${titleSlug}${item.title}`}
-      </Link>
-    </div>
+      </a>
+    </li>
   );
 };
 
