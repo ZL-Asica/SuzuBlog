@@ -31,6 +31,7 @@ function getPostFromFile(
     redirect: defaultTo(data.redirect),
     showComments: defaultTo(data.showComments, true),
     showLicense: defaultTo(data.showLicense, true),
+    showThumbnail: defaultTo(data.showThumbnail, true),
     autoSlug: defaultTo(data.autoSlug, true)
   };
 

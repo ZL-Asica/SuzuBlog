@@ -7,7 +7,7 @@ description: 'Suzu is a minimalist blog template with a serene sakura-inspired t
 keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica' # Comma-separated keywords for SEO purposes.
 author:
   name: 'ZL Asica' # Your name, displayed as the author of the blog.
-  link: 'https://www.zla.app' # Link to your personal website or blog.
+  link: 'https://www.zla.pub' # Link to your personal website or blog.
 # Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
 lang: 'zh'
 # Your public root url, used for SEO and meta tags.
@@ -64,13 +64,6 @@ socialMedia:
   bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
   email: zl@zla.app # Your email address.
   rss: true # Display the RSS icon.
-
-#######################
-# PAGES (ABOUT, FRIENDS) SETTINGS
-#######################
-# Have thumbnails for the about and friends pages.
-thumbnailAbout: false
-thumbnailFriends: false
 
 #######################
 # COMMENTS SETTINGS
