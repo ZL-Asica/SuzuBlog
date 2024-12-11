@@ -3,6 +3,7 @@ title: 关于我
 thumbnail: '' # (Optional) You can put your personal about thumbnail
 showLicense: false
 showComments: false # Set whether you want have comment for this page
+showThumbnail: false
 ---
 
 ## 自我介绍

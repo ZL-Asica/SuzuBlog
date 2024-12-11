@@ -3,6 +3,7 @@ title: 友人帐
 thumbnail: '' # (Optional) You can put your personal about thumbnail
 showLicense: false
 showComments: true # Set whether you want have comment for this page
+showThumbnail: false
 ---
 
 ## 我的项目

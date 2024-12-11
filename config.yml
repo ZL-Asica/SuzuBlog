@@ -63,13 +63,6 @@ socialMedia:
   rss: true # Display the RSS icon.
 
 #######################
-# PAGES (ABOUT, FRIENDS) SETTINGS
-#######################
-# Have thumbnails for the about and friends pages.
-thumbnailAbout: false
-thumbnailFriends: false
-
-#######################
 # COMMENTS SETTINGS
 # Only one of the following two options should be enabled.
 # Priority: Twikoo > Disqus
