@@ -1,6 +1,6 @@
 'use client';
 
-import { FaArrowUp } from 'react-icons/fa';
+import { FaArrowUp } from 'react-icons/fa6';
 import { useIsBottom, backToTop, useIsTop } from '@zl-asica/react';
 import { usePathname } from 'next/navigation';
 
