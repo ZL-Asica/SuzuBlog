@@ -59,6 +59,15 @@ const nextConfig: NextConfig = {
       'remark-math',
       'slugify'
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/(rss|atom|rss2).*|/feed',
+        destination: '/feed.xml',
+        permanent: true
+      }
+    ];
   }
 };
 
