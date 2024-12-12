@@ -19,7 +19,7 @@ const Footer = ({ config }: FooterProperties) => {
       <div className='mx-auto max-w-7xl px-4 py-4 text-center'>
         {!isHomePage && <SocialMediaLink socialMedia={config.socialMedia} />}
         <p className='text-[var(--gray)]'>
-          {`© ${config.startYear && config.startYear < currentYear ? `${config.startYear} - ` : ''}${currentYear} ${config.title}`}
+          {`© ${config.startYear < currentYear ? `${config.startYear} - ` : ''}${currentYear} ${config.title}`}
         </p>
         <p className='text-base text-[var(--gray)]'>
           Theme{' '}
