@@ -63,7 +63,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/(rss|atom|rss2).*|/feed',
+        source: String.raw`/:type(rss|atom|rss2)\.:format(\w+)`,
         destination: '/feed.xml',
         permanent: true
       }
