@@ -23,9 +23,15 @@ const PostPageClient = ({
   postsPerPage
 }: PostPageClientProperties) => {
   const searchParameters = useSearchParams();
-  const searchQuery = searchParameters.get('query') || '';
+  const queryParameters = searchParameters.get('query') || '';
   const categoryParameter = searchParameters.get('category') || '';
   const tagParameter = searchParameters.get('tag') || '';
+
+  const searchQueries = {
+    query: queryParameters,
+    category: categoryParameter,
+    tag: tagParameter
+  };
 
   const [currentPage, setCurrentPage] = useState(
     parseInt(searchParameters.get('page') || '1', 10)
@@ -53,7 +59,7 @@ const PostPageClient = ({
 
   const filteredPosts = getFilteredPosts(
     posts,
-    searchQuery,
+    queryParameters,
     categoryParameter,
     tagParameter
   );
@@ -70,7 +76,7 @@ const PostPageClient = ({
         categories={categories}
         tags={tags}
         translation={translation}
-        initialValue={searchQuery}
+        searchQueries={searchQueries}
       />
 
       {/* Post List */}

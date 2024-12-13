@@ -13,6 +13,7 @@ const Pagination = ({
   currentPage,
   setCurrentPage
 }: PaginationProperties) => {
+  // TODO: handle more than 5 pages condition.
   const pageNumbers = Array.from(
     { length: ceil(totalPosts / postsPerPage) },
     (_, index) => index + 1

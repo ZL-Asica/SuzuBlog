@@ -28,8 +28,8 @@ const PostList = ({ posts, translation }: PostListProperties) => {
           >
             {/* Thumbnail */}
             <div
-              className={`relative w-full ${
-                index % 2 === 0 ? 'rounded-r-lg' : 'rounded-l-lg'
+              className={`relative w-full rounded-lg ${
+                index % 2 === 0 ? 'md:rounded-r-lg' : 'md:rounded-l-lg'
               } h-1/2 overflow-hidden md:h-full md:w-7/12`}
             >
               <Link

@@ -36,7 +36,7 @@ const DisqusComments = ({ disqusShortname }: DisqusCommentsProperties) => {
       id='disqus_thread'
       ref={disqusReference}
       className='mx-auto w-full font-sans'
-    ></div>
+    />
   );
 };
 
