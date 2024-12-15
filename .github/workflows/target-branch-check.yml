@@ -1,0 +1,17 @@
+name: Check Target Branch
+
+on:
+  pull_request:
+    branches:
+      - main
+      - blog
+
+jobs:
+  check_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR target
+        if: github.base_ref == 'main' || github.base_ref == 'blog'
+        run: |
+          echo "::error::This PR targets the wrong branch (${github.base_ref}). Please change the target branch to 'dev'."
+          exit 1
