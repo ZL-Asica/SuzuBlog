@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 import { CustomImage } from '../ui';
 
+import CopyProtection from './CopyProtection';
 import MarkdownContent from './parser';
 import TOC from './TOC';
 import CategoriesTagsList from './CategoriesTagsList';
@@ -28,6 +29,7 @@ const ArticlePage = ({ config, post }: PostLayoutProperties) => {
 
   return (
     <article className='container mx-auto animate-fadeInDown p-6 pb-2'>
+      <CopyProtection />
       {post.frontmatter.showThumbnail ? (
         <Thumbnail
           title={post.frontmatter.title}
