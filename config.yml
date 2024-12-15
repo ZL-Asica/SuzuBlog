@@ -55,7 +55,7 @@ startYear: 2017 # Leave empty if you do not want to display a start year.
 socialMedia:
   github_username: ZL-Asica # Your GitHub username. https://github.com/username
   linkedin_username: elara-liu # Your LinkedIn username. https://www.linkedin.com/in/username
-  instagram_id: zl_asica # Your Instagram username.
+  instagram_id: # Your Instagram username.
   orcid_id: 0009-0008-7221-2324 # Your ORCID iD.
   telegram_username: zl_asica # Your Telegram username. https://t.me/username
   bluesky_username: zla.app # Your Bluesky username (without prefix). https://bsky.app/profile/{username}

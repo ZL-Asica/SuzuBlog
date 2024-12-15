@@ -31,12 +31,12 @@ const SocialMediaLinks = ({
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}
     >
       {Object.entries(socialMedia)
-        .filter(([key, _]) => key in socialData)
+        .filter(([key, username]) => key in socialData && username !== null)
         .map(([key, username]) => {
           const { urlTemplate, icon: IconComponent } = socialData[key as SocialMediaKey];
 
           const label = upperFirst(words(key)[0]);
-          if (key === 'rss' && username !== '' && username !== 'false') {
+          if (key === 'rss' && username !== 'false') {
             username = `/feed.xml`;
           }
           return (
