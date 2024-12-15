@@ -57,7 +57,7 @@ socialMedia:
   telegram_username: zl_asica # Your Telegram username. https://t.me/username
   bluesky_username: zla.app # Your Bluesky username (without prefix). https://bsky.app/profile/{username}
   youtube_id: ZL-Asica # Your YouTube channel ID. https://www.youtube.com/@username
-  zhihu_username: zl_asica # Your Zhihu username. https://www.zhihu.com/people/username
+  zhihu_username: zl-asica # Your Zhihu username. https://www.zhihu.com/people/username
   bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
   email: zl@zla.app # Your email address.
   rss: true # Display the RSS icon.
