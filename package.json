@@ -28,7 +28,7 @@
     "@vercel/speed-insights": "^1.1.0",
     "@zl-asica/react": "^0.3.10",
     "clsx": "^2.1.1",
-    "es-toolkit": "^1.29.0",
+    "es-toolkit": "^1.30.1",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.15",
     "next": "15.1.0",
