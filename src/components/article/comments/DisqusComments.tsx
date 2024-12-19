@@ -1,43 +1,43 @@
-'use client';
+'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react'
 
 interface DisqusCommentsProperties {
-  disqusShortname: string;
+  disqusShortname: string
 }
 
-const DisqusComments = ({ disqusShortname }: DisqusCommentsProperties) => {
-  const disqusReference = useRef<HTMLDivElement | null>(null);
+function DisqusComments({ disqusShortname }: DisqusCommentsProperties) {
+  const disqusReference = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          const disqusScript = document.createElement('script');
-          disqusScript.src = `https://${disqusShortname}.disqus.com/embed.js`;
-          disqusScript.dataset.timestamp = `${Date.now()}`;
-          (document.head || document.body).append(disqusScript);
+          const disqusScript = document.createElement('script')
+          disqusScript.src = `https://${disqusShortname}.disqus.com/embed.js`
+          disqusScript.dataset.timestamp = `${Date.now()}`
+          document.body.append(disqusScript)
 
-          observer.disconnect(); // Disconnect observer after loading script
+          observer.disconnect() // Disconnect observer after loading script
         }
       },
-      { threshold: 0.1 }
-    );
+      { threshold: 0.1 },
+    )
 
     if (disqusReference.current) {
-      observer.observe(disqusReference.current);
+      observer.observe(disqusReference.current)
     }
 
-    return () => observer.disconnect();
-  }, [disqusShortname]);
+    return () => observer.disconnect()
+  }, [disqusShortname])
 
   return (
     <div
-      id='disqus_thread'
+      id="disqus_thread"
       ref={disqusReference}
-      className='mx-auto w-full font-sans'
+      className="mx-auto w-full font-sans"
     />
-  );
-};
+  )
+}
 
-export default DisqusComments;
+export default DisqusComments

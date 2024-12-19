@@ -1,110 +1,109 @@
-'use client';
+'use client'
 
-import { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Form from 'next/form';
-import { clsx } from 'clsx';
-import { useClickOutside, useToggle } from '@zl-asica/react';
+import { updateURL, validateParameters } from '@/services/utils'
+import { useClickOutside, useToggle } from '@zl-asica/react'
+import { clsx } from 'clsx'
+import Form from 'next/form'
+import { useSearchParams } from 'next/navigation'
 
-import { validateParameters, updateURL } from '@/services/utils';
+import { useEffect, useRef, useState } from 'react'
 
 interface SearchInputProperties {
-  categories: string[];
-  tags: string[];
-  translation: Translation;
-  searchQueries: { query: string; category: string; tag: string };
+  categories: string[]
+  tags: string[]
+  translation: Translation
+  searchQueries: { query: string, category: string, tag: string }
 }
 
 // Handle form submission
-const handleFormSubmit = (event_) => {
-  event_.preventDefault();
+function handleFormSubmit(event_: React.FormEvent<HTMLFormElement>) {
+  event_.preventDefault()
 
-  const formData = new FormData(event_.currentTarget);
-  const params = new URLSearchParams();
+  const formData = new FormData(event_.currentTarget)
+  const params = new URLSearchParams()
 
   for (const [key, value] of formData.entries()) {
-    if (value) params.append(key, value.toString());
+    if (value !== null && value !== '')
+      params.append(key, value.toString())
   }
 
-  updateURL(new URL(globalThis.location.href), params);
-};
+  updateURL(new URL(globalThis.location.href), params)
+}
 
-const SearchInput = ({
+function SearchInput({
   categories,
   tags,
   translation,
-  searchQueries
-}: SearchInputProperties) => {
-  const searchParameters = useSearchParams();
-  const formReference = useRef<HTMLFormElement>(null);
+  searchQueries,
+}: SearchInputProperties) {
+  const searchParameters = useSearchParams()
+  const formReference = useRef<HTMLFormElement>(null)
 
-  const [searchQuery, setSearchQuery] = useState(searchQueries.query);
-  const [selectedCategory, setSelectedCategory] = useState(searchQueries.category);
-  const [selectedTag, setSelectedTag] = useState(searchQueries.tag);
-  const [expanded, toggleExpanded] = useToggle();
+  const [searchQuery, setSearchQuery] = useState(searchQueries.query)
+  const [selectedCategory, setSelectedCategory] = useState(searchQueries.category)
+  const [selectedTag, setSelectedTag] = useState(searchQueries.tag)
+  const [expanded, toggleExpanded] = useToggle()
 
   // Initialize search parameters
   useEffect(() => {
-    const sanitizedParameters = validateParameters(searchParameters, categories, tags);
-    const currentUrl = new URL(globalThis.location.href);
-    updateURL(currentUrl, sanitizedParameters);
-  }, [searchParameters, searchQueries]);
+    const sanitizedParameters = validateParameters(searchParameters, categories, tags)
+    const currentUrl = new URL(globalThis.location.href)
+    updateURL(currentUrl, sanitizedParameters)
+  }, [searchParameters, searchQueries, categories, tags])
 
   // Close the form when clicking outside
   useClickOutside(formReference, () => {
     if (expanded && !selectedCategory && !selectedTag) {
-      toggleExpanded();
+      toggleExpanded()
     }
-  });
+  })
 
-  const handleCategoryChange = (event_) => {
-    const newCategory = event_.target.value;
-    setSelectedCategory(newCategory);
-    const params = new URLSearchParams();
-    params.append('category', newCategory.toString());
-    updateURL(new URL(globalThis.location.href), params);
-  };
+  const handleCategoryChange = (event_: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCategory = event_.target.value
+    setSelectedCategory(newCategory)
+    const params = new URLSearchParams()
+    params.append('category', newCategory.toString())
+    updateURL(new URL(globalThis.location.href), params)
+  }
 
-  const handleTagChange = (event_) => {
-    const newTag = event_.target.value;
-    setSelectedTag(newTag);
-    const params = new URLSearchParams();
-    params.append('tag', newTag.toString());
-    console.info(params);
-    console.info(params.toString());
-    updateURL(new URL(globalThis.location.href), params);
-  };
+  const handleTagChange = (event_: React.ChangeEvent<HTMLSelectElement>) => {
+    const newTag = event_.target.value
+    setSelectedTag(newTag)
+    const params = new URLSearchParams()
+    params.append('tag', newTag.toString())
+    updateURL(new URL(globalThis.location.href), params)
+  }
 
   const handleReset = () => {
-    setSearchQuery('');
-    setSelectedCategory('');
-    setSelectedTag('');
-    updateURL(new URL(globalThis.location.href), new URLSearchParams());
-  };
+    setSearchQuery('')
+    setSelectedCategory('')
+    setSelectedTag('')
+    updateURL(new URL(globalThis.location.href), new URLSearchParams())
+  }
 
   return (
     <Form
       ref={formReference}
-      action='/posts'
-      className='mb-6 w-full max-w-lg space-y-4 rounded-lg p-4'
+      action="/posts"
+      className="mb-6 w-full max-w-lg space-y-4 rounded-lg p-4"
       replace
       onSubmit={handleFormSubmit}
     >
       {/* Search Input with Submit Button */}
-      <div className='relative w-full'>
-        <div className='relative flex items-center'>
+      <div className="relative w-full">
+        <div className="relative flex items-center">
           <input
-            type='text'
-            name='query'
+            type="text"
+            name="query"
             placeholder={`🔍 ${translation.search.prompt}`}
             value={searchQuery}
-            onChange={(event_) => setSearchQuery(event_.target.value)}
+            onChange={event_ => setSearchQuery(event_.target.value)}
             onFocus={toggleExpanded}
-            className='w-full rounded-full border border-gray-300 px-4 py-2 pr-16 transition-all duration-300 focus:ring-2'
+            className="w-full rounded-full border border-gray-300 px-4 py-2 pr-16 transition-all duration-300 focus:ring-2"
           />
           <button
-            type='submit'
-            className='absolute right-2 rounded-full px-4 py-1 transition'
+            type="submit"
+            className="absolute right-2 rounded-full px-4 py-1 transition"
           >
             {translation.search.submit}
           </button>
@@ -117,14 +116,14 @@ const SearchInput = ({
           'flex flex-col items-center space-y-4 overflow-hidden transition-all duration-300',
           {
             'max-h-0 opacity-0': !expanded,
-            'max-h-96 opacity-100': expanded
-          }
+            'max-h-96 opacity-100': expanded,
+          },
         )}
       >
-        <div className='mt-1 flex w-full space-x-10 px-2'>
-          <div className='relative flex-1'>
+        <div className="mt-1 flex w-full space-x-10 px-2">
+          <div className="relative flex-1">
             <select
-              name='category'
+              name="category"
               value={selectedCategory}
               aria-label={translation.search.categoriesAria}
               onChange={handleCategoryChange}
@@ -133,29 +132,29 @@ const SearchInput = ({
               }`}
             >
               <option
-                value=''
-                className='text-gray-400'
+                value=""
+                className="text-gray-400"
               >
                 {translation.search.allCategories}
               </option>
-              {categories.map((category) => (
+              {categories.map(category => (
                 <option
                   key={category}
                   value={category}
-                  className='text-gray-700'
+                  className="text-gray-700"
                 >
                   {category}
                 </option>
               ))}
             </select>
-            <span className='pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500'>
+            <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
               ▼
             </span>
           </div>
 
-          <div className='relative flex-1'>
+          <div className="relative flex-1">
             <select
-              name='tag'
+              name="tag"
               value={selectedTag}
               aria-label={translation.search.tagsAria}
               onChange={handleTagChange}
@@ -164,22 +163,22 @@ const SearchInput = ({
               }`}
             >
               <option
-                value=''
-                className='text-gray-400'
+                value=""
+                className="text-gray-400"
               >
                 {translation.search.allTags}
               </option>
-              {tags.map((tag) => (
+              {tags.map(tag => (
                 <option
                   key={tag}
                   value={tag}
-                  className='text-gray-700'
+                  className="text-gray-700"
                 >
                   {tag}
                 </option>
               ))}
             </select>
-            <span className='pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500'>
+            <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
               ▼
             </span>
           </div>
@@ -187,15 +186,15 @@ const SearchInput = ({
 
         {/* Clear Filters Button */}
         <button
-          type='reset'
+          type="reset"
           onClick={handleReset}
-          className='mt-2 rounded-full px-4 py-2 transition'
+          className="mt-2 rounded-full px-4 py-2 transition"
         >
           {translation.search.clear}
         </button>
       </div>
     </Form>
-  );
-};
+  )
+}
 
-export default SearchInput;
+export default SearchInput
