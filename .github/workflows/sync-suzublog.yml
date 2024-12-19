@@ -19,9 +19,9 @@ jobs:
         id: repo-check
         run: |
           if [[ "${{ github.repository }}" == "ZL-Asica/SuzuBlog" ]]; then
-            echo "::set-output name=target_branch::blog"
+            echo "target_branch=blog" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=target_branch::main"
+            echo "target_branch=main" >> $GITHUB_OUTPUT
           fi
 
       # Step 1: Checkout target branch
@@ -30,7 +30,7 @@ jobs:
         with:
           ref: ${{ steps.repo-check.outputs.target_branch }}
 
-      # Step 2: If is not SuzuBlog，clone main branch of SuzuBlog
+      # Step 2: If is not SuzuBlog, clone main branch of SuzuBlog
       - name: Clone SuzuBlog repo 🌸
         run: |
           git clone --branch main --depth 1 https://github.com/ZL-Asica/SuzuBlog.git suzublog
@@ -39,14 +39,11 @@ jobs:
       - name: Sync content excluding specific paths ✨
         run: |
           rsync -av --delete \
-            --exclude=".git/**" \
-            --exclude="config.yml" \
-            --exclude="next.config.ts" \
-            --exclude="src/app/robots.ts" \
+            --exclude="/.git/**" \
+            --exclude="/config.yml" \
             --exclude="/posts/**" \
             --exclude="/public/**" \
-            --exclude=".github/workflows/sync-suzublog.yml" \
-            --exclude="suzublog/**" \
+            --exclude="/suzublog/**" \
             suzublog/ .
 
       # Step 4: Delete the cloned SuzuBlog repo
@@ -61,6 +58,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --quiet || git commit -m "✨ Sync from SuzuBlog main branch"
+          git add --all
+          git status
+          git commit -m "✨ Sync from SuzuBlog main branch" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ steps.repo-check.outputs.target_branch }}
