@@ -1,21 +1,23 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { FaFolder, FaTags } from 'react-icons/fa6';
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { FaFolder, FaTags } from 'react-icons/fa6'
 
 interface CategoriesTagsListProperties {
-  type: 'category' | 'tag';
-  translation: Translation;
-  items?: string[];
+  type: 'category' | 'tag'
+  translation: Translation
+  items?: string[]
 }
 
-const CategoriesTagsList = ({
+const defaultItems: never[] = []
+
+function CategoriesTagsList({
   type,
   translation,
-  items = []
-}: CategoriesTagsListProperties) => {
-  const searchParameters = useSearchParams();
+  items = defaultItems,
+}: CategoriesTagsListProperties) {
+  const searchParameters = useSearchParams()
 
   // Handle no categories or tags
   if (items.length === 0) {
@@ -23,36 +25,36 @@ const CategoriesTagsList = ({
       <span>
         {type === 'category' ? translation.post.noCategories : translation.post.noTags}
       </span>
-    );
+    )
   }
 
   // Precompute links to reduce inline computation
   const links = items.map((item) => {
-    const newParameters = new URLSearchParams(searchParameters);
-    newParameters.set(type, item);
+    const newParameters = new URLSearchParams(searchParameters)
+    newParameters.set(type, item)
     return {
       item,
-      href: `/posts?${newParameters.toString()}`
-    };
-  });
+      href: `/posts?${newParameters.toString()}`,
+    }
+  })
 
-  const typeTranslation =
-    type === 'category' ? translation.post.categories : translation.post.tags;
+  const typeTranslation
+    = type === 'category' ? translation.post.categories : translation.post.tags
 
   return (
-    <span className='flex items-center'>
+    <span className="flex items-center">
       {/* Render Type icon */}
-      {type === 'category' ? <FaFolder className='mr-1' /> : <FaTags className='mr-1' />}
+      {type === 'category' ? <FaFolder className="mr-1" /> : <FaTags className="mr-1" />}
       {/* List */}
       <span>
         {links.map(({ item, href }, index) => (
           <span key={item}>
             <Link
               href={href}
-              target='_self'
+              target="_self"
               title={`${translation.navigate} ${typeTranslation} ${item}`}
               aria-label={`${translation.navigate} ${typeTranslation} ${item}`}
-              className='no-underline'
+              className="no-underline"
             >
               {item}
             </Link>
@@ -62,7 +64,7 @@ const CategoriesTagsList = ({
         ))}
       </span>
     </span>
-  );
-};
+  )
+}
 
-export default CategoriesTagsList;
+export default CategoriesTagsList

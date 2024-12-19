@@ -1,52 +1,52 @@
-import Image from 'next/image';
-import Head from 'next/head';
+import SocialMediaLinks from '@/components/common/SocialMediaLinks'
+import { getConfig } from '@/services/config'
 
-import { getConfig } from '@/services/config';
+import Head from 'next/head'
 
-import SocialMediaLinks from '@/components/common/SocialMediaLinks';
+import Image from 'next/image'
 
 async function Home() {
-  const config: Config = getConfig();
+  const config: Config = getConfig()
 
   // JSON-LD for the entire site
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: config.title,
-    url: config.siteUrl,
-    description: config.description,
-    publisher: {
+    'name': config.title,
+    'url': config.siteUrl,
+    'description': config.description,
+    'publisher': {
       '@type': 'Organization',
-      name: config.author.name,
-      url: config.author.link,
-      logo: config.avatar
-    }
-  };
+      'name': config.author.name,
+      'url': config.author.link,
+      'logo': config.avatar,
+    },
+  }
 
   return (
     <>
       <Head>
         <script
-          type='application/ld+json'
+          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <div className='flex max-h-[800px] animate-fadeInDown flex-col items-center justify-center px-6'>
-        <div className='relative h-[30vh] w-full bg-cover bg-center md:h-[50vh]'>
-          <div className='absolute left-1/2 top-[25%] -translate-x-1/2 transform'>
+      <div className="flex max-h-[800px] animate-fadeInDown flex-col items-center justify-center px-6">
+        <div className="relative h-[30vh] w-full bg-cover bg-center md:h-[50vh]">
+          <div className="absolute left-1/2 top-[25%] -translate-x-1/2 transform">
             <Image
               src={config.avatar}
-              alt='Avatar'
+              alt="Avatar"
               width={180}
               height={180}
-              className='rounded-full border-4 border-[var(--sakuraPink)] shadow-lg'
-              priority={true}
+              className="rounded-full border-4 border-[var(--sakuraPink)] shadow-lg"
+              priority
             />
           </div>
         </div>
 
-        <div className='mt-20 text-center'>
-          <p className='text-foreground mb-28 text-3xl font-bold'>{config.slogan}</p>
+        <div className="mt-20 text-center">
+          <p className="text-foreground mb-28 text-3xl font-bold">{config.slogan}</p>
 
           <SocialMediaLinks
             socialMedia={config.socialMedia}
@@ -55,7 +55,7 @@ async function Home() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

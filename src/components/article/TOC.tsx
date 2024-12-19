@@ -1,33 +1,34 @@
-'use client';
+'use client'
 
-import { FaListUl } from 'react-icons/fa6';
-import { useIsTop } from '@zl-asica/react';
+import { useTOCLogic } from '@/hooks'
+import { useIsTop } from '@zl-asica/react'
 
-import TOCLink from './TOCLink';
+import { FaListUl } from 'react-icons/fa6'
 
-import { useTOCLogic } from '@/hooks';
+import TOCLink from './TOCLink'
 
 interface TOCProperties {
-  items: TocItems[];
-  translation: Translation;
-  autoSlug?: boolean;
-  showThumbnail?: boolean;
+  items: TocItems[]
+  translation: Translation
+  autoSlug?: boolean
+  showThumbnail?: boolean
 }
 
-const TOC = ({
+function TOC({
   items,
   translation,
   autoSlug = true,
-  showThumbnail = true
-}: TOCProperties) => {
-  const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic();
-  const isVisible = !useIsTop(showThumbnail ? 150 : 50);
+  showThumbnail = true,
+}: TOCProperties) {
+  const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic()
+  const isVisible = !useIsTop(showThumbnail ? 150 : 50)
 
   return (
     <div
       className={`${isVisible ? 'opacity-100' : 'pointer-events-none opacity-0'} duration-200 ease-in-out`}
     >
       <button
+        type="button"
         hidden={!isVisible}
         onClick={toggleOpen}
         aria-label={translation.post.tocToggle}
@@ -44,11 +45,11 @@ const TOC = ({
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } right-8 xl:right-[calc((100vw-1280px)/2+10px)] xl:block xl:translate-x-0 ${!isOpen && 'hidden xl:block'} scrollbar-custom text-wrap break-words`}
       >
-        <h2 className='mb-4 text-lg font-semibold text-[var(--sakuraPink)]'>
+        <h2 className="mb-4 text-lg font-semibold text-[var(--sakuraPink)]">
           {translation.post.toc}
         </h2>
-        <ul className='m-0 list-none p-0'>
-          {items.map((item) => (
+        <ul className="m-0 list-none p-0">
+          {items.map(item => (
             <TOCLink
               key={item.slug}
               item={item}
@@ -60,8 +61,7 @@ const TOC = ({
         </ul>
       </menu>
     </div>
-  );
-};
+  )
+}
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default TOC;
+export default TOC

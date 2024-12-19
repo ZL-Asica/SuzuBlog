@@ -1,9 +1,9 @@
-import type { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next'
 
-import { getConfig } from '@/services/config';
+import { getConfig } from '@/services/config'
 
 function manifest(): MetadataRoute.Manifest {
-  const config = getConfig();
+  const config = getConfig()
 
   return {
     name: `${config.title} - ${config.subTitle}`,
@@ -19,20 +19,20 @@ function manifest(): MetadataRoute.Manifest {
       {
         src: '/icons/icon-192x192.png',
         sizes: '192x192',
-        type: 'image/png'
+        type: 'image/png',
       },
       {
         src: '/icons/icon-512x512.png',
         sizes: '512x512',
-        type: 'image/png'
+        type: 'image/png',
       },
       {
         src: '/favicon.ico',
         sizes: '64x64',
-        type: 'image/x-icon'
-      }
-    ]
-  };
+        type: 'image/x-icon',
+      },
+    ],
+  }
 }
 
-export default manifest;
+export default manifest

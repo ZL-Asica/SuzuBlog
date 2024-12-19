@@ -1,21 +1,8 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always",
-    "source.addMissingImports.ts": "always"
-  },
-  "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true,
-    "**/node_modules": true,
-    "pnpm-lock.yaml": true,
-    "yarn.lock": true,
-    "package-lock.json": true,
-    ".github": true,
-    "/*.md": true
-  },
+  // Disable the default formatter, use eslint instead
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+
   "editor.wordWrap": "on",
-  "prettier.requireConfig": true
 }

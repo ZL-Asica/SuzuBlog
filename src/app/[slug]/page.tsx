@@ -1,113 +1,114 @@
-import type { Metadata } from 'next';
-import { notFound, redirect } from 'next/navigation';
-import Head from 'next/head';
+import type { Metadata } from 'next'
+import { ArticlePage } from '@/components/article'
+import { getConfig } from '@/services/config'
 
-import { getConfig } from '@/services/config';
-import { getAllPosts, getPostData } from '@/services/content';
-import generateRssFeed from '@/services/utils/generateRssFeed';
+import { getAllPosts, getPostData } from '@/services/content'
+import generateRssFeed from '@/services/utils/generateRssFeed'
+import Head from 'next/head'
 
-import { ArticlePage } from '@/components/article';
+import { notFound, redirect } from 'next/navigation'
 
 // build static params for all posts
-async function generateStaticParams() {
-  const posts = await getAllPosts();
-  await generateRssFeed(posts, getConfig());
-  return posts.map((post) => ({
-    slug: post.slug
-  }));
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  await generateRssFeed(posts, getConfig())
+  return posts.map(post => ({
+    slug: post.slug,
+  }))
 }
 
-type Properties = {
-  params: Promise<{ slug: string }>;
-};
+interface Properties {
+  params: Promise<{ slug: string }>
+}
 
-async function generateMetadata({ params }: Properties): Promise<Metadata> {
+export async function generateMetadata({ params }: Properties): Promise<Metadata> {
   // get post data
-  const { slug } = await params;
-  const postData: FullPostData | null = await getPostData(slug);
+  const { slug } = await params
+  const postData: FullPostData | null = await getPostData(slug)
 
-  const config = getConfig();
+  const config = getConfig()
   const metaKeywords = [
     ...(postData?.frontmatter.tags || []),
     ...(postData?.frontmatter.categories || []),
-    postData?.frontmatter.author || config.author.name,
-    'blog'
-  ].join(', ');
+    postData?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
+    'blog',
+  ].join(', ')
 
   return {
     title: `${postData?.frontmatter.title} - ${config.title}`,
-    description: postData?.postAbstract || config.description,
+    description: postData?.postAbstract ?? config.description ?? 'Default description',
     keywords: metaKeywords,
     alternates: { canonical: `${config.siteUrl}/${slug}` },
-    publisher: postData?.frontmatter.author || config.author.name,
+    publisher: postData?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
     openGraph: {
       siteName: config.title,
       type: 'article',
-      authors: postData?.frontmatter.author || config.author.name,
+      authors: postData?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
       tags: metaKeywords,
       modifiedTime: postData?.frontmatter.date,
-      title: postData?.frontmatter.title || config.title,
-      description: postData?.postAbstract || config.description,
+      title: postData?.frontmatter.title ?? config.title ?? 'Default Title',
+      description: postData?.postAbstract ?? config.description ?? 'Default description',
       images: postData?.frontmatter.thumbnail,
       url: `/${slug}`,
-      locale: config.lang
+      locale: config.lang,
     },
     twitter: {
       card: 'summary',
-      title: postData?.frontmatter.title || config.title,
-      description: postData?.postAbstract || config.description,
-      images: postData?.frontmatter.thumbnail
-    }
-  };
+      title: postData?.frontmatter.title ?? config.title ?? 'Default Title',
+      description: postData?.postAbstract ?? config.description ?? 'Default description',
+      images: postData?.frontmatter.thumbnail,
+    },
+  }
 }
 
 // PostPage component that receives the params directly
-async function PostPage(props: { params: Promise<{ slug: string }> }) {
-  const parameters = await props.params;
-  const post: FullPostData | null = await getPostData(parameters.slug);
+export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
+  // eslint-disable-next-line react/prefer-destructuring-assignment
+  const parameters = await props.params
+  const post: FullPostData | null = await getPostData(parameters.slug)
   if (!post) {
-    return notFound();
+    return notFound()
   }
 
-  const redirectUrl = post.frontmatter.redirect || '';
+  const redirectUrl = post.frontmatter.redirect ?? ''
   if (redirectUrl) {
-    redirect(redirectUrl);
+    redirect(redirectUrl)
   }
 
-  const config: Config = getConfig();
+  const config: Config = getConfig()
 
   // JSON-LD for the article
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: post?.frontmatter.title,
-    description: post?.postAbstract || config.description,
-    author: {
+    'headline': post?.frontmatter.title,
+    'description': post?.postAbstract || config.description,
+    'author': {
       '@type': 'Person',
-      name: post?.frontmatter.author || config.author.name
+      'name': post?.frontmatter.author || config.author.name,
     },
-    datePublished: post?.frontmatter.date,
-    dateModified: post?.lastModified || post?.frontmatter.date,
-    mainEntityOfPage: {
+    'datePublished': post?.frontmatter.date,
+    'dateModified': post?.lastModified || post?.frontmatter.date,
+    'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': `${config.siteUrl}/${post.slug}`
+      '@id': `${config.siteUrl}/${post.slug}`,
     },
-    image: post?.frontmatter.thumbnail,
-    publisher: {
+    'image': post?.frontmatter.thumbnail,
+    'publisher': {
       '@type': 'Organization',
-      name: config.title,
-      logo: {
+      'name': config.title,
+      'logo': {
         '@type': 'ImageObject',
-        url: config.avatar
-      }
-    }
-  };
+        'url': config.avatar,
+      },
+    },
+  }
 
   return (
     <>
       <Head>
         <script
-          type='application/ld+json'
+          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
@@ -116,7 +117,5 @@ async function PostPage(props: { params: Promise<{ slug: string }> }) {
         post={post}
       />
     </>
-  );
+  )
 }
-
-export { generateStaticParams, generateMetadata, PostPage as default };
