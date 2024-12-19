@@ -1,6 +1,6 @@
 import { ceil } from 'es-toolkit/compat'
 
-interface PaginationProperties {
+interface PaginationProps {
   postsPerPage: number
   totalPosts: number
   setCurrentPage: (pageNumber: number) => void
@@ -12,7 +12,7 @@ function Pagination({
   totalPosts,
   currentPage,
   setCurrentPage,
-}: PaginationProperties) {
+}: PaginationProps) {
   // TODO: handle more than 5 pages condition.
   const pageNumbers = Array.from(
     { length: ceil(totalPosts / postsPerPage) },

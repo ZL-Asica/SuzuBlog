@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { usePathname } from 'next/navigation'
 
-interface FooterProperties {
+interface FooterProps {
   config: Config
 }
 
@@ -16,7 +16,7 @@ function getYearDisplay(startYear: number | null | undefined, currentYear: numbe
   return ''
 }
 
-function Footer({ config }: FooterProperties) {
+function Footer({ config }: FooterProps) {
   const currentYear = new Date().getFullYear()
   const pathname = usePathname()
   const isHomePage = pathname === '/'

@@ -8,12 +8,12 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { FaEllipsis, FaRegClock } from 'react-icons/fa6'
 
-interface PostListProperties {
+interface PostListProps {
   posts: PostListData[]
   translation: Translation
 }
 
-function PostList({ posts, translation }: PostListProperties) {
+function PostList({ posts, translation }: PostListProps) {
   return (
     <div className="mb-10 grid grid-cols-1 gap-10">
       {posts.map((post, index) => {

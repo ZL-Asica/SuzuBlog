@@ -2,16 +2,16 @@
 
 import { slugPrefix } from '@/services/utils'
 
-interface TOCLinkProperties {
+interface TOCLinkProps {
   item: TocItems
   activeSlug: string
   handleLinkClick: (slug: string) => void
   autoSlug: boolean
 }
 
-function TOCLink({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProperties) {
+function TOCLink({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) {
   const isActive = activeSlug === item.slug
-  const titleSlug = autoSlug ? `${slugPrefix(item.slug, item.level)} ` : ''
+  const titleSlug = autoSlug ? slugPrefix(item.slug, item.level) : ''
 
   return (
     <li

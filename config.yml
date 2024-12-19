@@ -63,7 +63,7 @@ socialMedia:
   zhihu_username: zl_asica # Your Zhihu username. https://www.zhihu.com/people/username
   bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
   email: zl@zla.app # Your email address.
-  rss: false # Display the RSS icon.
+  rss: false # Display the RSS icon. Set to false to hide the icon. Set empty to fully disable the RSS feed.
 
 # ######################
 # COMMENTS SETTINGS

@@ -26,10 +26,10 @@ tags:
 
 ## Emphasis
 
-_This text will be italic_  
+_This text will be italic_
 _This will also be italic_
 
-**This text will be bold**  
+**This text will be bold**
 **This will also be bold**
 
 _You **can** combine them_
@@ -71,10 +71,10 @@ You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
 
 ## Blocks of code
 
-```javascript
-let message = 'Hello world';
-alert(message);
-const testInt: number = 120;
+```typescript
+const message = 'Hello world'
+alert(message)
+const testInt: number = 120
 ```
 
 ## Inline code

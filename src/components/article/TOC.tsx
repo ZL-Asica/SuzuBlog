@@ -7,7 +7,7 @@ import { FaListUl } from 'react-icons/fa6'
 
 import TOCLink from './TOCLink'
 
-interface TOCProperties {
+interface TOCProps {
   items: TocItems[]
   translation: Translation
   autoSlug?: boolean
@@ -19,7 +19,7 @@ function TOC({
   translation,
   autoSlug = true,
   showThumbnail = true,
-}: TOCProperties) {
+}: TOCProps) {
   const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic()
   const isVisible = !useIsTop(showThumbnail ? 150 : 50)
 

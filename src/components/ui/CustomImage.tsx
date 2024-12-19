@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-interface ImageProperties {
+interface CustomImageProps {
   src: string
   alt: string
   className?: string
@@ -13,7 +13,7 @@ interface ImageProperties {
   blurDataURL?: string
 }
 
-function CustomImage({ src, alt, ...props }: ImageProperties) {
+function CustomImage({ src, alt, ...props }: CustomImageProps) {
   const fallbackImage = props.blurDataURL ?? '/images/image-not-found.webp'
   const [imgSource, setImgSource] = useState(src || fallbackImage)
 

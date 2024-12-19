@@ -4,16 +4,16 @@
 
 > **Suzu** - 日本語の「鈴（すず）」を意味し、**Next.js** と純粋な **Markdown** を基盤としたミニマリストブログテンプレートです。
 
-[![GitHub License][license-badge]][license-link]  
-[![Node.js][node-badge]][node-link]  
+[![GitHub License][license-badge]][license-link]
+[![Node.js][node-badge]][node-link]
 [![pnpm Version][pnpm-badge]][pnpm-link]
 [![Next.js][nextjs-badge]][nextjs-link]
 [![Tailwind CSS][tailwind-badge]][tailwind-link] |
-[![Vercel][vercel-badge]][vercel-link]  
-[![Eslint][eslint-badge]][eslint-link]  
+[![Vercel][vercel-badge]][vercel-link]
+[![Eslint][eslint-badge]][eslint-link]
 [![Prettier][prettier-badge]][prettier-link]
 
-- [**ドキュメント**](https://suzu.zla.app) 📚  
+- [**ドキュメント**](https://suzu.zla.app) 📚
   Suzu Blog の開始、設定、カスタマイズ方法を詳細に説明。
 
 ## ✨ 特徴
@@ -61,7 +61,7 @@
 
 ### 5. テンプレート更新を同期
 
-デフォルトで GitHub Actions を使用して、Suzu Blog テンプレートの最新更新を毎週自動でリポジトリに同期。  
+デフォルトで GitHub Actions を使用して、Suzu Blog テンプレートの最新更新を毎週自動でリポジトリに同期。
 同期時に `.github`、`public`、`posts`、`config.yml` は無視されます。
 
 ## 🏗️ プロジェクト構造

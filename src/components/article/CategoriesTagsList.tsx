@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { FaFolder, FaTags } from 'react-icons/fa6'
 
-interface CategoriesTagsListProperties {
+interface CategoriesTagsListProps {
   type: 'category' | 'tag'
   translation: Translation
   items?: string[]
@@ -16,7 +16,7 @@ function CategoriesTagsList({
   type,
   translation,
   items = defaultItems,
-}: CategoriesTagsListProperties) {
+}: CategoriesTagsListProps) {
   const searchParameters = useSearchParams()
 
   // Handle no categories or tags

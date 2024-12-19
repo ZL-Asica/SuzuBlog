@@ -9,12 +9,12 @@ import createMarkdownComponents from './markdownComponents'
 
 import 'katex/dist/katex.min.css'
 
-interface MarkdownContentProperties {
+interface MarkdownContentProps {
   post: FullPostData
   translation: Translation
 }
 
-function MarkdownContent({ post, translation }: MarkdownContentProperties) {
+function MarkdownContent({ post, translation }: MarkdownContentProps) {
   const markdownComponents = createMarkdownComponents(
     translation,
     post.frontmatter.autoSlug,

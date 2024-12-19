@@ -1367,9 +1367,9 @@ autoSlug: false
 #### 5.1.1 RNN model
 
 - Notation
-  - Input x: $x^{<1>}, x^{<2>}, ..., x^{<t>}$​​
+  - Input x: $x^{<1>}, x^{<2>}, ..., x^{<t>}$
   - Total Length of input: $T_x$
-  - Output y: $y^{<1>}, y^{<2>}, ..., y^{<t>}$​
+  - Output y: $y^{<1>}, y^{<2>}, ..., y^{<t>}$
   - Total Length of output: $T_y$
 
 #### 5.1.2 Backpropagation through time

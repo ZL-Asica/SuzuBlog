@@ -5,13 +5,13 @@ import { copyToClipboard, useToggle } from '@zl-asica/react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
-interface CodeBlockProperties {
+interface CodeBlockProps {
   match: RegExpExecArray
   translation: Translation
   children: ReactNode
 }
 
-function CodeBlock({ match, translation, children }: CodeBlockProperties) {
+function CodeBlock({ match, translation, children }: CodeBlockProps) {
   const [isCopied, toggleCopied] = useToggle()
   const cleanedChildren = String(children).replace(/\n$/, '')
 

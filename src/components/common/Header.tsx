@@ -8,11 +8,11 @@ import { FaBars } from 'react-icons/fa6'
 
 import HeaderMenu from './HeaderMenu'
 
-interface HeaderProperties {
+interface HeaderProps {
   config: Config
 }
 
-function Header({ config }: HeaderProperties) {
+function Header({ config }: HeaderProps) {
   const [isOpen, toggleOpen] = useToggle()
   const siteTitle = config.title
   const scrollProgress = useScrollPosition(undefined, true)
@@ -51,7 +51,7 @@ function Header({ config }: HeaderProperties) {
           className="z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--foreground)] text-2xl text-[var(--background)] shadow-md transition-transform duration-300 hover:scale-110 md:hidden"
           onClick={toggleOpen}
           aria-label="Toggle menu"
-          aria-expanded={!!isOpen}
+          aria-expanded={isOpen ? 'true' : 'false'}
           aria-controls="mobile-menu"
         >
           {!isOpen && <FaBars />}

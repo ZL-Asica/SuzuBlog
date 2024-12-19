@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { useEffect, useRef, useState } from 'react'
 
-interface SearchInputProperties {
+interface SearchInputProps {
   categories: string[]
   tags: string[]
   translation: Translation
@@ -35,7 +35,7 @@ function SearchInput({
   tags,
   translation,
   searchQueries,
-}: SearchInputProperties) {
+}: SearchInputProps) {
   const searchParameters = useSearchParams()
   const formReference = useRef<HTMLFormElement>(null)
 

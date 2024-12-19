@@ -39,12 +39,11 @@ jobs:
       - name: Sync content excluding specific paths ✨
         run: |
           rsync -av --delete \
-            --exclude=".git/**" \
-            --exclude="config.yml" \
+            --exclude="/.git/**" \
+            --exclude="/config.yml" \
             --exclude="/posts/**" \
             --exclude="/public/**" \
-            --exclude=".github/workflows/sync-suzublog.yml" \
-            --exclude="suzublog/**" \
+            --exclude="/suzublog/**" \
             suzublog/ .
 
       # Step 4: Delete the cloned SuzuBlog repo
