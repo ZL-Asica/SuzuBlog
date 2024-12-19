@@ -1,8 +1,8 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   eslint: {
-    dirs: ['src']
+    dirs: ['src'],
   },
   async headers() {
     return [
@@ -11,27 +11,27 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'SAMEORIGIN',
           },
           {
             key: 'X-Themed-By',
-            value: 'SuzuBlog'
+            value: 'SuzuBlog',
           },
           {
             key: 'X-Theme-Author',
-            value: 'ZL Asica'
+            value: 'ZL Asica',
           },
           {
             key: 'X-Theme-URL',
-            value: 'https://suzu.zla.app'
-          }
-        ]
-      }
-    ];
+            value: 'https://suzu.zla.app',
+          },
+        ],
+      },
+    ]
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -39,36 +39,25 @@ const nextConfig: NextConfig = {
     localPatterns: [
       {
         pathname: '/images/**',
-        search: ''
-      }
+        search: '',
+      },
     ],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**'
-      }
-    ]
-  },
-  experimental: {
-    optimizePackageImports: [
-      'react-syntax-highlighter',
-      'rehype-katex',
-      'rehype-raw',
-      'remark-gemoji',
-      'remark-gfm',
-      'remark-math',
-      'slugify'
-    ]
+        hostname: '**',
+      },
+    ],
   },
   async redirects() {
     return [
       {
         source: String.raw`/:type(rss|atom|rss2)\.:format(\w+)`,
         destination: '/feed.xml',
-        permanent: true
-      }
-    ];
-  }
-};
+        permanent: true,
+      },
+    ]
+  },
+}
 
-export default nextConfig;
+export default nextConfig

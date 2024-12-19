@@ -11,7 +11,7 @@ import PostListLayout from './PostList'
 
 import SearchInput from './SearchInput'
 
-interface PostPageClientProperties {
+interface PostPageClientProps {
   posts: PostListData[]
   translation: Translation
   postsPerPage: number
@@ -21,7 +21,7 @@ function PostPageClient({
   posts,
   translation,
   postsPerPage,
-}: PostPageClientProperties) {
+}: PostPageClientProps) {
   const searchParameters = useSearchParams()
   const queryParameters = searchParameters.get('query') ?? ''
   const categoryParameter = searchParameters.get('category') ?? ''

@@ -18,7 +18,7 @@ interface MenuItem {
   icon: React.ReactElement
 }
 
-interface HeaderMenuProperties {
+interface HeaderMenuProps {
   config: Config
   isMobile: boolean
   ulClassName?: string
@@ -30,21 +30,13 @@ function HeaderMenu({
   isMobile,
   ulClassName,
   onClickHandler,
-}: HeaderMenuProperties) {
+}: HeaderMenuProps) {
   const translation = config.translation
 
   const menuItems: MenuItem[] = [
     { href: '/', label: translation.home.title, icon: <FaHouse /> },
-    {
-      href: '/posts',
-      label: translation.posts.title,
-      icon: <FaRegNewspaper />,
-    },
-    {
-      href: '/friends',
-      label: translation.friends.title,
-      icon: <FaPeopleGroup />,
-    },
+    { href: '/posts', label: translation.posts.title, icon: <FaRegNewspaper /> },
+    { href: '/friends', label: translation.friends.title, icon: <FaPeopleGroup /> },
     { href: '/about', label: translation.about.title, icon: <FaInfo /> },
   ]
 
@@ -131,12 +123,8 @@ function HeaderMenu({
         >
           <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">
             {isDarkTheme
-              ? (
-                  <FaRegSun className="h-full w-full" />
-                )
-              : (
-                  <FaMoon className="h-full w-full" />
-                )}
+              ? (<FaRegSun className="h-full w-full" />)
+              : (<FaMoon className="h-full w-full" />)}
           </span>
         </button>
       </li>

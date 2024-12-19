@@ -4,5 +4,5 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-  "editor.wordWrap": "on",
+  "editor.wordWrap": "on"
 }

@@ -1,29 +1,25 @@
 import LoadingIndicator from '@/components/common/LoadingIndicator'
+import { CustomImage } from '@/components/ui'
 import { includes, isEmpty, lowerCase } from 'es-toolkit/compat'
+
 import dynamic from 'next/dynamic'
 
 import { Suspense } from 'react'
-
-import { CustomImage } from '../ui'
 import CategoriesTagsList from './CategoriesTagsList'
 import MarkdownContent from './parser'
 
 import TOC from './TOC'
 
 const CopyrightInfo = dynamic(async () => import('./CopyrightInfo'))
-const TwikooComments = dynamic(async () =>
-  import('./comments').then(module_ => module_.TwikooComments),
-)
-const DisqusComments = dynamic(async () =>
-  import('./comments').then(module_ => module_.DisqusComments),
-)
+const TwikooComments = dynamic(async () => import('./comments/TwikooComments'))
+const DisqusComments = dynamic(async () => import('./comments/DisqusComments'))
 
-interface PostLayoutProperties {
+interface PostLayoutProps {
   config: Config
   post: FullPostData
 }
 
-function ArticlePage({ config, post }: PostLayoutProperties) {
+function ArticlePage({ config, post }: PostLayoutProps) {
   const translation = config.translation
 
   return (

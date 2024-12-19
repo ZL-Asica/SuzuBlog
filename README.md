@@ -61,7 +61,7 @@ Edit `config.yml` to set your site name, description, author details, and more.
 
 ### 5. Keep Your Blog Updated
 
-By default, GitHub Actions sync the latest updates from the Suzu Blog template to your repository weekly.  
+By default, GitHub Actions sync the latest updates from the Suzu Blog template to your repository weekly.
 Ignored directories during sync include `.github`, `public`, `posts`, and `config.yml`.
 
 ## 🏗️ Project Structure

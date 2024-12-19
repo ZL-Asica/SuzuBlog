@@ -11,7 +11,10 @@ import { notFound, redirect } from 'next/navigation'
 // build static params for all posts
 export async function generateStaticParams() {
   const posts = await getAllPosts()
-  await generateRssFeed(posts, getConfig())
+  const config = getConfig()
+  if (config.socialMedia.rss !== null) {
+    await generateRssFeed(posts, config)
+  }
   return posts.map(post => ({
     slug: post.slug,
   }))

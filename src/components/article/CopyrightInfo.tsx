@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-interface CopyrightInfoProperties {
+interface CopyrightInfoProps {
   author: string
   siteUrl: string
   title: string
@@ -18,7 +18,7 @@ function CopyrightInfo({
   title,
   creativeCommons,
   translation,
-}: CopyrightInfoProperties) {
+}: CopyrightInfoProps) {
   const pathname = usePathname()
   const copyright = translation.post.copyright
 

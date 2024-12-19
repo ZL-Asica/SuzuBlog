@@ -62,7 +62,7 @@ const socialData = {
   },
 }
 
-interface socialMediaLinksProperties {
+interface socialMediaLinksProps {
   socialMedia: SocialMedia
   iconSize?: number
   className?: string
@@ -72,7 +72,7 @@ function SocialMediaLinks({
   socialMedia,
   iconSize = 32,
   className = '',
-}: socialMediaLinksProperties) {
+}: socialMediaLinksProps) {
   return (
     <div
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}

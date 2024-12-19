@@ -9,7 +9,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
 import Script from 'next/script'
-import React from 'react'
 
 import './globals.css'
 
