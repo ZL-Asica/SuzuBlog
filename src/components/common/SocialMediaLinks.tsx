@@ -78,21 +78,21 @@ function SocialMediaLinks({
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}
     >
       {Object.entries(socialMedia)
-        .filter(([key, username]) => key in socialData && username !== null)
+        .filter(([key, username]) =>
+          key in socialData && username !== null && String(username) !== 'false',
+        )
         .map(([key, username]) => {
           const { urlTemplate, icon: IconComponent } = socialData[key as keyof typeof socialData]
 
           const label = upperFirst(words(key)[0])
-          if (key === 'rss' && username !== 'false') {
-            username = `/feed.xml`
-          }
+
           return (
             <Link
               key={label}
               href={replace(
                 urlTemplate,
                 '{username}',
-                key === 'rss' ? username : encodeURIComponent(username),
+                key === 'rss' ? '/feed.xml' : encodeURIComponent(String(username)),
               )}
               target="_blank"
               rel="noopener noreferrer"

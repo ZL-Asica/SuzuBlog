@@ -1,31 +1,31 @@
-#######################
+# ######################
 # SITE SETTINGS
-#######################
-title: 'Suzu' # The name of your blog, used in titles and meta tags.
-subTitle: 'Next.js Blog Template' # A short description that appears after the main title.
+# ######################
+title: Suzu # The name of your blog, used in titles and meta tags.
+subTitle: Next.js Blog Template # A short description that appears after the main title.
 description: 'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.' # A longer description for SEO and meta tags.
 keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica' # Comma-separated keywords for SEO purposes.
 author:
-  name: 'ZL Asica' # Your name, displayed as the author of the blog.
+  name: ZL Asica # Your name, displayed as the author of the blog.
   link: 'https://www.zla.pub' # Link to your personal website or blog.
 # Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
-lang: 'zh'
+lang: zh
 # Your public root url, used for SEO and meta tags.
 # !Do not include a ending slash
 siteUrl: 'https://suzu.zla.app'
 
 # Path to your avatar image. Can be a relative path from /public or a full URL (e.g., https://).
-avatar: '/images/avatar.jpg'
+avatar: /images/avatar.jpg
 # Used as the default thumbnail for posts without thumbnails.
-background: '/images/background.jpg'
+background: /images/background.jpg
 # Slogan displayed on your homepage, under your avatar.
 slogan: "As long as the code or the developer is able to run, it's all good."
 # Google Analytics tracking ID (e.g., 'G-XXXXXXXXXX'). Leave empty if you do not want to use Google Analytics.
 googleAnalytics:
 
-#######################
+# ######################
 # POSTS SETTINGS
-#######################
+# ######################
 # How many posts you want to display per page. (default(not set): 5, max: 15)
 postsPerPage:
 # Your custom CC license for the posts.
@@ -33,22 +33,22 @@ creativeCommons:
   type: CC BY-SA 4.0 Deed
   link: https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans
 
-#######################
+# ######################
 # HEADER SETTINGS
-#######################
+# ######################
 # If you want to join the travellings community, set the following field to true.
 # For more information, visit https://www.travellings.cn/en_US/
 travellings: false
 
-#######################
+# ######################
 # FOOTER SETTINGS
-#######################
+# ######################
 # If you want to have a start year of your blog, set the year here.
 startYear: 2017 # Leave empty if you do not want to display a start year.
 
-#######################
+# ######################
 # SOCIAL MEDIA SETTINGS
-#######################
+# ######################
 # Add your social media usernames.
 # Leave the field empty if you do not want to display a specific platform.
 # The order of the social media icons is determined by the order below.
@@ -63,23 +63,23 @@ socialMedia:
   zhihu_username: zl_asica # Your Zhihu username. https://www.zhihu.com/people/username
   bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
   email: zl@zla.app # Your email address.
-  rss: true # Display the RSS icon.
+  rss: false # Display the RSS icon.
 
-#######################
+# ######################
 # COMMENTS SETTINGS
 # Only one of the following two options should be enabled.
 # Priority: Twikoo > Disqus
-#######################
+# ######################
 # Your Twikoo environment ID.
 twikooEnvId:
 # Your Disqus shortname (used for integrating Disqus comments).
 # Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
 disqusShortname: zla-pub
 
-#######################
+# ######################
 # CUSTOM CODE BLOCKS
 # ! WARNING: Only modify these if you understand the purpose of custom scripts.
-#######################
+# ######################
 # Add custom JavaScript code to be included inside the <head> section of your site. One script per line.
 headerJavascript:
   - https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js
