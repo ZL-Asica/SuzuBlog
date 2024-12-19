@@ -1,62 +1,64 @@
-import { includes, isEmpty, lowerCase } from 'es-toolkit/compat';
-import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
+import LoadingIndicator from '@/components/common/LoadingIndicator'
+import { includes, isEmpty, lowerCase } from 'es-toolkit/compat'
+import dynamic from 'next/dynamic'
 
-import { CustomImage } from '../ui';
+import { Suspense } from 'react'
 
-import MarkdownContent from './parser';
-import TOC from './TOC';
-import CategoriesTagsList from './CategoriesTagsList';
+import { CustomImage } from '../ui'
+import CategoriesTagsList from './CategoriesTagsList'
+import MarkdownContent from './parser'
 
-import LoadingIndicator from '@/components/common/LoadingIndicator';
+import TOC from './TOC'
 
-const CopyrightInfo = dynamic(() => import('./CopyrightInfo'));
-const TwikooComments = dynamic(() =>
-  import('./comments').then((module_) => module_.TwikooComments)
-);
-const DisqusComments = dynamic(() =>
-  import('./comments').then((module_) => module_.DisqusComments)
-);
+const CopyrightInfo = dynamic(async () => import('./CopyrightInfo'))
+const TwikooComments = dynamic(async () =>
+  import('./comments').then(module_ => module_.TwikooComments),
+)
+const DisqusComments = dynamic(async () =>
+  import('./comments').then(module_ => module_.DisqusComments),
+)
 
 interface PostLayoutProperties {
-  config: Config;
-  post: FullPostData;
+  config: Config
+  post: FullPostData
 }
 
-const ArticlePage = ({ config, post }: PostLayoutProperties) => {
-  const translation = config.translation;
+function ArticlePage({ config, post }: PostLayoutProperties) {
+  const translation = config.translation
 
   return (
-    <article className='container mx-auto animate-fadeInDown p-6 pb-2'>
-      {post.frontmatter.showThumbnail ? (
-        <Thumbnail
-          title={post.frontmatter.title}
-          src={post.frontmatter.thumbnail}
-          author={post.frontmatter.author}
-          date={post.frontmatter.date}
-          thumbnailTranslation={translation.post.thumbnail}
-          fallbackImage={config.background}
-        />
-      ) : (
-        <TitleHeader
-          title={post.frontmatter.title}
-          author={post.frontmatter.author}
-          date={post.frontmatter.date}
-          slug={post.slug}
-        />
-      )}
+    <article className="container mx-auto animate-fadeInDown p-6 pb-2">
+      {post.frontmatter.showThumbnail
+        ? (
+            <Thumbnail
+              title={post.frontmatter.title}
+              src={post.frontmatter.thumbnail}
+              author={post.frontmatter.author}
+              date={post.frontmatter.date}
+              thumbnailTranslation={translation.post.thumbnail}
+              fallbackImage={config.background}
+            />
+          )
+        : (
+            <TitleHeader
+              title={post.frontmatter.title}
+              author={post.frontmatter.author}
+              date={post.frontmatter.date}
+              slug={post.slug}
+            />
+          )}
 
-      <div className='mx-auto my-10 w-full max-w-3xl'>
+      <div className="mx-auto my-10 w-full max-w-3xl">
         <Suspense fallback={<LoadingIndicator />}>
           {(post.frontmatter.categories || post.frontmatter.tags) && (
-            <ul className='mx-auto mt-5 flex flex-col gap-4'>
+            <ul className="mx-auto mt-5 flex flex-col gap-4">
               <CategoriesTagsList
-                type={'category'}
+                type="category"
                 translation={translation}
                 items={post.frontmatter.categories}
               />
               <CategoriesTagsList
-                type={'tag'}
+                type="tag"
                 translation={translation}
                 items={post.frontmatter.tags}
               />
@@ -84,44 +86,50 @@ const ArticlePage = ({ config, post }: PostLayoutProperties) => {
             translation={translation}
           />
         )}
-        <div className='mt-10'></div>
-        {post.frontmatter.showComments &&
-          (config.twikooEnvId ? (
-            <TwikooComments environmentId={config.twikooEnvId} />
-          ) : config.disqusShortname ? (
-            <DisqusComments disqusShortname={config.disqusShortname} />
-          ) : null)}
+        <div className="mt-10"></div>
+        {post.frontmatter.showComments && (
+          config.twikooEnvId != null
+            ? (
+                <TwikooComments environmentId={config.twikooEnvId} />
+              )
+            : config.disqusShortname != null
+              ? (
+                  <DisqusComments disqusShortname={config.disqusShortname} />
+                )
+              : null
+        )}
+
       </div>
     </article>
-  );
-};
+  )
+}
 
-const Thumbnail = ({
+function Thumbnail({
   title,
   src,
   author,
   date,
   thumbnailTranslation,
-  fallbackImage
+  fallbackImage,
 }: {
-  title: string;
-  src: string;
-  author: string;
-  date: string;
-  thumbnailTranslation: string;
-  fallbackImage: string;
-}) => {
+  title: string
+  src: string
+  author: string
+  date: string
+  thumbnailTranslation: string
+  fallbackImage: string
+}) {
   return (
-    <div className='relative h-96 w-full'>
+    <div className="relative h-96 w-full">
       <CustomImage
         src={src}
         alt={`${thumbnailTranslation} ${title}`}
         width={1200}
         height={500}
-        className='h-full w-full rounded-lg object-cover'
+        className="h-full w-full rounded-lg object-cover"
         blurDataURL={fallbackImage}
       />
-      <div className='absolute inset-0 rounded-lg bg-black bg-opacity-40'></div>
+      <div className="absolute inset-0 rounded-lg bg-black bg-opacity-40"></div>
       <MetaInfo
         title={title}
         author={author}
@@ -129,23 +137,23 @@ const Thumbnail = ({
         isOverlay
       />
     </div>
-  );
-};
+  )
+}
 
-const TitleHeader = ({
+function TitleHeader({
   title,
   author,
   date,
-  slug
+  slug,
 }: {
-  title: string;
-  author: string;
-  date: string;
-  slug: string;
-}) => {
+  title: string
+  author: string
+  date: string
+  slug: string
+}) {
   return (
-    <div className='mx-auto mb-5 w-full max-w-3xl'>
-      <h1 className='text-3xl font-bold'>{title}</h1>
+    <div className="mx-auto mb-5 w-full max-w-3xl">
+      <h1 className="text-3xl font-bold">{title}</h1>
       {includes(['about', 'friends'], lowerCase(slug)) || (
         <MetaInfo
           author={author}
@@ -153,32 +161,32 @@ const TitleHeader = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-const MetaInfo = ({
+function MetaInfo({
   title,
   author,
   date,
-  isOverlay
+  isOverlay,
 }: {
-  title?: string;
-  author: string;
-  date: string;
-  isOverlay?: boolean;
-}) => {
+  title?: string
+  author: string
+  date: string
+  isOverlay?: boolean
+}) {
   return (
     <div
       className={`absolute ${isOverlay ? 'bottom-0 left-1/2 w-full max-w-3xl -translate-x-1/2 transform p-4 text-white' : 'mt-2 flex items-center'}`}
     >
-      {title && <h1 className='text-3xl font-bold'>{title}</h1>}
-      <p className='left-1 ml-2 flex items-center'>
+      <h1 className="text-3xl font-bold">{title}</h1>
+      <p className="left-1 ml-2 flex items-center">
         {author}
-        <span className='mx-3 text-2xl'>•</span>
+        <span className="mx-3 text-2xl">•</span>
         {date.split(' ')[0]}
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default ArticlePage;
+export default ArticlePage

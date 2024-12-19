@@ -1,44 +1,54 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import SocialMediaLink from '@/components/common/SocialMediaLinks'
+import Link from 'next/link'
 
-import SocialMediaLink from '@/components/common/SocialMediaLinks';
+import { usePathname } from 'next/navigation'
 
 interface FooterProperties {
-  config: Config;
+  config: Config
 }
 
-const Footer = ({ config }: FooterProperties) => {
-  const currentYear = new Date().getFullYear();
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
+function getYearDisplay(startYear: number | null | undefined, currentYear: number) {
+  if (startYear != null && !Number.isNaN(startYear) && startYear < currentYear) {
+    return `${startYear} - `
+  }
+  return ''
+}
+
+function Footer({ config }: FooterProperties) {
+  const currentYear = new Date().getFullYear()
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   return (
-    <footer className='mb-1 mt-10 w-full'>
-      <div className='mx-auto max-w-7xl px-4 py-4 text-center'>
+    <footer className="mb-1 mt-10 w-full">
+      <div className="mx-auto max-w-7xl px-4 py-4 text-center">
         {!isHomePage && <SocialMediaLink socialMedia={config.socialMedia} />}
-        <p className='text-[var(--gray)]'>
-          {`© ${config.startYear && config.startYear < currentYear ? `${config.startYear} - ` : ''}${currentYear} ${config.title}`}
+        <p className="text-[var(--gray)]">
+          {`© ${getYearDisplay(config.startYear, currentYear)}${currentYear} ${config.title}`}
         </p>
-        <p className='text-base text-[var(--gray)]'>
-          Theme{' '}
+        <p className="text-base text-[var(--gray)]">
+          Theme
+          {' '}
           <Link
-            href='https://suzu.zla.app'
-            target='_blank'
+            href="https://suzu.zla.app"
+            target="_blank"
             aria-label="Suzu's Documentation (new tab)"
-            rel='noopener noreferrer'
-            className='decoration-dashed underline-offset-2'
+            rel="noopener noreferrer"
+            className="decoration-dashed underline-offset-2"
           >
             Suzu
-          </Link>{' '}
-          by{' '}
+          </Link>
+          {' '}
+          by
+          {' '}
           <Link
-            href='https://www.zla.pub'
-            target='_blank'
+            href="https://www.zla.pub"
+            target="_blank"
             aria-label="ZL Asica's blog (new tab)"
-            rel='noopener noreferrer'
-            className='decoration-dashed underline-offset-2'
+            rel="noopener noreferrer"
+            className="decoration-dashed underline-offset-2"
           >
             ZL Asica
           </Link>
@@ -48,7 +58,7 @@ const Footer = ({ config }: FooterProperties) => {
         )}
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

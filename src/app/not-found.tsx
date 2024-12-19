@@ -1,47 +1,49 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 function Custom404() {
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(10)
 
   useEffect(() => {
     // Set up a countdown timer
     const timer = setInterval(() => {
-      setCountdown((previous) => previous - 1);
-    }, 1000);
+      setCountdown(previous => previous - 1)
+    }, 1000)
 
     // Redirect after 10 seconds
     const redirectTimer = setTimeout(() => {
-      globalThis.location.href = '/';
-    }, 10_000);
+      globalThis.location.href = '/'
+    }, 10_000)
 
     // Clean up both timers on component unmount
     return () => {
-      clearTimeout(redirectTimer);
-      clearInterval(timer);
-    };
-  }, []);
+      clearTimeout(redirectTimer)
+      clearInterval(timer)
+    }
+  }, [])
 
   return (
-    <main className='mx-8 mt-[30vh] flex flex-col items-center justify-center text-center'>
-      <h1 className='mb-4 text-3xl font-bold text-[var(--sakuraPink)]'>
+    <main className="mx-8 mt-[30vh] flex flex-col items-center justify-center text-center">
+      <h1 className="mb-4 text-3xl font-bold text-[var(--sakuraPink)]">
         404 - 页面迷路啦 (；′⌒`)
       </h1>
-      <p className='mb-6 text-base leading-7'>
+      <p className="mb-6 text-base leading-7">
         抱歉，您要找的页面已经不见了，或者它从未存在过 🔍
         <br />
-        <span className='text-[var(--skyblue)]'>{countdown}</span> 秒后将自动返回首页
+        <span className="text-[var(--skyblue)]">{countdown}</span>
+        {' '}
+        秒后将自动返回首页
       </p>
       <Link
-        href='/'
-        className='rounded bg-[var(--skyblue)] px-4 py-2 text-white no-underline transition-all duration-500 hover:scale-110 hover:bg-[var(--skyblue)] hover:text-black'
+        href="/"
+        className="rounded bg-[var(--skyblue)] px-4 py-2 text-white no-underline transition-all duration-500 hover:scale-110 hover:bg-[var(--skyblue)] hover:text-black"
       >
         返回首页
       </Link>
     </main>
-  );
+  )
 }
 
-export default Custom404;
+export default Custom404

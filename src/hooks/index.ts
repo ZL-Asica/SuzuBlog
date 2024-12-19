@@ -1,1 +1,1 @@
-export { default as useTOCLogic } from './useTOCLogic';
+export { default as useTOCLogic } from './useTOCLogic'

@@ -1,10 +1,10 @@
 const zh: Translation = {
   home: {
-    title: '首页'
+    title: '首页',
   },
   posts: {
     title: '文章',
-    description: ' 的文章页，在这里你可以看到所有的文章。'
+    description: ' 的文章页，在这里你可以看到所有的文章。',
   },
   search: {
     title: '搜索',
@@ -16,16 +16,16 @@ const zh: Translation = {
     clear: '清空筛选条件',
     loading: '搜索中...',
     submit: '搜索',
-    noResultsFound: '没有匹配的文章'
+    noResultsFound: '没有匹配的文章',
   },
   friends: {
     title: '朋友',
     description: ' 的友情链接页，在这里你可以看到所有的友情链接。',
-    avatar: '头像'
+    avatar: '头像',
   },
   about: {
     title: '关于',
-    description: ' 的关于页，这里是关于站长一些信息。查看站长的个人故事。'
+    description: ' 的关于页，这里是关于站长一些信息。查看站长的个人故事。',
   },
   post: {
     thumbnail: '封面：',
@@ -44,16 +44,16 @@ const zh: Translation = {
       link: '本文链接：',
       copyright: {
         start: '本文采用',
-        end: '进行许可'
-      }
-    }
+        end: '进行许可',
+      },
+    },
   },
   aria: {
     travellings: '开往',
-    theme: '主题'
+    theme: '主题',
   },
   newTab: '在新标签页打开：',
-  navigate: '重定向到'
-};
+  navigate: '重定向到',
+}
 
-export default zh;
+export default zh
