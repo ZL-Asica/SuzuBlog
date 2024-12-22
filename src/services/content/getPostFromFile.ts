@@ -36,7 +36,7 @@ function getPostFromFile(
   }
 
   let toc: TocItems[] = []
-  if (fullData && frontmatter.redirect !== null && frontmatter.redirect !== undefined && frontmatter.redirect !== '') {
+  if (fullData && frontmatter.redirect !== null) {
     toc = generateTOC(contentRaw)
   }
 
@@ -81,7 +81,7 @@ function generateTOC(content: string): TocItems[] {
     match = headingRegex.exec(content)
     if (match === null)
       break
-    const [_, hashes, title] = match as unknown as [string, string, string]
+    const [, hashes, title] = match
     const level = `h${hashes.length}` as keyof typeof headingLevels
 
     const slug = generateHierarchicalSlug(String(title), level, headingLevels)
