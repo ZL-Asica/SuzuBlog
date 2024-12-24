@@ -204,6 +204,12 @@ showThumbnail: false
 "link": "https://blog.woo.moe",
 "img": "https://data.woo.moe/img/ico/blog200.png",
 "des": "雨嶼沫"
+},
+{
+"title": "良的世界",
+"link": "https://www.lemonary.cn",
+"img": "https://r2.img.zla.app/2024/12/24/8263e6.webp",
+"des": "忙点充实，闲点自在"
 }
 ]
 ```

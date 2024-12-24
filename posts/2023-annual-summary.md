@@ -650,7 +650,7 @@ thumbnail: 'https://s2.loli.net/2024/01/01/vAJ16SYCwglynmp.jpg'
 
 ![Conrad Tokyo Food](https://s2.loli.net/2024/01/01/5INPpb9xOeYJXHa.jpg)
 
-来到香港以后住了两个月港中文的和声书院宿舍，8000港币两个月，双人间单独的床、桌子、柜子，有空调，不计电费。每层共用浴室和卫生间，没有LGBTQ宿舍，只有binary sex。
+来到香港以后住了两个月港中文的和声书院宿舍，8000港币两个月，双人间单独的床、桌子、柜子，有空调，不计电费。每层共用浴室和卫生间。
 
 去拉斯维加斯期间住的是Hilton旗下挂Double Tree牌子的Tropicana，主要为了用掉Aspire送的250刀resort credit。定的普通房三晚一个人141.3，钻卡在美国不好使，就给升到了高级房，好在给了个最边上的房间还大一些有一些风景。早餐不用想一个人就给13刀credit没有免费早餐。总体体验还可以，给小费home keeper也没拿。
 
