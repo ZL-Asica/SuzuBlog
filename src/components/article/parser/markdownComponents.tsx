@@ -111,16 +111,16 @@ function createMarkdownComponents(translation: Translation, autoSlug: boolean = 
 
     ul: ({ children }) => (
       <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-4">
-        <ul className="list-inside list-disc space-y-2">{children as ReactNode}</ul>
+        <ul className="list-disc list-inside">{children as ReactNode}</ul>
       </div>
     ),
     ol: ({ children }) => (
       <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-4">
-        <ol className="list-inside list-decimal space-y-2">{children as ReactNode}</ol>
+        <ol className="list-decimal list-inside">{children as ReactNode}</ol>
       </div>
     ),
     li: ({ children }) => (
-      <li className="text-foreground mb-1 leading-relaxed marker:text-[var(--sakuraPink)]">
+      <li className="text-foreground leading-relaxed marker:text-[var(--sakuraPink)] list-outside pl-4 ml-4">
         {children as ReactNode}
       </li>
     ),
