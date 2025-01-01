@@ -21,10 +21,14 @@ function generateHierarchicalSlug(children: React.ReactNode | string, level: key
 }
 
 function slugPrefix(slug: string, level: number) {
-  return `${slug
-    .split('-')
-    .slice(0, level - 1)
-    .join('.')}.`
+  const parts = slug.split('-')
+  if (level === 6) {
+    return `${parts
+      .slice(-2)
+      .map(part => String.fromCharCode(96 + Number.parseInt(part, 10)))
+      .join('.')} `
+  }
+  return `${parts.slice(0, level - 1).join('.')} `
 }
 
 export { generateHierarchicalSlug as default, slugPrefix }
