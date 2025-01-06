@@ -43,7 +43,7 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "slugify": "^1.6.6",
-    "twikoo": "^1.6.40",
+    "twikoo": "^1.6.41",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
