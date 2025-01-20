@@ -13,7 +13,7 @@ showThumbnail: false
 {
 "title": "白鲸字幕组",
 "link": "https://www.belugasubs.com/",
-"img": "https://r2.img.zla.app/2024/12/02/fcc241.webp",
+"img": "https://s2.loli.net/2024/01/17/CGeZhq1FYovxz2p.jpg",
 "des": "白鲸字幕组是一个非盈利性质的多语言字幕组。"
 },
 {
@@ -26,13 +26,13 @@ showThumbnail: false
 "title": "个人学术网站",
 "link": "https://www.zla.app/",
 "img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
-"des": "我的个人学术网站(英文)。"
+"des": "我的个人学术网站(英文)"
 },
 {
 "title": "React 工具库",
 "link": "https://react.zla.app/",
 "img": "https://react.zla.app/logo.png",
-"des": "我自己搭建和维护的 React 工具库。"
+"des": "我自己搭建和维护的 React 工具库"
 }
 ]
 ```
@@ -200,10 +200,10 @@ showThumbnail: false
 "des": "美好回忆中毒症。"
 },
 {
-"title": "Nikoのblog",
+"title": "Hinai",
 "link": "https://blog.woo.moe",
-"img": "https://data.woo.moe/img/ico/blog200.png",
-"des": "雨嶼沫"
+"img": "https://data.woo.moe/img/ico/104491469_0_r.png",
+"des": "曇花一現"
 },
 {
 "title": "良的世界",
@@ -225,7 +225,7 @@ showThumbnail: false
   "title": "ZLA 小站",
   "link": "https://www.zla.pub/",
   "img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
-  "des": "不要哭，不要笑，不要恨，要理解。"
+  "des": "月亮不抱你，星星会落在你怀里✨🌙"
 }
 ```
 
@@ -235,7 +235,7 @@ showThumbnail: false
 名称: ZLA 小站
 地址: https://www.zla.pub/
 图标: https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512
-描述: 不要哭，不要笑，不要恨，要理解。
+描述: 月亮不抱你，星星会落在你怀里✨🌙
 RSS: https://www.zla.pub/feed.xml
 ```
 

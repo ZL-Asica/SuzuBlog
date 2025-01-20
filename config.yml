@@ -1,51 +1,51 @@
-#######################
+# ######################
 # SITE SETTINGS
-#######################
-title: 'ZLA 小站' # The name of your blog, used in titles and meta tags.
-subTitle: 'ZL Asica 的个人小站' # A short description that appears after the main title.
-description: 'ZL Asica 的个人小站，发布个人技术和生活内容。生活内容会与微信公众号（ZL Asica）同步更新。' # A longer description for SEO and meta tags.
+# ######################
+title: ZLA 小站 # The name of your blog, used in titles and meta tags.
+subTitle: ZL Asica 的个人小站 # A short description that appears after the main title.
+description: ZL Asica 的个人小站，发布个人技术和生活内容。生活内容会与微信公众号（ZL Asica）同步更新。 # A longer description for SEO and meta tags.
 keywords: 'markdown blog, blog, sakura, ZL Asica, ZL Asica, ZLA, 嫒希卡' # Comma-separated keywords for SEO purposes.
 author:
-  name: 'ZL Asica' # Your name, displayed as the author of the blog.
+  name: ZL Asica # Your name, displayed as the author of the blog.
   link: 'https://www.zla.pub' # Link to your personal website or blog.
 # Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
-lang: 'zh'
+lang: zh
 # Your public root url, used for SEO and meta tags.
 # !Do not include a ending slash
 siteUrl: 'https://www.zla.pub'
 
 # Path to your avatar image. Can be a relative path from /public or a full URL (e.g., https://).
-avatar: '/images/avatar.jpg'
+avatar: /images/avatar.jpg
 # Used as the default thumbnail for posts without thumbnails.
-background: '/images/background.jpg'
+background: /images/background.jpg
 # Slogan displayed on your homepage, under your avatar.
-slogan: 人和代码，有一个能跑就行～
+slogan: 月亮不抱你，星星会落在你怀里✨🌙
 # Google Analytics tracking ID (e.g., 'G-XXXXXXXXXX').
 googleAnalytics:
 
-#######################
+# ######################
 # POSTS SETTINGS
-#######################
+# ######################
 creativeCommons:
   type: CC BY-SA 4.0 Deed
   link: https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans
 
-#######################
+# ######################
 # HEADER SETTINGS
-#######################
+# ######################
 # If you want to join the travellings community, set the following field to true.
 # For more information, visit https://www.travellings.cn/en_US/
 travellings: true
 
-#######################
+# ######################
 # FOOTER SETTINGS
-#######################
+# ######################
 # If you want to have a start year of your blog, set the year here.
 startYear: 2017 # Leave empty if you do not want to display a start year.
 
-#######################
+# ######################
 # SOCIAL MEDIA SETTINGS
-#######################
+# ######################
 # Add your social media usernames.
 # Leave the field empty if you do not want to display a specific platform.
 # The order of the social media icons is determined by the order below.
@@ -62,21 +62,21 @@ socialMedia:
   email: zl@zla.app # Your email address.
   rss: true # Display the RSS icon.
 
-#######################
+# ######################
 # COMMENTS SETTINGS
 # Only one of the following two options should be enabled.
 # Priority: Twikoo > Disqus
-#######################
+# ######################
 # Your Twikoo environment ID.
 twikooEnvId: https://vercel.twikoo.zla.app
 # Your Disqus shortname (used for integrating Disqus comments).
 # Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
 disqusShortname: zla-pub
 
-#######################
+# ######################
 # CUSTOM CODE BLOCKS
 # ! WARNING: Only modify these if you understand the purpose of custom scripts.
-#######################
+# ######################
 # Add custom JavaScript code to be included inside the <head> section of your site. One script per line.
 headerJavascript:
   - https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js
