@@ -122,12 +122,6 @@ showThumbnail: false
 "des": "柳影曳曳，清酒孤灯，扬笔撒墨，心境如霜"
 },
 {
-"title": "Canmi",
-"link": "https://canmi21.github.io",
-"img": "https://canmi21.github.io/img/Canmi.webp",
-"des": "彩笔猫猫"
-},
-{
 "title": "苏卡卡的有底洞",
 "link": "https://skk.moe",
 "img": "https://cdn.skk.moe/avatar/512x512.png",
@@ -165,8 +159,8 @@ showThumbnail: false
 },
 {
 "title": "s22y",
-"link": "http://blog.sooooooooooooooooootheby.top/",
-"img": "https://blog.sooooooooooooooooootheby.top/logo_small.webp",
+"link": "https://blog.s22y.moe",
+"img": "https://blog.s22y.moe/logo_small.webp",
 "des": "去码头整点薯条。"
 },
 {
@@ -210,6 +204,21 @@ showThumbnail: false
 "link": "https://www.lemonary.cn",
 "img": "https://r2.img.zla.app/2024/12/24/8263e6.webp",
 "des": "忙点充实，闲点自在"
+}
+]
+```
+
+## 失效友链
+
+> 麻烦出现在下面的朋友在看到后尽快修复或评论区留言更新信息，谢谢！
+
+```Links
+[
+{
+"title": "Canmi",
+"link": "https://canmi21.github.io",
+"img": "https://canmi21.github.io/img/Canmi.webp",
+"des": "彩笔猫猫"
 }
 ]
 ```
