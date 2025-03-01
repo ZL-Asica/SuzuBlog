@@ -61,10 +61,7 @@ export default async function AboutPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <ArticlePage
-        config={config}
-        post={post}
-      />
+      <ArticlePage config={config} post={post} />
     </>
   )
 }

@@ -1,9 +1,9 @@
 'use client'
 
-import { useClickOutside, useScrollPosition, useToggle } from '@zl-asica/react'
+import { useClickOutside, useHideOnScrollDown, useScrollPosition, useToggle } from '@zl-asica/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { FaBars } from 'react-icons/fa6'
 
 import HeaderMenu from './HeaderMenu'
@@ -12,21 +12,42 @@ interface HeaderProps {
   config: Config
 }
 
-function Header({ config }: HeaderProps) {
+const Header = ({ config }: HeaderProps) => {
   const [isOpen, toggleOpen] = useToggle()
   const siteTitle = config.title
   const scrollProgress = useScrollPosition(undefined, true)
   const menuReference = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isHomePage = pathname === '/'
+  const headerRef = useRef<HTMLElement>(null)
+  const isHeaderVisible = useHideOnScrollDown(headerRef)
 
   useClickOutside(menuReference, () => {
-    if (isOpen)
+    if (isOpen) {
       toggleOpen()
+    }
   })
 
+  // Avoid scrolling when the menu is open (mobile)
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    }
+    else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   return (
-    <header className="relative z-50 w-full bg-[var(--background)] shadow-md">
+    <header
+      ref={headerRef}
+      className={`fixed top-0 left-0 z-50 w-full bg-[var(--background)] shadow-md transition-transform duration-300
+        ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}
+      `}
+    >
       {/* Progress Scroll Bar */}
       <div
         className="fixed left-0 top-0 h-[3px] w-full bg-[var(--sakuraPink)] transition-all duration-500 ease-out"
@@ -35,7 +56,7 @@ function Header({ config }: HeaderProps) {
       />
 
       {/* Navigation Menu */}
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 bg-[var(--background)]">
         {/* Logo */}
         <Link
           href="/"
@@ -61,7 +82,7 @@ function Header({ config }: HeaderProps) {
         <div
           id="mobile-menu"
           ref={menuReference}
-          className={`fixed right-0 top-0 z-50 h-full w-1/2 bg-[var(--background)] shadow-lg transition-all duration-300 ease-out md:hidden ${
+          className={`fixed right-0 top-0 z-50 h-screen w-1/2 bg-[var(--background)] shadow-lg transition-transform duration-300 ease-out md:hidden ${
             isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
         >
@@ -76,7 +97,7 @@ function Header({ config }: HeaderProps) {
         {/* Backdrop */}
         {isOpen && (
           <div
-            className="fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300"
+            className="fixed inset-0 z-40 h-screen w-screen bg-black/70 transition-opacity duration-300"
             onClick={(event_) => {
               event_.preventDefault()
               event_.stopPropagation()

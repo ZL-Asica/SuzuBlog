@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
-import LoadingIndicator from '@/components/common/LoadingIndicator'
 import PostsPageClient from '@/components/posts/PostPageClient'
 
 import { getConfig } from '@/services/config'
 import { getAllPosts } from '@/services/content'
 
 import Head from 'next/head'
-import { Suspense } from 'react'
 
 export function generateMetadata(): Metadata {
   const config = getConfig()
@@ -59,13 +57,11 @@ export default async function PostsPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <Suspense fallback={<LoadingIndicator />}>
-        <PostsPageClient
-          posts={posts}
-          translation={translation}
-          postsPerPage={Math.min(15, config.postsPerPage ?? 5)}
-        />
-      </Suspense>
+      <PostsPageClient
+        posts={posts}
+        translation={translation}
+        postsPerPage={Math.min(15, config.postsPerPage ?? 5)}
+      />
     </>
   )
 }

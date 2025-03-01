@@ -25,12 +25,7 @@ interface HeaderMenuProps {
   onClickHandler?: () => void
 }
 
-function HeaderMenu({
-  config,
-  isMobile,
-  ulClassName,
-  onClickHandler,
-}: HeaderMenuProps) {
+const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMenuProps) => {
   const translation = config.translation
 
   const menuItems: MenuItem[] = [
@@ -89,7 +84,7 @@ function HeaderMenu({
               className="w-full"
               aria-hidden
             >
-              <div className="h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]" />
+              <div className="h-[1px] w-full bg-linear-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]" />
             </li>
           )}
         </Fragment>
@@ -113,12 +108,13 @@ function HeaderMenu({
         )}
         <button
           type="button"
-          className="group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 hover:cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700"
           aria-label={translation.aria.theme}
           onClick={() => {
             toggleTheme()
-            if (onClickHandler)
+            if (onClickHandler) {
               onClickHandler()
+            }
           }}
         >
           <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">

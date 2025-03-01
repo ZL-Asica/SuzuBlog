@@ -11,7 +11,7 @@ interface CodeBlockProps {
   children: ReactNode
 }
 
-function CodeBlock({ match, translation, children }: CodeBlockProps) {
+const CodeBlock = ({ match, translation, children }: CodeBlockProps) => {
   const [isCopied, toggleCopied] = useToggle()
   const cleanedChildren = String(children).replace(/\n$/, '')
 
@@ -27,7 +27,7 @@ function CodeBlock({ match, translation, children }: CodeBlockProps) {
       <button
         type="button"
         onClick={handleCopyClick}
-        className="absolute -top-7 right-2 rounded bg-[var(--skyblue)] px-2 py-1 text-xs hover:bg-opacity-80"
+        className="absolute -top-7 right-2 rounded-sm bg-[var(--skyblue)] px-2 py-1 text-xs hover:bg-opacity-80"
       >
         {isCopied ? translation.post.copied : translation.post.copy}
       </button>
@@ -44,7 +44,7 @@ function CodeBlock({ match, translation, children }: CodeBlockProps) {
           paddingRight: '10px',
         }}
         PreTag="div"
-        className="scrollbar-custom rounded py-1 pl-2 font-mono hover:shadow-2xl"
+        className="scrollbar-custom rounded-sm py-1 pl-2 font-mono hover:shadow-2xl"
       >
         {cleanedChildren}
       </SyntaxHighlighter>

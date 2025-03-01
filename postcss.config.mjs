@@ -1,5 +1,3 @@
-import process from 'node:process'
-
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
@@ -13,9 +11,7 @@ const config = {
         'custom-properties': false, // Disable custom properties
       },
     },
-    'tailwindcss': {},
-    'autoprefixer': {},
-    ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}), // Add cssnano only in production
+    '@tailwindcss/postcss': {},
   },
 }
 

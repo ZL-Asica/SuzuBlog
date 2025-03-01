@@ -12,13 +12,13 @@ interface CopyrightInfoProps {
   translation: Translation
 }
 
-function CopyrightInfo({
+const CopyrightInfo = ({
   author,
   siteUrl,
   title,
   creativeCommons,
   translation,
-}: CopyrightInfoProps) {
+}: CopyrightInfoProps) => {
   const pathname = usePathname()
   const copyright = translation.post.copyright
 

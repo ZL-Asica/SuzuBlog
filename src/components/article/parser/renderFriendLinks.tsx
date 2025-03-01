@@ -3,7 +3,7 @@ import { replace } from 'es-toolkit/compat'
 
 import Link from 'next/link'
 
-function renderFriendLinks(linksChildren: string, transition: Translation) {
+const renderFriendLinks = (linksChildren: string, transition: Translation) => {
   let links: FriendLink[] = []
   try {
     links = JSON.parse(replace(linksChildren, /\}\s*,\s*\{/g, '},{')) as FriendLink[]
@@ -27,7 +27,7 @@ function renderFriendLinks(linksChildren: string, transition: Translation) {
         {links.map((link, index) => (
           <li
             key={link.link ?? index}
-            className="friend-link-item group relative box-border min-w-[150px] max-w-[200px] flex-shrink flex-grow basis-[calc(25%-16px)]"
+            className="friend-link-item group relative box-border min-w-[150px] max-w-[200px] shrink grow basis-[calc(25%-16px)]"
           >
             <Link
               href={link.link ?? '#'}

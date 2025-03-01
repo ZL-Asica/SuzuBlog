@@ -1,28 +1,28 @@
 import antfu from '@antfu/eslint-config'
 import nextPlugin from '@next/eslint-plugin-next'
-import tailwind from 'eslint-plugin-tailwindcss'
+// import tailwind from "eslint-plugin-tailwindcss";
 
 export default antfu({
+  formatters: true,
   react: true,
   typescript: {
     tsconfigPath: 'tsconfig.json',
   },
-  formatters: {
-    css: true,
-    html: true,
-    markdown: 'prettier',
-  },
   plugins: {
     '@next/next': nextPlugin,
   },
+  lessOpinionated: true,
   rules: {
     'react-dom/no-dangerously-set-innerhtml': 'off',
   },
-  ...tailwind.configs['flat/recommended'],
-  settings: {
-    tailwindcss: {
-      callees: ['classnames', 'clsx', 'ctl', 'className'],
-      config: 'tailwind.config.ts',
-    },
+}, {
+  files: ['src/app/**/loading.tsx'],
+  rules: {
+    'react/no-array-index-key': 'off',
   },
+}, {
+  // TODO: Need wait for their support for tailwindcss v4
+  // ! Not support tailwindcss v4 yet
+  // files: ['**/*.{ts,tsx}'],
+  // ...tailwind.configs["flat/recommended"],
 })

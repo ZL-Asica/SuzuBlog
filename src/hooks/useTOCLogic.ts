@@ -4,7 +4,7 @@ import { useClickOutside, useToggle } from '@zl-asica/react'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-function useTOCLogic() {
+const useTOCLogic = () => {
   const [activeSlug, setActiveSlug] = useState('')
   const [isOpen, toggleOpen] = useToggle()
   const tocReference = useRef<HTMLElement>(null)
@@ -13,12 +13,16 @@ function useTOCLogic() {
   const handleLinkClick = (slug: string) => {
     const targetElement = document.querySelector(`#${CSS.escape(slug)}`)
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' })
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
       setActiveSlug(slug)
       router.push(`#${slug}`, { scroll: false })
     }
-    if (isOpen)
+    if (isOpen) {
       toggleOpen()
+    }
   }
 
   const updateActiveSlug = useCallback(() => {
@@ -64,8 +68,9 @@ function useTOCLogic() {
   }, [activeSlug, updateActiveSlug])
 
   useClickOutside(tocReference, () => {
-    if (isOpen)
+    if (isOpen) {
       toggleOpen()
+    }
   })
 
   return {

@@ -7,21 +7,27 @@ import { Analytics } from '@vercel/analytics/react'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-import { JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
+import { Noto_Sans_SC, Roboto, Ubuntu_Mono } from 'next/font/google'
 import Script from 'next/script'
 
 import './globals.css'
 
 const config: Config = getConfig()
 
+const roboto = Roboto({
+  subsets: ['latin', 'latin-ext', 'vietnamese'],
+  variable: '--font-roboto',
+})
+
 const notoSansSC = Noto_Sans_SC({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
   variable: '--font-noto-sans-sc',
 })
 
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ['latin', 'latin-ext', 'vietnamese'],
-  variable: '--font-jetbrains-mono',
+const ubuntuMono = Ubuntu_Mono({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  variable: '--font-ubuntu-mono',
+  weight: ['400', '700'],
 })
 
 export const metadata: Metadata = {
@@ -117,10 +123,10 @@ export default function RootLayout(
       )}
 
       <body
-        className={`${notoSansSC.variable} ${jetBrainsMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
+        className={`${roboto.variable} ${notoSansSC.variable} ${ubuntuMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
       >
         <Header config={config} />
-        <main className="flex-grow">
+        <main className="animate-fade-in-down grow mt-20">
           {children}
           <Analytics />
           <SpeedInsights />

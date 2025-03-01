@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "ES2017",
+    "target": "ESNext",
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -30,8 +30,7 @@
     "src/**/*.tsx",
     "eslint.config.mjs",
     ".next/types/**/*.ts",
-    "next.config.ts",
-    "tailwind.config.ts"
+    "next.config.ts"
   ],
   "exclude": ["node_modules"]
 }

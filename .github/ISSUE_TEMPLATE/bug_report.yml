@@ -1,0 +1,83 @@
+name: 🐞 Bug Report
+description: Report a bug to help us improve the project
+title: '[Bug]: '
+labels: [bug, needs-triage]
+assignees:
+  - asica
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before submitting, please check if the bug has already been reported.**
+        Provide as much detail as possible to help us reproduce the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 🐛 Bug Description
+      description: Describe the bug in detail.
+      placeholder: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: Provide step-by-step instructions to reproduce the bug.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See the error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: ✅ Expected Behavior
+      description: What should happen instead?
+      placeholder: Describe what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: ❌ Actual Behavior
+      description: What actually happens?
+      placeholder: Describe what is currently happening.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 🌍 Environment
+      description: Where did the bug occur?
+      options:
+        - Production
+        - Development
+        - Local Machine
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: '📄 Additional Context & Logs'
+      description: 'Add screenshots, logs, or any other relevant information.'
+      placeholder: You can paste logs here.
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: 📝 Confirmation
+      description: 'Before submitting, please check the following:'
+      options:
+        - label: I have searched for existing issues.
+          required: true
+        - label: I have provided all necessary details.
+          required: true

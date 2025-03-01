@@ -1,15 +1,16 @@
-import type { Components } from 'react-markdown'
+import type { ReactNode } from 'react'
+import type { Components as MarkdownComponents } from 'react-markdown'
 import { CustomImage } from '@/components/ui'
-import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
 
+import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
 import Link from 'next/link'
-import { isValidElement, type ReactNode } from 'react'
+import { isValidElement } from 'react'
 
 import CodeBlock from './renderCodeBlock'
 
 import renderFriendLinks from './renderFriendLinks'
 
-function createMarkdownComponents(translation: Translation, autoSlug: boolean = true): Components {
+const createMarkdownComponents = (translation: Translation, autoSlug: boolean = true): MarkdownComponents => {
   // Set initial heading levels
   const headingLevels = {
     h2: 0,
@@ -24,7 +25,7 @@ function createMarkdownComponents(translation: Translation, autoSlug: boolean = 
     return (
       <Link
         href={`#${slug}`}
-        className="no-underline"
+        className="no-underline transition-colors duration-300 hover:text-[var(--sakuraPink)]"
       >
         {`${titleSlug}${children?.toString()}`}
       </Link>
@@ -138,7 +139,7 @@ function createMarkdownComponents(translation: Translation, autoSlug: boolean = 
           )
         : (
             <code
-              className="rounded bg-[var(--lightGray)] px-2 py-1 font-mono text-base"
+              className="rounded-sm bg-[var(--lightGray)] px-2 py-1 font-mono text-base"
               {...(props as Record<string, unknown>)}
             >
               {children}
@@ -158,7 +159,8 @@ function createMarkdownComponents(translation: Translation, autoSlug: boolean = 
               ? undefined
               : `${translation.newTab}${children?.toString() ?? 'link'}`
           }
-          className="mx-1 break-words font-semibold text-[var(--skyBlue)] decoration-dashed underline-offset-2 transition-colors duration-200 ease-in-out hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
+          prefetch={false}
+          className="mx-1 break-words font-semibold text-[var(--skyBlue)] underline decoration-dashed underline-offset-2 transition-colors duration-200 ease-in-out hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
           {...(props as Record<string, unknown>)}
         >
           {children}
@@ -173,7 +175,7 @@ function createMarkdownComponents(translation: Translation, autoSlug: boolean = 
         width={500}
         height={700}
         priority={false}
-        className="relative mx-auto my-6 h-auto max-h-[500px] min-h-[200px] w-auto min-w-[200px] max-w-full rounded-sm object-contain shadow-md lg:max-h-[700px] lg:min-h-[300px] lg:min-w-[300px] xl:max-h-[800px] xl:min-h-[400px] xl:min-w-[400px]"
+        className="relative mx-auto my-6 h-auto max-h-[500px] min-h-[200px] w-auto min-w-[200px] max-w-full rounded-xs object-contain shadow-md lg:max-h-[700px] lg:min-h-[300px] lg:min-w-[300px] xl:max-h-[800px] xl:min-h-[400px] xl:min-w-[400px]"
         {...(props as Record<string, unknown>)}
       />
     ),

@@ -1,0 +1,49 @@
+name: 📦 Dependency Update Request
+description: 'Request to update, add, or remove dependencies'
+labels: [dependencies]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📦 Dependency Update Request
+        Need a package update? Fill in the details below.
+
+  - type: textarea
+    id: dependency-reason
+    attributes:
+      label: 🔍 Why is this update needed?
+      description: Explain why this dependency needs an update.
+      placeholder: 'Security fix, new feature, etc.'
+
+  - type: dropdown
+    id: update-type
+    attributes:
+      label: 📊 Type of Update
+      description: Choose what kind of update this is.
+      options:
+        - Bug fix
+        - Security update
+        - Performance improvement
+        - New feature
+        - Other
+
+  - type: textarea
+    id: dependency-table
+    attributes:
+      label: 📜 Dependency Changes
+      description: List all dependencies that need updating.
+      placeholder: |
+        | Dependency | Old Version | New Version |
+        |------------|------------|------------|
+        | Next.js    | 14.2.3      | 15.1.6      |
+        | React      | 18.3.1      | 19.0.0      |
+        | Tailwind   | 3.4.3       | 4.0.1       |
+
+  - type: checkboxes
+    id: risk-assessment
+    attributes:
+      label: ⚠️ Risk Assessment
+      options:
+        - label: Tested for breaking changes
+        - label: Checked compatibility with existing code
+        - label: Security vulnerabilities reviewed

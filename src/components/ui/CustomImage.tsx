@@ -13,7 +13,7 @@ interface CustomImageProps {
   blurDataURL?: string
 }
 
-function CustomImage({ src, alt, ...props }: CustomImageProps) {
+const CustomImage = ({ src, alt, ...props }: CustomImageProps) => {
   const fallbackImage = props.blurDataURL ?? '/images/image-not-found.webp'
   const [imgSource, setImgSource] = useState(src || fallbackImage)
 

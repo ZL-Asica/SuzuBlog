@@ -12,18 +12,16 @@ interface CategoriesTagsListProps {
 
 const defaultItems: never[] = []
 
-function CategoriesTagsList({
-  type,
-  translation,
-  items = defaultItems,
-}: CategoriesTagsListProps) {
+const CategoriesTagsList = ({ type, translation, items = defaultItems }: CategoriesTagsListProps) => {
   const searchParameters = useSearchParams()
 
   // Handle no categories or tags
   if (items.length === 0) {
     return (
       <span>
-        {type === 'category' ? translation.post.noCategories : translation.post.noTags}
+        {type === 'category'
+          ? translation.post.noCategories
+          : translation.post.noTags}
       </span>
     )
   }
@@ -38,13 +36,16 @@ function CategoriesTagsList({
     }
   })
 
-  const typeTranslation
-    = type === 'category' ? translation.post.categories : translation.post.tags
+  const typeTranslation = type === 'category'
+    ? translation.post.categories
+    : translation.post.tags
 
   return (
     <span className="flex items-center">
       {/* Render Type icon */}
-      {type === 'category' ? <FaFolder className="mr-1" /> : <FaTags className="mr-1" />}
+      {type === 'category'
+        ? <FaFolder className="mr-1" />
+        : <FaTags className="mr-1" />}
       {/* List */}
       <span>
         {links.map(({ item, href }, index) => (
@@ -54,7 +55,7 @@ function CategoriesTagsList({
               target="_self"
               title={`${translation.navigate} ${typeTranslation} ${item}`}
               aria-label={`${translation.navigate} ${typeTranslation} ${item}`}
-              className="no-underline"
+              className="hover:font-bold hover:underline hover:decoration-dotted hover:underline-offset-2 hover:text-[var(--sakuraPink)]"
             >
               {item}
             </Link>

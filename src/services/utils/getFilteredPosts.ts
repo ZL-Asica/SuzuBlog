@@ -26,14 +26,14 @@ function getFilteredPosts(
     // Perform search query
     const matchesQuery
       = queryKeywords.length === 0
-      || queryKeywords.some(keyword =>
-        [
-          normalizedTitle,
-          normalizedAbstract,
-          ...normalizedTags,
-          ...normalizedCategories,
-        ].some(field => field.includes(keyword)),
-      )
+        || queryKeywords.some(keyword =>
+          [
+            normalizedTitle,
+            normalizedAbstract,
+            ...normalizedTags,
+            ...normalizedCategories,
+          ].some(field => field.includes(keyword)),
+        )
 
     // Perform category and tag filtering
     const matchesCategory = normalizedCategory !== undefined && normalizedCategory !== null

@@ -115,10 +115,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <ArticlePage
-        config={config}
-        post={post}
-      />
+      <ArticlePage config={config} post={post} />
     </>
   )
 }

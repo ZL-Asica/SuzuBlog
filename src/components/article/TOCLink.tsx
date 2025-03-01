@@ -9,14 +9,14 @@ interface TOCLinkProps {
   autoSlug: boolean
 }
 
-function TOCLink({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) {
+const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) => {
   const isActive = activeSlug === item.slug
   const titleSlug = autoSlug ? slugPrefix(item.slug, item.level) : ''
 
   return (
     <li
       key={item.slug}
-      className={`list-none py-1 text-base transition-colors duration-200 ${
+      className={`list-none py-1 text-base transition-all duration-200 ${
         isActive ? 'font-bold text-[var(--sakuraPink)]' : 'text-[var(--gray)]'
       } `}
       style={{ marginLeft: `${(item.level - 2) * 0.8}em` }}
@@ -27,7 +27,7 @@ function TOCLink({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) 
           event.preventDefault()
           handleLinkClick(item.slug)
         }}
-        className="block break-words no-underline"
+        className="block break-words no-underline transition-all duration-200 hover:text-[var(--sakuraPink)]"
       >
         {`${titleSlug}${item.title}`}
       </a>

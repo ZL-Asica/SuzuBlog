@@ -17,11 +17,11 @@ interface PostPageClientProps {
   postsPerPage: number
 }
 
-function PostPageClient({
+const PostPageClient = ({
   posts,
   translation,
   postsPerPage,
-}: PostPageClientProps) {
+}: PostPageClientProps) => {
   const searchParameters = useSearchParams()
   const queryParameters = searchParameters.get('query') ?? ''
   const categoryParameter = searchParameters.get('category') ?? ''

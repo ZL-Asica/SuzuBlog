@@ -1,0 +1,53 @@
+name: ✨ Feature Request
+description: Suggest a new feature or improvement
+title: '[Feature]: '
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for suggesting an improvement! 🚀 Please fill out the following details.
+
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: 💡 Feature Description
+      description: Describe the new feature or improvement.
+      placeholder: What problem does this feature solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: 📌 Use Case
+      description: How would this feature be used? Provide an example.
+      placeholder: 'Example: As a user, I want to...'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🚀 Priority Level
+      description: How important is this feature?
+      options:
+        - Low - Nice to have
+        - Medium - Important but not urgent
+        - High - Critical for functionality
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatives Considered
+      description: Have you considered any alternative solutions?
+      placeholder: Describe any alternative features or workarounds.
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: ✔ Checklist
+      options:
+        - label: I have checked that this feature does not already exist.
+          required: true

@@ -1,5 +1,3 @@
-'use client'
-
 import { CategoriesTagsList } from '@/components/article'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import Image from 'next/image'
@@ -13,18 +11,19 @@ interface PostListProps {
   translation: Translation
 }
 
-function PostList({ posts, translation }: PostListProps) {
+const PostList = ({ posts, translation }: PostListProps) => {
   return (
     <div className="mb-10 grid grid-cols-1 gap-10">
       {posts.map((post, index) => {
         const postTitle = post.frontmatter.title
         const postLink = post.slug
+
         return (
           <article
             key={post.slug}
             className={`mx-auto flex h-[500px] w-11/12 max-w-[850px] flex-col overflow-hidden rounded-lg shadow-lg md:h-[300px] md:w-full md:flex-row ${
               index % 2 === 0 ? 'md:flex-row-reverse' : ''
-            } shadow-[var(--lightGray)] drop-shadow-sm`}
+            } shadow-[var(--lightGray)] drop-shadow-xs`}
           >
             {/* Thumbnail */}
             <div
@@ -62,7 +61,7 @@ function PostList({ posts, translation }: PostListProps) {
                   href={postLink}
                   target="_self"
                   aria-label={`${translation.post.readMore} ${postTitle}`}
-                  className="no-underline"
+                  className="no-underline transition duration-500 hover:text-[var(--sakuraPink)]"
                 >
                   <h2 className="mb-2 text-2xl font-bold">{postTitle}</h2>
                 </Link>
@@ -75,7 +74,7 @@ function PostList({ posts, translation }: PostListProps) {
                   href={postLink}
                   target="_self"
                   aria-label={`${postTitle}`}
-                  className="self-start transition duration-500 hover:scale-110"
+                  className="self-start transition duration-500 hover:scale-110 hover:text-[var(--sakuraPink)]"
                 >
                   <FaEllipsis
                     size={32}

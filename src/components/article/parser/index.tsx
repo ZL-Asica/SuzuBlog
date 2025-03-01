@@ -14,20 +14,22 @@ interface MarkdownContentProps {
   translation: Translation
 }
 
-function MarkdownContent({ post, translation }: MarkdownContentProps) {
+const MarkdownContent = ({ post, translation }: MarkdownContentProps) => {
   const markdownComponents = createMarkdownComponents(
     translation,
     post.frontmatter.autoSlug,
   )
+
   return (
-    <Markdown
-      remarkPlugins={[remarkGfm, remarkMath, remarkGemoji]}
-      rehypePlugins={[rehypeRaw, rehypeKatex]}
-      components={markdownComponents}
-      className="mt-5"
-    >
-      {post.contentRaw}
-    </Markdown>
+    <div className="mt-5">
+      <Markdown
+        remarkPlugins={[remarkGfm, remarkMath, remarkGemoji]}
+        rehypePlugins={[rehypeRaw, rehypeKatex]}
+        components={markdownComponents}
+      >
+        {post.contentRaw}
+      </Markdown>
+    </div>
   )
 }
 
