@@ -1,6 +1,6 @@
 const PostsLoading = () => {
   return (
-    <div className="mb-10 grid grid-cols-1 gap-10 animate-pulse">
+    <div className="mt-5 mb-10 grid grid-cols-1 gap-10 animate-pulse">
       {Array.from({ length: 4 }).map((_, index) => (
         <article
           key={index}

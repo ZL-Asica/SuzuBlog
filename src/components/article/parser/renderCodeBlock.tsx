@@ -27,7 +27,7 @@ const CodeBlock = ({ match, translation, children }: CodeBlockProps) => {
       <button
         type="button"
         onClick={handleCopyClick}
-        className="absolute -top-7 right-2 rounded-sm bg-[var(--skyblue)] px-2 py-1 text-xs hover:bg-opacity-80"
+        className={`absolute -top-7 right-2 text-[var(--foreground)] rounded-sm ${isCopied ? 'bg-[var(--sakuraPink)]' : 'bg-[var(--skyblue)]'} px-2 py-1 text-xs hover:bg-[var(--sakuraPink)] dark:text-[var(--background)]`}
       >
         {isCopied ? translation.post.copied : translation.post.copy}
       </button>
@@ -44,7 +44,7 @@ const CodeBlock = ({ match, translation, children }: CodeBlockProps) => {
           paddingRight: '10px',
         }}
         PreTag="div"
-        className="scrollbar-custom rounded-sm py-1 pl-2 font-mono hover:shadow-2xl"
+        className="scrollbar-custom rounded-sm py-1 pl-2 font-mono hover:shadow-xl"
       >
         {cleanedChildren}
       </SyntaxHighlighter>

@@ -126,7 +126,7 @@ export default function RootLayout(
         className={`${roboto.variable} ${notoSansSC.variable} ${ubuntuMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
       >
         <Header config={config} />
-        <main className="animate-fade-in-down grow mt-20">
+        <main className="grow mt-20">
           {children}
           <Analytics />
           <SpeedInsights />

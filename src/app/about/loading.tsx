@@ -1,6 +1,6 @@
 const LoadingPlaceholder = () => {
   return (
-    <div className="container mx-auto p-6 pb-2 animate-pulse">
+    <div className="container mx-auto p-6 pb-2 animate-pulse max-w-3xl">
       {/* Thumbnail Skeleton */}
       <div className="relative h-96 w-full bg-gray-200 dark:bg-gray-700 rounded-lg shadow-lg">
         <div className="absolute inset-0 bg-black/20 rounded-lg"></div>

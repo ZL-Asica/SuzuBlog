@@ -50,7 +50,7 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
   const translation = config.translation
 
   return (
-    <article className="container mx-auto animate-fadeInDown p-6 pb-2">
+    <article className="container mx-auto animate-fadeInDown p-6 pb-2 mt-5">
       {post.frontmatter.showThumbnail
         ? (
             <div className="relative h-96 w-full">
