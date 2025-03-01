@@ -14,12 +14,12 @@ interface TOCProps {
   showThumbnail?: boolean
 }
 
-function TOC({
+const TOC = ({
   items,
   translation,
   autoSlug = true,
   showThumbnail = true,
-}: TOCProps) {
+}: TOCProps) => {
   const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic()
   const isVisible = !useIsTop(showThumbnail ? 150 : 50)
 

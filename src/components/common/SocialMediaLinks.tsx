@@ -68,11 +68,11 @@ interface socialMediaLinksProps {
   className?: string
 }
 
-function SocialMediaLinks({
+const SocialMediaLinks = ({
   socialMedia,
   iconSize = 32,
   className = '',
-}: socialMediaLinksProps) {
+}: socialMediaLinksProps) => {
   return (
     <div
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}
@@ -98,11 +98,11 @@ function SocialMediaLinks({
               rel="noopener noreferrer"
               aria-label={label}
               prefetch={false}
-              className="group relative inline-block transform transition-all duration-700 ease-out"
+              className="group relative inline-block"
             >
               <IconComponent
                 size={iconSize}
-                className="transition-transform duration-500 group-hover:scale-150"
+                className="transition-all duration-700 group-hover:scale-150 hover:text-[var(--sakuraPink)]"
               />
             </Link>
           )

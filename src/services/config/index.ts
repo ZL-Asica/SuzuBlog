@@ -23,8 +23,9 @@ watchConfigFile(() => {
  * @returns Config object containing site settings, translations, and friend links
  */
 function getConfig(): Config {
-  if (cachedConfig)
+  if (cachedConfig) {
     return cachedConfig
+  }
 
   const userConfig = loadUserConfig()
   const friendLinks = loadFriendLinks()

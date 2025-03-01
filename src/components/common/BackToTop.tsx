@@ -4,7 +4,7 @@ import { backToTop, useIsBottom, useIsTop } from '@zl-asica/react'
 import { usePathname } from 'next/navigation'
 import { FaArrowUp } from 'react-icons/fa6'
 
-function BackToTop() {
+const BackToTop = () => {
   const path = usePathname()
   const isVisible = !useIsTop(150) && path !== '/'
   const isBottom = useIsBottom(100)

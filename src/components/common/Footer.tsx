@@ -9,14 +9,14 @@ interface FooterProps {
   config: Config
 }
 
-function getYearDisplay(startYear: number | null | undefined, currentYear: number) {
+const getYearDisplay = (startYear: number | null | undefined, currentYear: number) => {
   if (startYear != null && !Number.isNaN(startYear) && startYear < currentYear) {
     return `${startYear} - `
   }
   return ''
 }
 
-function Footer({ config }: FooterProps) {
+const Footer = ({ config }: FooterProps) => {
   const currentYear = new Date().getFullYear()
   const pathname = usePathname()
   const isHomePage = pathname === '/'
@@ -36,7 +36,7 @@ function Footer({ config }: FooterProps) {
             target="_blank"
             aria-label="Suzu's Documentation (new tab)"
             rel="noopener noreferrer"
-            className="decoration-dashed underline-offset-2"
+            className="underline decoration-dashed underline-offset-2 transition-all duration-200 ease-in-out hover:font-bold hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
           >
             Suzu
           </Link>
@@ -48,7 +48,7 @@ function Footer({ config }: FooterProps) {
             target="_blank"
             aria-label="ZL Asica's blog (new tab)"
             rel="noopener noreferrer"
-            className="decoration-dashed underline-offset-2"
+            className="underline decoration-dashed underline-offset-2 transition-all duration-200 ease-in-out hover:font-bold hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
           >
             ZL Asica
           </Link>

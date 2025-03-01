@@ -8,11 +8,7 @@ import { read as matterRead } from 'gray-matter'
 
 const config = getConfig()
 
-function getPostFromFile(
-  filePath: string,
-  slug: string,
-  fullData: boolean = true,
-): FullPostData {
+const getPostFromFile = (filePath: string, slug: string, fullData: boolean = true): FullPostData => {
   const {
     data,
     content: contentRaw,
@@ -79,8 +75,9 @@ function generateTOC(content: string): TocItems[] {
   let match: RegExpExecArray | null
   while (true) {
     match = headingRegex.exec(content)
-    if (match === null)
+    if (match === null) {
       break
+    }
     const [, hashes, title] = match
     const level = `h${hashes.length}` as keyof typeof headingLevels
 

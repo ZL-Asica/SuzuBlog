@@ -5,7 +5,6 @@ import { useClickOutside, useToggle } from '@zl-asica/react'
 import { clsx } from 'clsx'
 import Form from 'next/form'
 import { useSearchParams } from 'next/navigation'
-
 import { useEffect, useRef, useState } from 'react'
 
 interface SearchInputProps {
@@ -16,26 +15,27 @@ interface SearchInputProps {
 }
 
 // Handle form submission
-function handleFormSubmit(event_: React.FormEvent<HTMLFormElement>) {
+const handleFormSubmit = (event_: React.FormEvent<HTMLFormElement>) => {
   event_.preventDefault()
 
   const formData = new FormData(event_.currentTarget)
   const params = new URLSearchParams()
 
   for (const [key, value] of formData.entries()) {
-    if (value !== null && value !== '')
+    if (value !== null && value !== '') {
       params.append(key, value.toString())
+    }
   }
 
   updateURL(new URL(globalThis.location.href), params)
 }
 
-function SearchInput({
+const SearchInput = ({
   categories,
   tags,
   translation,
   searchQueries,
-}: SearchInputProps) {
+}: SearchInputProps) => {
   const searchParameters = useSearchParams()
   const formReference = useRef<HTMLFormElement>(null)
 
@@ -85,12 +85,12 @@ function SearchInput({
     <Form
       ref={formReference}
       action="/posts"
-      className="mb-6 w-full max-w-lg space-y-4 rounded-lg p-4"
+      className="px-5 w-full max-w-lg space-y-4 rounded-lg p-4"
       replace
       onSubmit={handleFormSubmit}
     >
       {/* Search Input with Submit Button */}
-      <div className="relative w-full">
+      <div className="relative w-full transition-all duration-300 hover:scale-105">
         <div className="relative flex items-center">
           <input
             type="text"
@@ -99,11 +99,11 @@ function SearchInput({
             value={searchQuery}
             onChange={event_ => setSearchQuery(event_.target.value)}
             onFocus={toggleExpanded}
-            className="w-full rounded-full border border-gray-300 px-4 py-2 pr-16 transition-all duration-300 focus:ring-2"
+            className="w-full rounded-full border border-gray-300 px-4 py-2 pr-16 transition-all duration-300 focus:ring-2 focus:border-none"
           />
           <button
             type="submit"
-            className="absolute right-2 rounded-full px-4 py-1 transition"
+            className="absolute right-2 rounded-full px-4 py-1 transition bg-[var(--skyblue)] hover:bg-[var(--sakuraPink)] dark:text-[var(--background)]"
           >
             {translation.search.submit}
           </button>
@@ -113,7 +113,7 @@ function SearchInput({
       {/* Expandable Filters */}
       <div
         className={clsx(
-          'flex flex-col items-center space-y-4 overflow-hidden transition-all duration-300',
+          'pb-2 flex flex-col items-center space-y-4 overflow-hidden transition-all duration-300',
           {
             'max-h-0 opacity-0': !expanded,
             'max-h-96 opacity-100': expanded,
@@ -127,9 +127,9 @@ function SearchInput({
               value={selectedCategory}
               aria-label={translation.search.categoriesAria}
               onChange={handleCategoryChange}
-              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
-                selectedCategory || 'text-gray-400'
-              }`}
+              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 transition-all duration-300 hover:scale-105 focus:ring-2
+                ${selectedCategory || 'text-gray-400'}
+              `}
             >
               <option
                 value=""
@@ -158,9 +158,9 @@ function SearchInput({
               value={selectedTag}
               aria-label={translation.search.tagsAria}
               onChange={handleTagChange}
-              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 focus:ring-2 ${
-                selectedTag || 'text-gray-400'
-              }`}
+              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 transition-all duration-300 hover:scale-105 focus:ring-2
+                ${selectedTag || 'text-gray-400'}
+              `}
             >
               <option
                 value=""
@@ -188,7 +188,7 @@ function SearchInput({
         <button
           type="reset"
           onClick={handleReset}
-          className="mt-2 rounded-full px-4 py-2 transition"
+          className="mt-2 rounded-full px-4 py-2 transition bg-[var(--skyblue)] hover:bg-[var(--sakuraPink)] hover:scale-105 dark:text-[var(--background)]"
         >
           {translation.search.clear}
         </button>

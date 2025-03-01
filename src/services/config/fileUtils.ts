@@ -35,8 +35,9 @@ function watchConfigFile(callback: () => void): void {
   let debounceTimeout: NodeJS.Timeout | null = null
 
   watch(CONFIG_FILE_PATH, () => {
-    if (debounceTimeout)
+    if (debounceTimeout) {
       clearTimeout(debounceTimeout)
+    }
     debounceTimeout = setTimeout(callback, 100) // Debounce with a delay of 100ms
   })
 }

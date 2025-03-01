@@ -1,6 +1,9 @@
 import slugify from 'slugify'
 
-function resetLowerLevels(level: keyof typeof headingLevels, headingLevels: Record<string, number>) {
+const resetLowerLevels = (
+  level: keyof typeof headingLevels,
+  headingLevels: Record<string, number>,
+) => {
   const levels = Object.keys(headingLevels)
   const startIndex = levels.indexOf(level) + 1
   for (const key of levels.slice(startIndex)) {
@@ -8,7 +11,11 @@ function resetLowerLevels(level: keyof typeof headingLevels, headingLevels: Reco
   }
 }
 
-function generateHierarchicalSlug(children: React.ReactNode | string, level: keyof typeof headingLevels, headingLevels: Record<string, number>) {
+const generateHierarchicalSlug = (
+  children: React.ReactNode | string,
+  level: keyof typeof headingLevels,
+  headingLevels: Record<string, number>,
+) => {
   headingLevels[level] += 1
   resetLowerLevels(level, headingLevels)
   const hierarchicalSlug = Object.values(headingLevels)
@@ -20,7 +27,7 @@ function generateHierarchicalSlug(children: React.ReactNode | string, level: key
   return slug
 }
 
-function slugPrefix(slug: string, level: number) {
+const slugPrefix = (slug: string, level: number) => {
   const parts = slug.split('-')
   if (level === 6) {
     return `${parts

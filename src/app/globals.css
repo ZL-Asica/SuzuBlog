@@ -1,98 +1,117 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --skyblue: #5bcefa;
-  --sakuraPink: #f6a8b8;
-  --lightGray: #f9fafb;
-  --gray: #1f2937;
-  --font-noto-sans-sc: 'Noto Sans SC', sans-serif;
-  --font-jetbrains-mono: 'JetBrains Mono', monospace;
-}
+@custom-variant dark (&:is(.dark *));
 
-.dark:root {
-  --background: #1a1a1a;
-  --foreground: #d4d4d4;
-  --skyblue: #4aa7e0;
-  --sakuraPink: #d890a2;
-  --lightGray: #1f2937;
-  --gray: #d1d5db;
-}
+@theme {
+  --font-sans: var(--font-roboto), var(--font-noto-sans-sc), Arial, sans-serif;
+  --font-mono: var(--font-ubuntu-mono), monospace;
 
-html {
-  color: var(--foreground);
-  background: var(--background);
-  font-family:
-    var(--font-noto-sans-sc),
-    var(--font-jetbrains-mono) 'PingFang SC',
-    'Microsoft YaHei',
-    Arial,
-    Helvetica,
-    sans-serif;
-}
+  --animate-fade-in-down: fadeInDown 0.5s ease-out;
 
-/* Utility classes for text balancing */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+}
 
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility scrollbar-custom {
   /* For Webkit browsers (Chrome, Safari, etc.) */
-  .scrollbar-custom::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 8px; /* Scrollbar width */
   }
 
-  .scrollbar-custom::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background: #fff3f3; /* background of the scrollbar */
   }
 
-  .scrollbar-custom::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background-color: #ff6f91; /* scrollbar color */
     border: 2px solid #fff3f3; /* border around thumb */
   }
 
-  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  &::-webkit-scrollbar-thumb:hover {
     background-color: #ff4a70; /* scrollbar color on hover */
   }
-
-  .scrollbar-custom {
-    scrollbar-color: #ff6f91 #fff3f3; /* Firefox scrollbar color */
-  }
+  scrollbar-color: #ff6f91 #fff3f3; /* Firefox scrollbar color */
 
   @media (prefers-color-scheme: dark) {
-    .scrollbar-custom::-webkit-scrollbar-track {
+    &::-webkit-scrollbar-track {
       background: #2d2d2d; /* background of the scrollbar */
       border-radius: 4px; /* Outer radius */
     }
 
-    .scrollbar-custom::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
       background-color: #ff6f91; /* scrollbar color */
       border-radius: 4px; /* Thumb radius */
       border: 2px solid #2d2d2d; /* border around thumb */
     }
 
-    .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    &::-webkit-scrollbar-thumb:hover {
       background-color: #ff4a70; /* scrollbar color on hover */
     }
 
     /* Non-Webkit browsers (Firefox) */
-    .scrollbar-custom {
-      scrollbar-width: thin; /* Firefox scrollbar width */
-      scrollbar-color: #ff6f91 #2d2d2d; /* Firefox scrollbar color */
-    }
+    scrollbar-width: thin; /* Firefox scrollbar width */
+    scrollbar-color: #ff6f91 #2d2d2d; /* Firefox scrollbar color */
   }
 }
 
-form,
-input,
-select,
-header,
-nav {
+@layer utilities {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+    --skyblue: #5bcefa;
+    --sakuraPink: #f6a8b8;
+    --lightGray: #f9fafb;
+    --gray: #1f2937;
+  }
+
+  .dark:root {
+    --background: #1a1a1a;
+    --foreground: #d4d4d4;
+    --skyblue: #4aa7e0;
+    --sakuraPink: #d890a2;
+    --lightGray: #1f2937;
+    --gray: #d1d5db;
+  }
+}
+
+html,
+body {
   color: var(--foreground);
   background: var(--background);
+}
+
+[id] {
+  scroll-margin-top: 100px;
 }
 
 /****************************************************
@@ -102,39 +121,6 @@ nav {
 /* Avoid filter on images */
 img {
   filter: none !important;
-}
-
-/****************************************************
- * INTERACTIVE ELEMENTS (Hover, focus, active states)
- ****************************************************/
-
-/* Links */
-a {
-  text-decoration: underline;
-}
-
-a:hover,
-a:focus-visible {
-  color: var(--sakuraPink);
-  text-decoration: none;
-}
-
-/* Buttons */
-button {
-  color: #183153;
-  font-weight: 500;
-  background-color: var(--skyblue);
-  border: none;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  transition: background-color 0.3s;
-}
-
-button:hover,
-select:checked {
-  scale: 1.05;
-  background-color: var(--sakuraPink);
 }
 
 /****************************************************

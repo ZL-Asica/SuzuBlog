@@ -1,14 +1,19 @@
-function sanitizeQuery(query: string | null): string {
+const sanitizeQuery = (query: string | null): string => {
   // Remove non-alphanumeric characters and trim the query
-  if (query === null)
+  if (query === null) {
     return ''
+  }
   return query
     .replaceAll(/[^\p{L}\p{N}\s]/gu, '')
     .trim()
     .slice(0, 30)
 }
 
-function validateParameters(searchParameters: URLSearchParams, categories: string[], tags: string[]): URLSearchParams {
+const validateParameters = (
+  searchParameters: URLSearchParams,
+  categories: string[],
+  tags: string[],
+): URLSearchParams => {
   const newParameters = new URLSearchParams()
 
   for (const [key, value] of searchParameters.entries()) {
@@ -30,7 +35,7 @@ function validateParameters(searchParameters: URLSearchParams, categories: strin
   return newParameters
 }
 
-function updateURL(currentUrl: URL, updatedParameters: URLSearchParams): void {
+const updateURL = (currentUrl: URL, updatedParameters: URLSearchParams): void => {
   const newSearch = updatedParameters.toString()
   if (currentUrl.search !== `?${newSearch}`) {
     currentUrl.search = newSearch

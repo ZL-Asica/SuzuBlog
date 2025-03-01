@@ -17,11 +17,11 @@ interface PostPageClientProps {
   postsPerPage: number
 }
 
-function PostPageClient({
+const PostPageClient = ({
   posts,
   translation,
   postsPerPage,
-}: PostPageClientProps) {
+}: PostPageClientProps) => {
   const searchParameters = useSearchParams()
   const queryParameters = searchParameters.get('query') ?? ''
   const categoryParameter = searchParameters.get('category') ?? ''
@@ -70,7 +70,7 @@ function PostPageClient({
   )
 
   return (
-    <div className="container mx-auto flex animate-fadeInDown flex-col items-center p-4">
+    <div className="container mt-5 mx-auto flex animate-fadeInDown flex-col items-center p-4">
       {/* Centered Search Input */}
       <SearchInput
         categories={categories}

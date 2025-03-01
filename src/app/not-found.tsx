@@ -38,7 +38,7 @@ function Custom404() {
       </p>
       <Link
         href="/"
-        className="rounded bg-[var(--skyblue)] px-4 py-2 text-white no-underline transition-all duration-500 hover:scale-110 hover:bg-[var(--skyblue)] hover:text-black"
+        className="rounded-sm bg-[var(--skyblue)] px-4 py-2 text-white no-underline transition-all duration-500 hover:scale-110 hover:bg-[var(--skyblue)] hover:text-black"
       >
         返回首页
       </Link>

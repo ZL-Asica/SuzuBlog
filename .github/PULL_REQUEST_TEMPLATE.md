@@ -1,24 +1,111 @@
-## Description
+## ✨ Feature Request
 
-Provide a concise summary of the changes, the motivation behind them, and a link to any relevant issues.
+### 📌 Description
 
-## Type of Change
+<!-- Clearly describe the feature you have added or updated. -->
+<!-- Explain why this feature is necessary. -->
 
-Select all options that apply to this pull request:
+### 🔍 Changes
 
-- [ ] 🐛 Bug fix
-- [ ] ✨ New feature
-- [ ] 🛠 Code refactor
-- [ ] ⚠️ Breaking change
-- [ ] 🎨 Style update
-- [ ] 📚 Documentation update
+- [ ] New component or page
+- [ ] API update
+- [ ] UI/UX improvement
+- [ ] Other: ...
 
-## Checklist
+### ✅ Checklist
 
-Before submitting, please confirm the following:
+- [ ] Code follows project coding style.
+- [ ] Tested in a Next.js environment.
+- [ ] Relevant documentation is updated.
 
-- [ ] I have performed a self-review of my code.
-- [ ] The main changes are limited to single files, ideally within 200 lines.
-- [ ] Clear and concise comments have been added where necessary.
-- [ ] My changes do not introduce any new warnings or errors in the codebase.
-- [ ] Any dependencies have been updated in `package.json` and documented.
+### 📸 Screenshots (if applicable)
+
+<!-- Attach screenshots or GIFs here -->
+
+### 💬 Additional Notes
+
+<!-- Add any extra context -->
+
+---
+
+## 🐛 Bug Fix
+
+### 📌 Description
+
+<!-- Describe the bug and how you fixed it. -->
+<!-- Include related issue references, e.g., "Closes #123". -->
+
+### 🛠 Changes
+
+- [ ] Fixed issue: ...
+- [ ] Improved error handling
+- [ ] Performance fix
+- [ ] Other: ...
+
+### ✅ Checklist
+
+- [ ] Bug has been reproduced and verified.
+- [ ] Fix does not introduce new issues.
+- [ ] Added necessary tests.
+
+### 📝 Steps to Reproduce (before fix)
+
+<!-- Provide steps for reproducing the original issue -->
+
+### 📸 Screenshots (if applicable)
+
+<!-- Attach screenshots showing the fix -->
+
+### 💬 Additional Notes
+
+<!-- Add any extra context -->
+
+---
+
+## 🛠 Code Refactor
+
+### 📌 Description
+
+<!-- Describe the refactor and why it was needed. -->
+
+### 🔄 Changes
+
+- [ ] Code optimization
+- [ ] Improve maintainability
+- [ ] Remove unnecessary code
+- [ ] Other: ...
+
+### ✅ Checklist
+
+- [ ] No breaking changes introduced.
+- [ ] Performance improvement validated.
+- [ ] Documentation updated if necessary.
+
+### 💬 Additional Notes
+
+<!-- Add any extra context -->
+
+---
+
+## 📦 Dependency Update
+
+### 📌 Description
+
+<!-- Describe why this dependency update is needed. -->
+
+### 📜 Dependency Changes
+
+| Dependency Name | Old Version | New Version | Reason                             |
+| --------------- | ----------- | ----------- | ---------------------------------- |
+| Next.js         | 14.2.3      | 15.1.6      | Upgrade to latest stable version   |
+| React           | 18.3.1      | 19.0.0      | Required for Next.js compatibility |
+| Tailwind CSS    | 3.4.3       | 4.0.1       | Performance improvements           |
+
+### ✅ Checklist
+
+- [ ] Verified functionality after update.
+- [ ] Checked for security vulnerabilities using `npm audit` / `pnpm audit`.
+
+### 💬 Additional Notes
+
+<!-- Add any extra context -->
