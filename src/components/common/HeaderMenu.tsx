@@ -39,7 +39,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
     { href: '/about', label: translation.about.title, icon: <FaInfo /> },
   ]
 
-  if (config.anilist_username !== null && config.anilist_username !== '') {
+  if (config.anilist_username !== undefined && config.anilist_username !== null && config.anilist_username.length > 1) {
     menuItems[3].children = [{ href: '/about/anime', label: translation.anime.title, icon: <FaTv /> }]
   }
 
@@ -125,6 +125,8 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
                 <li key={subItem.href}>
                   <Link
                     href={subItem.href}
+                    title={subItem.label}
+                    onClick={onClickHandler}
                     className={`flex items-center gap-2 py-2 text-base hover:text-[var(--sakuraPink)]
                       ${currentPath.startsWith(subItem.href) ? 'text-[var(--sakuraPink)]' : ''}
                       `}
