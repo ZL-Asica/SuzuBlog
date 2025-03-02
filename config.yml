@@ -44,6 +44,13 @@ travellings: true
 startYear: 2017 # Leave empty if you do not want to display a start year.
 
 # ######################
+# PAGES SETTINGS
+# ######################
+# Add your AniList username if you want to display your AniList profile.
+# Leave the field empty if you do not want to display your AniList profile.
+anilist_username: zlasica # Your AniList username. https://anilist.co/user/username
+
+# ######################
 # SOCIAL MEDIA SETTINGS
 # ######################
 # Add your social media usernames.
