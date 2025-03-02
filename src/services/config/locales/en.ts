@@ -28,6 +28,18 @@ const en: Translation = {
     description:
       '\'s about page, where you can see some information about the webmaster. Check out the webmaster\'s personal story.',
   },
+  anime: {
+    title: 'Anime List',
+    description: '\'s anime list page, data from Anilist.',
+    source: 'Data Source: ',
+    status: {
+      watching: 'Watching',
+      completed: 'Completed',
+      paused: 'Paused',
+      dropped: 'Dropped',
+      planning: 'Planning',
+    },
+  },
   post: {
     thumbnail: 'Thumbnail: ',
     readMore: 'Read more about ',

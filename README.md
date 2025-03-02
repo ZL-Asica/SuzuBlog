@@ -27,6 +27,7 @@
   - **Link Preloading**: Improves navigation speed and user experience.
 - **SEO Optimized**: Automatically generates sitemap.xml, robots.txt, manifest.json, Open Graph, Twitter Cards, and more.
 - **Multi-Language Support**: Built-in support for English, Chinese, Japanese, etc., automatically configured via `config.yml`.
+- **Anime List Feature**: Fetching and displaying anime information from AniList API.
 - **Adaptive Light/Dark Themes**: Provides a seamless dark mode experience based on system preferences.
 - **RSS Feed**: Automatically generated RSS feed for your blog.
 - **Accessibility (A11Y) Enhanced**:

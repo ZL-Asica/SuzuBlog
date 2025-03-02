@@ -5,7 +5,6 @@ import { useClickOutside, useToggle } from '@zl-asica/react'
 import { clsx } from 'clsx'
 import Form from 'next/form'
 import { useSearchParams } from 'next/navigation'
-
 import { useEffect, useRef, useState } from 'react'
 
 interface SearchInputProps {

@@ -27,6 +27,18 @@ const zh: Translation = {
     title: '关于',
     description: ' 的关于页，这里是关于站长一些信息。查看站长的个人故事。',
   },
+  anime: {
+    title: '动漫列表',
+    description: ' 的动漫列表页面，数据来自 Anilist。',
+    source: '数据来源：',
+    status: {
+      watching: '在看',
+      completed: '已看完',
+      paused: '暂停',
+      dropped: '弃坑',
+      planning: '计划',
+    },
+  },
   post: {
     thumbnail: '封面：',
     readMore: '阅读全文 ',

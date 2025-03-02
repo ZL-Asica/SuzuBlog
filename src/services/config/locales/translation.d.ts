@@ -27,6 +27,18 @@ interface Translation {
     title: string
     description: string
   }
+  anime: {
+    title: string
+    description: string
+    source: string
+    status: {
+      watching: string
+      completed: string
+      paused: string
+      dropped: string
+      planning: string
+    }
+  }
   post: {
     thumbnail: string
     readMore: string

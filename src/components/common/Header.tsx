@@ -1,6 +1,6 @@
 'use client'
 
-import { useClickOutside, useHideOnScrollDown, useScrollPosition, useToggle } from '@zl-asica/react'
+import { useClickOutside, useHideOnScrollDown, useToggle } from '@zl-asica/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
@@ -15,7 +15,6 @@ interface HeaderProps {
 const Header = ({ config }: HeaderProps) => {
   const [isOpen, toggleOpen] = useToggle()
   const siteTitle = config.title
-  const scrollProgress = useScrollPosition(undefined, true)
   const menuReference = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isHomePage = pathname === '/'
@@ -48,13 +47,6 @@ const Header = ({ config }: HeaderProps) => {
         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
     >
-      {/* Progress Scroll Bar */}
-      <div
-        className="fixed left-0 top-0 h-[3px] w-full bg-[var(--sakuraPink)] transition-all duration-500 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-        aria-hidden
-      />
-
       {/* Navigation Menu */}
       <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 bg-[var(--background)]">
         {/* Logo */}
