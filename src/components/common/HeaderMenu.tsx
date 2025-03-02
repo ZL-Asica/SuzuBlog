@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Fragment, useEffect, useState } from 'react'
 import {
   FaHouse,
@@ -29,6 +30,7 @@ interface HeaderMenuProps {
 
 const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMenuProps) => {
   const translation = config.translation
+  const currentPath = usePathname()
 
   const menuItems: MenuItem[] = [
     { href: '/', label: translation.home.title, icon: <FaHouse /> },
@@ -77,7 +79,9 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
             <Link
               href={item.href}
               title={item.label}
-              className="relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all duration-300 ease-in-out group-hover:text-[var(--sakuraPink)]"
+              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all duration-300 ease-in-out group-hover:text-[var(--sakuraPink)]
+                ${item.href !== '/' && currentPath.startsWith(item.href) ? 'text-[var(--sakuraPink)]' : ''}
+                `}
               onClick={onClickHandler}
               aria-label={`${translation.navigate} ${item.label}`}
             >
@@ -92,7 +96,10 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
               <ul className="absolute left-0 top-full hidden w-36 shadow-lg rounded-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-hover:block transition-all duration-300 ease-in-out">
                 {item.children.map((subItem, index) => (
                   <Fragment key={subItem.href}>
-                    <li className="p-2 rounded-md bg-[var(--background)] transition-colors duration-300 hover:text-[var(--sakuraPink)] dark:bg-[var(--background)]">
+                    <li className={`p-2 rounded-md bg-[var(--background)] transition-colors duration-300 hover:text-[var(--sakuraPink)] dark:bg-[var(--background)]
+                    ${currentPath.startsWith(subItem.href) ? 'text-[var(--sakuraPink)]' : ''}
+                      `}
+                    >
                       <Link href={subItem.href} className="flex items-center justify-center px-4 py-2 text-base">
                         <span className="pr-2">{subItem.icon}</span>
                         {subItem.label}
@@ -118,7 +125,9 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
                 <li key={subItem.href}>
                   <Link
                     href={subItem.href}
-                    className="flex items-center gap-2 py-2 text-base hover:text-[var(--sakuraPink)]"
+                    className={`flex items-center gap-2 py-2 text-base hover:text-[var(--sakuraPink)]
+                      ${currentPath.startsWith(subItem.href) ? 'text-[var(--sakuraPink)]' : ''}
+                      `}
                   >
                     {subItem.icon}
                     <span className="whitespace-nowrap">{subItem.label}</span>
