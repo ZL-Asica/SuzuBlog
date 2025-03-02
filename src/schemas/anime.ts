@@ -29,7 +29,7 @@ const AniListListEntrySchema = z.object({
 })
 
 const AniListListSchema = z.object({
-  name: z.string(),
+  name: z.string(), // Watching, Planning, Completed, Dropped, Paused, Repeating
   entries: z.array(
     AniListListEntrySchema,
   ),

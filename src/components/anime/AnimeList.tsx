@@ -56,7 +56,7 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
                   || (b.progress ?? 0) - (a.progress ?? 0)
                   || (b.notes !== null ? 1 : 0) - (a.notes !== null ? 1 : 0),
                 )
-                .map((entry: AniListListEntry) => (
+                .map((entry: AniListListEntry, entryIndex) => (
                   <div
                     key={entry.media.id}
                     className="relative group bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:scale-105"
@@ -86,7 +86,8 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
                             : entry.media.title.romaji}
                         fill
                         className="object-cover"
-                        priority
+                        unoptimized
+                        priority={index === 1 && entryIndex <= 16}
                       />
                     </div>
 
