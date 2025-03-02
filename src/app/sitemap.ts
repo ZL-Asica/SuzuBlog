@@ -20,7 +20,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // Pages settings
-  const showAnime = config.anilist_username !== null && config.anilist_username !== ''
+  const showAnime = config.anilist_username === undefined || config.anilist_username !== null || config.anilist_username !== ''
 
   const pages = [`${siteUrl}/posts`, `${siteUrl}/about`, `${siteUrl}/friends`]
 

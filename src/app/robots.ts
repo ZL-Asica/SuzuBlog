@@ -12,7 +12,7 @@ async function robots(): Promise<MetadataRoute.Robots> {
   const postUrls = posts.map(post => `/${post.slug}`)
 
   // Pages settings
-  const showAnime = config.anilist_username !== null && config.anilist_username !== ''
+  const showAnime = config.anilist_username === undefined || config.anilist_username !== null || config.anilist_username !== ''
 
   const allowList = [
     '/',
