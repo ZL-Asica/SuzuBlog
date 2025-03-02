@@ -19,6 +19,22 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }))
 
+  // Pages settings
+  const showAnime = config.anilist_username !== null && config.anilist_username !== ''
+
+  const pages = [`${siteUrl}/posts`, `${siteUrl}/about`, `${siteUrl}/friends`]
+
+  if (showAnime) {
+    pages.push(`${siteUrl}/about/anime`)
+  }
+
+  const pagesSitemap = pages.map(page => ({
+    url: page,
+    lastModified: updateDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
   return [
     {
       url: siteUrl,
@@ -26,24 +42,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 1,
     },
-    {
-      url: `${siteUrl}/posts`,
-      lastModified: updateDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/about`,
-      lastModified: updateDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/friends`,
-      lastModified: updateDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    ...pagesSitemap, // Static page
     ...postUrls, // Dynamic post URLs
   ]
 }

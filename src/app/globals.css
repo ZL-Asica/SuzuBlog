@@ -90,6 +90,7 @@
     --foreground: #171717;
     --skyblue: #5bcefa;
     --sakuraPink: #f6a8b8;
+    --sakuraPinkDark: #d9778b;
     --lightGray: #f9fafb;
     --gray: #1f2937;
   }
@@ -99,6 +100,7 @@
     --foreground: #d4d4d4;
     --skyblue: #4aa7e0;
     --sakuraPink: #d890a2;
+    --sakuraPinkDark: #d9778b;
     --lightGray: #1f2937;
     --gray: #d1d5db;
   }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import BackToTop from '@/components/common/BackToTop'
 import Footer from '@/components/common/Footer'
 import Header from '@/components/common/Header'
+import ScrollPositionBar from '@/components/common/ScrollPositionBar'
 import { getConfig } from '@/services/config'
 import { Analytics } from '@vercel/analytics/react'
 
@@ -125,6 +126,7 @@ export default function RootLayout(
       <body
         className={`${roboto.variable} ${notoSansSC.variable} ${ubuntuMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
       >
+        <ScrollPositionBar />
         <Header config={config} />
         <main className="grow mt-20">
           {children}

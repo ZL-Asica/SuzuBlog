@@ -56,6 +56,7 @@ interface UserConfig {
   slogan: string
   travellings: boolean | null
   startYear: number | null
+  anilist_username: string | null
   socialMedia: SocialMedia
   twikooEnvId: string | null
   disqusShortname: string | null
