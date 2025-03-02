@@ -11,23 +11,36 @@ async function robots(): Promise<MetadataRoute.Robots> {
   const posts = await getAllPosts()
   const postUrls = posts.map(post => `/${post.slug}`)
 
+  // Pages settings
+  const showAnime = config.anilist_username !== null && config.anilist_username !== ''
+
+  const allowList = [
+    '/',
+    '/about',
+    '/friends',
+    '/posts',
+    ...postUrls, // Dynamic post URLs
+  ]
+
+  const disallowList = [
+    '/posts?',
+    '/images',
+    '/icons',
+    '/_next',
+  ]
+
+  if (showAnime) {
+    allowList.push('/about/anime')
+  }
+  else {
+    disallowList.push('/about/anime')
+  }
+
   return {
     rules: {
       userAgent: '*',
-      allow: [
-        '/',
-        '/about',
-        '/friends',
-        '/posts',
-        ...postUrls, // Dynamic post URLs
-      ],
-      disallow: [
-        // Below are disallow
-        '/posts?',
-        '/images',
-        '/icons',
-        '/_next',
-      ],
+      allow: allowList,
+      disallow: disallowList,
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   }

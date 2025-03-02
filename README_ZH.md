@@ -27,6 +27,7 @@
   - **链接预加载**：提升用户体验。
 - **SEO 优化**：自动生成 sitemap.xml、robots.txt、manifest.json、Open Graph、Twitter Card 等。
 - **多语言支持**：内置中文、英文、日语等，根据 `config.yml` 中的语言配置自动切换。
+- **动漫列表功能**：从 AniList API 获取并展示动漫信息。
 - **自适应亮暗色主题**：支持深色模式，用户体验更优。
 - **RSS 订阅**：自动生成博客 RSS 订阅。
 - **无障碍（A11Y）优化**：提供语义化的 HTML 和符合 ARIA 标准的组件。
