@@ -129,8 +129,8 @@ showThumbnail: false
 },
 {
 "title": "紗夕里",
-"link": "https://lolicon.team",
-"img": "https://lolicon.team/img/avatar.webp",
+"link": "https://blog.ovofish.com",
+"img": "https://blog.ovofish.com/img/avatar.webp",
 "des": "在你心里-直到永远"
 },
 {
