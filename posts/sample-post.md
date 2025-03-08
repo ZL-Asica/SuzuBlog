@@ -16,7 +16,7 @@ tags:
 
 <!--more-->
 
-### Test heading h3
+### Test heading h3 `inline code`
 
 #### h4
 

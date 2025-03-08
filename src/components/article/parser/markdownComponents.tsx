@@ -20,28 +20,19 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     h6: 0,
   }
 
-  const headingLink = (slug: string, level: number, children: ReactNode) => {
-    const titleSlug = autoSlug ? `${slugPrefix(slug, level)} ` : ''
-    return (
-      <Link
-        href={`#${slug}`}
-        className="no-underline transition-colors duration-300 hover:text-[var(--sakuraPink)]"
-      >
-        {`${titleSlug}${children?.toString()}`}
-      </Link>
-    )
-  }
+  const titleSlug = (slug: string, level: number) => autoSlug ? `${slugPrefix(slug, level)} ` : ''
 
   return {
     h2: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h2', headingLevels)
+      const slug = generateHierarchicalSlug('h2', headingLevels)
       return (
         <div className="group">
           <h2
-            className="text-foreground relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose"
+            className="text-foreground relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose transition-colors duration-300 hover:text-[var(--sakuraPink)]"
             id={slug}
           >
-            {headingLink(slug, 2, children)}
+            {titleSlug(slug, 2)}
+            {children}
             <span className="absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-[var(--sakuraPink)] transition-all duration-300 ease-in-out group-hover:w-[35%]"></span>
           </h2>
         </div>
@@ -49,49 +40,53 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     },
 
     h3: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h3', headingLevels)
+      const slug = generateHierarchicalSlug('h3', headingLevels)
       return (
         <h3
-          className="text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed"
+          className="text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 3, children)}
+          {titleSlug(slug, 3)}
+          {children}
         </h3>
       )
     },
 
     h4: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h4', headingLevels)
+      const slug = generateHierarchicalSlug('h4', headingLevels)
       return (
         <h4
-          className="text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal"
+          className="text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 4, children)}
+          {titleSlug(slug, 4)}
+          {children}
         </h4>
       )
     },
 
     h5: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h5', headingLevels)
+      const slug = generateHierarchicalSlug('h5', headingLevels)
       return (
         <h5
-          className="text-foreground my-3 text-lg font-medium leading-normal"
+          className="text-foreground my-3 text-lg font-medium leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 5, children)}
+          {titleSlug(slug, 5)}
+          {children}
         </h5>
       )
     },
 
     h6: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h6', headingLevels)
+      const slug = generateHierarchicalSlug('h6', headingLevels)
       return (
         <h6
-          className="text-foreground my-2 text-base font-medium leading-normal"
+          className="text-foreground my-2 text-base font-medium leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 6, children)}
+          {titleSlug(slug, 6)}
+          {children}
         </h6>
       )
     },
