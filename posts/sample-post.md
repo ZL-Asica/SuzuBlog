@@ -20,6 +20,12 @@ tags:
 
 #### h4
 
+Below is a HR
+
+---
+
+Above is a HR
+
 ##### h5
 
 ###### This is a Heading h6

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { Components as MarkdownComponents } from 'react-markdown'
-import { CustomImage } from '@/components/ui'
+import { CustomImage, SakuraIcon } from '@/components/ui'
 
 import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
 import Link from 'next/link'
@@ -245,8 +245,16 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     ),
 
     hr: () => (
-      <div className="flex justify-center">
-        <hr className="mx-auto my-8 max-w-[75%] border-t-2 border-lightForeground" />
+      <div className="relative my-12 flex items-center justify-center group">
+        <hr className="h-0.5 w-2/5 bg-gradient-to-r from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
+
+        <div className="relative mx-4 h-8 w-8 flex items-center justify-center transition-transform duration-[3s] ease-in-out group-hover:rotate-[720deg]">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <SakuraIcon />
+          </div>
+        </div>
+
+        <hr className="h-0.5 w-2/5 bg-gradient-to-l from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
       </div>
     ),
   }
