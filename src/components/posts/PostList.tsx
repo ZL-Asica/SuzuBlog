@@ -1,10 +1,9 @@
 import { CategoriesTagsList } from '@/components/article'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
+import { Clock, Ellipsis } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import { Suspense } from 'react'
-import { FaEllipsis, FaRegClock } from 'react-icons/fa6'
 
 interface PostListProps {
   posts: PostListData[]
@@ -36,6 +35,7 @@ const PostList = ({ posts, translation }: PostListProps) => {
                 href={postLink}
                 target="_self"
                 aria-label={`${translation.post.readMore} ${postTitle}`}
+                prefetch
               >
                 <Image
                   src={post.frontmatter.thumbnail}
@@ -53,8 +53,8 @@ const PostList = ({ posts, translation }: PostListProps) => {
               <div>
                 {/* Date of Publish */}
                 <div className="mb-1 flex items-center">
-                  <FaRegClock className="mr-2" />
-                  <span className="text-sm">{post.frontmatter.date.split(' ')[0]}</span>
+                  <Clock size={18} className="mr-1" />
+                  <span className="text-sm font-medium">{post.frontmatter.date.split(' ')[0]}</span>
                 </div>
                 {/* Title in Frontmatter */}
                 <Link
@@ -75,9 +75,11 @@ const PostList = ({ posts, translation }: PostListProps) => {
                   target="_self"
                   aria-label={`${postTitle}`}
                   className="self-start transition duration-500 hover:scale-110 hover:text-[var(--sakuraPink)]"
+                  prefetch
                 >
-                  <FaEllipsis
+                  <Ellipsis
                     size={32}
+                    strokeWidth={3}
                     className="cursor-pointer"
                   />
                 </Link>

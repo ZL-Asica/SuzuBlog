@@ -1,23 +1,15 @@
 'use client'
 
+import type { ReactElement } from 'react'
+import { House, Info, Moon, Newspaper, Sun, TrainFront, TvMinimalPlay, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Fragment, useEffect, useState } from 'react'
-import {
-  FaHouse,
-  FaInfo,
-  FaMoon,
-  FaPeopleGroup,
-  FaRegNewspaper,
-  FaRegSun,
-  FaTrainSubway,
-  FaTv,
-} from 'react-icons/fa6'
 
 interface MenuItem {
   href: string
   label: string
-  icon: React.ReactElement | undefined
+  icon: ReactElement | undefined
   children?: MenuItem[]
 }
 
@@ -33,14 +25,14 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
   const currentPath = usePathname()
 
   const menuItems: MenuItem[] = [
-    { href: '/', label: translation.home.title, icon: <FaHouse /> },
-    { href: '/posts', label: translation.posts.title, icon: <FaRegNewspaper /> },
-    { href: '/friends', label: translation.friends.title, icon: <FaPeopleGroup /> },
-    { href: '/about', label: translation.about.title, icon: <FaInfo /> },
+    { href: '/', label: translation.home.title, icon: <House /> },
+    { href: '/posts', label: translation.posts.title, icon: <Newspaper /> },
+    { href: '/friends', label: translation.friends.title, icon: <UsersRound /> },
+    { href: '/about', label: translation.about.title, icon: <Info /> },
   ]
 
   if (config.anilist_username !== undefined && config.anilist_username !== null && config.anilist_username.length > 1) {
-    menuItems[3].children = [{ href: '/about/anime', label: translation.anime.title, icon: <FaTv /> }]
+    menuItems[3].children = [{ href: '/about/anime', label: translation.anime.title, icon: <TvMinimalPlay /> }]
   }
 
   const [isDarkTheme, setIsDarkTheme] = useState(false)
@@ -159,7 +151,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
             target="_blank"
           >
             <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">
-              <FaTrainSubway className="h-full w-full" />
+              <TrainFront className="h-full w-full" />
             </span>
           </Link>
         )}
@@ -175,7 +167,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
           }}
         >
           <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">
-            {isDarkTheme ? <FaRegSun className="h-full w-full" /> : <FaMoon className="h-full w-full" />}
+            {isDarkTheme ? <Sun className="h-full w-full" /> : <Moon className="h-full w-full" />}
           </span>
         </button>
       </li>

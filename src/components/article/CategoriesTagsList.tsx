@@ -1,8 +1,8 @@
 'use client'
 
+import { Folder, Tags } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { FaFolder, FaTags } from 'react-icons/fa6'
 
 interface CategoriesTagsListProps {
   type: 'category' | 'tag'
@@ -44,8 +44,8 @@ const CategoriesTagsList = ({ type, translation, items = defaultItems }: Categor
     <span className="flex items-center">
       {/* Render Type icon */}
       {type === 'category'
-        ? <FaFolder className="mr-1" />
-        : <FaTags className="mr-1" />}
+        ? <Folder className="mr-1" size={20} strokeWidth={3} />
+        : <Tags className="mr-1" size={20} strokeWidth={3} />}
       {/* List */}
       <span>
         {links.map(({ item, href }, index) => (
@@ -56,6 +56,7 @@ const CategoriesTagsList = ({ type, translation, items = defaultItems }: Categor
               title={`${translation.navigate} ${typeTranslation} ${item}`}
               aria-label={`${translation.navigate} ${typeTranslation} ${item}`}
               className="hover:font-bold hover:underline hover:decoration-dotted hover:underline-offset-2 hover:text-[var(--sakuraPink)]"
+              prefetch={false}
             >
               {item}
             </Link>
