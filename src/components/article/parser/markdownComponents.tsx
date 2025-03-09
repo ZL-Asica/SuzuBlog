@@ -105,7 +105,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </em>
     ),
     u: ({ children }) => (
-      <u className="mx-0.5 underline font-medium underline-offset-2 decoration-[var(--sakuraPink)] transition-all duration-300 hover:decoration-dotted">
+      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-2 decoration-[var(--sakuraPink)]">
         {children}
       </u>
     ),
@@ -123,7 +123,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     sub: ({ children }) => <sub className="text-xs align-sub">{children}</sub>,
     blockquote: ({ children }) => (
       <div className="my-3 flex justify-center">
-        <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] py-0.5 pl-3 pr-2 italic">
+        <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] bg-opacity-75 py-0.5 pl-3 pr-2 italic shadow-sm transition-shadow duration-300 hover:shadow-md">
           {children}
         </blockquote>
       </div>
@@ -146,17 +146,21 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // List related
     ul: ({ children }) => (
-      <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-4">
-        <ul className="list-disc list-inside">{children}</ul>
+      <div className="my-4 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-3">
+        <ul className="ml-2 list-disc list-inside">
+          {children}
+        </ul>
       </div>
     ),
     ol: ({ children }) => (
-      <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-4">
-        <ol className="list-decimal list-inside">{children}</ol>
+      <div className="my-4 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-3">
+        <ol className="ml-2 list-decimal list-inside">
+          {children}
+        </ol>
       </div>
     ),
     li: ({ children }) => (
-      <li className="text-foreground leading-relaxed marker:text-[var(--sakuraPink)] list-outside pl-4 ml-4">
+      <li className="text-foreground leading-relaxed marker:text-[var(--sakuraPinkDark)] marker:font-medium list-outside pl-1 ml-2">
         {children}
       </li>
     ),
@@ -210,7 +214,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           )
         : (
             <code
-              className="rounded-sm bg-[var(--lightGray)] px-2 py-1 font-mono text-base"
+              className="inline-block rounded-lg bg-[var(--sakuraPink)]/20 mx-0.5 px-2 py-0.5 font-mono text-sm text-[var(--sakuraPinkDark)]"
               {...(props as Record<string, unknown>)}
             >
               {children}
@@ -263,7 +267,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const key = children?.toString().toLowerCase().replace(/\s+/g, '') ?? ''
 
       return (
-        <kbd className="inline-fle items-center justify-center gap-1 rounded-md border border-gray-500 bg-gray-800 px-2 py-1 text-sm font-mono text-white shadow-md">
+        <kbd className="items-center justify-center gap-1 rounded-md border border-gray-500 bg-gray-800 px-2 py-1 text-sm font-mono text-white shadow-md">
           {KEY_ICONS[key] ?? children}
         </kbd>
       )
@@ -271,32 +275,36 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // Table related
     table: ({ children }) => (
-      <div className="my-6 w-full overflow-visible rounded-lg shadow-lg transition-shadow hover:shadow-xl">
-        <table className="w-full border-separate border-spacing-0 bg-[var(--background)]">
+      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md">
+        <table className="w-full border-collapse bg-[var(--background)] text-left">
           {children}
         </table>
       </div>
     ),
+
     th: ({ children, className }) => (
       <th
-        className={`border border-[var(--gray)] bg-[var(--sakuraPink)] px-4 py-3 text-left font-semibold text-gray-100 dark:bg-[var(--sakuraPink-dark)] ${className}`}
+        className={`border border-gray-400 bg-[var(--sakuraPink)]/90 px-4 py-3 font-semibold text-white ${className}`}
       >
         {children}
       </th>
     ),
+
     td: ({ children, className }) => (
       <td
-        className={`text-foreground border border-[var(--gray)] bg-[var(--lightGray)] px-4 py-3 text-left font-medium ${className}`}
+        className={`border border-gray-300 bg-[var(--lightGray)] px-4 py-3 font-medium ${className}`}
       >
         {children}
       </td>
     ),
+
     tr: ({ children, className }) => (
-      <tr className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)]`}>
+      <tr className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)] even:bg-opacity-75`}>
         {children}
       </tr>
     ),
 
+    // Misc
     hr: () => (
       <div className="relative my-12 flex items-center justify-center group">
         <hr className="h-0.5 w-2/5 bg-gradient-to-r from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
@@ -311,9 +319,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </div>
     ),
     br: () => (
-      <div className="flex justify-center">
-        <br className="my-4" />
-      </div>
+      <br className="flex justify-center my-4" />
     ),
   }
 }
