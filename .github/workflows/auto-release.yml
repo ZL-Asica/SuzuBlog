@@ -1,0 +1,41 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - "v*" # Listen to tags like v1.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Previous Tag
+        id: get_prev_tag
+        run: echo "LAST_TAG=$(git describe --tags --abbrev=0 --exclude=${{ github.ref_name }})" >> $GITHUB_ENV
+
+      - name: Generate GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }} # Tag Name
+          name: ${{ github.ref_name }} # Release Name (same as Tag Name)
+          body: |
+            📢 **SuzuBlog new version released!** 🚀
+            新版本发布！请查看自动生成的 Release Notes 🔽
+
+            ## What's Changed
+            - Automatically generated Release Notes based on changes in this release.
+
+            ## Full Changelog
+            [View Full Changelog](https://github.com/ZL-Asica/SuzuBlog/compare/${{ github.event.before }}...${{ github.ref }})
+
+            ## Contributors
+            🏆 Thank you to everyone who contributed to this release!
+
+            ${{ github.event.release.body }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
