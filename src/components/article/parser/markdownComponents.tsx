@@ -23,6 +23,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
   const titleSlug = (slug: string, level: number) => autoSlug ? `${slugPrefix(slug, level)} ` : ''
 
   return {
+    // Heading related
     h2: ({ children }) => {
       const slug = generateHierarchicalSlug('h2', headingLevels)
       return (
@@ -91,12 +92,12 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       )
     },
 
+    // Text related
     p: ({ children }) => (
       <p className="text-foreground my-6 text-base leading-relaxed">
         {children}
       </p>
     ),
-
     blockquote: ({ children }) => (
       <div className="my-3 flex justify-center">
         <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] py-0.5 pl-3 pr-2 italic">
@@ -105,6 +106,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </div>
     ),
 
+    // List related
     ul: ({ children }) => (
       <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-4">
         <ul className="list-disc list-inside">{children}</ul>
@@ -121,27 +123,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </li>
     ),
 
-    code: ({ className, children, ...props }) => {
-      const match = typeof className === 'string' ? /language-(\w+)/.exec(className) : null
-      return match
-        ? (
-            <CodeBlock
-              match={match}
-              translation={translation}
-            >
-              {children}
-            </CodeBlock>
-          )
-        : (
-            <code
-              className="rounded-sm bg-[var(--lightGray)] px-2 py-1 font-mono text-base"
-              {...(props as Record<string, unknown>)}
-            >
-              {children}
-            </code>
-          )
-    },
-
+    // Link related
     a: ({ href = '#', children, ...props }: { href?: string, children?: ReactNode }) => {
       const isInternalLink = typeof href === 'string' && (href.startsWith('/') || href.startsWith('#'))
       return (
@@ -163,6 +145,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       )
     },
 
+    // Image related
     img: ({ src: source = '', alt = 'Image', ...props }: { src?: string, alt?: string }) => (
       <CustomImage
         src={source}
@@ -174,6 +157,28 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         {...(props as Record<string, unknown>)}
       />
     ),
+
+    // Code related
+    code: ({ className, children, ...props }) => {
+      const match = typeof className === 'string' ? /language-(\w+)/.exec(className) : null
+      return match
+        ? (
+            <CodeBlock
+              match={match}
+              translation={translation}
+            >
+              {children}
+            </CodeBlock>
+          )
+        : (
+            <code
+              className="rounded-sm bg-[var(--lightGray)] px-2 py-1 font-mono text-base"
+              {...(props as Record<string, unknown>)}
+            >
+              {children}
+            </code>
+          )
+    },
 
     pre: ({ children }: { children?: ReactNode }) => {
       if (
@@ -196,7 +201,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           : 'CODE'
 
       return (
-        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-md shadow-slate-950 hover:shadow-xl dark:shadow-slate-700">
+        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-md shadow-slate-950 transition-shadow duration-300 ease-in-out hover:shadow-lg dark:shadow-slate-700">
           {/* MacOS window buttons */}
           <div className="absolute left-3 top-2 flex space-x-2">
             {/* Red button */}
@@ -217,6 +222,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       )
     },
 
+    // Table related
     table: ({ children }) => (
       <div className="my-6 w-full overflow-visible rounded-lg shadow-lg transition-shadow hover:shadow-xl">
         <table className="w-full border-separate border-spacing-0 bg-[var(--background)]">
