@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react'
 import type { Components as MarkdownComponents } from 'react-markdown'
-import { CustomImage } from '@/components/ui'
 
+import { CustomImage, SakuraIcon } from '@/components/ui'
 import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
+
 import Link from 'next/link'
 import { isValidElement } from 'react'
 
+import { KEY_ICONS } from './keyboardIcons'
 import CodeBlock from './renderCodeBlock'
-
 import renderFriendLinks from './renderFriendLinks'
 
 const createMarkdownComponents = (translation: Translation, autoSlug: boolean = true): MarkdownComponents => {
@@ -20,28 +21,20 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     h6: 0,
   }
 
-  const headingLink = (slug: string, level: number, children: ReactNode) => {
-    const titleSlug = autoSlug ? `${slugPrefix(slug, level)} ` : ''
-    return (
-      <Link
-        href={`#${slug}`}
-        className="no-underline transition-colors duration-300 hover:text-[var(--sakuraPink)]"
-      >
-        {`${titleSlug}${children?.toString()}`}
-      </Link>
-    )
-  }
+  const titleSlug = (slug: string, level: number) => autoSlug ? `${slugPrefix(slug, level)} ` : ''
 
   return {
+    // Heading related
     h2: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h2', headingLevels)
+      const slug = generateHierarchicalSlug('h2', headingLevels)
       return (
         <div className="group">
           <h2
-            className="text-foreground relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose"
+            className="text-foreground relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose transition-colors duration-300 hover:text-[var(--sakuraPink)]"
             id={slug}
           >
-            {headingLink(slug, 2, children)}
+            {titleSlug(slug, 2)}
+            {children}
             <span className="absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-[var(--sakuraPink)] transition-all duration-300 ease-in-out group-hover:w-[35%]"></span>
           </h2>
         </div>
@@ -49,104 +42,130 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     },
 
     h3: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h3', headingLevels)
+      const slug = generateHierarchicalSlug('h3', headingLevels)
       return (
         <h3
-          className="text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed"
+          className="text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 3, children)}
+          {titleSlug(slug, 3)}
+          {children}
         </h3>
       )
     },
 
     h4: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h4', headingLevels)
+      const slug = generateHierarchicalSlug('h4', headingLevels)
       return (
         <h4
-          className="text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal"
+          className="text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 4, children)}
+          {titleSlug(slug, 4)}
+          {children}
         </h4>
       )
     },
 
     h5: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h5', headingLevels)
+      const slug = generateHierarchicalSlug('h5', headingLevels)
       return (
         <h5
-          className="text-foreground my-3 text-lg font-medium leading-normal"
+          className="text-foreground my-3 text-lg font-medium leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 5, children)}
+          {titleSlug(slug, 5)}
+          {children}
         </h5>
       )
     },
 
     h6: ({ children }) => {
-      const slug = generateHierarchicalSlug(children, 'h6', headingLevels)
+      const slug = generateHierarchicalSlug('h6', headingLevels)
       return (
         <h6
-          className="text-foreground my-2 text-base font-medium leading-normal"
+          className="text-foreground my-2 text-base font-medium leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
           id={slug}
         >
-          {headingLink(slug, 6, children)}
+          {titleSlug(slug, 6)}
+          {children}
         </h6>
       )
     },
 
+    // Text related
     p: ({ children }) => (
       <p className="text-foreground my-6 text-base leading-relaxed">
         {children}
       </p>
     ),
-
+    em: ({ children }) => (
+      <em className="italic text-[var(--skyblueDark)] ml-0.5 mr-1">
+        {children}
+      </em>
+    ),
+    u: ({ children }) => (
+      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-2 decoration-[var(--sakuraPink)]">
+        {children}
+      </u>
+    ),
+    strong: ({ children }) => (
+      <strong className="font-extrabold text-[var(--sakuraPink)] mx-1">
+        {children}
+      </strong>
+    ),
+    del: ({ children }) => (
+      <del className="line-through text-[var(--gray)]">
+        {children}
+      </del>
+    ),
+    sup: ({ children }) => <sup className="text-xs align-super">{children}</sup>,
+    sub: ({ children }) => <sub className="text-xs align-sub">{children}</sub>,
     blockquote: ({ children }) => (
       <div className="my-3 flex justify-center">
-        <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] py-0.5 pl-3 pr-2 italic">
+        <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] bg-opacity-75 py-0.5 pl-3 pr-2 italic shadow-sm transition-shadow duration-300 hover:shadow-md">
           {children}
         </blockquote>
       </div>
     ),
+    details: ({ children }) => (
+      <details className="cursor-pointer rounded-lg border border-gray-300 bg-[var(--background)] p-3 open:bg-[var(--background)]">
+        {children}
+      </details>
+    ),
+    summary: ({ children }) => (
+      <summary className="font-semibold text-[var(--sakuraPink)] cursor-pointer">
+        {children}
+      </summary>
+    ),
+    mark: ({ children }) => (
+      <mark className="bg-yellow-200 px-1 py-0.5 rounded">
+        {children}
+      </mark>
+    ),
 
+    // List related
     ul: ({ children }) => (
-      <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-4">
-        <ul className="list-disc list-inside">{children}</ul>
+      <div className="my-4 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-3">
+        <ul className="ml-2 list-disc list-inside">
+          {children}
+        </ul>
       </div>
     ),
     ol: ({ children }) => (
-      <div className="my-4 ml-2 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-4">
-        <ol className="list-decimal list-inside">{children}</ol>
+      <div className="my-4 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-3">
+        <ol className="ml-2 list-decimal list-inside">
+          {children}
+        </ol>
       </div>
     ),
     li: ({ children }) => (
-      <li className="text-foreground leading-relaxed marker:text-[var(--sakuraPink)] list-outside pl-4 ml-4">
+      <li className="text-foreground leading-relaxed marker:text-[var(--sakuraPinkDark)] marker:font-medium list-outside pl-1 ml-2">
         {children}
       </li>
     ),
 
-    code: ({ className, children, ...props }) => {
-      const match = typeof className === 'string' ? /language-(\w+)/.exec(className) : null
-      return match
-        ? (
-            <CodeBlock
-              match={match}
-              translation={translation}
-            >
-              {children}
-            </CodeBlock>
-          )
-        : (
-            <code
-              className="rounded-sm bg-[var(--lightGray)] px-2 py-1 font-mono text-base"
-              {...(props as Record<string, unknown>)}
-            >
-              {children}
-            </code>
-          )
-    },
-
+    // Link related
     a: ({ href = '#', children, ...props }: { href?: string, children?: ReactNode }) => {
       const isInternalLink = typeof href === 'string' && (href.startsWith('/') || href.startsWith('#'))
       return (
@@ -168,6 +187,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       )
     },
 
+    // Image related
     img: ({ src: source = '', alt = 'Image', ...props }: { src?: string, alt?: string }) => (
       <CustomImage
         src={source}
@@ -179,6 +199,28 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         {...(props as Record<string, unknown>)}
       />
     ),
+
+    // Code related
+    code: ({ className, children, ...props }) => {
+      const match = typeof className === 'string' ? /language-(\w+)/.exec(className) : null
+      return match
+        ? (
+            <CodeBlock
+              match={match}
+              translation={translation}
+            >
+              {children}
+            </CodeBlock>
+          )
+        : (
+            <code
+              className="inline-block rounded-lg bg-[var(--sakuraPink)]/20 mx-0.5 px-2 py-0.5 font-mono text-sm text-[var(--sakuraPinkDark)]"
+              {...(props as Record<string, unknown>)}
+            >
+              {children}
+            </code>
+          )
+    },
 
     pre: ({ children }: { children?: ReactNode }) => {
       if (
@@ -201,7 +243,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           : 'CODE'
 
       return (
-        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-md shadow-slate-950 hover:shadow-xl dark:shadow-slate-700">
+        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-md shadow-slate-950 transition-shadow duration-300 ease-in-out hover:shadow-lg dark:shadow-slate-700">
           {/* MacOS window buttons */}
           <div className="absolute left-3 top-2 flex space-x-2">
             {/* Red button */}
@@ -221,38 +263,63 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         </pre>
       )
     },
+    kbd: ({ children }) => {
+      const key = children?.toString().toLowerCase().replace(/\s+/g, '') ?? ''
 
+      return (
+        <kbd className="items-center justify-center gap-1 rounded-md border border-gray-500 bg-gray-800 px-2 py-1 text-sm font-mono text-white shadow-md">
+          {KEY_ICONS[key] ?? children}
+        </kbd>
+      )
+    },
+
+    // Table related
     table: ({ children }) => (
-      <div className="my-6 w-full overflow-visible rounded-lg shadow-lg transition-shadow hover:shadow-xl">
-        <table className="w-full border-separate border-spacing-0 bg-[var(--background)]">
+      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md">
+        <table className="w-full border-collapse bg-[var(--background)] text-left">
           {children}
         </table>
       </div>
     ),
+
     th: ({ children, className }) => (
       <th
-        className={`border border-[var(--gray)] bg-[var(--sakuraPink)] px-4 py-3 text-left font-semibold text-gray-100 dark:bg-[var(--sakuraPink-dark)] ${className}`}
+        className={`border border-gray-400 bg-[var(--sakuraPink)]/90 px-4 py-3 font-semibold text-white ${className}`}
       >
         {children}
       </th>
     ),
+
     td: ({ children, className }) => (
       <td
-        className={`text-foreground border border-[var(--gray)] bg-[var(--lightGray)] px-4 py-3 text-left font-medium ${className}`}
+        className={`border border-gray-300 bg-[var(--lightGray)] px-4 py-3 font-medium ${className}`}
       >
         {children}
       </td>
     ),
+
     tr: ({ children, className }) => (
-      <tr className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)]`}>
+      <tr className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)] even:bg-opacity-75`}>
         {children}
       </tr>
     ),
 
+    // Misc
     hr: () => (
-      <div className="flex justify-center">
-        <hr className="mx-auto my-8 max-w-[75%] border-t-2 border-lightForeground" />
+      <div className="relative my-12 flex items-center justify-center group">
+        <hr className="h-0.5 w-2/5 bg-gradient-to-r from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
+
+        <div className="relative mx-4 h-8 w-8 flex items-center justify-center transition-transform duration-[3s] ease-in-out group-hover:rotate-[720deg]">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <SakuraIcon />
+          </div>
+        </div>
+
+        <hr className="h-0.5 w-2/5 bg-gradient-to-l from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
       </div>
+    ),
+    br: () => (
+      <br className="flex justify-center my-4" />
     ),
   }
 }

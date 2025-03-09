@@ -1,8 +1,8 @@
 import type { AniListList, AniListListEntry, AnimeResponse } from '@/schemas/anime'
 import TOC from '@/components/article/TOC'
+import { MessageCircle, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaCommentDots, FaStar } from 'react-icons/fa6'
 
 interface AnimeListProps {
   animeData: AnimeResponse
@@ -66,7 +66,7 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
                       <div
                         className="absolute top-2 right-2 z-10 flex items-center bg-black/70 px-2 py-1 rounded-lg shadow-md"
                       >
-                        <FaCommentDots className="text-[var(--sakuraPinkDark)]" size={20} />
+                        <MessageCircle className="text-[var(--sakuraPinkDark)] fill-current" size={20} />
                       </div>
                     )}
 
@@ -114,8 +114,8 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
                         entry.score !== null && entry.score !== 0 ? 'text-[var(--sakuraPinkDark)]' : 'text-gray-400'
                       }`}
                     >
-                      <p className="text-sm">{entry.score ?? 'N/A'}</p>
-                      <FaStar className="ml-1" />
+                      <p className="text-sm font-medium">{entry.score ?? 'N/A'}</p>
+                      <Star className="ml-1 fill-current" size={20} />
                     </div>
 
                     {/* Hover Note */}

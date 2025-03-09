@@ -2,8 +2,7 @@
 
 import { useTOCLogic } from '@/hooks'
 import { useIsTop } from '@zl-asica/react'
-
-import { FaListUl } from 'react-icons/fa6'
+import { List } from 'lucide-react'
 
 import TOCLink from './TOCLink'
 
@@ -36,7 +35,7 @@ const TOC = ({
           isOpen ? 'translate-y-2' : 'hover:scale-110'
         }`}
       >
-        <FaListUl size={20} />
+        <List size={24} strokeWidth={3} />
       </button>
       <menu
         ref={tocReference}
