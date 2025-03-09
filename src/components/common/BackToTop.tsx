@@ -1,8 +1,8 @@
 'use client'
 
 import { backToTop, useIsBottom, useIsTop } from '@zl-asica/react'
+import { ArrowUp } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { FaArrowUp } from 'react-icons/fa6'
 
 const BackToTop = () => {
   const path = usePathname()
@@ -23,7 +23,7 @@ const BackToTop = () => {
       disabled={!isVisible}
       aria-hidden={!isVisible}
     >
-      <FaArrowUp size={20} />
+      <ArrowUp size={24} strokeWidth={3} />
     </button>
   )
 }

@@ -1,41 +1,25 @@
-## ✨ Feature Request
+## ✨ Features Updates && 🐛 Bug Fix && 🛠 Code Refactor && 📦 Dependency Update
 
 ### 📌 Description
 
 <!-- Clearly describe the feature you have added or updated. -->
 <!-- Explain why this feature is necessary. -->
 
-### 🔍 Changes
+### 🔍 Feature Changes
 
 - [ ] New component or page
 - [ ] API update
 - [ ] UI/UX improvement
 - [ ] Other: ...
 
-### ✅ Checklist
+### 🔄 Refactor Changes
 
-- [ ] Code follows project coding style.
-- [ ] Tested in a Next.js environment.
-- [ ] Relevant documentation is updated.
+- [ ] Code optimization
+- [ ] Improve maintainability
+- [ ] Remove unnecessary code
+- [ ] Other: ...
 
-### 📸 Screenshots (if applicable)
-
-<!-- Attach screenshots or GIFs here -->
-
-### 💬 Additional Notes
-
-<!-- Add any extra context -->
-
----
-
-## 🐛 Bug Fix
-
-### 📌 Description
-
-<!-- Describe the bug and how you fixed it. -->
-<!-- Include related issue references, e.g., "Closes #123". -->
-
-### 🛠 Changes
+### 🛠 Bug Fixes
 
 - [ ] Fixed issue: ...
 - [ ] Improved error handling
@@ -44,54 +28,28 @@
 
 ### ✅ Checklist
 
+1. Feature Updates:
+
+- [ ] Code follows project coding style.
+- [ ] Tested in a Next.js environment.
+- [ ] Relevant documentation is updated.
+
+2. Bug Fixes:
+
 - [ ] Bug has been reproduced and verified.
 - [ ] Fix does not introduce new issues.
 - [ ] Added necessary tests.
 
-### 📝 Steps to Reproduce (before fix)
-
-<!-- Provide steps for reproducing the original issue -->
-
-### 📸 Screenshots (if applicable)
-
-<!-- Attach screenshots showing the fix -->
-
-### 💬 Additional Notes
-
-<!-- Add any extra context -->
-
----
-
-## 🛠 Code Refactor
-
-### 📌 Description
-
-<!-- Describe the refactor and why it was needed. -->
-
-### 🔄 Changes
-
-- [ ] Code optimization
-- [ ] Improve maintainability
-- [ ] Remove unnecessary code
-- [ ] Other: ...
-
-### ✅ Checklist
+3. Code Refactor:
 
 - [ ] No breaking changes introduced.
 - [ ] Performance improvement validated.
 - [ ] Documentation updated if necessary.
 
-### 💬 Additional Notes
+4. Dependency Updates:
 
-<!-- Add any extra context -->
-
----
-
-## 📦 Dependency Update
-
-### 📌 Description
-
-<!-- Describe why this dependency update is needed. -->
+- [ ] Verified functionality after update.
+- [ ] Checked for security vulnerabilities using `npm audit` / `pnpm audit`.
 
 ### 📜 Dependency Changes
 
@@ -101,11 +59,14 @@
 | React           | 18.3.1      | 19.0.0      | Required for Next.js compatibility |
 | Tailwind CSS    | 3.4.3       | 4.0.1       | Performance improvements           |
 
-### ✅ Checklist
+### 📝 Steps to Reproduce (before fix)
 
-- [ ] Verified functionality after update.
-- [ ] Checked for security vulnerabilities using `npm audit` / `pnpm audit`.
+<!-- Provide steps for reproducing the original issue -->
 
 ### 💬 Additional Notes
 
 <!-- Add any extra context -->
+
+### 📸 Screenshots (if applicable)
+
+<!-- Attach screenshots or GIFs here -->

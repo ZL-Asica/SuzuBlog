@@ -1,10 +1,10 @@
 'use client'
 
 import { useClickOutside, useHideOnScrollDown, useToggle } from '@zl-asica/react'
+import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
-import { FaBars } from 'react-icons/fa6'
 
 import HeaderMenu from './HeaderMenu'
 
@@ -67,7 +67,7 @@ const Header = ({ config }: HeaderProps) => {
           aria-expanded={isOpen ? 'true' : 'false'}
           aria-controls="mobile-menu"
         >
-          {!isOpen && <FaBars />}
+          {!isOpen && <Menu strokeWidth={2.5} />}
         </button>
 
         {/* Mobile Menu */}

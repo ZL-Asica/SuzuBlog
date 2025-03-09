@@ -7,7 +7,7 @@ import { getConfig } from '@/services/config'
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
 
-export const revalidate = 3600
+export const revalidate = 300 // 5 minutes for whole page
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig()
@@ -48,7 +48,7 @@ export default async function AnimePage() {
     : 'http://localhost:3000'
 
   const response = await fetch(`${API_BASE_URL}/api/anime?userName=${anilist_username}`, {
-    next: { tags: ['anime'], revalidate: 3600 }, // Cache for 1 hour
+    next: { tags: ['anime'], revalidate: 600 }, // Cache for 10 minutes
   })
 
   if (!response.ok) {

@@ -1,0 +1,82 @@
+name: Auto Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name for release (leave empty to use latest pushed tag)"
+        required: false
+  push:
+    tags:
+      - "v*.*.*" # Match only version-like tags (e.g., v1.0.0, v2.1.3)
+
+permissions:
+  contents: write # Required for GitHub release creation
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch full commit history and tags
+
+      - name: Determine Tag Name
+        id: get_tag
+        run: |
+          # If manually triggered, use the input tag; otherwise, use github.ref_name
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ github.event.inputs.tag }}" ]]; then
+            TAG_NAME="${{ github.event.inputs.tag }}"
+          else
+            TAG_NAME="${{ github.ref_name }}"
+          fi
+
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          echo "Resolved TAG_NAME: $TAG_NAME"
+
+      - name: Get Previous Tag
+        id: get_prev_tag
+        run: |
+          # Get the last tag before the new one, or empty if this is the first tag
+          LAST_TAG=$(git tag --sort=-creatordate | grep -v "$TAG_NAME" | head -n 1 || echo "")
+
+          # If no previous tag exists, use the root commit
+          if [[ -z "$LAST_TAG" ]]; then
+            LAST_TAG=$(git rev-list --max-parents=0 HEAD)
+            echo "First release detected, using root commit: $LAST_TAG"
+          fi
+
+          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
+          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_OUTPUT
+
+      - name: Skip Release if No Previous Tag
+        if: env.LAST_TAG == ''
+        run: |
+          echo "No previous tag found, skipping release..."
+          exit 0
+
+      - name: Generate GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/') # Ensures release runs only on tag pushes
+        with:
+          tag_name: ${{ env.TAG_NAME }} # Ensure correct tag name is used
+          name: ${{ env.TAG_NAME }} # Release Name
+          body: |
+            📢 **SuzuBlog new version released!** 🚀
+            新版本发布！请查看自动生成的 Release Notes 🔽
+
+            ## What's Changed
+            - Automatically generated Release Notes based on changes in this release.
+
+            ## Full Changelog
+            [View Full Changelog](https://github.com/ZL-Asica/SuzuBlog/compare/${{ env.LAST_TAG }}...${{ env.TAG_NAME }})
+
+            ## Contributors
+            🏆 Thank you to everyone who contributed to this release!
+
+            ${{ github.event.release.body }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true

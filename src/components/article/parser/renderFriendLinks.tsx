@@ -15,7 +15,7 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
     console.error('Failed to parse Friend Links JSON:', error)
     return (
       <div className="error-message">
-        Invalid Friend Links JSON. Please check the input format.
+        Invalid Friend Links JSON. Please check the input format of your markdown file.
       </div>
     )
   }
@@ -33,6 +33,7 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
               href={link.link ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
+              prefetch={false}
               className="friend-link flex h-[225px] flex-col items-center justify-center rounded-lg p-4 text-center no-underline shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
             >
               <CustomImage
@@ -48,9 +49,11 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
               </div>
             </Link>
             {/* Description shown on hover */}
-            <div className="absolute bottom-[-30px] left-1/2 z-10 hidden translate-x-[-50%] whitespace-nowrap rounded-md bg-black px-3 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100">
-              {link.des ?? ''}
-            </div>
+            {link.des !== undefined && link.des.trim() !== '' && (
+              <div className="absolute bottom-[-30px] left-1/2 z-10 hidden translate-x-[-50%] whitespace-nowrap rounded-md bg-black px-3 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100">
+                {link.des ?? ''}
+              </div>
+            )}
           </li>
         ))}
       </ul>

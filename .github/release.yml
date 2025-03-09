@@ -1,14 +1,32 @@
 changelog:
   exclude:
-    labels:
-      - ignore-for-release
+    labels: [ignore-for-release, wip, dependencies]
+    authors: ['dependabot[bot]', renovate-bot]
+
   categories:
-    - title: new features 🚀
-      labels:
-        - enhancement
-    - title: bug fixes and improvements ✨
-      labels:
-        - bug-fix
-    - title: other changes 🛠️
-      labels:
-        - '*'
+    - title: 🚀 Features / 新功能
+      labels: [feature, enhancement]
+
+    - title: 🐛 Bug Fixes / 修复
+      labels: [bug, fix]
+
+    - title: 🛠️ Improvements / 改进
+      labels: [refactor, optimization, performance]
+
+    - title: 📦 Dependencies / 依赖更新
+      labels: [dependencies]
+
+    - title: 📖 Documentation / 文档更新
+      labels: [docs]
+
+    - title: 🧰 Internal / 内部变更
+      labels: [internal, ci, workflow, build]
+
+    - title: 💥 Breaking Changes / 破坏性变更
+      labels: [breaking-change, Semver-Major]
+
+    - title: 🎨 UI UX & Styling / UI UX & 样式
+      labels: [ui, ux, design]
+
+    - title: 🔄 Miscellaneous / 其他变更
+      labels: ['*']
