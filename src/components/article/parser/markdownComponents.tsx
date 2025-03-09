@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react'
 import type { Components as MarkdownComponents } from 'react-markdown'
-import { CustomImage, SakuraIcon } from '@/components/ui'
 
+import { CustomImage, SakuraIcon } from '@/components/ui'
 import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
+
 import Link from 'next/link'
 import { isValidElement } from 'react'
 
+import { KEY_ICONS } from './keyboardIcons'
 import CodeBlock from './renderCodeBlock'
-
 import renderFriendLinks from './renderFriendLinks'
 
 const createMarkdownComponents = (translation: Translation, autoSlug: boolean = true): MarkdownComponents => {
@@ -98,12 +99,49 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         {children}
       </p>
     ),
+    em: ({ children }) => (
+      <em className="italic text-[var(--skyblueDark)] ml-0.5 mr-1">
+        {children}
+      </em>
+    ),
+    u: ({ children }) => (
+      <u className="mx-0.5 underline font-medium underline-offset-2 decoration-[var(--sakuraPink)] transition-all duration-300 hover:decoration-dotted">
+        {children}
+      </u>
+    ),
+    strong: ({ children }) => (
+      <strong className="font-extrabold text-[var(--sakuraPink)] mx-1">
+        {children}
+      </strong>
+    ),
+    del: ({ children }) => (
+      <del className="line-through text-[var(--gray)]">
+        {children}
+      </del>
+    ),
+    sup: ({ children }) => <sup className="text-xs align-super">{children}</sup>,
+    sub: ({ children }) => <sub className="text-xs align-sub">{children}</sub>,
     blockquote: ({ children }) => (
       <div className="my-3 flex justify-center">
         <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] py-0.5 pl-3 pr-2 italic">
           {children}
         </blockquote>
       </div>
+    ),
+    details: ({ children }) => (
+      <details className="cursor-pointer rounded-lg border border-gray-300 bg-[var(--background)] p-3 open:bg-[var(--background)]">
+        {children}
+      </details>
+    ),
+    summary: ({ children }) => (
+      <summary className="font-semibold text-[var(--sakuraPink)] cursor-pointer">
+        {children}
+      </summary>
+    ),
+    mark: ({ children }) => (
+      <mark className="bg-yellow-200 px-1 py-0.5 rounded">
+        {children}
+      </mark>
     ),
 
     // List related
@@ -221,6 +259,15 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         </pre>
       )
     },
+    kbd: ({ children }) => {
+      const key = children?.toString().toLowerCase().replace(/\s+/g, '') ?? ''
+
+      return (
+        <kbd className="inline-fle items-center justify-center gap-1 rounded-md border border-gray-500 bg-gray-800 px-2 py-1 text-sm font-mono text-white shadow-md">
+          {KEY_ICONS[key] ?? children}
+        </kbd>
+      )
+    },
 
     // Table related
     table: ({ children }) => (
@@ -261,6 +308,11 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         </div>
 
         <hr className="h-0.5 w-2/5 bg-gradient-to-l from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
+      </div>
+    ),
+    br: () => (
+      <div className="flex justify-center">
+        <br className="my-4" />
       </div>
     ),
   }

@@ -89,6 +89,7 @@
     --background: #ffffff;
     --foreground: #171717;
     --skyblue: #5bcefa;
+    --skyblueDark: #4aa7e0;
     --sakuraPink: #f6a8b8;
     --sakuraPinkDark: #d9778b;
     --lightGray: #f9fafb;
@@ -99,6 +100,7 @@
     --background: #1a1a1a;
     --foreground: #d4d4d4;
     --skyblue: #4aa7e0;
+    --skyblueDark: #4aa7e0;
     --sakuraPink: #d890a2;
     --sakuraPinkDark: #d9778b;
     --lightGray: #1f2937;

@@ -40,6 +40,23 @@ _This will also be italic_
 
 _You **can** combine them_
 
+中文中**重点内容**的加粗与*斜体*的使用
+
+<br>
+
+Aso support <u>underline</u> and ~~strikethrough~~
+
+Here is a kbd example: <kbd>Ctrl</kbd> + <kbd>C</kbd> and <kbd>Command</kbd> + <kbd>V</kbd> and <kbd>Arrow up</kbd> and <kbd>Arrow down</kbd>
+
+这是 ==高亮文本==。
+
+H~2~O, E=mc^2^
+
+<details>
+<summary>点击展开</summary>
+这里是可折叠的内容。
+</details>
+
 ## Lists
 
 ### Unordered

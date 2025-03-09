@@ -32,6 +32,7 @@
     "es-toolkit": "^1.32.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.21",
+    "lucide-react": "^0.479.0",
     "next": "15.2.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
