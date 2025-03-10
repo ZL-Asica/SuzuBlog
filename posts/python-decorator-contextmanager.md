@@ -12,6 +12,8 @@ thumbnail: /images/projects/python.png
 
 最近在做自己的 Research Project，大量使用到了 Python（因为项目还在进行中，代码暂时无法开源）。有很多情况下我都想要检测一个函数（或者一段代码）的执行时间、管理 SQLALChemy 的 Session（管理 Transaction 和 Rollback）等等。这时候就需要用到 Python 的装饰器（Decorator）和上下文管理器（Context Manager）。讲真，这两个东西真的很方便，而且代码看起来也很优雅。我相信没人愿意写一堆重复的代码，或者等一个要执行很多不同的函数负责不同功能无法统计时间，或者每次都要手动管理 Session（甚至忘记 Rollback）。今天我就来详细介绍一下 Python 中的 decorator 和 context manager。<!--more-->
 
+---
+
 ## Wrapper（包装器）
 
 ### Wrapper 的概念
@@ -151,8 +153,6 @@ function_1()
 function_2()
 ```
 
----
-
 ## 上下文管理器（Context Manager）
 
 ### 上下文管理器的概念
@@ -171,7 +171,7 @@ function_2()
 
 Python 提供了 `contextlib.contextmanager`，可以用更简洁的方式实现上下文管理器。
 
-#### 示例：使用 @contextmanager 进行计时
+#### 示例：使用 `@contextmanager` 进行计时
 
 ```python
 import time

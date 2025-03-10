@@ -95,7 +95,7 @@ PermitRootLogin no
 PubkeyAuthentication yes
 ```
 
-修改完成后，`ctrl + x` -> `y` -> `Enter` 保存并退出。
+修改完成后，<kbd>Ctrl</kbd> `+` <kbd>X</kbd> -> <kbd>Y</kbd> -> <kbd>Enter</kbd> 保存并退出。
 
 最后在你的 Ubuntu 中重启 SSH 服务：
 

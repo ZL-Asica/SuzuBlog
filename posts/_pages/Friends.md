@@ -122,6 +122,12 @@ showThumbnail: false
 "des": "柳影曳曳，清酒孤灯，扬笔撒墨，心境如霜"
 },
 {
+"title": "Canmi",
+"link": "https://xyy.canmi.xyz/",
+"img": "https://xyy.canmi.xyz/img/Canmi.webp",
+"des": "彩笔猫猫"
+},
+{
 "title": "苏卡卡的有底洞",
 "link": "https://skk.moe",
 "img": "https://cdn.skk.moe/avatar/512x512.png",
@@ -214,12 +220,6 @@ showThumbnail: false
 
 ```Links
 [
-{
-"title": "Canmi",
-"link": "https://canmi21.github.io",
-"img": "https://canmi21.github.io/img/Canmi.webp",
-"des": "彩笔猫猫"
-}
 ]
 ```
 
