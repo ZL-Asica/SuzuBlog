@@ -1,5 +1,11 @@
 # SuzuBlog Changelog
 
+## 1.4.3
+
+### Patch Changes
+
+- Fix pnpm lock file error
+
 ## 1.4.2 (2025-03-12)
 
 ### Patch Changes
