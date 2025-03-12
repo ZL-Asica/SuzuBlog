@@ -52,10 +52,29 @@ Here is a kbd example: <kbd>Ctrl</kbd> + <kbd>C</kbd> and <kbd>Command</kbd> + <
 
 H~2~O, E=mc^2^
 
+### Notes
+
+A note [^1] and another note [^2]
+
+[^1]: This is a note
+
+[^2]: This is another note
+
+### Task Lists
+
+- [ ] to do
+- [x] done
+
 <details>
 <summary>点击展开</summary>
 这里是可折叠的内容。
 </details>
+
+### Special Quotes
+
+::: tip
+This is a tip
+:::
 
 ## Lists
 
