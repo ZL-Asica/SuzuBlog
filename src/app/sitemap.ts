@@ -17,6 +17,9 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: post.lastModified || updateDate,
     changeFrequency: 'weekly' as const,
     priority: 0.5,
+    images: post.frontmatter.showThumbnail && post.frontmatter.thumbnail !== undefined
+      ? [post.frontmatter.thumbnail]
+      : [],
   }))
 
   // Pages settings

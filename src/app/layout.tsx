@@ -16,7 +16,7 @@ import './globals.css'
 const config: Config = getConfig()
 
 const roboto = Roboto({
-  subsets: ['latin', 'latin-ext', 'vietnamese'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-roboto',
 })
 
@@ -66,22 +66,10 @@ export default function RootLayout(
 
   return (
     <html lang={config.lang}>
-      <link
-        rel="icon"
-        type="image/png"
-        href="/icons/favicon-96x96.png"
-        sizes="96x96"
-      />
-      <link
-        rel="icon"
-        type="image/svg+xml"
-        href="/icons/favicon.svg"
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/icons/apple-touch-icon.png"
-      />
+      {/* icons */}
+      <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
 
       {/* If rss set in config */}
       {config.socialMedia.rss && (
@@ -94,11 +82,7 @@ export default function RootLayout(
       )}
       {/* Custom js */}
       {config.headerJavascript.map(jsFile => (
-        <Script
-          key={jsFile}
-          src={jsFile}
-          strategy="afterInteractive"
-        />
+        <Script key={jsFile} src={jsFile} strategy="afterInteractive" />
       ))}
       {/* Google Analytics Script */}
       {googleAnalytics && (
@@ -107,10 +91,7 @@ export default function RootLayout(
             src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
             strategy="afterInteractive"
           />
-          <Script
-            id="google-analytics"
-            strategy="afterInteractive"
-          >
+          <Script id="google-analytics" strategy="afterInteractive">
             {`
             window.dataLayer = window.dataLayer || [];
             function gtag() {
@@ -128,7 +109,7 @@ export default function RootLayout(
       >
         <ScrollPositionBar />
         <Header config={config} />
-        <main className="grow mt-20">
+        <main className="grow mt-20 animate-fade-in-down">
           {children}
           <Analytics />
           <SpeedInsights />
