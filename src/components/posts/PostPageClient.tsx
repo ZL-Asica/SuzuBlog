@@ -70,7 +70,7 @@ const PostPageClient = ({
   )
 
   return (
-    <div className="container mt-5 mx-auto flex animate-fadeInDown flex-col items-center p-4">
+    <div className="container mt-5 mx-auto flex flex-col items-center p-4">
       {/* Centered Search Input */}
       <SearchInput
         categories={categories}

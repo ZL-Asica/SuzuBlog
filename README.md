@@ -5,14 +5,17 @@
 > **Suzu** - "鈴" in Japanese, meaning "bell" - is a minimalist blog template built with **Next.js** and pure **Markdown**.
 
 [![GitHub License][license-badge]][license-link]
+[![Latest Release][release-badge]][release-link]
 [![Node.js][node-badge]][node-link]
-[![pnpm Version][pnpm-badge]][pnpm-link]
+[![pnpm Version][pnpm-badge]][pnpm-link] |
 [![Next.js][nextjs-badge]][nextjs-link]
 [![Tailwind CSS][tailwind-badge]][tailwind-link] |
 [![Vercel][vercel-badge]][vercel-link]
 [![Eslint][eslint-badge]][eslint-link]
 [![Prettier][prettier-badge]][prettier-link]
 
+- [**Demo**](https://www.zla.pub) 🚀
+  Check out the live demo of Suzu Blog.
 - [**Documentation**](https://suzu.zla.app) 📚
   Learn how to start, configure and customize your Suzu Blog with detailed instructions.
 
@@ -106,7 +109,9 @@ After years of frustration with the maintenance, security risks, and performance
 [pnpm-link]: https://pnpm.io/
 [prettier-badge]: https://img.shields.io/badge/Prettier-F7B93E?logo=Prettier&logoColor=white
 [prettier-link]: https://www.npmjs.com/package/@zl-asica/prettier-config
-[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white
+[release-badge]: https://img.shields.io/github/v/release/ZL-Asica/SuzuBlog?display_name=release&label=SuzuBlog&color=fc8da3
+[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases
+[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
 [vercel-link]: https://vercel.com

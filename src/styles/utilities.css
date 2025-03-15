@@ -1,0 +1,122 @@
+/* Hover Utilities */
+@utility text-hover-primary {
+  @variant hover {
+    color: var(--color-primary-300);
+    @variant dark {
+      color: var(--color-primary-400);
+    }
+  }
+}
+@utility text-hover-secondary {
+  @variant hover {
+    color: var(--color-secondary-300);
+    @variant dark {
+      color: var(--color-secondary-400);
+    }
+  }
+}
+@utility bg-hover-primary {
+  @variant hover {
+    background-color: var(--color-primary-300);
+    @variant dark {
+      background-color: var(--color-primary-400);
+    }
+  }
+}
+@utility bg-hover-secondary {
+  @variant hover {
+    background-color: var(--color-secondary-300);
+    @variant dark {
+      background-color: var(--color-secondary-400);
+    }
+  }
+}
+
+/* Underline Utilities */
+@utility underline-interactive {
+  @apply underline decoration-dashed underline-offset-2 transition-all-300;
+  @variant hover {
+    @apply decoration-dotted;
+  }
+}
+
+@utility scrollbar-custom {
+  /* For Webkit browsers (Chrome, Safari, etc.) */
+  &::-webkit-scrollbar {
+    width: 6px; /* Scrollbar width */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; /* Track background color */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary-300); /* Thumb background color */
+    border: 2px solid transparent; /* Thumb border color */
+    border-radius: 4px; /* Thumb border radius */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    /* Thumb background color on hover */
+    background-color: var(--color-primary-500);
+  }
+
+  scrollbar-color: var(--color-primary-300) transparent;
+
+  @variant dark {
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-primary-300);
+      border: 2px solid transparent;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-primary-500);
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-300) transparent;
+  }
+}
+
+/* Transition Utilities */
+@utility transition-all-300 {
+  @apply transition-all duration-300 ease-in-out;
+}
+@utility transition-all-500 {
+  @apply transition-all duration-500 ease-in-out;
+}
+@utility transition-all-700 {
+  @apply transition-all duration-700 ease-in-out;
+}
+@utility transition-colors-300 {
+  @apply transition-colors duration-300 ease-in-out;
+}
+@utility transition-colors-500 {
+  @apply transition-colors duration-500 ease-in-out;
+}
+@utility transition-colors-700 {
+  @apply transition-colors duration-700 ease-in-out;
+}
+@utility transition-transform-300 {
+  @apply transition-transform duration-300 ease-in-out;
+}
+@utility transition-transform-500 {
+  @apply transition-transform duration-500 ease-in-out;
+}
+@utility transition-transform-700 {
+  @apply transition-transform duration-700 ease-in-out;
+}
+@utility transition-opacity-300 {
+  @apply transition-opacity duration-300 ease-in-out;
+}
+@utility transition-opacity-500 {
+  @apply transition-opacity duration-500 ease-in-out;
+}
+@utility transition-opacity-700 {
+  @apply transition-opacity duration-700 ease-in-out;
+}

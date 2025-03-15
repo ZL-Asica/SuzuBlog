@@ -3,6 +3,7 @@
 import { updateURL, validateParameters } from '@/services/utils'
 import { useClickOutside, useToggle } from '@zl-asica/react'
 import { clsx } from 'clsx'
+import { ArrowDown } from 'lucide-react'
 import Form from 'next/form'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -90,7 +91,7 @@ const SearchInput = ({
       onSubmit={handleFormSubmit}
     >
       {/* Search Input with Submit Button */}
-      <div className="relative w-full transition-all duration-300 hover:scale-105">
+      <div className="relative w-full transition-transform-300 hover:scale-105">
         <div className="relative flex items-center">
           <input
             type="text"
@@ -99,11 +100,11 @@ const SearchInput = ({
             value={searchQuery}
             onChange={event_ => setSearchQuery(event_.target.value)}
             onFocus={toggleExpanded}
-            className="w-full rounded-full border border-gray-300 px-4 py-2 pr-16 transition-all duration-300 focus:ring-2 focus:border-none"
+            className="w-full rounded-full border border-gray-300 px-4 py-2 pr-16 text-gray-dark"
           />
           <button
             type="submit"
-            className="absolute right-2 rounded-full px-4 py-1 transition bg-[var(--skyblue)] hover:bg-[var(--sakuraPink)] dark:text-[var(--background)]"
+            className="bg-hover-primary absolute right-2 rounded-full px-4 py-1 transition-colors-300 bg-secondary-300 dark:text-background font-medium"
           >
             {translation.search.submit}
           </button>
@@ -127,7 +128,7 @@ const SearchInput = ({
               value={selectedCategory}
               aria-label={translation.search.categoriesAria}
               onChange={handleCategoryChange}
-              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 transition-all duration-300 hover:scale-105 focus:ring-2
+              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 transition-transform-300 hover:scale-105
                 ${selectedCategory || 'text-gray-400'}
               `}
             >
@@ -148,7 +149,7 @@ const SearchInput = ({
               ))}
             </select>
             <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
-              ▼
+              <ArrowDown size={18} />
             </span>
           </div>
 
@@ -158,7 +159,7 @@ const SearchInput = ({
               value={selectedTag}
               aria-label={translation.search.tagsAria}
               onChange={handleTagChange}
-              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 transition-all duration-300 hover:scale-105 focus:ring-2
+              className={`w-full appearance-none rounded-full border border-gray-300 px-4 py-2 transition-transform-300 hover:scale-105
                 ${selectedTag || 'text-gray-400'}
               `}
             >
@@ -179,7 +180,7 @@ const SearchInput = ({
               ))}
             </select>
             <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
-              ▼
+              <ArrowDown size={18} />
             </span>
           </div>
         </div>
@@ -188,7 +189,7 @@ const SearchInput = ({
         <button
           type="reset"
           onClick={handleReset}
-          className="mt-2 rounded-full px-4 py-2 transition bg-[var(--skyblue)] hover:bg-[var(--sakuraPink)] hover:scale-105 dark:text-[var(--background)]"
+          className="mt-2 rounded-full px-4 py-2 transition-all-300 bg-secondary-300 bg-hover-primary hover:scale-105 dark:text-background font-medium"
         >
           {translation.search.clear}
         </button>
