@@ -31,7 +31,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           >
             {titleSlug(slug, 2)}
             {children}
-            <span className="transition-all-300 absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-primary-400  group-hover:w-[35%]"></span>
+            <span className="transition-all-300 absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-primary-400 dark:border-primary-300 group-hover:w-[35%]"></span>
           </h2>
         </div>
       )
@@ -41,7 +41,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h3', headingLevels)
       return (
         <h3
-          className="text-hover-primary transition-colors-300 my-5 border-l-4 border-primary-400 pl-2 text-2xl font-bold leading-relaxed"
+          className="text-hover-primary transition-colors-300 my-5 border-l-4 border-primary-400 dark:border-primary-300 pl-2 text-2xl font-bold leading-relaxed"
           id={slug}
         >
           {titleSlug(slug, 3)}
@@ -96,17 +96,17 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </p>
     ),
     em: ({ children }) => (
-      <em className="italic text-secondary-500 ml-0.5 mr-1">
+      <em className="italic text-secondary-500 dark:text-secondary-300 ml-0.5 mr-1">
         {children}
       </em>
     ),
     u: ({ children }) => (
-      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-2 text-primary-400">
+      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-3 text-primary-400 dark:text-primary-300">
         {children}
       </u>
     ),
     strong: ({ children }) => (
-      <strong className="font-extrabold text-primary-400 mx-1">
+      <strong className="font-extrabold text-primary-400 dark:text-primary-300 mx-1">
         {children}
       </strong>
     ),
@@ -130,7 +130,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </details>
     ),
     summary: ({ children }) => (
-      <summary className="font-semibold text-primary-400 cursor-pointer">
+      <summary className="font-semibold text-primary-400 dark:text-primary-300 cursor-pointer">
         {children}
       </summary>
     ),
@@ -162,21 +162,21 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // List related
     ul: ({ children }) => (
-      <div className="my-4 rounded-lg border-2 border-dashed border-primary-400 p-3">
+      <div className="my-4 rounded-lg border-2 border-dashed border-primary-400 dark:border-primary-300 p-3">
         <ul className="ml-2 list-disc list-inside">
           {children}
         </ul>
       </div>
     ),
     ol: ({ children }) => (
-      <div className="my-4 rounded-lg border-2 border-dashed border-secondary-500 p-3">
+      <div className="my-4 rounded-lg border-2 border-dashed border-secondary-500 dark:border-secondary-400 p-3">
         <ol className="ml-2 list-decimal list-inside">
           {children}
         </ol>
       </div>
     ),
     li: ({ children }) => (
-      <li className="leading-relaxed marker:text-primary-500 marker:font-medium list-outside pl-1 ml-2">
+      <li className="leading-relaxed marker:text-primary-500 dark:marker:text-primary-400 marker:font-medium list-outside pl-1 ml-2">
         {children}
       </li>
     ),
@@ -194,7 +194,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
               ? undefined
               : `${translation.newTab}${children?.toString() ?? 'link'}`
           }
-          className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary-500"
+          className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary-500 dark:text-secondary-400"
           {...(props as Record<string, unknown>)}
         >
           {children}
@@ -229,7 +229,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           )
         : (
             <code
-              className="inline-block rounded-lg bg-primary-400/20 mx-0.5 px-2 py-0.5 font-mono text-base font-bold text-primary-500"
+              className="inline-block rounded-lg bg-primary-400/20 mx-0.5 px-2 py-0.5 font-mono text-base font-bold text-primary-500 dark:text-primary-300"
               {...(props as Record<string, unknown>)}
             >
               {children}

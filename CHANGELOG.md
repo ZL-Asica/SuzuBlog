@@ -1,5 +1,14 @@
 # SuzuBlog Changelog
 
+## 1.5.1
+
+### Patch Changes
+
+- Fix anime page styling issue
+
+  - Forget to update anime page.
+  - Also update dark mode styling to improve contrast.
+
 ## 1.5.0
 
 ### Minor Changes

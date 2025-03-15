@@ -47,7 +47,7 @@ const Notes = ({ text, isMobile, showNotes }: NotesProps) => {
       ref={noteRef}
       className={`absolute left-1/2 top-0 z-50 w-max max-w-[300px] ${offsetX} 
                   -translate-y-full rounded-xl bg-black/90 p-4 text-white shadow-lg 
-                  transition-opacity duration-300 ${
+                  transition-opacity-300 ${
     isMobile ? 'opacity-0 pointer-events-auto' : 'opacity-0 group-hover:opacity-100 pointer-events-none'
     }`}
       style={{ opacity: isMobile && showNotes ? 1 : undefined }}
