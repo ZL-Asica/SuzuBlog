@@ -14,6 +14,8 @@
 [![Eslint][eslint-badge]][eslint-link]
 [![Prettier][prettier-badge]][prettier-link]
 
+- [**演示**](https://www.zla.pub) 🚀
+  查看 Suzu Blog 的实时演示。
 - [**文档**](https://suzu.zla.app) 📚
   学习如何使用详细说明开始、配置和自定义 Suzu Blog。
 

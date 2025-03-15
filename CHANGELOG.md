@@ -1,5 +1,25 @@
 # SuzuBlog Changelog
 
+## 1.5.0
+
+### Minor Changes
+
+- Theme cleanup and style refine
+
+  - feat(makrdown): add style for checkbox related
+
+  - 7daad73: style(global): styles clean up and re-structure
+
+    - Move reusable styles into `styles` folder.
+    - Fix custom scroll bar consistence.
+    - Fix minor styling issue and contract issue.
+    - Improve A11Y overall experience.
+    - Remove img min-h limit in markdown. Remember to refine this in the future.
+    - Remove Suspense for `CategoriesTagsList.tsx`. LoadingIndicator is non-used component now.
+
+  - 2548e85: chore: clean up some code
+  - 215b4eb: feat(darkTheme): theme setting only store for 7 days
+
 ## 1.4.3
 
 ### Patch Changes

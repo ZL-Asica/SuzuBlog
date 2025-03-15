@@ -16,7 +16,7 @@ async function Home() {
     'url': config.siteUrl,
     'description': config.description,
     'publisher': {
-      '@type': 'Organization',
+      '@type': 'Person',
       'name': config.author.name,
       'url': config.author.link,
       'logo': config.avatar,
@@ -31,7 +31,7 @@ async function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <div className="flex max-h-[800px] animate-fadeInDown flex-col items-center justify-center px-6">
+      <div className="flex max-h-[800px] flex-col items-center justify-center px-6">
         <div className="relative h-[30vh] w-full bg-cover bg-center md:h-[50vh]">
           <div className="absolute left-1/2 top-[25%] -translate-x-1/2 transform">
             <Image
@@ -39,7 +39,7 @@ async function Home() {
               alt="Avatar"
               width={180}
               height={180}
-              className="rounded-full border-4 border-[var(--sakuraPink)] shadow-lg"
+              className="rounded-full border-4 border-primary-300 shadow-lg"
               priority
             />
           </div>
@@ -47,11 +47,7 @@ async function Home() {
 
         <div className="mt-20 text-center">
           <p className="text-foreground mb-28 text-3xl font-bold">{config.slogan}</p>
-
-          <SocialMediaLinks
-            socialMedia={config.socialMedia}
-            iconSize={40}
-          />
+          <SocialMediaLinks socialMedia={config.socialMedia} iconSize={40} />
         </div>
       </div>
     </>

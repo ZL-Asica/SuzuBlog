@@ -1,0 +1,100 @@
+@import './utilities.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme static {
+  /* Primary Colors */
+  --color-primary-50: #fef2f4;
+  --color-primary-100: #fde6ea;
+  --color-primary-200: #fad1d9;
+  --color-primary-300: #f6a8b8; /* Primary - Sakura */
+  --color-primary-400: #f17b96;
+  --color-primary-500: #e64d73;
+  --color-primary-600: #d22c5e;
+  --color-primary-700: #b11f4f;
+  --color-primary-800: #941d48;
+  --color-primary-900: #7f1c42;
+  --color-primary-950: #470a20;
+
+  /* Secondary Colors */
+  --color-secondary-50: #f0faff;
+  --color-secondary-100: #e0f3fe;
+  --color-secondary-200: #bae9fd;
+  --color-secondary-300: #5bcefa; /* Secondary - Sora */
+  --color-secondary-400: #39c5f7;
+  --color-secondary-500: #10aee7;
+  --color-secondary-600: #038dc6;
+  --color-secondary-700: #0470a0;
+  --color-secondary-800: #085f84;
+  --color-secondary-900: #0d4e6d;
+  --color-secondary-950: #083249;
+
+  /* Fade in down animation */
+  --animate-fade-in-down: fade-in-down 0.6s ease-out;
+
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@theme inline {
+  /* Basic Colors */
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-gray-light: var(--gray-light);
+  --color-gray-dark: var(--gray-dark);
+}
+
+@layer utilities {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+    --gray-light: #f9fafb;
+    --gray-dark: #1f2937;
+  }
+
+  .dark:root {
+    --background: #1a1a1a;
+    --foreground: #d4d4d4;
+    --gray-light: #1f2937;
+    --gray-dark: #d1d5db;
+  }
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/****************************************************
+ * ACCESSIBILITY
+ ****************************************************/
+
+/* Remove default focus outline */
+*:focus {
+  outline: none;
+}
+
+/* Add focus outline for keyboard users */
+*:focus-visible {
+  outline: 2px solid var(--colors-secondary-500);
+  outline-offset: 4px;
+}
+
+/* Enhance focus for form inputs */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--colors-primary-500);
+  outline-offset: 2px;
+}

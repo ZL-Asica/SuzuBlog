@@ -1,7 +1,18 @@
-const LoadingIndicator = () => {
+interface LoadingIndicatorProps {
+  className?: string
+}
+
+const LoadingIndicator = ({ className = '' }: LoadingIndicatorProps) => {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-[var(--gray)]" />
+    <div className={`flex items-center justify-center h-full w-full ${className}`}>
+      <div className="relative w-16 h-16">
+        {/* Spinner */}
+        <div className="absolute inset-0 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" />
+        {/* Pulsating Circle */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-3 h-3 bg-primary-500 rounded-full animate-ping" />
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,8 +1,6 @@
 import { CustomImage } from '@/components/ui'
 import { replace } from 'es-toolkit/compat'
 
-import Link from 'next/link'
-
 const renderFriendLinks = (linksChildren: string, transition: Translation) => {
   let links: FriendLink[] = []
   try {
@@ -12,9 +10,9 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
     }
   }
   catch (error) {
-    console.error('Failed to parse Friend Links JSON:', error)
+    console.error('[SuzuBlog-friends] Failed to parse Friend Links JSON:', error)
     return (
-      <div className="error-message">
+      <div className="text-red-500 font-bold">
         Invalid Friend Links JSON. Please check the input format of your markdown file.
       </div>
     )
@@ -29,12 +27,11 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
             key={link.link ?? index}
             className="friend-link-item group relative box-border min-w-[150px] max-w-[200px] shrink grow basis-[calc(25%-16px)]"
           >
-            <Link
+            <a
               href={link.link ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
-              prefetch={false}
-              className="friend-link flex h-[225px] flex-col items-center justify-center rounded-lg p-4 text-center no-underline shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
+              className="friend-link flex h-[225px] flex-col items-center justify-center rounded-lg p-4 text-center no-underline shadow-md transition-transform-300 hover:-translate-y-2 hover:shadow-lg"
             >
               <CustomImage
                 src={link.img}
@@ -47,10 +44,10 @@ const renderFriendLinks = (linksChildren: string, transition: Translation) => {
               <div>
                 <p className="relative mx-5 mt-2 text-lg">{link.title ?? ''}</p>
               </div>
-            </Link>
+            </a>
             {/* Description shown on hover */}
             {link.des !== undefined && link.des.trim() !== '' && (
-              <div className="absolute bottom-[-30px] left-1/2 z-10 hidden translate-x-[-50%] whitespace-nowrap rounded-md bg-black px-3 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100">
+              <div className="transition-opacity-300 absolute bottom-[-30px] left-1/2 z-10 hidden translate-x-[-50%] whitespace-nowrap rounded-md bg-black px-3 py-1 text-sm text-white opacity-0 group-hover:block group-hover:opacity-100">
                 {link.des ?? ''}
               </div>
             )}

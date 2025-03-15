@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 interface CopyrightInfoProps {
@@ -23,7 +22,7 @@ const CopyrightInfo = ({
   const copyright = translation.post.copyright
 
   return (
-    <div className="relative w-full rounded-3xl bg-[var(--lightGray)] p-6">
+    <div className="relative w-full rounded-3xl bg-gray-light p-6">
       {/* Creative Commons Logo */}
       <div className="absolute right-4 top-4 z-0 h-28 w-28 text-base opacity-20">
         <Image
@@ -36,31 +35,31 @@ const CopyrightInfo = ({
       </div>
 
       {/* Copyright Info */}
-      <div className="z-20">
+      <div className="z-20 flex flex-col items-start gap-2">
         <p className="font-semibold">{copyright.author + author}</p>
-        <p className="mt-2">{copyright.title + title}</p>
-        <p className="mt-2">
+        <p>{copyright.title + title}</p>
+        <p>
           {copyright.link}
-          <Link
+          <a
             href={`${siteUrl}${pathname}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sakuraPink no-underline"
+            className="text-hover-secondary underline-interactive no-underline"
           >
             {`${siteUrl}${pathname}`}
-          </Link>
+          </a>
         </p>
-        <p className="mt-2">
+        <p className="">
           {copyright.copyright.start}
           {` `}
-          <Link
+          <a
             href={creativeCommons.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sakuraPink no-underline"
+            className="text-hover-secondary underline-interactive"
           >
             {creativeCommons.type}
-          </Link>
+          </a>
           {` `}
           {copyright.copyright.end}
         </p>
