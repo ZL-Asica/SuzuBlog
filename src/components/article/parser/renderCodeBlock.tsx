@@ -22,12 +22,14 @@ const CodeBlock = ({ match, translation, children }: CodeBlockProps) => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative font-mono">
       {/* Copy button */}
       <button
         type="button"
         onClick={handleCopyClick}
-        className={`absolute -top-7 right-2 text-[var(--foreground)] rounded-sm ${isCopied ? 'bg-[var(--sakuraPink)]' : 'bg-[var(--skyblue)]'} px-2 py-1 text-xs hover:bg-[var(--sakuraPink)] dark:text-[var(--background)]`}
+        className={`bg-hover-primary transition-all-300 absolute -top-7 right-2 font-medium text-foreground rounded-sm
+          ${isCopied ? 'bg-primary-300' : 'bg-secondary-300'}
+          px-2 py-1 text-xs dark:text-background hover:scale-105 hover:rounded-md`}
       >
         {isCopied ? translation.post.copied : translation.post.copy}
       </button>
@@ -40,11 +42,10 @@ const CodeBlock = ({ match, translation, children }: CodeBlockProps) => {
         showLineNumbers
         lineNumberStyle={{
           color: '#88C0D0',
-          fontSize: '0.8em',
-          paddingRight: '10px',
+          fontSize: '0.95em',
+          paddingRight: '1em',
         }}
-        PreTag="div"
-        className="scrollbar-custom rounded-sm py-1 pl-2 font-mono hover:shadow-xl"
+        className="scrollbar-custom rounded-b-sm py-1"
       >
         {cleanedChildren}
       </SyntaxHighlighter>

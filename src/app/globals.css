@@ -1,23 +1,9 @@
 @import 'tailwindcss';
+@import '../styles/theme.css';
 
-@custom-variant dark (&:is(.dark *));
-
-@theme {
+@theme inline {
   --font-sans: var(--font-roboto), var(--font-noto-sans-sc), Arial, sans-serif;
   --font-mono: var(--font-ubuntu-mono), monospace;
-
-  --animate-fade-in-down: fadeInDown 0.5s ease-out;
-
-  @keyframes fadeInDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 }
 
 /*
@@ -38,115 +24,7 @@
   }
 }
 
-@utility text-balance {
-  text-wrap: balance;
-}
-
-@utility scrollbar-custom {
-  /* For Webkit browsers (Chrome, Safari, etc.) */
-  &::-webkit-scrollbar {
-    width: 8px; /* Scrollbar width */
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #fff3f3; /* background of the scrollbar */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #ff6f91; /* scrollbar color */
-    border: 2px solid #fff3f3; /* border around thumb */
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #ff4a70; /* scrollbar color on hover */
-  }
-  scrollbar-color: #ff6f91 #fff3f3; /* Firefox scrollbar color */
-
-  @media (prefers-color-scheme: dark) {
-    &::-webkit-scrollbar-track {
-      background: #2d2d2d; /* background of the scrollbar */
-      border-radius: 4px; /* Outer radius */
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #ff6f91; /* scrollbar color */
-      border-radius: 4px; /* Thumb radius */
-      border: 2px solid #2d2d2d; /* border around thumb */
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #ff4a70; /* scrollbar color on hover */
-    }
-
-    /* Non-Webkit browsers (Firefox) */
-    scrollbar-width: thin; /* Firefox scrollbar width */
-    scrollbar-color: #ff6f91 #2d2d2d; /* Firefox scrollbar color */
-  }
-}
-
-@layer utilities {
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --skyblue: #5bcefa;
-    --skyblueDark: #4aa7e0;
-    --sakuraPink: #f6a8b8;
-    --sakuraPinkDark: #d9778b;
-    --lightGray: #f9fafb;
-    --gray: #1f2937;
-  }
-
-  .dark:root {
-    --background: #1a1a1a;
-    --foreground: #d4d4d4;
-    --skyblue: #4aa7e0;
-    --skyblueDark: #4aa7e0;
-    --sakuraPink: #d890a2;
-    --sakuraPinkDark: #d9778b;
-    --lightGray: #1f2937;
-    --gray: #d1d5db;
-  }
-}
-
-html,
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-[id] {
+/* TOC Scroll avoid hidden by header */
+.post-content [id] {
   scroll-margin-top: 100px;
-}
-
-/****************************************************
- * IMAGES & MEDIA
- ****************************************************/
-
-/* Avoid filter on images */
-img {
-  filter: none !important;
-}
-
-/****************************************************
- * ACCESSIBILITY
- ****************************************************/
-
-/* Remove default focus outline */
-*:focus {
-  outline: none;
-}
-
-/* Add focus outline for keyboard users */
-*:focus-visible {
-  outline: 2px solid var(--skyblue);
-  outline-offset: 4px;
-}
-
-/* Enhance focus for form inputs */
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--sakuraPink);
-  outline-offset: 2px;
 }

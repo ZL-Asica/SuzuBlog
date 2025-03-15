@@ -1,13 +1,8 @@
-import LoadingIndicator from '@/components/common/LoadingIndicator'
 import { CustomImage } from '@/components/ui'
 import { includes, isEmpty, lowerCase } from 'es-toolkit/compat'
-
 import dynamic from 'next/dynamic'
-
-import { Suspense } from 'react'
 import CategoriesTagsList from './CategoriesTagsList'
 import MarkdownContent from './parser'
-
 import TOC from './TOC'
 
 const CopyrightInfo = dynamic(async () => import('./CopyrightInfo'))
@@ -18,18 +13,20 @@ interface MetaInfoProps {
   title?: string
   author: string
   date: string
-  isOverlay?: boolean
 }
 
 const MetaInfo = ({
   title,
   author,
   date,
-  isOverlay,
 }: MetaInfoProps) => {
   return (
     <div
-      className={`absolute ${isOverlay ? 'bottom-0 left-1/2 w-full max-w-3xl -translate-x-1/2 transform p-4 text-white' : 'mt-2 flex items-center'}`}
+      className={`absolute
+        ${title !== undefined && title.trim() !== ''
+      ? 'bottom-0 left-1/2 w-full max-w-3xl -translate-x-1/2 transform p-4 text-white'
+      : 'mt-2 flex items-center'}
+        `}
     >
       <h1 className="text-3xl font-bold">{title}</h1>
       <p className="left-1 ml-2 flex items-center">
@@ -50,7 +47,7 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
   const translation = config.translation
 
   return (
-    <article className="container mx-auto animate-fadeInDown p-6 pb-2 mt-5">
+    <article className="container mx-auto p-6 pb-2 mt-5">
       {post.frontmatter.showThumbnail
         ? (
             <div className="relative h-96 w-full">
@@ -67,7 +64,6 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
                 title={post.frontmatter.title}
                 author={post.frontmatter.author}
                 date={post.frontmatter.date}
-                isOverlay
               />
             </div>
           )
@@ -83,23 +79,22 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
             </div>
           )}
 
+      {/* TODO: Change max-w-3xl to max-w-5xl */}
       <div className="mx-auto my-10 w-full max-w-3xl">
-        <Suspense fallback={<LoadingIndicator />}>
-          {(post.frontmatter.categories || post.frontmatter.tags) && (
-            <ul className="mx-auto mt-5 flex flex-col gap-4">
-              <CategoriesTagsList
-                type="category"
-                translation={translation}
-                items={post.frontmatter.categories}
-              />
-              <CategoriesTagsList
-                type="tag"
-                translation={translation}
-                items={post.frontmatter.tags}
-              />
-            </ul>
-          )}
-        </Suspense>
+        {(post.frontmatter.categories || post.frontmatter.tags) && (
+          <ul className="mx-auto mt-5 flex flex-col gap-4">
+            <CategoriesTagsList
+              type="category"
+              translation={translation}
+              items={post.frontmatter.categories}
+            />
+            <CategoriesTagsList
+              type="tag"
+              translation={translation}
+              items={post.frontmatter.tags}
+            />
+          </ul>
+        )}
         {!isEmpty(post.toc) && (
           <TOC
             items={post.toc}
@@ -108,10 +103,10 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
             showThumbnail={post.frontmatter.showThumbnail}
           />
         )}
-        <MarkdownContent
-          post={post}
-          translation={translation}
-        />
+
+        {/* Main Content */}
+        <MarkdownContent post={post} translation={translation} />
+
         {post.frontmatter.showLicense && (
           <CopyrightInfo
             author={post.frontmatter.author}
@@ -121,13 +116,13 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
             translation={translation}
           />
         )}
-        <div className="mt-10"></div>
+        <div className="mt-10" />
         {post.frontmatter.showComments && (
-          config.twikooEnvId != null
+          config.twikooEnvId != null && config.twikooEnvId.trim() !== ''
             ? (
                 <TwikooComments environmentId={config.twikooEnvId} />
               )
-            : config.disqusShortname != null
+            : config.disqusShortname != null && config.disqusShortname.trim() !== ''
               ? (
                   <DisqusComments disqusShortname={config.disqusShortname} />
                 )

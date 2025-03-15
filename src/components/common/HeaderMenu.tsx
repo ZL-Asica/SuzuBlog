@@ -42,20 +42,20 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
       {menuItems.map(item => (
         <Fragment key={item.href}>
           <li
-            className={`group relative flex w-full items-center justify-center rounded-lg hover:bg-[var(--lightGray)] ${
+            className={`group relative flex w-full items-center justify-center rounded-lg hover:bg-gray-light ${
               item.children ? 'hover:cursor-pointer' : ''
             }`}
           >
             <Link
               href={item.href}
               title={item.label}
-              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all duration-300 ease-in-out group-hover:text-[var(--sakuraPink)]
-                ${item.href !== '/' && currentPath.startsWith(item.href) ? 'text-[var(--sakuraPink)]' : ''}
+              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all-300 group-hover:text-primary-300
+                ${item.href !== '/' && currentPath.startsWith(item.href) ? 'text-primary-300' : ''}
                 `}
               onClick={onClickHandler}
               aria-label={`${translation.navigate} ${item.label}`}
             >
-              <span className="inline-block transition-transform duration-300 ease-in-out group-hover:scale-125">
+              <span className="inline-block transition-transform-300 group-hover:scale-125">
                 {item.icon}
               </span>
               {item.label}
@@ -63,11 +63,11 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
 
             {/* Desktop Hover - sub menu */}
             {item.children !== undefined && !isMobile && (
-              <ul className="absolute left-0 top-full hidden w-36 shadow-lg rounded-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-hover:block transition-all duration-300 ease-in-out">
+              <ul className="absolute left-0 top-full hidden w-36 shadow-lg rounded-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-hover:block transition-all-300">
                 {item.children.map((subItem, index) => (
                   <Fragment key={subItem.href}>
-                    <li className={`p-2 rounded-md bg-[var(--background)] transition-colors duration-300 hover:text-[var(--sakuraPink)] dark:bg-[var(--background)]
-                    ${currentPath.startsWith(subItem.href) ? 'text-[var(--sakuraPink)]' : ''}
+                    <li className={`p-2 rounded-md bg-background transition-colors duration-300 hover:text-primary-300 dark:bg-background
+                    ${currentPath.startsWith(subItem.href) ? 'text-primary-300' : ''}
                       `}
                     >
                       <Link href={subItem.href} className="flex items-center justify-center px-4 py-2 text-base">
@@ -78,9 +78,8 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
 
                     {item.children !== undefined && index < item.children.length - 1 && (
                       <li className="w-full" aria-hidden>
-                        <div className="h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]" />
+                        <div className="h-[1px] w-full bg-gradient-to-r from-gray-light via-primary-300 to-gray-light" />
                       </li>
-
                     )}
                   </Fragment>
                 ))}
@@ -97,8 +96,8 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
                     href={subItem.href}
                     title={subItem.label}
                     onClick={onClickHandler}
-                    className={`flex items-center gap-2 py-2 text-base hover:text-[var(--sakuraPink)]
-                      ${currentPath.startsWith(subItem.href) ? 'text-[var(--sakuraPink)]' : ''}
+                    className={`flex items-center gap-2 py-2 text-base text-hover-primary
+                      ${currentPath.startsWith(subItem.href) ? 'text-primary-300' : ''}
                       `}
                   >
                     {subItem.icon}
@@ -112,7 +111,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
           {/* Mobile - Divider */}
           {isMobile && (
             <li className="w-full" aria-hidden>
-              <div className="h-[1px] w-full bg-gradient-to-r from-[var(--lightGray)] via-[var(--sakuraPink)] to-[var(--lightGray)]" />
+              <div className="h-[1px] w-full bg-gradient-to-r from-gray-light via-primary-300 to-gray-light" />
             </li>
           )}
         </Fragment>
@@ -122,27 +121,27 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
       <li className={`${isMobile ? 'mt-4 flex w-full justify-around' : 'flex justify-center gap-4'}`}>
         {config.travellings && (
           <Link
-            className="group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="text-hover-primary transition-all-300 group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
             title={translation.aria.travellings}
             href="https://www.travellings.cn/go.html"
             rel="noopener noreferrer"
             target="_blank"
           >
-            <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">
+            <span className="transition-transform-300 flex h-6 w-6 items-center justify-center group-hover:scale-125 ">
               <TrainFront className="h-full w-full" />
             </span>
           </Link>
         )}
         <button
           type="button"
-          className="group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 transition-all duration-300 ease-in-out hover:bg-gray-200 hover:cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="text-hover-primary transition-all-300 group flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:text-gray-300 hover:bg-gray-200 hover:cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700"
           aria-label={translation.aria.theme}
           onClick={() => {
             toggleTheme()
             onClickHandler && onClickHandler()
           }}
         >
-          <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">
+          <span className="transition-transform-300 flex h-6 w-6 items-center justify-center group-hover:scale-125">
             {isDarkTheme ? <Sun className="h-full w-full" /> : <Moon className="h-full w-full" />}
           </span>
         </button>

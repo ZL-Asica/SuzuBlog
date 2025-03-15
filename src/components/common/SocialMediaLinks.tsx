@@ -15,7 +15,7 @@ import {
   FaZhihu,
 } from 'react-icons/fa6'
 
-const socialData = {
+const socialData: SocialData = {
   github_username: {
     urlTemplate: 'https://github.com/{username}',
     icon: FaGithub,
@@ -77,12 +77,12 @@ const SocialMediaLinks = ({
     <div
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}
     >
-      {Object.entries(socialMedia)
+      {(Object.entries(socialMedia) as [keyof SocialMedia, string | null][])
         .filter(([key, username]) =>
           key in socialData && username !== null && String(username) !== 'false',
         )
         .map(([key, username]) => {
-          const { urlTemplate, icon: IconComponent } = socialData[key as keyof typeof socialData]
+          const { urlTemplate, icon: IconComponent } = socialData[key]
 
           const label = upperFirst(words(key)[0])
 
@@ -92,7 +92,9 @@ const SocialMediaLinks = ({
               href={replace(
                 urlTemplate,
                 '{username}',
-                key === 'rss' ? '/feed.xml' : encodeURIComponent(String(username)),
+                key === 'rss'
+                  ? '/feed.xml'
+                  : encodeURIComponent(String(username)),
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -102,7 +104,7 @@ const SocialMediaLinks = ({
             >
               <IconComponent
                 size={iconSize}
-                className="transition-all duration-700 group-hover:scale-150 hover:text-[var(--sakuraPink)]"
+                className="text-hover-primary transition-all-700 group-hover:scale-150"
               />
             </Link>
           )

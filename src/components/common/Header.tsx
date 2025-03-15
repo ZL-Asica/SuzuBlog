@@ -43,17 +43,17 @@ const Header = ({ config }: HeaderProps) => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 z-50 w-full bg-[var(--background)] shadow-md transition-transform duration-300
+      className={`fixed top-0 left-0 z-50 w-full bg-background shadow-md transition-transform-300
         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
     >
       {/* Navigation Menu */}
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 bg-[var(--background)]">
+      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 bg-background">
         {/* Logo */}
         <Link
           href="/"
           aria-label={`Navigate to Home Page of ${siteTitle}`}
-          className="text-2xl font-bold text-[var(--foreground)] no-underline transition-all duration-300 hover:text-[var(--sakuraPink)]"
+          className="transition-all-300 text-hover-primary text-2xl font-bold text-foreground no-underline"
         >
           {isHomePage ? <h1>{siteTitle}</h1> : <p>{siteTitle}</p>}
         </Link>
@@ -61,7 +61,7 @@ const Header = ({ config }: HeaderProps) => {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--foreground)] text-2xl text-[var(--background)] shadow-md transition-transform duration-300 hover:scale-110 md:hidden"
+          className="transition-transform-300 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-foretext-foreground text-2xl bg-foreground text-background shadow-md hover:scale-110 md:hidden"
           onClick={toggleOpen}
           aria-label="Toggle menu"
           aria-expanded={isOpen ? 'true' : 'false'}
@@ -74,7 +74,7 @@ const Header = ({ config }: HeaderProps) => {
         <div
           id="mobile-menu"
           ref={menuReference}
-          className={`fixed right-0 top-0 z-50 h-screen w-1/2 bg-[var(--background)] shadow-lg transition-transform duration-300 ease-out md:hidden ${
+          className={`transition-all-300 fixed right-0 top-0 z-50 h-screen w-1/2 bg-background shadow-lg md:hidden ${
             isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
         >
@@ -89,7 +89,7 @@ const Header = ({ config }: HeaderProps) => {
         {/* Backdrop */}
         {isOpen && (
           <div
-            className="fixed inset-0 z-40 h-screen w-screen bg-black/70 transition-opacity duration-300"
+            className="fixed inset-0 z-40 h-screen w-screen bg-black/70 transition-opacity-300"
             onClick={(event_) => {
               event_.preventDefault()
               event_.stopPropagation()

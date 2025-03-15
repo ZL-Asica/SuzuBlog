@@ -30,14 +30,14 @@ const Pagination = ({
         {pageNumbers.map(number => (
           <li
             key={number}
-            className={currentPage === number ? 'font-bold' : ''}
+            className={currentPage === number ? 'font-extrabold' : 'font-medium'}
           >
             <button
               type="button"
               onClick={() => setCurrentPage(number)}
               className={`px-4 py-2
-                ${currentPage === number ? 'bg-[var(--sakuraPink)]' : 'bg-[var(--skyblue)]'}
-                text-lg rounded-4xl transition duration-300 ease-in-out hover:scale-110 hover:bg-[var(--sakuraPink)] dark:text-[var(--background)]`}
+                ${currentPage === number ? 'bg-primary-300' : 'bg-secondary-300'}
+                text-lg rounded-4xl transition-all-300 hover:scale-110 bg-hover-primary text-gray-light`}
             >
               {number}
             </button>

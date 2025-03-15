@@ -30,12 +30,12 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       return (
         <div className="group">
           <h2
-            className="text-foreground relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose transition-colors duration-300 hover:text-[var(--sakuraPink)]"
+            className="text-hover-primary transition-colors-300 relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose"
             id={slug}
           >
             {titleSlug(slug, 2)}
             {children}
-            <span className="absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-[var(--sakuraPink)] transition-all duration-300 ease-in-out group-hover:w-[35%]"></span>
+            <span className="transition-all-300 absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-primary-400  group-hover:w-[35%]"></span>
           </h2>
         </div>
       )
@@ -45,7 +45,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h3', headingLevels)
       return (
         <h3
-          className="text-foreground my-5 border-l-4 border-[var(--sakuraPink)] pl-2 text-2xl font-bold leading-relaxed transition-colors duration-300 hover:text-[var(--sakuraPink)]"
+          className="text-hover-primary transition-colors-300 my-5 border-l-4 border-primary-400 pl-2 text-2xl font-bold leading-relaxed"
           id={slug}
         >
           {titleSlug(slug, 3)}
@@ -58,7 +58,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h4', headingLevels)
       return (
         <h4
-          className="text-foreground my-4 border-l-4 border-[var(--skyblue)] pl-2 text-xl font-semibold leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
+          className="transition-colors-300 text-hover-primary my-4 border-l-4 border-secondary-300 pl-2 text-xl font-semibold leading-normal"
           id={slug}
         >
           {titleSlug(slug, 4)}
@@ -71,7 +71,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h5', headingLevels)
       return (
         <h5
-          className="text-foreground my-3 text-lg font-medium leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
+          className="text-hover-primary transition-colors-300 my-3 text-lg font-medium leading-normal"
           id={slug}
         >
           {titleSlug(slug, 5)}
@@ -84,7 +84,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h6', headingLevels)
       return (
         <h6
-          className="text-foreground my-2 text-base font-medium leading-normal transition-colors duration-300 hover:text-[var(--sakuraPink)]"
+          className="text-hover-primary transition-colors-300 my-2 text-base font-medium leading-normal"
           id={slug}
         >
           {titleSlug(slug, 6)}
@@ -95,27 +95,27 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // Text related
     p: ({ children }) => (
-      <p className="text-foreground my-6 text-base leading-relaxed">
+      <p className="my-6 text-base leading-relaxed">
         {children}
       </p>
     ),
     em: ({ children }) => (
-      <em className="italic text-[var(--skyblueDark)] ml-0.5 mr-1">
+      <em className="italic text-secondary-500 ml-0.5 mr-1">
         {children}
       </em>
     ),
     u: ({ children }) => (
-      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-2 decoration-[var(--sakuraPink)]">
+      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-2 text-primary-400">
         {children}
       </u>
     ),
     strong: ({ children }) => (
-      <strong className="font-extrabold text-[var(--sakuraPink)] mx-1">
+      <strong className="font-extrabold text-primary-400 mx-1">
         {children}
       </strong>
     ),
     del: ({ children }) => (
-      <del className="line-through text-[var(--gray)]">
+      <del className="line-through text-gray-dark">
         {children}
       </del>
     ),
@@ -123,18 +123,18 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     sub: ({ children }) => <sub className="text-xs align-sub">{children}</sub>,
     blockquote: ({ children }) => (
       <div className="my-3 flex justify-center">
-        <blockquote className="w-[95%] rounded-md border-l-4 border-[var(--sakuraPink)] bg-[var(--lightGray)] bg-opacity-75 py-0.5 pl-3 pr-2 italic shadow-sm transition-shadow duration-300 hover:shadow-md">
+        <blockquote className="w-[95%] rounded-md border-l-4 border-primary-300 bg-gray-light bg-opacity-75 py-0.5 pl-3 pr-2 italic shadow-sm transition-shadow duration-300 hover:shadow-md">
           {children}
         </blockquote>
       </div>
     ),
     details: ({ children }) => (
-      <details className="cursor-pointer rounded-lg border border-gray-300 bg-[var(--background)] p-3 open:bg-[var(--background)]">
+      <details className="cursor-pointer rounded-lg border border-gray-300 bg-background p-3 open:bg-background">
         {children}
       </details>
     ),
     summary: ({ children }) => (
-      <summary className="font-semibold text-[var(--sakuraPink)] cursor-pointer">
+      <summary className="font-semibold text-primary-400 cursor-pointer">
         {children}
       </summary>
     ),
@@ -146,21 +146,21 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // List related
     ul: ({ children }) => (
-      <div className="my-4 rounded-lg border-2 border-dashed border-[var(--sakuraPink)] p-3">
+      <div className="my-4 rounded-lg border-2 border-dashed border-primary-400 p-3">
         <ul className="ml-2 list-disc list-inside">
           {children}
         </ul>
       </div>
     ),
     ol: ({ children }) => (
-      <div className="my-4 rounded-lg border-2 border-dashed border-[var(--skyblue)] p-3">
+      <div className="my-4 rounded-lg border-2 border-dashed border-secondary-500 p-3">
         <ol className="ml-2 list-decimal list-inside">
           {children}
         </ol>
       </div>
     ),
     li: ({ children }) => (
-      <li className="text-foreground leading-relaxed marker:text-[var(--sakuraPinkDark)] marker:font-medium list-outside pl-1 ml-2">
+      <li className="leading-relaxed marker:text-primary-500 marker:font-medium list-outside pl-1 ml-2">
         {children}
       </li>
     ),
@@ -171,15 +171,15 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       return (
         <Link
           href={href}
-          target={isInternalLink ? undefined : '_blank'}
-          rel={isInternalLink ? undefined : 'noopener noreferrer'}
+          target={isInternalLink ? '_self' : '_blank'}
+          rel="noopener noreferrer"
           aria-label={
             isInternalLink
               ? undefined
               : `${translation.newTab}${children?.toString() ?? 'link'}`
           }
           prefetch={false}
-          className="mx-1 break-words font-semibold text-[var(--skyBlue)] underline decoration-dashed underline-offset-2 transition-colors duration-200 ease-in-out hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
+          className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary-500"
           {...(props as Record<string, unknown>)}
         >
           {children}
@@ -214,7 +214,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           )
         : (
             <code
-              className="inline-block rounded-lg bg-[var(--sakuraPink)]/20 mx-0.5 px-2 py-0.5 font-mono text-sm text-[var(--sakuraPinkDark)]"
+              className="inline-block rounded-lg bg-primary-400/20 mx-0.5 px-2 py-0.5 font-mono text-base font-bold text-primary-500"
               {...(props as Record<string, unknown>)}
             >
               {children}
@@ -243,15 +243,12 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           : 'CODE'
 
       return (
-        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-md shadow-slate-950 transition-shadow duration-300 ease-in-out hover:shadow-lg dark:shadow-slate-700">
+        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-sm shadow-slate-950 transition-all-300 hover:shadow-md dark:shadow-slate-700">
           {/* MacOS window buttons */}
           <div className="absolute left-3 top-2 flex space-x-2">
-            {/* Red button */}
-            <span className="h-3 w-3 rounded-full bg-red-500"></span>
-            {/* Yellow button */}
-            <span className="h-3 w-3 rounded-full bg-yellow-400"></span>
-            {/* Green button */}
-            <span className="h-3 w-3 rounded-full bg-green-500"></span>
+            <span className="h-3 w-3 rounded-full bg-red-500 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
+            <span className="h-3 w-3 rounded-full bg-yellow-400 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
+            <span className="h-3 w-3 rounded-full bg-green-500 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
           </div>
 
           {/* Language display */}
@@ -275,8 +272,8 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // Table related
     table: ({ children }) => (
-      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md">
-        <table className="w-full border-collapse bg-[var(--background)] text-left">
+      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md overflow-hidden">
+        <table className="w-full rounded-lg border text-left overflow-hidden">
           {children}
         </table>
       </div>
@@ -284,7 +281,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     th: ({ children, className }) => (
       <th
-        className={`border border-gray-400 bg-[var(--sakuraPink)]/90 px-4 py-3 font-semibold text-white ${className}`}
+        className={`border border-gray-400 bg-primary-400/90 px-4 py-3 font-semibold text-white ${className}`}
       >
         {children}
       </th>
@@ -292,14 +289,14 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     td: ({ children, className }) => (
       <td
-        className={`border border-gray-300 bg-[var(--lightGray)] px-4 py-3 font-medium ${className}`}
+        className={`border border-gray-300 bg-gray-light px-4 py-3 font-medium ${className}`}
       >
         {children}
       </td>
     ),
 
     tr: ({ children, className }) => (
-      <tr className={`${className} odd:bg-[var(--background)] even:bg-[var(--gray)] even:bg-opacity-75`}>
+      <tr className={`${className} odd:bg-background even:bg-gray-dark even:bg-opacity-75`}>
         {children}
       </tr>
     ),
@@ -307,7 +304,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     // Misc
     hr: () => (
       <div className="relative my-12 flex items-center justify-center group">
-        <hr className="h-0.5 w-2/5 bg-gradient-to-r from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
+        <hr className="transition-all-500 h-0.5 w-2/5 bg-gradient-to-r from-transparent via-primary-300 to-transparent group-hover:w-1/2 group-hover:opacity-90" />
 
         <div className="relative mx-4 h-8 w-8 flex items-center justify-center transition-transform duration-[3s] ease-in-out group-hover:rotate-[720deg]">
           <div className="absolute inset-0 flex items-center justify-center">
@@ -315,7 +312,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           </div>
         </div>
 
-        <hr className="h-0.5 w-2/5 bg-gradient-to-l from-transparent via-[var(--sakuraPink)] to-transparent transition-all duration-500 ease-in-out group-hover:w-1/2 group-hover:opacity-90" />
+        <hr className="transition-all-500 h-0.5 w-2/5 bg-gradient-to-l from-transparent via-primary-300 to-transparent group-hover:w-1/2 group-hover:opacity-90" />
       </div>
     ),
     br: () => (

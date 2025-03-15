@@ -21,7 +21,7 @@ const MarkdownContent = ({ post, translation }: MarkdownContentProps) => {
   )
 
   return (
-    <div className="mt-5">
+    <div className="post-content mt-5">
       <Markdown
         remarkPlugins={[remarkGfm, remarkMath, remarkGemoji]}
         rehypePlugins={[rehypeRaw, rehypeKatex]}
