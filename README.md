@@ -14,6 +14,8 @@
 [![Eslint][eslint-badge]][eslint-link]
 [![Prettier][prettier-badge]][prettier-link]
 
+- [**Demo**](https://www.zla.pub) 🚀
+  Check out the live demo of Suzu Blog.
 - [**Documentation**](https://suzu.zla.app) 📚
   Learn how to start, configure and customize your Suzu Blog with detailed instructions.
 

@@ -62,7 +62,7 @@ const AnimeCard = ({ sortedLists, lang, translation }: AnimeCardProps) => {
                     <div
                       className="absolute top-2 right-2 z-1 flex items-center bg-black/70 px-2 py-1 rounded-lg shadow-md"
                     >
-                      <MessageCircle className="text-[var(--sakuraPinkDark)] fill-current" size={20} />
+                      <MessageCircle className="text-primary-400 fill-current" size={20} />
                     </div>
                   )}
 
@@ -107,7 +107,7 @@ const AnimeCard = ({ sortedLists, lang, translation }: AnimeCardProps) => {
                   {/* Rating */}
                   <div
                     className={`absolute bottom-2 right-2 flex items-center bg-black/60 px-2 py-1 rounded-lg ${
-                      entry.score !== null && entry.score !== 0 ? 'text-[var(--sakuraPinkDark)]' : 'text-gray-400'
+                      entry.score !== null && entry.score !== 0 ? 'text-primary-400' : 'text-gray-400'
                     }`}
                   >
                     <p className="text-sm font-medium">{entry.score ?? 'N/A'}</p>

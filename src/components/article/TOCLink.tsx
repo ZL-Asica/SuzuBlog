@@ -16,18 +16,18 @@ const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) 
   return (
     <li
       key={item.slug}
-      className={`list-none py-1 text-base transition-all duration-200 ${
-        isActive ? 'font-bold text-[var(--sakuraPink)]' : 'text-[var(--gray)]'
+      className={`list-none py-1 text-base transition-all ${
+        isActive ? 'font-bold text-primary-300' : 'text-gray-dark'
       } `}
-      style={{ marginLeft: `${(item.level - 2) * 0.8}em` }}
+      style={{ marginLeft: `${(item.level - 2) * 0.7}em` }}
     >
       <a
         href={`#${item.slug}`}
-        onClick={(event) => {
-          event.preventDefault()
+        onClick={(event_) => {
+          event_.preventDefault()
           handleLinkClick(item.slug)
         }}
-        className="block break-words no-underline transition-all duration-200 hover:text-[var(--sakuraPink)]"
+        className="block break-words no-underline transition-all text-hover-primary"
       >
         {`${titleSlug}${item.title}`}
       </a>

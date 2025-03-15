@@ -25,10 +25,10 @@ const Footer = ({ config }: FooterProps) => {
     <footer className="mb-1 mt-10 w-full">
       <div className="mx-auto max-w-7xl px-4 py-4 text-center">
         {!isHomePage && <SocialMediaLink socialMedia={config.socialMedia} />}
-        <p className="text-[var(--gray)]">
+        <p className="text-gray-dark">
           {`© ${getYearDisplay(config.startYear, currentYear)}${currentYear} ${config.title}`}
         </p>
-        <p className="text-base text-[var(--gray)]">
+        <p className="text-base text-gray-dark">
           Theme
           {' '}
           <Link
@@ -36,7 +36,7 @@ const Footer = ({ config }: FooterProps) => {
             target="_blank"
             aria-label="Suzu's Documentation (new tab)"
             rel="noopener noreferrer"
-            className="underline decoration-dashed underline-offset-2 transition-all duration-200 ease-in-out hover:font-bold hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
+            className="text-hover-primary underline-interactive"
           >
             Suzu
           </Link>
@@ -48,7 +48,7 @@ const Footer = ({ config }: FooterProps) => {
             target="_blank"
             aria-label="ZL Asica's blog (new tab)"
             rel="noopener noreferrer"
-            className="underline decoration-dashed underline-offset-2 transition-all duration-200 ease-in-out hover:font-bold hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted"
+            className="text-hover-primary underline-interactive"
           >
             ZL Asica
           </Link>

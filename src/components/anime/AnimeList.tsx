@@ -1,6 +1,5 @@
 import type { AnimeResponse } from '@/schemas/anime'
 import TOC from '@/components/article/TOC'
-import Link from 'next/link'
 import AnimeCard from './AnimeCard'
 
 interface AnimeListProps {
@@ -29,16 +28,15 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
       <div className="container mx-auto animate-fadeInDown p-6 pb-2 mt-5">
         <h1 className="text-4xl font-bold">{translation.anime.title}</h1>
         <p className="text-gray-400 mt-2">{`${author}${translation.anime.description}`}</p>
-        <Link
+        <a
           href={`https://anilist.co/user/${userName}`}
           target="_blank"
           rel="noreferrer noopener"
-          className="text-gray-400 mt-2 underline decoration-dashed underline-offset-2 hover:text-[var(--sakuraPink)] hover:decoration-dotted"
-          prefetch={false}
+          className="text-gray-400 mt-2 underline-interactive hover:text-primary-300"
         >
           {translation.anime.source}
           AniList
-        </Link>
+        </a>
 
         <AnimeCard sortedLists={sortedLists} lang={lang} translation={translation} />
 
