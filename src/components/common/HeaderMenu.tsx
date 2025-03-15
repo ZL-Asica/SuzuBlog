@@ -1,10 +1,11 @@
 'use client'
 
 import type { ReactElement } from 'react'
+import { useTheme } from '@zl-asica/react'
 import { House, Info, Moon, Newspaper, Sun, TrainFront, TvMinimalPlay, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 
 interface MenuItem {
   href: string
@@ -23,6 +24,7 @@ interface HeaderMenuProps {
 const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMenuProps) => {
   const translation = config.translation
   const currentPath = usePathname()
+  const { isDarkTheme, toggleTheme } = useTheme('suzu-theme-color', 7)
 
   const menuItems: MenuItem[] = [
     { href: '/', label: translation.home.title, icon: <House /> },
@@ -33,30 +35,6 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
 
   if (config.anilist_username !== undefined && config.anilist_username !== null && config.anilist_username.length > 1) {
     menuItems[3].children = [{ href: '/about/anime', label: translation.anime.title, icon: <TvMinimalPlay /> }]
-  }
-
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
-
-  useEffect(() => {
-    const themeColor = localStorage.getItem('suzu-color-theme') ?? null
-    const systemPrefersDark = globalThis.matchMedia('(prefers-color-scheme: dark)').matches
-
-    if (themeColor !== null) {
-      setIsDarkTheme(themeColor === 'dark')
-      document.documentElement.classList.toggle('dark', themeColor === 'dark')
-    }
-    else {
-      setIsDarkTheme(systemPrefersDark)
-      document.documentElement.classList.toggle('dark', systemPrefersDark)
-    }
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = isDarkTheme ? 'light' : 'dark'
-
-    setIsDarkTheme(newTheme === 'dark')
-    document.documentElement.classList.toggle('dark', newTheme === 'dark')
-    localStorage.setItem('suzu-color-theme', newTheme)
   }
 
   return (
@@ -161,9 +139,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
           aria-label={translation.aria.theme}
           onClick={() => {
             toggleTheme()
-            if (onClickHandler) {
-              onClickHandler()
-            }
+            onClickHandler && onClickHandler()
           }}
         >
           <span className="flex h-6 w-6 items-center justify-center text-gray-600 transition-transform duration-300 ease-in-out hover:text-[var(--sakuraPink)] group-hover:scale-125 dark:text-gray-300 dark:hover:text-[var(--sakuraPink)]">
