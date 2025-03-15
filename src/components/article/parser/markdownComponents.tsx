@@ -1,12 +1,8 @@
 import type { ReactNode } from 'react'
 import type { Components as MarkdownComponents } from 'react-markdown'
-
 import { CustomImage, SakuraIcon } from '@/components/ui'
 import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
-
-import Link from 'next/link'
 import { isValidElement } from 'react'
-
 import { KEY_ICONS } from './keyboardIcons'
 import CodeBlock from './renderCodeBlock'
 import renderFriendLinks from './renderFriendLinks'
@@ -143,6 +139,26 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         {children}
       </mark>
     ),
+    // Checkbox related [x] or [ ]
+    input: ({ children, ...props }) => (
+      <label className="relative inline-flex items-center text-center">
+        <input
+          type="checkbox"
+          className="peer form-tick appearance-none h-4 w-4 border border-gray-300 rounded-md checked:bg-primary-400 checked:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50"
+          {...props}
+        />
+        <span className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 peer-checked:opacity-100">
+          <svg
+            className="h-4 w-4 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </span>
+      </label>
+    ),
 
     // List related
     ul: ({ children }) => (
@@ -169,7 +185,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     a: ({ href = '#', children, ...props }: { href?: string, children?: ReactNode }) => {
       const isInternalLink = typeof href === 'string' && (href.startsWith('/') || href.startsWith('#'))
       return (
-        <Link
+        <a
           href={href}
           target={isInternalLink ? '_self' : '_blank'}
           rel="noopener noreferrer"
@@ -178,12 +194,11 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
               ? undefined
               : `${translation.newTab}${children?.toString() ?? 'link'}`
           }
-          prefetch={false}
           className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary-500"
           {...(props as Record<string, unknown>)}
         >
           {children}
-        </Link>
+        </a>
       )
     },
 
@@ -195,7 +210,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         width={500}
         height={700}
         priority={false}
-        className="relative mx-auto my-6 h-auto max-h-[500px] min-h-[200px] w-auto min-w-[200px] max-w-full rounded-xs object-contain shadow-md lg:max-h-[700px] lg:min-h-[300px] lg:min-w-[300px] xl:max-h-[800px] xl:min-h-[400px] xl:min-w-[400px]"
+        className="relative mx-auto my-6 h-auto max-h-[500px] w-auto min-w-[200px] max-w-full rounded-xs object-contain shadow-md lg:max-h-[700px] lg:min-w-[300px] xl:max-h-[800px] xl:min-w-[400px]"
         {...(props as Record<string, unknown>)}
       />
     ),

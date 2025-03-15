@@ -72,14 +72,17 @@ export default function RootLayout(
       <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
 
       {/* If rss set in config */}
-      {config.socialMedia.rss && (
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="RSS Feed"
-          href={`${config.siteUrl}/feed.xml`}
-        />
-      )}
+      {config.socialMedia.rss !== undefined
+        && config.socialMedia.rss !== null
+        && String(config.socialMedia.rss) !== 'false'
+        && (
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS Feed"
+            href={`${config.siteUrl}/feed.xml`}
+          />
+        )}
       {/* Custom js */}
       {config.headerJavascript.map(jsFile => (
         <Script key={jsFile} src={jsFile} strategy="afterInteractive" />
