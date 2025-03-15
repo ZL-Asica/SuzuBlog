@@ -123,8 +123,8 @@ showThumbnail: false
 },
 {
 "title": "Canmi",
-"link": "https://xyy.canmi.xyz/",
-"img": "https://xyy.canmi.xyz/img/Canmi.webp",
+"link": "https://arc.canmi.icu/",
+"img": "https://arc.canmi.icu/img/Canmi.webp",
 "des": "彩笔猫猫"
 },
 {

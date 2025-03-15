@@ -4,7 +4,7 @@
 title: ZLA 小站 # The name of your blog, used in titles and meta tags.
 subTitle: ZL Asica 的个人小站 # A short description that appears after the main title.
 description: ZL Asica 的个人小站，发布个人技术和生活内容。走过路过都进来看看哦 ( ง⁼̴̀ω⁼̴ )ง⁼³₌₃ ～～～ # A longer description for SEO and meta tags.
-keywords: 'markdown blog, blog, sakura, ZL Asica, ZL Asica, ZLA, 嫒希卡' # Comma-separated keywords for SEO purposes.
+keywords: 'blog, 技术, ZL Asica, ZLA, 嫒希卡' # Comma-separated keywords for SEO purposes.
 author:
   name: ZL Asica # Your name, displayed as the author of the blog.
   link: 'https://www.zla.pub' # Link to your personal website or blog.
@@ -78,7 +78,7 @@ socialMedia:
 twikooEnvId: https://vercel.twikoo.zla.app
 # Your Disqus shortname (used for integrating Disqus comments).
 # Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
-disqusShortname: zla-pub
+disqusShortname:
 
 # ######################
 # CUSTOM CODE BLOCKS
@@ -89,4 +89,4 @@ headerJavascript:
   - https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js
 # Add custom HTML code to be included inside the <footer> section of your site.
 slotFooter: |
-  <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-2 transition-all duration-200 ease-in-out hover:font-bold hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted" aria-label="鲁ICP备19057855号-4备案信息">鲁ICP备19057855号-4</a> <span> | </span> <a href="https://icp.gov.moe/?keyword=20247775" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-2 transition-all duration-200 ease-in-out hover:font-bold hover:text-[var(--sakuraPink)] hover:underline hover:decoration-dotted" aria-label="萌ICP备20247775号备案信息">萌ICP备20247775号</a>
+  <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="text-hover-primary underline-interactive" aria-label="鲁ICP备19057855号-4 备案信息">鲁ICP备19057855号-4</a> <span> | </span> <a href="https://icp.gov.moe/?keyword=20247775" target="_blank" rel="noopener noreferrer" class="text-hover-primary underline-interactive" aria-label="萌ICP备20247775号 备案信息">萌ICP备20247775号</a>
