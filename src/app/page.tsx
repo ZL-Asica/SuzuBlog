@@ -39,7 +39,7 @@ async function Home() {
               alt="Avatar"
               width={180}
               height={180}
-              className="rounded-full border-4 border-primary-300 shadow-lg"
+              className="rounded-full border-4 border-primary-300 shadow-lg dark:border-primary-200"
               priority
             />
           </div>
