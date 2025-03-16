@@ -2,71 +2,30 @@
 
 [English](./README.md) | [中文](./README_ZH.md) | [日本語](./README_JA.md)
 
-> **Suzu** - "鈴" in Japanese, meaning "bell" - is a minimalist blog template built with **Next.js** and pure **Markdown**.
+> **Suzu** (鈴) means "bell" in Japanese — a minimalist **Next.js + Markdown** blog template.
 
-[![GitHub License][license-badge]][license-link]
-[![Latest Release][release-badge]][release-link]
-[![Node.js][node-badge]][node-link]
-[![pnpm Version][pnpm-badge]][pnpm-link] |
-[![Next.js][nextjs-badge]][nextjs-link]
-[![Tailwind CSS][tailwind-badge]][tailwind-link] |
-[![Vercel][vercel-badge]][vercel-link]
-[![Eslint][eslint-badge]][eslint-link]
-[![Prettier][prettier-badge]][prettier-link]
+🚀 **[Live Demo](https://www.zla.pub)** | 📚 **[Documentation](https://suzu.zla.app)**
 
-- [**Demo**](https://www.zla.pub) 🚀
-  Check out the live demo of Suzu Blog.
-- [**Documentation**](https://suzu.zla.app) 📚
-  Learn how to start, configure and customize your Suzu Blog with detailed instructions.
+[![GitHub License][license-badge]][license-link] [![Latest Release][release-badge]][release-link]
+
+[![Node.js][node-badge]][node-link] [![pnpm Version][pnpm-badge]][pnpm-link] | [![Next.js][nextjs-badge]][nextjs-link] [![Tailwind CSS][tailwind-badge]][tailwind-link] | [![Vercel][vercel-badge]][vercel-link] [![Eslint][eslint-badge]][eslint-link] [![Prettier][prettier-badge]][prettier-link]
 
 ## ✨ Features
 
-- **Next.js**: A modern web framework supporting both server-side rendering (SSR) and static site generation (SSG).
-- **Lightning Fast**: Ultra-high performance with a sleek and minimal design.
-- **Markdown Support**: Simplify your writing experience with features like:
-  - **Code Highlighting**: Includes language tags and one-click copy functionality.
-  - **LaTeX**: Beautiful formula rendering.
-  - **Optimized Images**: Efficient image loading powered by Next.js.
-  - **Link Preloading**: Improves navigation speed and user experience.
-- **SEO Optimized**: Automatically generates sitemap.xml, robots.txt, manifest.json, Open Graph, Twitter Cards, and more.
-- **Multi-Language Support**: Built-in support for English, Chinese, Japanese, etc., automatically configured via `config.yml`.
-- **Anime List Feature**: Fetching and displaying anime information from AniList API.
-- **Adaptive Light/Dark Themes**: Provides a seamless dark mode experience based on system preferences.
-- **RSS Feed**: Automatically generated RSS feed for your blog.
-- **Accessibility (A11Y) Enhanced**:
-  - Semantic HTML and ARIA-compliant components.
-  - Alt attributes for all images and icons.
-  - WCAG-compliant color contrast for optimal readability.
+- **🚀 Next.js Powered** – Supports ISR & SSG for lightning-fast performance.
+- **📄 Markdown Support** – Code highlighting with copy button, LaTeX rendering, optimized images, and elegant styling.
+- **🔍 SEO Ready** – Auto-generates sitemap, Open Graph, Twitter Cards, and more.
+- **🌍 Multi-Language** – Supports English, Chinese, Japanese, and more via `config.yml`.
+- **📺 Anime List** – Fetch & display anime info from AniList API.
+- **🌓 Dark Mode** – Adapts to system preferences seamlessly.
+- **📢 RSS Feed** – Auto-generated RSS for easy content distribution.
+- **♿ Accessibility First** – Semantic HTML, ARIA support, WCAG-compliant colors.
 
-## 🚀 Get Started
+## **🚀 Get Started**
 
-### 1. Use the Template
+For setup, configuration, Markdown syntax, and deployment guides, follow the documentation:
 
-Click the `Use this template` button to create your own blog repository.
-
-### 2. Configure Site Information
-
-Edit `config.yml` to set your site name, description, author details, and more.
-
-### 3. Write Your Posts
-
-- Place Markdown posts in the `posts` folder, where the filename becomes the post URL.
-- Edit files in the `posts/_pages` directory to update your "About" or "Friends" pages.
-
-### 4. Deploy
-
-- **Cloud Hosting (Recommended)**: Use [Vercel](https://vercel.com). Import your project, and it will be automatically deployed.
-- **Local Deployment/Preview**: Install `Node.js`, then run:
-
-  ```bash
-  pnpm install
-  pnpm dev
-  ```
-
-### 5. Keep Your Blog Updated
-
-By default, GitHub Actions sync the latest updates from the Suzu Blog template to your repository weekly.
-Ignored directories during sync include `.github`, `public`, `posts`, and `config.yml`.
+📖 **[Suzu Blog Docs](https://suzu.zla.app)**
 
 ## 🏗️ Project Structure
 
@@ -89,18 +48,18 @@ Ignored directories during sync include `.github`, `public`, `posts`, and `confi
 
 ## ❤️ About Suzu
 
-After years of frustration with the maintenance, security risks, and performance issues of WordPress, I decided to create Suzu Blog using **Next.js**. It is simple, efficient, and highly customizable, designed for anyone looking to build a modern blog quickly.
+After years of frustration with the maintenance, security risks, and performance issues of other frameworks, I decided to create Suzu Blog using **Next.js**. It is simple, efficient, and highly customizable, designed for anyone looking to build a modern blog quickly.
 
 ## 🔗 Community Support
 
-**Contribute**: Contributions are welcome! Please refer to the [Contribution Guide](https://github.com/ZL-Asica/SuzuBlog/blob/main/CONTRIBUTING.md).
+**Contribute**: Contributions are welcome! Please refer to the [Contribution Guide](./CONTRIBUTING.md).
 
 <!-- Badges / Links -->
 
 [eslint-badge]: https://img.shields.io/badge/eslint-4B32C3?logo=eslint&logoColor=white
 [eslint-link]: https://www.npmjs.com/package/eslint-config-zl-asica
 [license-badge]: https://img.shields.io/github/license/ZL-Asica/SuzuBlog
-[license-link]: https://github.com/ZL-Asica/SuzuBlog/blob/main/LICENSE
+[license-link]: ./LICENSE
 [nextjs-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [nextjs-link]: https://nextjs.org
 [node-badge]: https://img.shields.io/badge/node%3E=18.18-339933?logo=node.js&logoColor=white
@@ -110,7 +69,7 @@ After years of frustration with the maintenance, security risks, and performance
 [prettier-badge]: https://img.shields.io/badge/Prettier-F7B93E?logo=Prettier&logoColor=white
 [prettier-link]: https://www.npmjs.com/package/@zl-asica/prettier-config
 [release-badge]: https://img.shields.io/github/v/release/ZL-Asica/SuzuBlog?display_name=release&label=SuzuBlog&color=fc8da3
-[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases
+[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases/
 [tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white

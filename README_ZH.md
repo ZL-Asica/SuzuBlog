@@ -2,72 +2,30 @@
 
 [English](./README.md) | [中文](./README_ZH.md) | [日本語](./README_JA.md)
 
-> **Suzu** - 日语中的鈴 “铃铛” - 是一个基于 **Next.js** 和纯 **Markdown** 的极简博客模板。
+> **Suzu**（日语中的 “铃”）代表着清脆的铃声，SuzuBlog 是一款基于 **Next.js + Markdown** 的极简博客模板，轻量、美观、快速。
 
-[![GitHub License][license-badge]][license-link]
-[![Node.js][node-badge]][node-link]
-[![Latest Release][release-badge]][release-link]
-[![pnpm Version][pnpm-badge]][pnpm-link] |
-[![Next.js][nextjs-badge]][nextjs-link]
-[![Tailwind CSS][tailwind-badge]][tailwind-link] |
-[![Vercel][vercel-badge]][vercel-link]
-[![Eslint][eslint-badge]][eslint-link]
-[![Prettier][prettier-badge]][prettier-link]
+🚀 **[在线演示](https://www.zla.pub)** | 📚 **[使用文档](https://suzu.zla.app)**
 
-- [**演示**](https://www.zla.pub) 🚀
-  查看 Suzu Blog 的实时演示。
-- [**文档**](https://suzu.zla.app) 📚
-  学习如何使用详细说明开始、配置和自定义 Suzu Blog。
+[![GitHub License][license-badge]][license-link] [![Latest Release][release-badge]][release-link]
 
-## ✨ 特性
+[![Node.js][node-badge]][node-link] [![pnpm Version][pnpm-badge]][pnpm-link] | [![Next.js][nextjs-badge]][nextjs-link] [![Tailwind CSS][tailwind-badge]][tailwind-link] | [![Vercel][vercel-badge]][vercel-link] [![Eslint][eslint-badge]][eslint-link] [![Prettier][prettier-badge]][prettier-link]
 
-- **Next.js**：现代 Web 框架，支持服务端渲染（SSR）和静态站点生成（SSG）。
-- **极速**：超高性能，简洁高效的体验。
-- **Markdown 支持**：便捷撰写文章，提供以下特性：
-  - **代码高亮**：支持语言标注与一键复制。
-  - **LaTeX**：公式渲染。
-  - **图片优化**：通过 Next.js 高效加载。
-  - **链接预加载**：提升用户体验。
-- **SEO 优化**：自动生成 sitemap.xml、robots.txt、manifest.json、Open Graph、Twitter Card 等。
-- **多语言支持**：内置中文、英文、日语等，根据 `config.yml` 中的语言配置自动切换。
-- **动漫列表功能**：从 AniList API 获取并展示动漫信息。
-- **自适应亮暗色主题**：支持深色模式，用户体验更优。
-- **RSS 订阅**：自动生成博客 RSS 订阅。
-- **无障碍（A11Y）优化**：提供语义化的 HTML 和符合 ARIA 标准的组件。
-  - 提供语义化的 HTML 和符合 ARIA 标准的组件。
-  - 图片和图标添加 alt 属性。
-  - 符合 WCAG 对比度要求的颜色搭配。
+## ✨ 主要特性
+
+- **🚀 基于 Next.js** – 支持 ISR & SSG，提供极速加载体验。
+- **📄 强大 Markdown 支持** – 代码高亮（带一键复制）、LaTeX 数学公式、美观排版、优化图片加载。
+- **🔍 SEO 友好** – 自动生成站点地图、Open Graph、Twitter Cards 等。
+- **🌍 多语言支持** – 通过 `config.yml` 轻松配置中、英、日等多种语言。
+- **📺 动漫列表功能** – 从 AniList API 获取并展示动漫信息。
+- **🌓 深色模式** – 自动适配系统主题，无缝切换。
+- **📢 RSS 订阅** – 自动生成 RSS，方便订阅和分发内容。
+- **♿ 无障碍优化** – 语义化 HTML、ARIA 支持、符合 WCAG 规范的色彩设计。
 
 ## 🚀 快速上手
 
-### 1. 使用模板
+Suzu Blog 的安装、配置、Markdown 语法、部署等详细教程，请参考：
 
-点击 `Use this template` 按钮，创建你的博客仓库。
-
-### 2. 配置站点信息
-
-在 `config.yml` 中设置你的站点名称、描述、作者信息等。
-
-### 3. 撰写文章
-
-- 将 Markdown 格式的文章放入 `posts` 文件夹，文件名即为文章的 URL。
-- 修改 `posts/_pages` 目录下的文件以更新“关于”页面或“友情链接”。
-
-### 4. 部署
-
-- **云端托管（推荐）**：推荐使用 [Vercel](https://vercel.com)。导入项目后，自动完成部署。
-- **本地部署/预览**：需要安装 `Node.js`，运行以下命令：
-
-  ```bash
-  pnpm install
-  pnpm dev
-  ```
-
-### 5. 自动同步
-
-默认通过 GitHub Actions，每周自动同步模板的最新更新到你的仓库。
-
-同步时忽略的目录：`.github`、`public`、`posts`、`config.yml`。
+📖 **[Suzu Blog 官方文档](https://suzu.zla.app)**
 
 ## 🏗️ 项目结构
 
@@ -88,9 +46,9 @@
 └── pnpm-lock.yaml            # pnpm 依赖锁定
 ```
 
-## ❤️ 关于
+## ❤️ 关于 Suzu
 
-受够了 WordPress 的维护成本、安全隐患、性能问题后，我决定用 **Next.js** 打造这个博客模板。它简洁、高效、可定制，适合任何想快速搭建现代化博客的人。
+在多年使用各种博客框架的过程中，我深受 **维护成本高、安全隐患多、性能不稳定** 等问题的困扰。最终，我决定基于 **Next.js** 打造 Suzu Blog —— 一个 **简洁、高效、可高度自定义** 的博客模板，帮助任何人快速搭建现代化博客。
 
 ## 🔗 社区支持
 
@@ -101,7 +59,7 @@
 [eslint-badge]: https://img.shields.io/badge/eslint-4B32C3?logo=eslint&logoColor=white
 [eslint-link]: https://www.npmjs.com/package/eslint-config-zl-asica
 [license-badge]: https://img.shields.io/github/license/ZL-Asica/SuzuBlog
-[license-link]: https://github.com/ZL-Asica/SuzuBlog/blob/main/LICENSE
+[license-link]: ./LICENSE
 [nextjs-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [nextjs-link]: https://nextjs.org
 [node-badge]: https://img.shields.io/badge/node%3E=18.18-339933?logo=node.js&logoColor=white
@@ -111,8 +69,8 @@
 [prettier-badge]: https://img.shields.io/badge/Prettier-F7B93E?logo=Prettier&logoColor=white
 [prettier-link]: https://www.npmjs.com/package/@zl-asica/prettier-config
 [release-badge]: https://img.shields.io/github/v/release/ZL-Asica/SuzuBlog?display_name=release&label=SuzuBlog&color=fc8da3
-[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases
-[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white
+[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases/
+[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
 [vercel-link]: https://vercel.com
