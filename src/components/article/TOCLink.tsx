@@ -17,7 +17,7 @@ const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) 
     <li
       key={item.slug}
       className={`list-none py-1 text-base transition-all ${
-        isActive ? 'font-bold text-primary-300' : 'text-gray-dark'
+        isActive ? 'font-bold text-primary' : 'text-gray-dark'
       } `}
       style={{ marginLeft: `${(item.level - 2) * 0.7}em` }}
     >

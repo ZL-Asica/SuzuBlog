@@ -2,71 +2,30 @@
 
 [English](./README.md) | [中文](./README_ZH.md) | [日本語](./README_JA.md)
 
-> **Suzu** - 日本語の「鈴（すず）」を意味し、**Next.js** と純粋な **Markdown** を基盤としたミニマリストブログテンプレートです。
+> **Suzu（鈴）** は日本語で「鈴（すず）」を意味し、心地よい響きを持つ名前です。SuzuBlog は **Next.js + Markdown** によるシンプルで美しいブログテンプレートです。
 
-[![GitHub License][license-badge]][license-link]
-[![Latest Release][release-badge]][release-link]
-[![Node.js][node-badge]][node-link]
-[![pnpm Version][pnpm-badge]][pnpm-link] |
-[![Next.js][nextjs-badge]][nextjs-link]
-[![Tailwind CSS][tailwind-badge]][tailwind-link] |
-[![Vercel][vercel-badge]][vercel-link]
-[![Eslint][eslint-badge]][eslint-link]
-[![Prettier][prettier-badge]][prettier-link]
+🚀 **[デモサイト](https://www.zla.pub)** | 📚 **[ドキュメント](https://suzu.zla.app)**
 
-- [**デモ**](https://www.zla.pub) 🚀
-  Suzu Blog のライブデモをチェック。
-- [**ドキュメント**](https://suzu.zla.app) 📚
-  Suzu Blog の開始、設定、カスタマイズ方法を詳細に説明。
+[![GitHub License][license-badge]][license-link] [![Latest Release][release-badge]][release-link]
 
-## ✨ 特徴
+[![Node.js][node-badge]][node-link] [![pnpm Version][pnpm-badge]][pnpm-link] | [![Next.js][nextjs-badge]][nextjs-link] [![Tailwind CSS][tailwind-badge]][tailwind-link] | [![Vercel][vercel-badge]][vercel-link] [![Eslint][eslint-badge]][eslint-link] [![Prettier][prettier-badge]][prettier-link]
 
-- **Next.js**: モダンな Web フレームワークで、サーバーサイドレンダリング（SSR）と静的サイト生成（SSG）をサポート。
-- **超高速**: 洗練されたデザインで、高パフォーマンスを実現。
-- **Markdown 対応**: 記事作成がシンプルで、以下の機能を提供：
-  - **コードハイライト**: 言語タグやワンクリックコピー機能をサポート。
-  - **LaTeX**: 美しい数式レンダリング。
-  - **画像最適化**: Next.js による効率的な画像読み込み。
-  - **リンク事前読み込み**: スムーズなナビゲーションを実現。
-- **SEO 最適化**: sitemap.xml、robots.txt、manifest.json、Open Graph、Twitter Cards などを自動生成。
-- **多言語サポート**: 英語、中国語、日本語などに対応。`config.yml` の設定に基づいて自動切替。
-- **アニメリスト機能**: AniList API からアニメ情報を取得・表示。
-- **ライト/ダークテーマ対応**: システム設定に基づき、自動的にダークモードを適用。
-- **RSS フィード**: ブログ用の RSS フィードを自動生成。
-- **アクセシビリティ（A11Y）対応**:
-  - セマンティック HTML や ARIA 準拠のコンポーネントを提供。
-  - すべての画像とアイコンに alt 属性を追加。
-  - WCAG 基準に準拠した色彩コントラストで可読性を向上。
+## ✨ 特長
+
+- **🚀 Next.js ベース** – ISR & SSG 対応で超高速パフォーマンスを実現。
+- **📄 Markdown 完全対応** – コードハイライト（ワンクリックコピー）、LaTeX 数式、洗練されたデザイン、画像最適化。
+- **🔍 SEO 最適化** – サイトマップ、Open Graph、Twitter Cards などを自動生成。
+- **🌍 多言語対応** – `config.yml` で英語・中国語・日本語など簡単に設定可能。
+- **📺 アニメリスト機能** – AniList API からアニメ情報を取得＆表示。
+- **🌓 ダークモード** – システム設定に応じて自動でテーマを切り替え。
+- **📢 RSS フィード** – 自動生成される RSS でブログの更新を簡単に配信。
+- **♿ アクセシビリティ対応** – セマンティック HTML、ARIA サポート、WCAG 基準のカラーデザイン。
 
 ## 🚀 はじめに
 
-### 1. テンプレートを使用
+Suzu Blog のセットアップ、設定、Markdown の書き方、デプロイ方法などについては、公式ドキュメントをご覧ください。
 
-`Use this template` ボタンをクリックして、独自のブログリポジトリを作成。
-
-### 2. サイト情報を設定
-
-`config.yml` を編集し、サイト名、説明、著者情報などを設定。
-
-### 3. 記事を書く
-
-- Markdown 形式の記事を `posts` フォルダに配置します。ファイル名が URL になります。
-- `posts/_pages` ディレクトリ内のファイルを編集して、「About」や「Friends」ページを更新。
-
-### 4. デプロイ
-
-- **クラウドホスティング（推奨）**: [Vercel](https://vercel.com) を使用します。プロジェクトをインポートするだけで自動デプロイが完了。
-- **ローカルデプロイ/プレビュー**: `Node.js` をインストールして、以下のコマンドを実行：
-
-  ```bash
-  pnpm install
-  pnpm dev
-  ```
-
-### 5. テンプレート更新を同期
-
-デフォルトで GitHub Actions を使用して、Suzu Blog テンプレートの最新更新を毎週自動でリポジトリに同期。
-同期時に `.github`、`public`、`posts`、`config.yml` は無視されます。
+📖 **[Suzu Blog ドキュメント](https://suzu.zla.app)**
 
 ## 🏗️ プロジェクト構造
 
@@ -89,18 +48,18 @@
 
 ## ❤️ Suzu について
 
-WordPress のメンテナンスコスト、安全性、性能問題に悩まされてきた結果、**Next.js** を使用して Suzu Blog を作成しました。このテンプレートはシンプルで効率的、かつカスタマイズ性が高く、現代的なブログを迅速に構築したい人に最適です。
+長年にわたり、さまざまなブログフレームワークを試してきましたが、**保守の手間・セキュリティリスク・パフォーマンス問題** に悩まされてきました。そこで、私は **Next.js** を用いて **シンプル・高効率・カスタマイズ性抜群** の Suzu Blog を開発しました。モダンなブログを素早く構築したいすべての人のためのテンプレートです。
 
 ## 🔗 コミュニティサポート
 
-**貢献**: 貢献を歓迎します！詳しくは [Contribution Guide](https://github.com/ZL-Asica/SuzuBlog/blob/main/CONTRIBUTING.md) を参照してください。
+**貢献**: 貢献を歓迎します！詳しくは [Contribution Guide](./CONTRIBUTING.md) を参照してください。
 
 <!-- Badges / Links -->
 
 [eslint-badge]: https://img.shields.io/badge/eslint-4B32C3?logo=eslint&logoColor=white
 [eslint-link]: https://www.npmjs.com/package/eslint-config-zl-asica
 [license-badge]: https://img.shields.io/github/license/ZL-Asica/SuzuBlog
-[license-link]: https://github.com/ZL-Asica/SuzuBlog/blob/main/LICENSE
+[license-link]: ./LICENSE
 [nextjs-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [nextjs-link]: https://nextjs.org
 [node-badge]: https://img.shields.io/badge/node%3E=18.18-339933?logo=node.js&logoColor=white
@@ -110,8 +69,8 @@ WordPress のメンテナンスコスト、安全性、性能問題に悩まさ�
 [prettier-badge]: https://img.shields.io/badge/Prettier-F7B93E?logo=Prettier&logoColor=white
 [prettier-link]: https://www.npmjs.com/package/@zl-asica/prettier-config
 [release-badge]: https://img.shields.io/github/v/release/ZL-Asica/SuzuBlog?display_name=release&label=SuzuBlog&color=fc8da3
-[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases
-[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white
+[release-link]: https://github.com/ZL-Asica/SuzuBlog/releases/
+[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
 [vercel-link]: https://vercel.com

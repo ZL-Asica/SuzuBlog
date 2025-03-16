@@ -49,8 +49,8 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
             <Link
               href={item.href}
               title={item.label}
-              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all-300 group-hover:text-primary-300
-                ${item.href !== '/' && currentPath.startsWith(item.href) ? 'text-primary-300' : ''}
+              className={`relative flex w-full items-center gap-4 px-4 py-3 text-lg font-medium no-underline transition-all-300 group-hover:text-primary
+                ${item.href !== '/' && currentPath.startsWith(item.href) ? 'text-primary' : ''}
                 `}
               onClick={onClickHandler}
               aria-label={`${translation.navigate} ${item.label}`}
@@ -66,8 +66,8 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
               <ul className="absolute left-0 top-full hidden w-36 shadow-lg rounded-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-hover:block transition-all-300">
                 {item.children.map((subItem, index) => (
                   <Fragment key={subItem.href}>
-                    <li className={`p-2 rounded-md bg-background transition-colors duration-300 hover:text-primary-300 dark:bg-background
-                    ${currentPath.startsWith(subItem.href) ? 'text-primary-300' : ''}
+                    <li className={`p-2 rounded-md bg-background transition-colors duration-300 hover:text-primary dark:bg-background
+                    ${currentPath.startsWith(subItem.href) ? 'text-primary' : ''}
                       `}
                     >
                       <Link href={subItem.href} className="flex items-center justify-center px-4 py-2 text-base">
@@ -97,7 +97,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
                     title={subItem.label}
                     onClick={onClickHandler}
                     className={`flex items-center gap-2 py-2 text-base text-hover-primary
-                      ${currentPath.startsWith(subItem.href) ? 'text-primary-300' : ''}
+                      ${currentPath.startsWith(subItem.href) ? 'text-primary' : ''}
                       `}
                   >
                     {subItem.icon}
