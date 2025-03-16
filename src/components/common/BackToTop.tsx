@@ -13,11 +13,10 @@ const BackToTop = () => {
     <button
       type="button"
       onClick={backToTop()}
-      className={`${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      } fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-200 hover:scale-125 md:right-16 lg:right-20 xl:right-[calc((100vw-1280px)/2+10px)] ${
-        isBottom ? 'bottom-12 scale-125' : ''
-      }`}
+      className={`transition-all-300
+        ${isVisible ? 'opacity-100' : 'opacity-0'} text-background
+        fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary shadow-lg hover:scale-110 md:right-16 lg:right-20 xl:right-[calc((100vw-1280px)/2+10px)]
+        ${isBottom ? 'bottom-12 scale-125' : ''}`}
       aria-label="Back to Top"
       hidden={!isVisible}
       disabled={!isVisible}
