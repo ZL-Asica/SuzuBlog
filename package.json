@@ -19,7 +19,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "dev": "next dev --turbopack",
-    "build": "NODE_NO_WARNINGS=1 next build",
+    "build": "pnpm run lint:fix && NODE_NO_WARNINGS=1 next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
