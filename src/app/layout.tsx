@@ -17,7 +17,7 @@ const config: Config = getConfig()
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-inter',
+  variable: '--font-roboto',
 })
 
 const notoSansSC = Noto_Sans_SC({
@@ -26,7 +26,7 @@ const notoSansSC = Noto_Sans_SC({
 })
 
 const jetBrainsMono = JetBrains_Mono({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-jetbrains-mono',
 })
 
@@ -107,7 +107,7 @@ export default function RootLayout(
       )}
 
       <body
-        className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
+        className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-screen flex-col antialiased`}
       >
         <ScrollPositionBar />
         <Header config={config} />
