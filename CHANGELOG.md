@@ -1,6 +1,19 @@
 # SuzuBlog Changelog
 
-## 1.5.1
+## 1.6.0 (2025-03-16)
+
+### Minor Changes
+
+- Update color palette, styles updates, fix aria issues
+
+  - Primary, secondary, accent color update. Corresponding utils added.
+  - h5, h6 new styles added.
+  - h3, h4 border sharpeness issue fixed.
+  - em, ul, strong, del styles updated.
+  - inline codeblock ml 0.5->1, p 1->0.5.
+  - aria-hidden added for decoration DOM elements.
+
+## 1.5.1 (2025-03-15)
 
 ### Patch Changes
 
@@ -9,7 +22,7 @@
   - Forget to update anime page.
   - Also update dark mode styling to improve contrast.
 
-## 1.5.0
+## 1.5.0 (2025-03-15)
 
 ### Minor Changes
 
@@ -29,7 +42,7 @@
   - 2548e85: chore: clean up some code
   - 215b4eb: feat(darkTheme): theme setting only store for 7 days
 
-## 1.4.3
+## 1.4.3 (2025-03-12)
 
 ### Patch Changes
 

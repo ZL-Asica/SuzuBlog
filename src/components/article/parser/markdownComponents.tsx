@@ -24,16 +24,14 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     h2: ({ children }) => {
       const slug = generateHierarchicalSlug('h2', headingLevels)
       return (
-        <div className="group">
-          <h2
-            className="text-hover-primary transition-colors-300 relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose"
-            id={slug}
-          >
-            {titleSlug(slug, 2)}
-            {children}
-            <span className="transition-all-300 absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-primary-400 dark:border-primary-300 group-hover:w-[35%]"></span>
-          </h2>
-        </div>
+        <h2
+          className="group text-hover-primary transition-colors-300 relative mb-6 mt-6 border-b-2 pb-1 text-3xl font-extrabold leading-loose"
+          id={slug}
+        >
+          {titleSlug(slug, 2)}
+          {children}
+          <span className="transition-all-300 absolute bottom-[-0.1em] left-0 w-[20%] rounded-md border-b-4 border-primary-300 dark:border-primary-200 group-hover:w-[35%]" aria-hidden="true" />
+        </h2>
       )
     },
 
@@ -41,9 +39,10 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h3', headingLevels)
       return (
         <h3
-          className="text-hover-primary transition-colors-300 my-5 border-l-4 border-primary-400 dark:border-primary-300 pl-2 text-2xl font-bold leading-relaxed"
+          className="group relative flex items-center my-5 pl-3 text-2xl font-bold leading-normal text-hover-primary transition-colors-300"
           id={slug}
         >
+          <span className="absolute left-0 h-full w-1 bg-primary rounded-full transition-all-300 group-hover:w-1.5" aria-hidden="true" />
           {titleSlug(slug, 3)}
           {children}
         </h3>
@@ -54,9 +53,10 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h4', headingLevels)
       return (
         <h4
-          className="transition-colors-300 text-hover-primary my-4 border-l-4 border-secondary-300 pl-2 text-xl font-semibold leading-normal"
+          className="group relative flex items-center my-4 pl-3 text-xl font-semibold leading-normal text-hover-primary transition-colors-300"
           id={slug}
         >
+          <span className="absolute left-0 h-full w-1 bg-secondary rounded-full transition-all-300 group-hover:w-1.5" aria-hidden="true" />
           {titleSlug(slug, 4)}
           {children}
         </h4>
@@ -67,9 +67,10 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h5', headingLevels)
       return (
         <h5
-          className="text-hover-primary transition-colors-300 my-3 text-lg font-medium leading-normal"
+          className="group relative flex items-center my-3 pl-3 text-lg font-medium leading-normal text-hover-primary transition-colors-300"
           id={slug}
         >
+          <span className="absolute left-0 h-2/3 w-0.5 bg-gray-400 dark:bg-gray-500 rounded-full transition-all-300 group-hover:w-1" aria-hidden="true" />
           {titleSlug(slug, 5)}
           {children}
         </h5>
@@ -80,38 +81,39 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       const slug = generateHierarchicalSlug('h6', headingLevels)
       return (
         <h6
-          className="text-hover-primary transition-colors-300 my-2 text-base font-medium leading-normal"
+          className="group relative my-2 text-base font-medium leading-normal text-hover-primary transition-colors-300"
           id={slug}
         >
           {titleSlug(slug, 6)}
           {children}
+          <span className="transition-all-300 absolute bottom-0 left-0 w-[10%] rounded-md border-b border-dashed border-gray-400 dark:border-gray-500 group-hover:w-[15%]" aria-hidden="true" />
         </h6>
       )
     },
 
     // Text related
     p: ({ children }) => (
-      <p className="my-6 text-base leading-relaxed">
+      <p className="my-6 text-base leading-relaxed tracking-wide">
         {children}
       </p>
     ),
     em: ({ children }) => (
-      <em className="italic text-secondary-500 dark:text-secondary-300 ml-0.5 mr-1">
+      <em className="italic text-primary ml-0.5 mr-1">
         {children}
       </em>
     ),
     u: ({ children }) => (
-      <u className="mx-0.5 underline decoration-wavy font-medium underline-offset-3 text-primary-400 dark:text-primary-300">
+      <u className="mx-0.5 underline decoration-dotted underline-offset-4 decoration-accent-300">
         {children}
       </u>
     ),
     strong: ({ children }) => (
-      <strong className="font-extrabold text-primary-400 dark:text-primary-300 mx-1">
+      <strong className="font-semibold text-[#2D3748] dark:text-[#E2E8F0] hover:shadow-sm transition-all mx-1">
         {children}
       </strong>
     ),
     del: ({ children }) => (
-      <del className="line-through text-gray-dark">
+      <del className="line-through text-gray-500 dark:text-gray-400 opacity-70">
         {children}
       </del>
     ),
@@ -119,7 +121,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     sub: ({ children }) => <sub className="text-xs align-sub">{children}</sub>,
     blockquote: ({ children }) => (
       <div className="my-3 flex justify-center">
-        <blockquote className="w-[95%] rounded-md border-l-4 border-primary-300 bg-gray-light bg-opacity-75 py-0.5 pl-3 pr-2 italic shadow-sm transition-shadow duration-300 hover:shadow-md">
+        <blockquote className="w-[95%] rounded-md border-l-4 border-primary-300 dark:border-primary-200 bg-gray-light bg-opacity-75 py-0.5 pl-3 pr-2 italic shadow-sm transition-shadow duration-300 hover:shadow-md">
           {children}
         </blockquote>
       </div>
@@ -130,7 +132,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       </details>
     ),
     summary: ({ children }) => (
-      <summary className="font-semibold text-primary-400 dark:text-primary-300 cursor-pointer">
+      <summary className="font-semibold text-primary cursor-pointer">
         {children}
       </summary>
     ),
@@ -144,10 +146,10 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       <label className="relative inline-flex items-center text-center">
         <input
           type="checkbox"
-          className="peer form-tick appearance-none h-4 w-4 border border-gray-300 rounded-md checked:bg-primary-400 checked:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50"
+          className="peer form-tick appearance-none h-4 w-4 border border-gray-300 rounded-md checked:bg-primary-400 checked:border-transparent dark:checked:bg-primary-300"
           {...props}
         />
-        <span className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 peer-checked:opacity-100">
+        <span className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 peer-checked:opacity-100" aria-hidden="true">
           <svg
             className="h-4 w-4 text-white"
             fill="none"
@@ -162,21 +164,21 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // List related
     ul: ({ children }) => (
-      <div className="my-4 rounded-lg border-2 border-dashed border-primary-400 dark:border-primary-300 p-3">
+      <div className="my-4 rounded-lg border-2 border-dashed border-primary-300 dark:border-primary-200 p-3">
         <ul className="ml-2 list-disc list-inside">
           {children}
         </ul>
       </div>
     ),
     ol: ({ children }) => (
-      <div className="my-4 rounded-lg border-2 border-dashed border-secondary-500 dark:border-secondary-400 p-3">
+      <div className="my-4 rounded-lg border-2 border-dashed border-secondary-400 dark:border-secondary-300 p-3">
         <ol className="ml-2 list-decimal list-inside">
           {children}
         </ol>
       </div>
     ),
     li: ({ children }) => (
-      <li className="leading-relaxed marker:text-primary-500 dark:marker:text-primary-400 marker:font-medium list-outside pl-1 ml-2">
+      <li className="leading-relaxed marker:text-primary-400 dark:marker:text-primary-300 marker:font-medium list-outside pl-1 ml-2">
         {children}
       </li>
     ),
@@ -194,7 +196,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
               ? undefined
               : `${translation.newTab}${children?.toString() ?? 'link'}`
           }
-          className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary-500 dark:text-secondary-400"
+          className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary decoration-[#5BCEFA] dark:decoration-[#81E6D9] hover:text-accent-700 dark:hover:text-accent-600"
           {...(props as Record<string, unknown>)}
         >
           {children}
@@ -229,7 +231,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           )
         : (
             <code
-              className="inline-block rounded-lg bg-primary-400/20 mx-0.5 px-2 py-0.5 font-mono text-base font-bold text-primary-500 dark:text-primary-300"
+              className="inline-block rounded-lg bg-primary-300/20 mx-1 px-1 py-0.5 font-mono text-base font-bold text-primary-400 dark:text-primary-200"
               {...(props as Record<string, unknown>)}
             >
               {children}
@@ -260,7 +262,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       return (
         <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-sm shadow-slate-950 transition-all-300 hover:shadow-md dark:shadow-slate-700">
           {/* MacOS window buttons */}
-          <div className="absolute left-3 top-2 flex space-x-2">
+          <div className="absolute left-3 top-2 flex space-x-2" aria-hidden="true">
             <span className="h-3 w-3 rounded-full bg-red-500 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
             <span className="h-3 w-3 rounded-full bg-yellow-400 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
             <span className="h-3 w-3 rounded-full bg-green-500 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
@@ -296,7 +298,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     th: ({ children, className }) => (
       <th
-        className={`border border-gray-400 bg-primary-400/90 px-4 py-3 font-semibold text-white ${className}`}
+        className={`border border-gray-400 bg-primary-300/90 px-4 py-3 font-semibold text-white ${className}`}
       >
         {children}
       </th>
@@ -321,7 +323,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       <div className="relative my-12 flex items-center justify-center group">
         <hr className="transition-all-500 h-0.5 w-2/5 bg-gradient-to-r from-transparent via-primary-300 to-transparent group-hover:w-1/2 group-hover:opacity-90" />
 
-        <div className="relative mx-4 h-8 w-8 flex items-center justify-center transition-transform duration-[3s] ease-in-out group-hover:rotate-[720deg]">
+        <div className="relative mx-4 h-8 w-8 flex items-center justify-center transition-transform duration-[3s] ease-in-out group-hover:rotate-[720deg]" aria-hidden="true">
           <div className="absolute inset-0 flex items-center justify-center">
             <SakuraIcon />
           </div>

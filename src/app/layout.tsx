@@ -8,14 +8,14 @@ import { Analytics } from '@vercel/analytics/react'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-import { Noto_Sans_SC, Roboto, Ubuntu_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
 import Script from 'next/script'
 
 import './globals.css'
 
 const config: Config = getConfig()
 
-const roboto = Roboto({
+const inter = Inter({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-roboto',
 })
@@ -25,10 +25,9 @@ const notoSansSC = Noto_Sans_SC({
   variable: '--font-noto-sans-sc',
 })
 
-const ubuntuMono = Ubuntu_Mono({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
-  variable: '--font-ubuntu-mono',
-  weight: ['400', '700'],
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-jetbrains-mono',
 })
 
 export const metadata: Metadata = {
@@ -108,7 +107,7 @@ export default function RootLayout(
       )}
 
       <body
-        className={`${roboto.variable} ${notoSansSC.variable} ${ubuntuMono.variable} flex max-h-full min-h-screen flex-col antialiased`}
+        className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-screen flex-col antialiased`}
       >
         <ScrollPositionBar />
         <Header config={config} />

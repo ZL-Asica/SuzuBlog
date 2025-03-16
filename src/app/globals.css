@@ -2,8 +2,12 @@
 @import '../styles/theme.css';
 
 @theme inline {
-  --font-sans: var(--font-roboto), var(--font-noto-sans-sc), Arial, sans-serif;
-  --font-mono: var(--font-ubuntu-mono), monospace;
+  --font-sans:
+    var(--font-inter), var(--font-noto-sans-sc), 'Roboto', 'Helvetica Neue',
+    'Segoe UI', 'Ubuntu', 'DejaVu Sans', 'Noto Sans', Arial, sans-serif;
+  --font-mono:
+    var(--font-jetbrains-mono), 'Fira Code', 'Menlo', 'Consolas', 'Courier New',
+    monospace;
 }
 
 /*

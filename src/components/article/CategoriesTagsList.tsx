@@ -55,7 +55,7 @@ const CategoriesTagsList = ({ type, translation, items = defaultItems }: Categor
               target="_self"
               title={`${translation.navigate} ${typeTranslation} ${item}`}
               aria-label={`${translation.navigate} ${typeTranslation} ${item}`}
-              className="text-hover-primary transition-all-300 font-medium hover:underline hover:decoration-dotted hover:underline-offset-3"
+              className="text-hover-primary transition-all-300 font-medium hover:underline hover:decoration-dotted hover:underline-offset-4"
             >
               {item}
             </a>
