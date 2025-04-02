@@ -1,5 +1,14 @@
 # SuzuBlog Changelog
 
+## 1.6.1 (2025-04-02)
+
+### Patch Changes
+
+- Bump up deps and fix env compatibility error in Windows
+
+  - Bump up dependencies.
+  - Fix npm script "build". Remove NODE_NO_WARNINGS env variable from the script to avoid incompatibility issues on Windows.
+
 ## 1.6.0 (2025-03-16)
 
 ### Minor Changes
