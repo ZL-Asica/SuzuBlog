@@ -78,10 +78,10 @@ socialMedia:
 # Priority: Twikoo > Disqus
 # ######################
 # Your Twikoo environment ID.
-twikooEnvId:
+twikooEnvId: https://vercel.twikoo.zla.app
 # Your Disqus shortname (used for integrating Disqus comments).
 # Find this in your Disqus account: yoursite.disqus.com (shortname is the part before .disqus.com).
-disqusShortname: zla-pub
+disqusShortname:
 
 # ######################
 # CUSTOM CODE BLOCKS

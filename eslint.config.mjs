@@ -21,6 +21,11 @@ export default antfu({
     'react/no-array-index-key': 'off',
   },
 }, {
+  files: ['src/components/anime/**/*.tsx'],
+  rules: {
+    'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
+  },
+}, {
   // TODO: Need wait for their support for tailwindcss v4
   // ! Not support tailwindcss v4 yet
   // files: ['**/*.{ts,tsx}'],

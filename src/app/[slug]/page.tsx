@@ -66,7 +66,6 @@ export async function generateMetadata({ params }: Properties): Promise<Metadata
 
 // PostPage component that receives the params directly
 export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
-  // eslint-disable-next-line react/prefer-destructuring-assignment
   const parameters = await props.params
   const post: FullPostData | null = await getPostData(parameters.slug)
   if (!post) {
