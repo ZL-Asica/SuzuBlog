@@ -105,8 +105,8 @@ showThumbnail: false
 },
 {
 "title": "Ethan",
-"link": "https://hanlife02.com.cn/",
-"img": "https://r2.img.zla.app/2024/12/08/31fa97.webp",
+"link": "https://hanlife02.com",
+"img": "https://hanlife02.com/api/v2/objects/avatar/evcvs61h0ajgvoai07.jpeg",
 "des": "Don't stay awake for too long"
 },
 {
@@ -232,7 +232,7 @@ showThumbnail: false
 ```json
 {
   "title": "ZLA 小站",
-  "link": "https://www.zla.pub/",
+  "link": "https://zla.pub/",
   "img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
   "des": "月亮不抱你，星星会落在你怀里✨🌙"
 }
@@ -242,10 +242,10 @@ showThumbnail: false
 
 ```plaintext
 名称: ZLA 小站
-地址: https://www.zla.pub/
+地址: https://zla.pub/
 图标: https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512
 描述: 月亮不抱你，星星会落在你怀里✨🌙
-RSS: https://www.zla.pub/feed.xml
+RSS: https://zla.pub/feed.xml
 ```
 
 需要更新头像或者链接请留言，有时间会处理的。若没有及时处理请给我发邮件催一下，邮箱是zl at zla dot app。

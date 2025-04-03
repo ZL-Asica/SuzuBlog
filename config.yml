@@ -7,12 +7,12 @@ description: ZL Asica 的个人小站，发布个人技术和生活内容。走�
 keywords: 'blog, 技术, ZL Asica, ZLA, 嫒希卡' # Comma-separated keywords for SEO purposes.
 author:
   name: ZL Asica # Your name, displayed as the author of the blog.
-  link: 'https://www.zla.pub' # Link to your personal website or blog.
+  link: 'https://zla.pub' # Link to your personal website or blog.
 # Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
 lang: zh
 # Your public root url, used for SEO and meta tags.
 # !Do not include a ending slash
-siteUrl: 'https://www.zla.pub'
+siteUrl: 'https://zla.pub'
 
 # Path to your avatar image. Can be a relative path from /public or a full URL (e.g., https://).
 avatar: /images/avatar.jpg
