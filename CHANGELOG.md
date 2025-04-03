@@ -7,7 +7,7 @@
 - Performance improvement
 
   - Make two main fonts "display:swap" and "preload:true" to improve performance.
-  - Honor "anime-safe" for page fade-in animation for accessibility.
+  - Honor "motion-safe" for page fade-in animation for accessibility.
   - Set main page avatar "loading:eager" to make sure this image is loaded first.
   - Fix `<ul>` and `<li>` tags issues in mobile header menu.
 
