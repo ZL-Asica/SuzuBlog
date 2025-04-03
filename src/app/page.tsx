@@ -40,7 +40,7 @@ async function Home() {
               width={180}
               height={180}
               className="rounded-full border-4 border-primary-300 shadow-lg dark:border-primary-200"
-              priority
+              loading="eager"
             />
           </div>
         </div>
