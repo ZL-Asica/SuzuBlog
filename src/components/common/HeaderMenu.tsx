@@ -89,23 +89,25 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
 
           {/* Mobile - sub menu */}
           {isMobile && item.children && (
-            <ul className="ml-6 border-l-2 border-gray-600 pl-3">
-              {item.children.map(subItem => (
-                <li key={subItem.href}>
-                  <Link
-                    href={subItem.href}
-                    title={subItem.label}
-                    onClick={onClickHandler}
-                    className={`flex items-center gap-2 py-2 text-base text-hover-primary
+            <li>
+              <ul className="ml-6 border-l-2 border-gray-600 pl-3">
+                {item.children.map(subItem => (
+                  <li key={subItem.href}>
+                    <Link
+                      href={subItem.href}
+                      title={subItem.label}
+                      onClick={onClickHandler}
+                      className={`flex items-center gap-2 py-2 text-base text-hover-primary
                       ${currentPath.startsWith(subItem.href) ? 'text-primary' : ''}
                       `}
-                  >
-                    {subItem.icon}
-                    <span className="whitespace-nowrap">{subItem.label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                    >
+                      {subItem.icon}
+                      <span className="whitespace-nowrap">{subItem.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
           )}
 
           {/* Mobile - Divider */}
