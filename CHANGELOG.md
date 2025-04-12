@@ -1,5 +1,30 @@
 # SuzuBlog Changelog
 
+## 1.7.1 (2025-04-12)
+
+### Patch Changes
+
+- Switch to useRouter for pagination and search
+
+  - feat(search): use useRouter from Next.js instead of history API
+
+    - Introduce `useUpdateURL` hook to manage URL updates.
+    - Replace `history.` with `useRouter` for better integration with Next.js.
+    - With `useRouter`, fix the scroll behavior when current page changes.
+    - Add santitize query logic to prevent XSS attacks (before only from URL, now also from input).
+    - Extract `SearchInput` component from `PostPageClient` to `src/app/posts/page.tsx` for better organization and performance (categories and tags array also generated without re-rendering).
+
+  - chore: some updates on minor details
+
+    - Finally remove `tailwind.config.ts` from README (since from v4.0.0 it has been removed)
+    - Update manifest theme color.
+    - Fix thumbnail showing when parameter `showThumbnail` is set to `false`.
+    - Replace some a tags with NextLink.
+
+  - style(search): extract select in search out
+    - Color adjusted a little bit. Now the color is different in light and dark mode.
+    - Added a new component Select to be used in the search input.
+
 ## 1.7.0 (2025-04-11)
 
 ### Minor Changes
