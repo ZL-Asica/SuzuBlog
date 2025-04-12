@@ -11,7 +11,7 @@
     - Introduce `useUpdateURL` hook to manage URL updates.
     - Replace `history.` with `useRouter` for better integration with Next.js.
     - With `useRouter`, fix the scroll behavior when current page changes.
-    - Add santitize query logic to prevent XSS attacks (before only from URL, now also from input).
+    - Add sanitize query logic to prevent XSS attacks (before only from URL, now also from input).
     - Extract `SearchInput` component from `PostPageClient` to `src/app/posts/page.tsx` for better organization and performance (categories and tags array also generated without re-rendering).
 
   - chore: some updates on minor details
