@@ -1,12 +1,15 @@
 'use client'
 
+import type { ReadonlyURLSearchParams } from 'next/navigation'
 import MiniSearch from 'minisearch'
 import { useMemo } from 'react'
 
 const useSearchedPosts = (
   posts: PostListData[],
-  { query = '', category = '', tag = '' }: SearchOptions,
+  searchParams: ReadonlyURLSearchParams,
 ): PostListData[] => {
+  const { query, category, tag } = Object.fromEntries(searchParams.entries())
+
   // Preprocess posts into searchable flat fields
   const preparedPosts = useMemo(() => {
     return posts.map(post => ({

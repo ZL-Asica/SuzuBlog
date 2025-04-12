@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Properties): Promise<Metadata
       modifiedTime: postData?.frontmatter.date,
       title: postData?.frontmatter.title ?? config.title ?? 'Default Title',
       description: postData?.postAbstract ?? config.description ?? 'Default description',
-      images: postData?.frontmatter.thumbnail,
+      images: postData?.frontmatter.showThumbnail !== false ? postData?.frontmatter.thumbnail : undefined,
       url: `/${slug}`,
       locale: config.lang,
     },
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Properties): Promise<Metadata
       card: 'summary',
       title: postData?.frontmatter.title ?? config.title ?? 'Default Title',
       description: postData?.postAbstract ?? config.description ?? 'Default description',
-      images: postData?.frontmatter.thumbnail,
+      images: postData?.frontmatter.showThumbnail !== false ? postData?.frontmatter.thumbnail : undefined,
     },
   }
 }
@@ -95,7 +95,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
       '@type': 'WebPage',
       '@id': `${config.siteUrl}/${post.slug}`,
     },
-    'image': post?.frontmatter.thumbnail,
+    'image': post?.frontmatter.showThumbnail !== false ? post?.frontmatter.thumbnail : undefined,
     'publisher': {
       '@type': 'Organization',
       'name': config.title,
