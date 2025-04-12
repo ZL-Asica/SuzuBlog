@@ -64,6 +64,13 @@ const en: Translation = {
   aria: {
     travellings: 'travellings',
     theme: 'Theme',
+    pagination: {
+      label: 'Pagination Navigation',
+      prev: 'Prev',
+      next: 'Next',
+      current: 'Current page, page ',
+      goTo: 'Go to page ',
+    },
   },
   newTab: 'Open in new tab: ',
   navigate: 'Navigate to',
