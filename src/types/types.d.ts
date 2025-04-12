@@ -38,3 +38,9 @@ interface FriendLink {
   img: string
   des?: string
 }
+
+interface SearchOptions {
+  query?: string
+  category?: string
+  tag?: string
+}
