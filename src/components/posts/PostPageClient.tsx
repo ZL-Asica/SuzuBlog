@@ -1,14 +1,14 @@
 'use client'
 
-import { getFilteredPosts, updateURL, validateParameters } from '@/services/utils'
-import { backToTop } from '@zl-asica/react'
-import { parseInt } from 'es-toolkit/compat'
-import { useSearchParams } from 'next/navigation'
+import { useSearchedPosts } from '@/hooks'
+import { updateURL } from '@/services/utils'
 
-import { useEffect, useMemo, useState } from 'react'
+import { backToTop } from '@zl-asica/react'
+import { useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
+
 import Pagination from './Pagination'
 import PostListLayout from './PostList'
-
 import SearchInput from './SearchInput'
 
 interface PostPageClientProps {
@@ -32,37 +32,24 @@ const PostPageClient = ({
     category: categoryParameter,
     tag: tagParameter,
   }
+  const filteredPosts = useSearchedPosts(posts, searchQueries)
 
-  const [currentPage, setCurrentPage] = useState(() =>
-    parseInt(searchParameters.get('page') ?? '1', 10),
-  )
+  const currentPage = useMemo(() => {
+    const page = Number(searchParameters.get('page') ?? '1')
+    return Number.isNaN(page) || page < 1 ? 1 : page
+  }, [searchParameters])
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page)
     backToTop(10)()
-
-    const currentUrl = new URL(globalThis.location.href)
-    currentUrl.searchParams.set('page', page.toString())
-    globalThis.history.pushState(null, '', currentUrl)
+    updateURL({ page }, { replace: false })
   }
 
   const categories = useMemo(() => [
     ...new Set(posts.flatMap(post => post.frontmatter.categories || [])),
   ], [posts])
-  const tags = useMemo(() => [...new Set(posts.flatMap(post => post.frontmatter.tags || []))], [posts])
-
-  useEffect(() => {
-    const sanitizedParameters = validateParameters(searchParameters, categories, tags)
-    const currentUrl = new URL(globalThis.location.href)
-    updateURL(currentUrl, sanitizedParameters)
-  }, [searchParameters, categories, tags])
-
-  const filteredPosts = getFilteredPosts(
-    posts,
-    queryParameters,
-    categoryParameter,
-    tagParameter,
-  )
+  const tags = useMemo(() => [
+    ...new Set(posts.flatMap(post => post.frontmatter.tags || [])),
+  ], [posts])
 
   const currentPosts = filteredPosts.slice(
     (currentPage - 1) * postsPerPage,
@@ -81,13 +68,12 @@ const PostPageClient = ({
 
       {/* Post List */}
       {filteredPosts.length === 0 && (
-        <h2 className="my-4 text-3xl font-bold">{translation.search.noResultsFound}</h2>
+        <h2 className="my-4 text-3xl font-bold">
+          {translation.search.noResultsFound}
+        </h2>
       )}
 
-      <PostListLayout
-        posts={currentPosts}
-        translation={translation}
-      />
+      <PostListLayout posts={currentPosts} translation={translation} />
 
       {/* Pagination */}
       <Pagination

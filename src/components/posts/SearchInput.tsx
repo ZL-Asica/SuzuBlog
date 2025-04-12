@@ -12,23 +12,17 @@ interface SearchInputProps {
   categories: string[]
   tags: string[]
   translation: Translation
-  searchQueries: { query: string, category: string, tag: string }
+  searchQueries: SearchOptions
 }
 
 // Handle form submission
-const handleFormSubmit = (event_: React.FormEvent<HTMLFormElement>) => {
-  event_.preventDefault()
-
-  const formData = new FormData(event_.currentTarget)
-  const params = new URLSearchParams()
-
-  for (const [key, value] of formData.entries()) {
-    if (value !== null && value !== '') {
-      params.append(key, value.toString())
-    }
-  }
-
-  updateURL(new URL(globalThis.location.href), params)
+const handleFormSubmit = (formData: FormData) => {
+  updateURL({
+    page: null,
+    query: formData.get('query'),
+    category: formData.get('category'),
+    tag: formData.get('tag'),
+  })
 }
 
 const SearchInput = ({
@@ -40,16 +34,15 @@ const SearchInput = ({
   const searchParameters = useSearchParams()
   const formReference = useRef<HTMLFormElement>(null)
 
-  const [searchQuery, setSearchQuery] = useState(searchQueries.query)
-  const [selectedCategory, setSelectedCategory] = useState(searchQueries.category)
-  const [selectedTag, setSelectedTag] = useState(searchQueries.tag)
+  const [searchQuery, setSearchQuery] = useState(searchQueries.query ?? '')
+  const [selectedCategory, setSelectedCategory] = useState(searchQueries.category ?? '')
+  const [selectedTag, setSelectedTag] = useState(searchQueries.tag ?? '')
   const [expanded, toggleExpanded] = useToggle()
 
   // Initialize search parameters
   useEffect(() => {
     const sanitizedParameters = validateParameters(searchParameters, categories, tags)
-    const currentUrl = new URL(globalThis.location.href)
-    updateURL(currentUrl, sanitizedParameters)
+    updateURL(sanitizedParameters)
   }, [searchParameters, searchQueries, categories, tags])
 
   // Close the form when clicking outside
@@ -62,33 +55,27 @@ const SearchInput = ({
   const handleCategoryChange = (event_: React.ChangeEvent<HTMLSelectElement>) => {
     const newCategory = event_.target.value
     setSelectedCategory(newCategory)
-    const params = new URLSearchParams()
-    params.append('category', newCategory.toString())
-    updateURL(new URL(globalThis.location.href), params)
+    updateURL({ category: newCategory })
   }
 
   const handleTagChange = (event_: React.ChangeEvent<HTMLSelectElement>) => {
     const newTag = event_.target.value
     setSelectedTag(newTag)
-    const params = new URLSearchParams()
-    params.append('tag', newTag.toString())
-    updateURL(new URL(globalThis.location.href), params)
+    updateURL({ tag: newTag })
   }
 
   const handleReset = () => {
     setSearchQuery('')
     setSelectedCategory('')
     setSelectedTag('')
-    updateURL(new URL(globalThis.location.href), new URLSearchParams())
+    updateURL({ query: null, category: null, tag: null })
   }
 
   return (
     <Form
       ref={formReference}
-      action="/posts"
+      action={handleFormSubmit}
       className="px-5 w-full max-w-lg space-y-4 rounded-lg p-4"
-      replace
-      onSubmit={handleFormSubmit}
     >
       {/* Search Input with Submit Button */}
       <div className="relative w-full transition-transform-300 hover:scale-105">

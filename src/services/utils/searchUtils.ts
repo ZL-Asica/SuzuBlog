@@ -13,8 +13,8 @@ const validateParameters = (
   searchParameters: URLSearchParams,
   categories: string[],
   tags: string[],
-): URLSearchParams => {
-  const newParameters = new URLSearchParams()
+): Map<string, string> => {
+  const newParameters = new Map<string, string>()
 
   for (const [key, value] of searchParameters.entries()) {
     if (key === 'category' && categories.includes(value)) {
@@ -35,11 +35,36 @@ const validateParameters = (
   return newParameters
 }
 
-const updateURL = (currentUrl: URL, updatedParameters: URLSearchParams): void => {
-  const newSearch = updatedParameters.toString()
+const updateURL = (
+  updates: Record<string, unknown> | Map<string, unknown>,
+  options: { replace?: boolean } = {},
+): void => {
+  const currentUrl = new URL(globalThis.location.href)
+  const params = new URLSearchParams(currentUrl.search)
+
+  const entries = updates instanceof Map
+    ? Array.from(updates.entries())
+    : Object.entries(updates)
+
+  entries.forEach(([key, value]) => {
+    if (value === null || value === undefined || value === '') {
+      params.delete(key)
+    }
+    else {
+      params.set(key, String(value))
+    }
+  })
+
+  const newSearch = params.toString()
   if (currentUrl.search !== `?${newSearch}`) {
     currentUrl.search = newSearch
-    globalThis.history.replaceState(null, '', currentUrl.toString())
+    const url = currentUrl.toString()
+    if (options.replace ?? true) {
+      globalThis.history.replaceState(null, '', url)
+    }
+    else {
+      globalThis.history.pushState(null, '', url)
+    }
   }
 }
 

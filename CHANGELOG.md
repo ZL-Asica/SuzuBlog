@@ -1,5 +1,17 @@
 # SuzuBlog Changelog
 
+## 1.7.0 (2025-04-11)
+
+### Minor Changes
+
+- improve search function
+
+  - Search function is now implemented with MiniSearch instead of manually filtering the posts.
+  - Add full-text search support.
+  - Add fuzzy search support.
+  - Set different weight for title, categories, tags, and content.
+  - Handle page changing while searching.
+
 ## 1.6.2 (2025-04-03)
 
 ### Patch Changes

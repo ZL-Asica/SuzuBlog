@@ -110,7 +110,7 @@ const getPostFromFile = (filePath: string, slug: string, fullData: boolean = tru
     slug,
     postAbstract: processPostAbstract(contentRaw, defaultTo(excerpt, '')),
     frontmatter,
-    contentRaw: fullData ? contentRaw : '',
+    contentRaw,
     lastModified,
     toc,
   }

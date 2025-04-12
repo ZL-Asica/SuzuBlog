@@ -1,6 +1,6 @@
 {
   "name": "suzu-blog",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "private": true,
   "packageManager": "pnpm@10.8.0",
   "author": {
@@ -35,6 +35,7 @@
     "gray-matter": "^4.0.3",
     "katex": "^0.16.22",
     "lucide-react": "^0.487.0",
+    "minisearch": "^7.1.2",
     "next": "15.3.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
