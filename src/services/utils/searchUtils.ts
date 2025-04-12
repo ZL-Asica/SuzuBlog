@@ -35,37 +35,4 @@ const validateParameters = (
   return newParameters
 }
 
-const updateURL = (
-  updates: Record<string, unknown> | Map<string, unknown>,
-  options: { replace?: boolean } = {},
-): void => {
-  const currentUrl = new URL(globalThis.location.href)
-  const params = new URLSearchParams(currentUrl.search)
-
-  const entries = updates instanceof Map
-    ? Array.from(updates.entries())
-    : Object.entries(updates)
-
-  entries.forEach(([key, value]) => {
-    if (value === null || value === undefined || value === '') {
-      params.delete(key)
-    }
-    else {
-      params.set(key, String(value))
-    }
-  })
-
-  const newSearch = params.toString()
-  if (currentUrl.search !== `?${newSearch}`) {
-    currentUrl.search = newSearch
-    const url = currentUrl.toString()
-    if (options.replace ?? true) {
-      globalThis.history.replaceState(null, '', url)
-    }
-    else {
-      globalThis.history.pushState(null, '', url)
-    }
-  }
-}
-
-export { sanitizeQuery, updateURL, validateParameters }
+export { sanitizeQuery, validateParameters }

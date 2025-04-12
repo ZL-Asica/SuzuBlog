@@ -1,15 +1,11 @@
 'use client'
 
-import { useSearchedPosts } from '@/hooks'
-import { updateURL } from '@/services/utils'
-
+import { useSearchedPosts, useUpdateURL } from '@/hooks'
 import { backToTop } from '@zl-asica/react'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
-
 import Pagination from './Pagination'
 import PostListLayout from './PostList'
-import SearchInput from './SearchInput'
 
 interface PostPageClientProps {
   posts: PostListData[]
@@ -22,34 +18,20 @@ const PostPageClient = ({
   translation,
   postsPerPage,
 }: PostPageClientProps) => {
-  const searchParameters = useSearchParams()
-  const queryParameters = searchParameters.get('query') ?? ''
-  const categoryParameter = searchParameters.get('category') ?? ''
-  const tagParameter = searchParameters.get('tag') ?? ''
+  const updateURL = useUpdateURL()
+  const searchParams = useSearchParams()
 
-  const searchQueries = {
-    query: queryParameters,
-    category: categoryParameter,
-    tag: tagParameter,
-  }
-  const filteredPosts = useSearchedPosts(posts, searchQueries)
+  const filteredPosts = useSearchedPosts(posts, searchParams)
 
   const currentPage = useMemo(() => {
-    const page = Number(searchParameters.get('page') ?? '1')
+    const page = Number(searchParams.get('page') ?? '1')
     return Number.isNaN(page) || page < 1 ? 1 : page
-  }, [searchParameters])
+  }, [searchParams])
 
-  const handlePageChange = (page: number) => {
+  const handleCurrentPageChange = (page: number) => {
     backToTop(10)()
-    updateURL({ page }, { replace: false })
+    updateURL({ page })
   }
-
-  const categories = useMemo(() => [
-    ...new Set(posts.flatMap(post => post.frontmatter.categories || [])),
-  ], [posts])
-  const tags = useMemo(() => [
-    ...new Set(posts.flatMap(post => post.frontmatter.tags || [])),
-  ], [posts])
 
   const currentPosts = filteredPosts.slice(
     (currentPage - 1) * postsPerPage,
@@ -57,15 +39,7 @@ const PostPageClient = ({
   )
 
   return (
-    <div className="container mt-5 mx-auto flex flex-col items-center p-4">
-      {/* Centered Search Input */}
-      <SearchInput
-        categories={categories}
-        tags={tags}
-        translation={translation}
-        searchQueries={searchQueries}
-      />
-
+    <>
       {/* Post List */}
       {filteredPosts.length === 0 && (
         <h2 className="my-4 text-3xl font-bold">
@@ -80,9 +54,9 @@ const PostPageClient = ({
         postsPerPage={postsPerPage}
         totalPosts={filteredPosts.length}
         currentPage={currentPage}
-        setCurrentPage={handlePageChange}
+        setCurrentPage={handleCurrentPageChange}
       />
-    </div>
+    </>
   )
 }
 

@@ -1,49 +1,45 @@
 'use client'
 
-import { updateURL, validateParameters } from '@/services/utils'
+import { useUpdateURL } from '@/hooks'
+import { validateParameters } from '@/services/utils'
 import { useClickOutside, useToggle } from '@zl-asica/react'
 import { clsx } from 'clsx'
 import { ArrowDown } from 'lucide-react'
 import Form from 'next/form'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface SearchInputProps {
   categories: string[]
   tags: string[]
   translation: Translation
-  searchQueries: SearchOptions
-}
-
-// Handle form submission
-const handleFormSubmit = (formData: FormData) => {
-  updateURL({
-    page: null,
-    query: formData.get('query'),
-    category: formData.get('category'),
-    tag: formData.get('tag'),
-  })
 }
 
 const SearchInput = ({
   categories,
   tags,
   translation,
-  searchQueries,
 }: SearchInputProps) => {
+  const updateURL = useUpdateURL()
+
   const searchParameters = useSearchParams()
   const formReference = useRef<HTMLFormElement>(null)
+  const { query, category, tag } = Object.fromEntries(validateParameters(searchParameters, categories, tags))
 
-  const [searchQuery, setSearchQuery] = useState(searchQueries.query ?? '')
-  const [selectedCategory, setSelectedCategory] = useState(searchQueries.category ?? '')
-  const [selectedTag, setSelectedTag] = useState(searchQueries.tag ?? '')
+  const [searchQuery, setSearchQuery] = useState(query ?? '')
+  const [selectedCategory, setSelectedCategory] = useState(category ?? '')
+  const [selectedTag, setSelectedTag] = useState(tag ?? '')
   const [expanded, toggleExpanded] = useToggle()
 
-  // Initialize search parameters
-  useEffect(() => {
-    const sanitizedParameters = validateParameters(searchParameters, categories, tags)
-    updateURL(sanitizedParameters)
-  }, [searchParameters, searchQueries, categories, tags])
+  // Handle form submission
+  const handleFormSubmit = (formData: FormData) => {
+    updateURL({
+      page: null,
+      query: formData.get('query'),
+      category: formData.get('category'),
+      tag: formData.get('tag'),
+    })
+  }
 
   // Close the form when clicking outside
   useClickOutside(formReference, () => {
