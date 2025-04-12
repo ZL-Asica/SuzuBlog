@@ -41,18 +41,21 @@ Suzu Blog 的安装、配置、Markdown 语法、部署等详细教程，请参�
 │   ├── components            # 复用组件
 │   ├── services              # 服务逻辑（内容解析、配置加载等）
 │   └── types.d.ts            # 全局类型定义
-├── tailwind.config.ts        # Tailwind CSS 配置
 ├── package.json              # 项目依赖与脚本
 └── pnpm-lock.yaml            # pnpm 依赖锁定
 ```
 
 ## ❤️ 关于 Suzu
 
-在多年使用各种博客框架的过程中，我深受 **维护成本高、安全隐患多、性能不稳定** 等问题的困扰。最终，我决定基于 **Next.js** 打造 Suzu Blog —— 一个 **简洁、高效、可高度自定义** 的博客模板，帮助任何人快速搭建现代化博客。
+在多年使用各种博客框架的过程中，我深受 **维护成本高、安全隐患多、性能不稳定** 等问题的困扰。最终，我决定基于 **Next.js** 打造 Suzu Blog —— 一个 **简洁、高效、可高度自定义** 的博客模板，帮助任何人快速搭建现代化博客。如果你喜欢这个项目，请考虑给它一个 ⭐！我希望你能和我一样享受使用它的乐趣！
 
 ## 🔗 社区支持
 
 **贡献**：欢迎提出问题或贡献代码！请访问 [贡献指南](https://github.com/ZL-Asica/SuzuBlog/blob/main/CONTRIBUTING.md)。
+
+## 📜 许可证
+
+本项目遵循 [AGPL-3.0 许可证][license-link]。有关详细信息，请参阅 [LICENSE](./LICENSE) 文件。
 
 <!-- Badges / Links -->
 

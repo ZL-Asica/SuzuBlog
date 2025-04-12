@@ -1,6 +1,7 @@
 'use client'
 
 import { Folder, Tags } from 'lucide-react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
 interface CategoriesTagsListProps {
@@ -50,7 +51,7 @@ const CategoriesTagsList = ({ type, translation, items = defaultItems }: Categor
       <span>
         {links.map(({ item, href }, index) => (
           <span key={item}>
-            <a
+            <Link
               href={href}
               target="_self"
               title={`${translation.navigate} ${typeTranslation} ${item}`}
@@ -58,7 +59,7 @@ const CategoriesTagsList = ({ type, translation, items = defaultItems }: Categor
               className="text-hover-primary transition-all-300 font-medium hover:underline hover:decoration-dotted hover:underline-offset-4"
             >
               {item}
-            </a>
+            </Link>
             {/* Add comma, except for the last item */}
             {index < items.length - 1 && ', '}
           </span>

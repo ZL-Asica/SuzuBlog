@@ -1,13 +1,8 @@
 import type { Metadata } from 'next'
-import BackToTop from '@/components/common/BackToTop'
-import Footer from '@/components/common/Footer'
-import Header from '@/components/common/Header'
-import ScrollPositionBar from '@/components/common/ScrollPositionBar'
+import { BackToTop, Footer, Header, ScrollPositionBar } from '@/components/common'
 import { getConfig } from '@/services/config'
 import { Analytics } from '@vercel/analytics/react'
-
 import { SpeedInsights } from '@vercel/speed-insights/next'
-
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
 import Script from 'next/script'
 

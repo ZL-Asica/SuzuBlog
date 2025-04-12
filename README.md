@@ -41,18 +41,21 @@ For setup, configuration, Markdown syntax, and deployment guides, follow the doc
 │   ├── components            # Reusable components
 │   ├── services              # Logic for content parsing, configuration, etc.
 │   └── types.d.ts            # Global type definitions
-├── tailwind.config.ts        # Tailwind CSS configuration
 ├── package.json              # Project dependencies and scripts
 └── pnpm-lock.yaml            # pnpm dependency lock file
 ```
 
 ## ❤️ About Suzu
 
-After years of frustration with the maintenance, security risks, and performance issues of other frameworks, I decided to create Suzu Blog using **Next.js**. It is simple, efficient, and highly customizable, designed for anyone looking to build a modern blog quickly.
+After years of frustration with the maintenance, security risks, and performance issues of other frameworks, I decided to create Suzu Blog using **Next.js**. It is simple, efficient, and highly customizable, designed for anyone looking to build a modern blog quickly. If you enjoy using it, please consider giving it a star! ⭐ I hope you find it as enjoyable as I do!
 
 ## 🔗 Community Support
 
 **Contribute**: Contributions are welcome! Please refer to the [Contribution Guide](./CONTRIBUTING.md).
+
+## 📜 License
+
+This project is licensed under the [AGPL-3.0 License][license-link]. See the [LICENSE](./LICENSE) file for details.
 
 <!-- Badges / Links -->
 
