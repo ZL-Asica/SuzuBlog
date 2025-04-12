@@ -33,7 +33,7 @@ const PostPageClient = ({
     tag: tagParameter,
   }
 
-  const [currentPage, setCurrentPage] = useState(
+  const [currentPage, setCurrentPage] = useState(() =>
     parseInt(searchParameters.get('page') ?? '1', 10),
   )
 
