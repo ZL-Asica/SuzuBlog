@@ -1,5 +1,17 @@
 # SuzuBlog Changelog
 
+## 1.8.0
+
+### Minor Changes
+
+- Add responsive pagination UI
+
+  - Move Pagination component to a separate file for better organization.
+  - Added ARIA support for pagination.
+  - Update i18n for pagination.
+  - Different pagination styles for mobile and desktop.
+  - Now able to handle whatever number of pages.
+
 ## 1.7.1 (2025-04-12)
 
 ### Patch Changes

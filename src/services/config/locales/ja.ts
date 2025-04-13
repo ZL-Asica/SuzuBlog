@@ -64,6 +64,13 @@ const ja: Translation = {
   aria: {
     travellings: '開通の道',
     theme: 'テーマ',
+    pagination: {
+      label: 'ページネーションナビゲーション',
+      prev: '前のページ',
+      next: '次のページ',
+      current: '現在のページ：ページ',
+      goTo: 'ページへ移動：',
+    },
   },
   newTab: '新しいタブで開く: ',
   navigate: '移動先',

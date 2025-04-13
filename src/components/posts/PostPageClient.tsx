@@ -1,10 +1,10 @@
 'use client'
 
+import { Pagination } from '@/components/ui'
 import { useSearchedPosts, useUpdateURL } from '@/hooks'
-import { backToTop } from '@zl-asica/react'
+import { backToTop, clamp } from '@zl-asica/react'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
-import Pagination from './Pagination'
 import PostListLayout from './PostList'
 
 interface PostPageClientProps {
@@ -22,11 +22,12 @@ const PostPageClient = ({
   const searchParams = useSearchParams()
 
   const filteredPosts = useSearchedPosts(posts, searchParams)
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
 
-  const currentPage = useMemo(() => {
-    const page = Number(searchParams.get('page') ?? '1')
-    return Number.isNaN(page) || page < 1 ? 1 : page
-  }, [searchParams])
+  const currentPage = useMemo(
+    () => clamp(Number(searchParams.get('page') ?? '1'), 1, totalPages),
+    [searchParams, totalPages],
+  )
 
   const handleCurrentPageChange = (page: number) => {
     backToTop(10)()
@@ -51,10 +52,10 @@ const PostPageClient = ({
 
       {/* Pagination */}
       <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={filteredPosts.length}
+        totalPages={totalPages}
         currentPage={currentPage}
         setCurrentPage={handleCurrentPageChange}
+        translation={translation}
       />
     </>
   )
