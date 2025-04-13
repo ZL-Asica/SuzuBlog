@@ -55,27 +55,27 @@ const PostList = ({ posts, translation }: PostListProps) => {
                   <span className="text-sm font-medium">{post.frontmatter.date.split(' ')[0]}</span>
                 </div>
                 {/* Title in Frontmatter */}
-                <a
+                <Link
                   href={postLink}
                   target="_self"
                   aria-label={`${translation.post.readMore} ${postTitle}`}
                   className="text-hover-primary transition-colors-500"
                 >
                   <h2 className="mb-2 text-2xl font-bold">{postTitle}</h2>
-                </a>
+                </Link>
                 {/* Abstract */}
                 <p className="line-clamp-5 text-sm">{post.postAbstract}</p>
               </div>
 
               <div className="text-gray-450 mt-3 flex items-center justify-between text-sm">
-                <a
+                <Link
                   href={postLink}
                   target="_self"
                   aria-label={`${postTitle}`}
                   className="self-start text-hover-primary transition-all-500 hover:scale-110"
                 >
                   <Ellipsis size={32} strokeWidth={3} className="cursor-pointer" />
-                </a>
+                </Link>
 
                 {/* Category */}
                 <CategoriesTagsList

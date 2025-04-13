@@ -12,7 +12,7 @@ function manifest(): MetadataRoute.Manifest {
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#f6a8b8',
+    theme_color: '#ff9fb2',
     lang: config.lang,
     orientation: 'any',
     icons: [

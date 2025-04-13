@@ -19,11 +19,11 @@ interface PostListData {
   postAbstract: string
   frontmatter: Frontmatter
   lastModified: string
+  contentRaw: string
 }
 
 // Full post data
 interface FullPostData extends PostListData {
-  contentRaw: string
   toc: TocItems[]
 }
 

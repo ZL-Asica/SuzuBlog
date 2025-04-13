@@ -63,6 +63,13 @@ interface Translation {
   aria: {
     travellings: string
     theme: string
+    pagination: {
+      label: string
+      prev: string
+      next: string
+      current: string
+      goTo: string
+    }
   }
   newTab: string
   navigate: string

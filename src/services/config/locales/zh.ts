@@ -63,6 +63,13 @@ const zh: Translation = {
   aria: {
     travellings: '开往',
     theme: '主题',
+    pagination: {
+      label: '分页导航',
+      prev: '上一页',
+      next: '下一页',
+      current: '当前页面，第',
+      goTo: '跳转到第',
+    },
   },
   newTab: '在新标签页打开：',
   navigate: '重定向到',

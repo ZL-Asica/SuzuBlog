@@ -1,15 +1,11 @@
 'use client'
 
-import { getFilteredPosts, updateURL, validateParameters } from '@/services/utils'
-import { backToTop } from '@zl-asica/react'
-import { parseInt } from 'es-toolkit/compat'
+import { Pagination } from '@/components/ui'
+import { useSearchedPosts, useUpdateURL } from '@/hooks'
+import { backToTop, clamp } from '@zl-asica/react'
 import { useSearchParams } from 'next/navigation'
-
-import { useEffect, useMemo, useState } from 'react'
-import Pagination from './Pagination'
+import { useMemo } from 'react'
 import PostListLayout from './PostList'
-
-import SearchInput from './SearchInput'
 
 interface PostPageClientProps {
   posts: PostListData[]
@@ -22,47 +18,21 @@ const PostPageClient = ({
   translation,
   postsPerPage,
 }: PostPageClientProps) => {
-  const searchParameters = useSearchParams()
-  const queryParameters = searchParameters.get('query') ?? ''
-  const categoryParameter = searchParameters.get('category') ?? ''
-  const tagParameter = searchParameters.get('tag') ?? ''
+  const updateURL = useUpdateURL()
+  const searchParams = useSearchParams()
 
-  const searchQueries = {
-    query: queryParameters,
-    category: categoryParameter,
-    tag: tagParameter,
-  }
+  const filteredPosts = useSearchedPosts(posts, searchParams)
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
 
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(searchParameters.get('page') ?? '1', 10),
+  const currentPage = useMemo(
+    () => clamp(Number(searchParams.get('page') ?? '1'), 1, totalPages),
+    [searchParams, totalPages],
   )
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
+  const handleCurrentPageChange = (page: number) => {
     backToTop(10)()
-
-    const currentUrl = new URL(globalThis.location.href)
-    currentUrl.searchParams.set('page', page.toString())
-    globalThis.history.pushState(null, '', currentUrl)
+    updateURL({ page })
   }
-
-  const categories = useMemo(() => [
-    ...new Set(posts.flatMap(post => post.frontmatter.categories || [])),
-  ], [posts])
-  const tags = useMemo(() => [...new Set(posts.flatMap(post => post.frontmatter.tags || []))], [posts])
-
-  useEffect(() => {
-    const sanitizedParameters = validateParameters(searchParameters, categories, tags)
-    const currentUrl = new URL(globalThis.location.href)
-    updateURL(currentUrl, sanitizedParameters)
-  }, [searchParameters, categories, tags])
-
-  const filteredPosts = getFilteredPosts(
-    posts,
-    queryParameters,
-    categoryParameter,
-    tagParameter,
-  )
 
   const currentPosts = filteredPosts.slice(
     (currentPage - 1) * postsPerPage,
@@ -70,33 +40,24 @@ const PostPageClient = ({
   )
 
   return (
-    <div className="container mt-5 mx-auto flex flex-col items-center p-4">
-      {/* Centered Search Input */}
-      <SearchInput
-        categories={categories}
-        tags={tags}
-        translation={translation}
-        searchQueries={searchQueries}
-      />
-
+    <>
       {/* Post List */}
       {filteredPosts.length === 0 && (
-        <h2 className="my-4 text-3xl font-bold">{translation.search.noResultsFound}</h2>
+        <h2 className="my-4 text-3xl font-bold">
+          {translation.search.noResultsFound}
+        </h2>
       )}
 
-      <PostListLayout
-        posts={currentPosts}
-        translation={translation}
-      />
+      <PostListLayout posts={currentPosts} translation={translation} />
 
       {/* Pagination */}
       <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={filteredPosts.length}
+        totalPages={totalPages}
         currentPage={currentPage}
-        setCurrentPage={handlePageChange}
+        setCurrentPage={handleCurrentPageChange}
+        translation={translation}
       />
-    </div>
+    </>
   )
 }
 

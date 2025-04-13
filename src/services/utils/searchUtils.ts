@@ -13,8 +13,8 @@ const validateParameters = (
   searchParameters: URLSearchParams,
   categories: string[],
   tags: string[],
-): URLSearchParams => {
-  const newParameters = new URLSearchParams()
+): Map<string, string> => {
+  const newParameters = new Map<string, string>()
 
   for (const [key, value] of searchParameters.entries()) {
     if (key === 'category' && categories.includes(value)) {
@@ -35,12 +35,4 @@ const validateParameters = (
   return newParameters
 }
 
-const updateURL = (currentUrl: URL, updatedParameters: URLSearchParams): void => {
-  const newSearch = updatedParameters.toString()
-  if (currentUrl.search !== `?${newSearch}`) {
-    currentUrl.search = newSearch
-    globalThis.history.replaceState(null, '', currentUrl.toString())
-  }
-}
-
-export { sanitizeQuery, updateURL, validateParameters }
+export { sanitizeQuery, validateParameters }

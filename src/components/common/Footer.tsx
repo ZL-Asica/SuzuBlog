@@ -44,7 +44,7 @@ const Footer = ({ config }: FooterProps) => {
           by
           {' '}
           <Link
-            href="https://www.zla.pub"
+            href="https://zla.pub"
             target="_blank"
             aria-label="ZL Asica's blog (new tab)"
             rel="noopener noreferrer"

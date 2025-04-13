@@ -10,18 +10,18 @@ import { filter, lowerCase, replace } from 'es-toolkit/compat'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-async function getAllPosts(): Promise<PostListData[]> {
+const getAllPosts = async (): Promise<PostListData[]> => {
   const fileNames = await fsPromise.readdir(postsDirectory)
   const markdownFiles = filter(fileNames, fileName => fileName.endsWith('.md'))
 
   const allPosts = await Promise.all(
     markdownFiles.map(async (fileName) => {
-      const { slug, postAbstract, frontmatter, lastModified } = getPostFromFile(
+      const { slug, postAbstract, frontmatter, lastModified, contentRaw } = getPostFromFile(
         path.join(postsDirectory, fileName),
         replace(fileName, /\.md$/, ''),
         false, // Fetch only partial data for list view
       )
-      return { slug, postAbstract, frontmatter, lastModified }
+      return { slug, postAbstract, frontmatter, lastModified, contentRaw }
     }),
   )
 
@@ -31,7 +31,7 @@ async function getAllPosts(): Promise<PostListData[]> {
   )
 }
 
-async function getPostData(slug: string): Promise<FullPostData | null> {
+const getPostData = async (slug: string): Promise<FullPostData | null> => {
   const filePath
     = lowerCase(slug) === 'about' || lowerCase(slug) === 'friends'
       ? path.join(postsDirectory, '_pages', `${slug}.md`)
