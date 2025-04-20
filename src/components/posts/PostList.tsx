@@ -10,7 +10,7 @@ interface PostListProps {
 
 const PostList = ({ posts, translation }: PostListProps) => {
   return (
-    <div className="mb-10 grid grid-cols-1 gap-10">
+    <div className="mb-10 grid grid-cols-1 gap-10 motion-safe:animate-mask-reveal">
       {posts.map((post, index) => {
         const postTitle = post.frontmatter.title
         const postLink = post.slug
