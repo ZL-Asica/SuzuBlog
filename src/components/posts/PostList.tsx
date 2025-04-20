@@ -13,7 +13,11 @@ const PostList = ({ posts, translation }: PostListProps) => {
     <div className="mb-10 grid grid-cols-1 gap-10 motion-safe:animate-mask-reveal">
       {posts.map((post, index) => {
         const postTitle = post.frontmatter.title
-        const postLink = post.slug
+        const postRedirect = post.frontmatter.redirect !== undefined && post.frontmatter.redirect !== ''
+
+        const postLink = postRedirect
+          ? post.frontmatter.redirect as string
+          : post.slug
 
         return (
           <article
@@ -31,7 +35,7 @@ const PostList = ({ posts, translation }: PostListProps) => {
               <Link
                 className="block h-full w-full transition-transform-700 hover:scale-110"
                 href={postLink}
-                target="_self"
+                target={postRedirect ? '_blank' : '_self'}
                 aria-label={`${translation.post.readMore} ${postTitle}`}
                 prefetch
               >
@@ -57,7 +61,7 @@ const PostList = ({ posts, translation }: PostListProps) => {
                 {/* Title in Frontmatter */}
                 <Link
                   href={postLink}
-                  target="_self"
+                  target={postRedirect ? '_blank' : '_self'}
                   aria-label={`${translation.post.readMore} ${postTitle}`}
                   className="text-hover-primary transition-colors-500"
                 >
@@ -70,7 +74,7 @@ const PostList = ({ posts, translation }: PostListProps) => {
               <div className="text-gray-450 mt-3 flex items-center justify-between text-sm">
                 <Link
                   href={postLink}
-                  target="_self"
+                  target={postRedirect ? '_blank' : '_self'}
                   aria-label={`${postTitle}`}
                   className="self-start text-hover-primary transition-all-500 hover:scale-110"
                 >
