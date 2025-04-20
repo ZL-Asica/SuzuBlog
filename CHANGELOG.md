@@ -1,5 +1,11 @@
 # SuzuBlog Changelog
 
+## 1.8.1 (2025-04-20)
+
+### Patch Changes
+
+- Fix dynamicParams in post slug page
+
 ## 1.8.0
 
 ### Minor Changes
