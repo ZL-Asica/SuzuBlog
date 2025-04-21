@@ -205,9 +205,9 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     },
 
     // Image related
-    img: ({ src: source = '', alt = 'Image', ...props }: { src?: string, alt?: string }) => (
+    img: ({ src: source = '', alt = 'Image', ...props }: { src?: string | Blob, alt?: string }) => (
       <CustomImage
-        src={source}
+        src={typeof source === 'string' ? source : ''}
         alt={alt}
         width={500}
         height={700}
