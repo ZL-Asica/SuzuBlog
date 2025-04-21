@@ -9,7 +9,6 @@ import RSS from 'rss'
 async function generateRssFeed(posts: PostListData[], config: Config): Promise<void> {
   const siteUrl = config.siteUrl
 
-  // 明确 feedOptions 类型
   const feedOptions: RSS.FeedOptions = {
     title: `${config.title} - ${config.subTitle}`,
     description: config.description || 'Welcome to my blog!',

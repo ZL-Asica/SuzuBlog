@@ -47,7 +47,7 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
   const translation = config.translation
 
   return (
-    <article className="container mx-auto p-6 pb-2 mt-5">
+    <article className="container mx-auto p-6 pb-2 mt-5 motion-safe:animate-mask-reveal">
       {post.frontmatter.showThumbnail
         ? (
             <div className="relative h-96 w-full">
