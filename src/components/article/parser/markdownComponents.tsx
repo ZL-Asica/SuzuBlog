@@ -205,9 +205,9 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
     },
 
     // Image related
-    img: ({ src: source = '', alt = 'Image', ...props }: { src?: string, alt?: string }) => (
+    img: ({ src: source = '', alt = 'Image', ...props }: { src?: string | Blob, alt?: string }) => (
       <CustomImage
-        src={source}
+        src={typeof source === 'string' ? source : ''}
         alt={alt}
         width={500}
         height={700}
@@ -231,7 +231,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           )
         : (
             <code
-              className="inline-block rounded-lg bg-primary-300/20 mx-1 px-1 py-0.5 font-mono text-base font-bold text-primary-400 dark:text-primary-200"
+              className="inline-block rounded-lg bg-primary-300/20 mx-1 px-0.5 font-mono text-base font-bold text-primary-400 dark:text-primary-200"
               {...(props as Record<string, unknown>)}
             >
               {children}
