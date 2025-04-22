@@ -1,7 +1,7 @@
 'use client'
 
 import { useTOCLogic } from '@/hooks'
-import { useIsTop } from '@zl-asica/react'
+import { useIsBottom, useIsTop } from '@zl-asica/react'
 import { List } from 'lucide-react'
 
 import TOCLink from './TOCLink'
@@ -20,7 +20,13 @@ const TOC = ({
   showThumbnail = true,
 }: TOCProps) => {
   const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic()
-  const isVisible = !useIsTop(showThumbnail ? 150 : 50)
+  const isTop = !useIsTop(showThumbnail ? 150 : 50)
+  const isBottom = !useIsBottom(50)
+  const isVisible = isTop && isBottom
+
+  if (items.length === 0) {
+    return null
+  }
 
   return (
     <div
