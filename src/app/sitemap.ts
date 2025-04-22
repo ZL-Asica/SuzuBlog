@@ -2,52 +2,59 @@ import type { MetadataRoute } from 'next'
 
 import { getConfig } from '@/services/config'
 import { getAllPosts } from '@/services/content'
+import { generateImageUrl } from '@/services/utils'
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const config = getConfig()
   const siteUrl = config.siteUrl
   const updateDate = new Date()
 
-  // Load posts data from JSON file
+  // Load posts data
   const posts = await getAllPosts()
 
-  // Generate sitemap entries for each post
-  const postUrls = posts.map(post => ({
-    url: `${siteUrl}/${post.slug}`,
-    lastModified: post.lastModified || updateDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.5,
-    images: post.frontmatter.showThumbnail && post.frontmatter.thumbnail !== undefined
-      ? [post.frontmatter.thumbnail]
-      : [],
-  }))
-
-  // Pages settings
-  const showAnime = config.anilist_username === undefined || config.anilist_username !== null || config.anilist_username !== ''
-
-  const pages = [`${siteUrl}/posts`, `${siteUrl}/about`, `${siteUrl}/friends`]
-
-  if (showAnime) {
-    pages.push(`${siteUrl}/about/anime`)
-  }
-
-  const pagesSitemap = pages.map(page => ({
-    url: page,
+  const makeSitemapItem = (
+    url: string,
+    options?: Partial<MetadataRoute.Sitemap[number]>,
+  ): MetadataRoute.Sitemap[number] => ({
+    url,
     lastModified: updateDate,
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
     priority: 0.8,
-  }))
+    ...options,
+  })
 
-  return [
-    {
-      url: siteUrl,
-      lastModified: updateDate,
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    ...pagesSitemap, // Static page
-    ...postUrls, // Dynamic post URLs
+  // Generate sitemap entries for each post
+  const postUrls = posts.map(post =>
+    makeSitemapItem(`${siteUrl}/${post.slug}`, {
+      changeFrequency: 'weekly',
+      priority: 0.5,
+      images: post.frontmatter.showThumbnail
+        ? generateImageUrl(siteUrl, post.frontmatter.thumbnail)
+        : undefined,
+    }),
+  )
+  const homepage = makeSitemapItem(siteUrl, {
+    changeFrequency: 'yearly',
+    priority: 1,
+  })
+
+  const aboutPage = makeSitemapItem(`${siteUrl}/about`, {
+    priority: 0.8,
+    images: generateImageUrl(siteUrl, config.avatar),
+  })
+
+  const showAnime = Boolean(config.anilist_username?.trim())
+  const staticPages = [
+    { path: '/posts', priority: 0.6 },
+    { path: '/friends', priority: 0.4 },
+    ...(showAnime ? [{ path: '/about/anime', priority: 0.5 }] : []),
   ]
+
+  const staticSitemap = staticPages.map(({ path, priority }) =>
+    makeSitemapItem(`${siteUrl}${path}`, { priority }),
+  )
+
+  return [homepage, aboutPage, ...staticSitemap, ...postUrls]
 }
 
 export default sitemap
