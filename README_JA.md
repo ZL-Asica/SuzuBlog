@@ -20,6 +20,7 @@
 - **🌓 ダークモード** – システム設定に応じて自動でテーマを切り替え。
 - **📢 RSS フィード** – 自動生成される RSS でブログの更新を簡単に配信。
 - **♿ アクセシビリティ対応** – セマンティック HTML、ARIA サポート、WCAG 基準のカラーデザイン。
+- **⚛️ LLM 対応** – `llms.txt` と `llms-full.txt` を自動生成し、ChatGPT や Claude などの LLM に対応。
 
 ## 🚀 はじめに
 
@@ -37,10 +38,10 @@ Suzu Blog のセットアップ、設定、Markdown の書き方、デプロイ�
 ├── public                    # 静的リソースディレクトリ
 │   └── images                # 画像リソース
 ├── src                       # プロジェクトソースコード
-│   ├── app                   # Next.js ページディレクトリ
+│   ├── app                   # Next.js App Router
 │   ├── components            # 再利用可能なコンポーネント
 │   ├── services              # コンテンツ解析、設定処理などのロジック
-│   └── types.d.ts            # グローバル型定義
+│   └── types                 # グローバル型定義
 ├── package.json              # プロジェクト依存関係とスクリプト
 └── pnpm-lock.yaml            # pnpm 依存関係ロックファイル
 ```

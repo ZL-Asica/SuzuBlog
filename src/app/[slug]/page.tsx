@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import { ArticlePage } from '@/components/article'
 import { getConfig } from '@/services/config'
-
 import { getAllPosts, getPostData } from '@/services/content'
-import generateRssFeed from '@/services/utils/generateRssFeed'
+import { generateLLMsTXTs, generateRssFeed } from '@/services/utils'
 import Head from 'next/head'
 
 import { notFound, redirect } from 'next/navigation'
@@ -15,6 +14,7 @@ export async function generateStaticParams() {
   if (config.socialMedia.rss !== null) {
     await generateRssFeed(posts, config)
   }
+  await generateLLMsTXTs(posts, config)
   return posts.map(post => ({
     slug: post.slug,
   }))
