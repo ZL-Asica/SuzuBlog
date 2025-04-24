@@ -20,6 +20,7 @@
 - **🌓 Dark Mode** – Adapts to system preferences seamlessly.
 - **📢 RSS Feed** – Auto-generated RSS for easy content distribution.
 - **♿ Accessibility First** – Semantic HTML, ARIA support, WCAG-compliant colors.
+- **⚛️ LLM Support** – Auto-generated `llms.txt` and `llms-full.txt` files for LLMs like ChatGPT, Claude, and more.
 
 ## **🚀 Get Started**
 
@@ -37,7 +38,7 @@ For setup, configuration, Markdown syntax, and deployment guides, follow the doc
 ├── public                    # Static assets directory
 │   └── images                # Image resources
 ├── src                       # Project source code
-│   ├── app                   # Next.js application directory
+│   ├── app                   # Next.js App Router
 │   ├── components            # Reusable components
 │   ├── services              # Logic for content parsing, configuration, etc.
 │   └── types.d.ts            # Global type definitions
