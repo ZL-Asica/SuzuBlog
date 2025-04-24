@@ -1,5 +1,19 @@
 # SuzuBlog Changelog
 
+## 1.9.0 (2025-04-23)
+
+### Minor Changes
+
+- Add auto-generation for llms.txt & llms-full.txt
+
+  - Add auto-generation for `llms.txt` and `llms-full.txt` files at build time.
+    - Followed the guidelines on [llmstxt.org](https://llmstxt.org/) to generate the files.
+    - This allows real time MCP, RAG, or LLM model doing web searching by itself could better understand the context of the whole website.
+    - `llms.txt` contains basic information for the whole website include some links.
+    - `llms-full.txt` contains all the content of the website, include full posts contents, about, friends.
+  - Fix `robots.txt` to allow search engines to crawl some files in `_next` folder.
+    - This will fix crawlers are not able to render the website properly (since no css and js files are loaded).
+
 ## 1.8.2 (2025-04-21)
 
 ### Patch Changes

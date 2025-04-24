@@ -20,6 +20,7 @@
 - **🌓 深色模式** – 自动适配系统主题，无缝切换。
 - **📢 RSS 订阅** – 自动生成 RSS，方便订阅和分发内容。
 - **♿ 无障碍优化** – 语义化 HTML、ARIA 支持、符合 WCAG 规范的色彩设计。
+- **⚛️ LLM 支持** – 自动生成 `llms.txt` 和 `llms-full.txt` 文件，兼容 ChatGPT、Claude 等 LLM。
 
 ## 🚀 快速上手
 
@@ -37,10 +38,10 @@ Suzu Blog 的安装、配置、Markdown 语法、部署等详细教程，请参�
 ├── public                    # 静态资源目录
 │   └── images                # 图片资源
 ├── src                       # 项目源代码
-│   ├── app                   # Next.js 页面目录
+│   ├── app                   # Next.js App Router
 │   ├── components            # 复用组件
 │   ├── services              # 服务逻辑（内容解析、配置加载等）
-│   └── types.d.ts            # 全局类型定义
+│   └── types                 # 全局类型定义
 ├── package.json              # 项目依赖与脚本
 └── pnpm-lock.yaml            # pnpm 依赖锁定
 ```
