@@ -70,9 +70,6 @@ jobs:
             ## Full Changelog
             [View Full Changelog](https://github.com/ZL-Asica/SuzuBlog/blob/main/CHANGELOG.md)
 
-            ## Contributors
-            🏆 Thank you to everyone who contributed to this release!
-
             ${{ github.event.release.body }}
           draft: false
           prerelease: false
