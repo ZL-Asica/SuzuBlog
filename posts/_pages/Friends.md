@@ -210,6 +210,24 @@ showThumbnail: false
 "link": "https://www.lemonary.cn",
 "img": "https://r2.img.zla.app/2024/12/24/8263e6.webp",
 "des": "忙点充实，闲点自在"
+},
+{
+"title": "W1ndys小屋",
+"link": "https://blog.w1ndys.top/",
+"img": "https://avatars.githubusercontent.com/u/109416673?v=4",
+"des": "欲戴皇冠，必承其重"
+},
+{
+"title": "微光档案",
+"link": "https://bikari.top",
+"img": "https://wsrv.nl/?url=github.com/KazariEX.png",
+"des": "虚幻的幸福"
+},
+{
+"title": "纸鹿摸鱼处",
+"link": "https://blog.zhilu.cyou/",
+"img": "https://www.zhilu.cyou/api/avatar.png",
+"des": "纸鹿至麓不知路，支炉制露不止漉"
 }
 ]
 ```
@@ -241,6 +259,7 @@ showThumbnail: false
 为了方便你们添加我的友链，我也提供了我的友链信息：
 
 ```plaintext
+博主: ZL Asica
 名称: ZLA 小站
 地址: https://zla.pub/
 图标: https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512
@@ -248,4 +267,4 @@ showThumbnail: false
 RSS: https://zla.pub/feed.xml
 ```
 
-需要更新头像或者链接请留言，有时间会处理的。若没有及时处理请给我发邮件催一下，邮箱是zl at zla dot app。
+需要更新头像或者链接请留言，有时间会处理的。若没有及时处理请给我发邮件催一下，联系方式 zl at zla dot app。
