@@ -18,7 +18,7 @@
   "scripts": {
     "changeset": "changeset",
     "version": "changeset version",
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "pnpm run lint:fix && next build",
     "start": "next start",
     "lint": "next lint",
