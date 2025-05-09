@@ -3,9 +3,6 @@ name: Sync SuzuBlog Main Branch 🎐
 on:
   # Manually trigger the workflow
   workflow_dispatch:
-  # Automatically trigger the workflow every Sunday at 00:00 UTC
-  schedule:
-    - cron: '0 0 * * 0'
 
 jobs:
   sync:
