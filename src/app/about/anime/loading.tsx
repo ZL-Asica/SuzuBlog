@@ -1,3 +1,5 @@
+import { assignUUID } from '@zl-asica/react/utils'
+
 const AnimeListSkeleton = () => {
   return (
     <div className="container mx-auto animate-fadeInDown p-6 pb-2 mt-5">
@@ -13,8 +15,8 @@ const AnimeListSkeleton = () => {
 
           {/* Anime Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-6 mt-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="relative bg-gray-800 rounded-lg overflow-hidden shadow-md animate-pulse">
+            {assignUUID(Array.from({ length: 8 })).map(({ id }) => (
+              <div key={id} className="relative bg-gray-800 rounded-lg overflow-hidden shadow-md animate-pulse">
                 {/* Cover Image Placeholder */}
                 <div className="w-full aspect-[9/16] bg-gray-700"></div>
 

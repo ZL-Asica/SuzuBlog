@@ -1,3 +1,5 @@
+import { assignUUID } from '@zl-asica/react/utils'
+
 const LoadingPlaceholder = () => {
   return (
     <div className="container mx-auto p-6 pb-2 animate-pulse max-w-3xl">
@@ -20,9 +22,9 @@ const LoadingPlaceholder = () => {
 
       {/* Categories/Tags Skeleton */}
       <div className="mx-auto my-4 w-full max-w-3xl flex flex-wrap gap-2">
-        {Array.from({ length: 3 }).map((_, index) => (
+        {assignUUID(Array.from({ length: 3 })).map(({ id }) => (
           <div
-            key={index}
+            key={id}
             className="h-6 w-16 bg-gray-300 dark:bg-gray-600 rounded"
           />
         ))}
@@ -30,9 +32,9 @@ const LoadingPlaceholder = () => {
 
       {/* Post Content Skeleton */}
       <div className="mx-auto my-6 w-full max-w-3xl space-y-4">
-        {Array.from({ length: 5 }).map((_, index) => (
+        {assignUUID(Array.from({ length: 5 })).map(({ id }) => (
           <div
-            key={index}
+            key={id}
             className="h-6 w-full bg-gray-300 dark:bg-gray-600 rounded"
           />
         ))}

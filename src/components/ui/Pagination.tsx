@@ -1,5 +1,7 @@
 'use client'
 
+import { assignUUID } from '@zl-asica/react/utils'
+
 interface PaginationProps {
   totalPages: number
   setCurrentPage: (pageNumber: number) => void
@@ -56,7 +58,7 @@ const Pagination = ({
     return pages
   }
 
-  const pageNumbers = getPageNumbers()
+  const pageNumbers = assignUUID(getPageNumbers())
 
   return (
     <nav
@@ -102,30 +104,29 @@ const Pagination = ({
         className="hidden sm:flex space-x-2 items-center"
         role="list"
       >
-        {pageNumbers.map((item, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <li key={index}>
-            {item === '...'
+        {pageNumbers.map(({ id, value }) => (
+          <li key={id}>
+            {value === '...'
               ? (
                   <span className="px-2 text-gray-dark cursor-default" aria-hidden>…</span>
                 )
               : (
                   <button
                     type="button"
-                    onClick={() => setCurrentPage(item)}
-                    aria-current={item === currentPage ? 'page' : undefined}
+                    onClick={() => setCurrentPage(value)}
+                    aria-current={value === currentPage ? 'page' : undefined}
                     aria-label={
-                      item === currentPage
-                        ? `${translation.aria.pagination.current}${item}`
-                        : `${translation.aria.pagination.goTo}${item}`
+                      value === currentPage
+                        ? `${translation.aria.pagination.current}${value}`
+                        : `${translation.aria.pagination.goTo}${value}`
                     }
                     className={`px-4 py-2 rounded-full text-lg sm:text-base
-                  ${item === currentPage
+                  ${value === currentPage
                     ? 'bg-primary-300 text-white font-bold scale-110'
                     : 'bg-secondary-300 text-gray-700 hover:scale-110'}
                   cursor-pointer transition-transform-300`}
                   >
-                    {item}
+                    {value}
                   </button>
                 )}
           </li>

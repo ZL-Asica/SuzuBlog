@@ -1,9 +1,11 @@
+import { assignUUID } from '@zl-asica/react/utils'
+
 const PostsLoading = () => {
   return (
     <div className="mt-5 mb-10 grid grid-cols-1 gap-10 animate-pulse">
-      {Array.from({ length: 4 }).map((_, index) => (
+      {assignUUID(Array.from({ length: 4 })).map(({ id }, index) => (
         <article
-          key={index}
+          key={id}
           className={`mx-auto flex h-[500px] w-11/12 max-w-[850px] flex-col overflow-hidden rounded-lg shadow-lg md:h-[300px] md:w-full md:flex-row ${
             index % 2 === 0 ? 'md:flex-row-reverse' : ''
           } bg-gray-200 dark:bg-gray-700 shadow-gray-light drop-shadow-xs`}
@@ -29,9 +31,9 @@ const PostsLoading = () => {
               <div className="mb-2 h-6 w-3/4 bg-gray-400 dark:bg-gray-500 rounded"></div>
               {/* Abstract Skeleton */}
               <div className="space-y-2">
-                {Array.from({ length: 3 }).map((_, idx) => (
+                {assignUUID(Array.from({ length: 3 })).map(({ id }) => (
                   <div
-                    key={idx}
+                    key={id}
                     className="h-4 w-full bg-gray-300 dark:bg-gray-600 rounded"
                   />
                 ))}
