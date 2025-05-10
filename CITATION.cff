@@ -12,6 +12,9 @@ authors:
     family-names: Liu
     orcid: 'https://orcid.org/0009-0008-7221-2324'
     affiliation: Northwestern University
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15377307
 repository-code: 'https://github.com/ZL-Asica/SuzuBlog'
 url: 'https://suzu.zla.app/en/'
 abstract: >-
