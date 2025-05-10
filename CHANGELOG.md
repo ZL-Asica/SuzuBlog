@@ -1,5 +1,11 @@
 # SuzuBlog Changelog
 
+## 1.9.1 (2025-05-09)
+
+### Patch Changes
+
+- Minor bug fix, CI update, and add citation
+
 ## 1.9.0 (2025-04-23)
 
 ### Minor Changes
