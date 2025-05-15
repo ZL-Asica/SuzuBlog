@@ -24,7 +24,7 @@ showThumbnail: false
 },
 {
 "title": "个人学术网站",
-"link": "https://www.zla.app/",
+"link": "https://elaraliu.com/",
 "img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
 "des": "我的个人学术网站(英文)"
 },

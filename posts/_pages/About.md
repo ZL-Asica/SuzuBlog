@@ -11,7 +11,7 @@ autoSlug: false
 
 我是 <u>ZL Asica（Elara Liu）</u>，目前坐标 [Evanston, IL, USA](https://www.google.com/maps/place/Evanston,+IL/)，就读于 [Northwestern University](https://www.northwestern.edu)，攻读 **Master of Science in Computer Science**。研究方向是 **HCI + Ubicomp + ML**，探索人机交互、可穿戴技术、健康信息学等领域的前沿研究。
 
-💡 <u>更详细的学术信息？</u> 访问我的 [学术主页](https://www.zla.app/) 🚀
+💡 <u>更详细的学术信息？</u> 访问我的 [学术主页](https://elaraliu.com/) 🚀
 
 ---
 
@@ -46,7 +46,6 @@ autoSlug: false
 💻 这个博客是我 <u>100% 纯手工打造</u>，基于我开发的 [SuzuBlog](https://suzu.zla.app/)，使用 **Next.js** + **Markdown** + **Vercel** 部署，所有代码 <u>开源可用</u>，欢迎试试和我同款博客！🚀
 
 📖 **SuzuBlog 文档**：[点击这里](https://suzu.zla.app/) 获取详细部署教程！
-
 
 ## 🎤 最后
 
