@@ -1,9 +1,9 @@
 import { statSync } from 'node:fs'
 
-import { getConfig } from '@/services/config'
-import { generateHierarchicalSlug } from '@/services/utils'
-
 import { read as matterRead } from 'gray-matter'
+import { getConfig } from '@/services/config'
+
+import { generateHierarchicalSlug } from '@/services/utils'
 
 const config = getConfig()
 

@@ -1,5 +1,11 @@
 # SuzuBlog Changelog
 
+## 1.9.2
+
+### Patch Changes
+
+- Remove useless deps, bump up deps
+
 ## 1.9.1 (2025-05-09)
 
 ### Patch Changes

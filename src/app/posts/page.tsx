@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import Head from 'next/head'
 import PostsPageClient from '@/components/posts/PostPageClient'
 import SearchInput from '@/components/posts/SearchInput'
 import { getConfig } from '@/services/config'
 import { getAllPosts } from '@/services/content'
-import Head from 'next/head'
 
 export function generateMetadata(): Metadata {
   const config = getConfig()

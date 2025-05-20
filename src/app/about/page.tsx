@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
+import Head from 'next/head'
+import { notFound } from 'next/navigation'
+
 import { ArticlePage } from '@/components/article'
 import { getConfig } from '@/services/config'
 
 import { getPostData } from '@/services/content'
-import Head from 'next/head'
-
-import { notFound } from 'next/navigation'
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig()

@@ -1,8 +1,8 @@
 'use client'
 
-import { useTOCLogic } from '@/hooks'
 import { useIsBottom, useIsTop } from '@zl-asica/react'
 import { List } from 'lucide-react'
+import { useTOCLogic } from '@/hooks'
 
 import TOCLink from './TOCLink'
 

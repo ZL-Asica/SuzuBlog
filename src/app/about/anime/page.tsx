@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import process from 'node:process'
-import AnimeList from '@/components/anime/AnimeList'
-import { AnimeResponseSchema } from '@/schemas/anime'
-
-import { getConfig } from '@/services/config'
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
+
+import AnimeList from '@/components/anime/AnimeList'
+import { AnimeResponseSchema } from '@/schemas/anime'
+import { getConfig } from '@/services/config'
 
 export const revalidate = 300 // 5 minutes for whole page
 

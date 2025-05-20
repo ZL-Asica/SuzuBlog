@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
+import Head from 'next/head'
+import { notFound, redirect } from 'next/navigation'
 import { ArticlePage } from '@/components/article'
 import { getConfig } from '@/services/config'
 import { getAllPosts, getPostData } from '@/services/content'
-import { generateLLMsTXTs, generateRssFeed } from '@/services/utils'
-import Head from 'next/head'
 
-import { notFound, redirect } from 'next/navigation'
+import { generateLLMsTXTs, generateRssFeed } from '@/services/utils'
 
 // build static params for all posts
 export async function generateStaticParams() {

@@ -1,5 +1,5 @@
-import { CustomImage } from '@/components/ui'
 import dynamic from 'next/dynamic'
+import { CustomImage } from '@/components/ui'
 import CategoriesTagsList from './CategoriesTagsList'
 import MarkdownContent from './parser'
 import TOC from './TOC'
