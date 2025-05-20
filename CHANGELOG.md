@@ -1,6 +1,6 @@
 # SuzuBlog Changelog
 
-## 1.9.2
+## 1.9.2 (2025-05-20)
 
 ### Patch Changes
 
