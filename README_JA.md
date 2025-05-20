@@ -6,6 +6,8 @@
 
 🚀 **[デモサイト](https://www.zla.pub)** | 📚 **[ドキュメント](https://suzu.zla.app)**
 
+もしこのプロジェクトが気に入ったら、ぜひ ⭐ を付けてください！私と同じように楽しんでいただければ幸いです！
+
 [![GitHub License][license-badge]][license-link] [![Latest Release][release-badge]][release-link]
 
 [![Node.js][node-badge]][node-link] [![pnpm Version][pnpm-badge]][pnpm-link] | [![Next.js][nextjs-badge]][nextjs-link] [![Tailwind CSS][tailwind-badge]][tailwind-link] | [![Vercel][vercel-badge]][vercel-link] [![Eslint][eslint-badge]][eslint-link] [![Prettier][prettier-badge]][prettier-link]
@@ -24,7 +26,11 @@
 
 ## 🚀 はじめに
 
-Suzu Blog のセットアップ、設定、Markdown の書き方、デプロイ方法などについては、公式ドキュメントをご覧ください。
+自分だけの Suzu Blog を立ち上げませんか？下のボタンをクリックするだけで、Vercel で簡単にデプロイできます：
+
+[![Deploy with Vercel][vercel-button]][vercel-deploy-link]
+
+セットアップ、カスタマイズ、Markdown の書き方、デプロイ手順については、以下のドキュメントをご覧ください：
 
 📖 **[Suzu Blog ドキュメント](https://suzu.zla.app)**
 
@@ -48,7 +54,7 @@ Suzu Blog のセットアップ、設定、Markdown の書き方、デプロイ�
 
 ## ❤️ Suzu について
 
-長年にわたり、さまざまなブログフレームワークを試してきましたが、**保守の手間・セキュリティリスク・パフォーマンス問題** に悩まされてきました。そこで、私は **Next.js** を用いて **シンプル・高効率・カスタマイズ性抜群** の Suzu Blog を開発しました。モダンなブログを素早く構築したいすべての人のためのテンプレートです。もしこのプロジェクトが気に入ったら、ぜひ ⭐ を付けてください！私と同じように楽しんでいただければ幸いです！
+長年にわたり、さまざまなブログフレームワークを試してきましたが、**保守の手間・セキュリティリスク・パフォーマンス問題** に悩まされてきました。そこで、私は **Next.js** を用いて **シンプル・高効率・カスタマイズ性抜群** の Suzu Blog を開発しました。モダンなブログを素早く構築したいすべての人のためのテンプレートです。
 
 ## 🔗 コミュニティサポート
 
@@ -77,4 +83,6 @@ Suzu Blog のセットアップ、設定、Markdown の書き方、デプロイ�
 [tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
+[vercel-button]: https://vercel.com/button
+[vercel-deploy-link]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FZL-Asica%2FSuzuBlog&env=ENABLE_EXPERIMENTAL_COREPACK&envDescription=This%20is%20option%20to%20enable%20corepack%20by%20default%20to%20use%20pnpm.%20Set%20this%20to%201.&envLink=https%3A%2F%2Fvercel.com%2Fdocs%2Fbuilds%2Fconfigure-a-build%23corepack&project-name=suzu-blog&repository-name=SuzuBlog&redirect-url=https%3A%2F%2Fsuzu.zla.app%2F&demo-title=ZLA%20%E5%B0%8F%E7%AB%99%20(Demo)&demo-description=ZL%20Asica%2C%20the%20creator%20of%20SuzuBlog%2C%20personal%20Blog.&demo-url=https%3A%2F%2Fzla.pub%2F
 [vercel-link]: https://vercel.com
