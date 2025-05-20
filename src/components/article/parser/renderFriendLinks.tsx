@@ -1,10 +1,9 @@
 import { CustomImage } from '@/components/ui'
-import { replace } from 'es-toolkit/compat'
 
 const renderFriendLinks = (linksChildren: string, transition: Translation) => {
   let links: FriendLink[] = []
   try {
-    links = JSON.parse(replace(linksChildren, /\}\s*,\s*\{/g, '},{')) as FriendLink[]
+    links = JSON.parse(linksChildren.replace(/\}\s*,\s*\{/g, '},{')) as FriendLink[]
     if (!Array.isArray(links)) {
       throw new TypeError('Parsed links is not an array')
     }

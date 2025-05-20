@@ -1,9 +1,9 @@
 'use client'
 
-import SocialMediaLink from '@/components/common/SocialMediaLinks'
 import Link from 'next/link'
-
 import { usePathname } from 'next/navigation'
+
+import SocialMediaLink from '@/components/common/SocialMediaLinks'
 
 interface FooterProps {
   config: Config

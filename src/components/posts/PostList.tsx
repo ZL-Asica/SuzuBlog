@@ -1,7 +1,7 @@
-import { CategoriesTagsList } from '@/components/article'
 import { Clock, Ellipsis } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CategoriesTagsList } from '@/components/article'
 
 interface PostListProps {
   posts: PostListData[]
