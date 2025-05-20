@@ -31,7 +31,6 @@
     "@vercel/speed-insights": "^1.2.0",
     "@zl-asica/react": "^0.7.0",
     "clsx": "^2.1.1",
-    "es-toolkit": "^1.37.2",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.22",
     "lucide-react": "^0.509.0",

@@ -1,5 +1,3 @@
-import { replace, words } from 'es-toolkit/compat'
-import { upperFirst } from 'es-toolkit/string'
 import Link from 'next/link'
 import {
   FaBilibili,
@@ -84,13 +82,12 @@ const SocialMediaLinks = ({
         .map(([key, username]) => {
           const { urlTemplate, icon: IconComponent } = socialData[key]
 
-          const label = upperFirst(words(key)[0])
+          const label = key.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
 
           return (
             <Link
               key={label}
-              href={replace(
-                urlTemplate,
+              href={urlTemplate.replace(
                 '{username}',
                 key === 'rss'
                   ? '/feed.xml'
@@ -105,6 +102,7 @@ const SocialMediaLinks = ({
               <IconComponent
                 size={iconSize}
                 className="text-hover-primary transition-all-700 group-hover:scale-150"
+                aria-hidden="true"
               />
             </Link>
           )
