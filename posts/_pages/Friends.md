@@ -19,13 +19,13 @@ showThumbnail: false
 {
 "title": "SuzuBlog",
 "link": "https://suzu.zla.app/",
-"img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
+"img": "https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512",
 "des": "也就是这个站点所使用的博客系统"
 },
 {
 "title": "个人学术网站",
 "link": "https://elaraliu.com/",
-"img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
+"img": "https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512",
 "des": "我的个人学术网站(英文)"
 },
 {
@@ -172,7 +172,7 @@ showThumbnail: false
 {
 "title": "晓雨杂记",
 "link": "https://www.lihaoyu.cn",
-"img": "https://cdn.v2ex.com/gravatar/636d113ce37111d08f08faee780ce9b8?size=512",
+"img": "https://gravatar.zla.app/avatar/636d113ce37111d08f08faee780ce9b8?s=512",
 "des": "也许我们会分别，但我们将永远不会忘记彼此"
 },
 {
@@ -228,6 +228,30 @@ showThumbnail: false
 "link": "https://blog.zhilu.cyou/",
 "img": "https://www.zhilu.cyou/api/avatar.png",
 "des": "纸鹿至麓不知路，支炉制露不止漉"
+},
+{
+"title": "Hitokoto - 一言",
+"link": "https://hitokoto.cn/",
+"img": "https://developer.hitokoto.cn/logo.png",
+"des": "萌创团队一句话服务"
+},
+{
+"title": "Pigwan",
+"link": "https://pigwan.me/",
+"img": "https://pigwan.me/logo.png",
+"des": "既然相遇是偶然，又何必在意分开时的突然"
+},
+{
+"title": "极客郎",
+"link": "https://blog.jkl.asia",
+"img": "https://blog.jkl.asia/img/jkl1.png",
+"des": "将科技玩到极致！"
+},
+{
+"title": "Aciano",
+"link": "https://aciano.top/",
+"img": "https://bu.dusays.com/2024/07/15/6694b499da8df.jpg",
+"des": "零碎的岛屿总会找到海."
 }
 ]
 ```
@@ -244,14 +268,22 @@ showThumbnail: false
 ## 添加友链
 
 可以直接在下面评论区，使用如下格式留言，方便我复制粘贴。
+
 只要我在你的页面中看到了我的链接且你的链接没有问题，我会第一时间添加！
+
 若链接失效/更换，请及时通知我，若失效时间过长，很抱歉会删除。
+
+若想交换友链，请符合以下情况：
+
+1. 网站采取 HTTPS 协议，且非 `.github.io` 或 `.pages.dev` 等非自由域名。
+2. 网站类型不限，但请不要是违法违规内容。
+3. 网站可以正常访问，并具有一定的内容和更新频率。
 
 ```json
 {
   "title": "ZLA 小站",
   "link": "https://zla.pub/",
-  "img": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
+  "img": "https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512",
   "des": "月亮不抱你，星星会落在你怀里✨🌙"
 }
 ```
@@ -262,7 +294,7 @@ showThumbnail: false
 博主: ZL Asica
 名称: ZLA 小站
 地址: https://zla.pub/
-图标: https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512
+图标: https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512
 描述: 月亮不抱你，星星会落在你怀里✨🌙
 RSS: https://zla.pub/feed.xml
 ```
