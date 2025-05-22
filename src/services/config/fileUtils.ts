@@ -2,8 +2,6 @@ import { watch } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
-import { lowerCase, trim } from 'es-toolkit/compat'
-
 import * as translations from './locales'
 
 // Config file path
@@ -20,7 +18,7 @@ const FRIEND_LINKS_FILE_PATH = path.join(process.cwd(), 'posts', '_pages', 'Frie
  * @returns Translation object
  */
 function getTranslationContent(lang: string): Translation {
-  const normalizedLang = lowerCase(trim(lang))
+  const normalizedLang = lang.toLowerCase().trim()
   const translation = translations[normalizedLang] as Translation | undefined
 
   return translation || translations.en

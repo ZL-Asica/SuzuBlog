@@ -6,6 +6,8 @@
 
 🚀 **[Live Demo](https://www.zla.pub)** | 📚 **[Documentation](https://suzu.zla.app)**
 
+If you enjoy using it, please consider giving it a star! ⭐ I hope you find it as enjoyable as I do!
+
 [![GitHub License][license-badge]][license-link] [![Latest Release][release-badge]][release-link]
 
 [![Node.js][node-badge]][node-link] [![pnpm Version][pnpm-badge]][pnpm-link] | [![Next.js][nextjs-badge]][nextjs-link] [![Tailwind CSS][tailwind-badge]][tailwind-link] | [![Vercel][vercel-badge]][vercel-link] [![Eslint][eslint-badge]][eslint-link] [![Prettier][prettier-badge]][prettier-link]
@@ -24,7 +26,11 @@
 
 ## **🚀 Get Started**
 
-For setup, configuration, Markdown syntax, and deployment guides, follow the documentation:
+Ready to launch your own Suzu Blog? Just click the button below to deploy instantly with Vercel:
+
+[![Deploy with Vercel][vercel-button]][vercel-deploy-link]
+
+Need help with setup, customization, or deployment? Check out the full documentation:
 
 📖 **[Suzu Blog Docs](https://suzu.zla.app)**
 
@@ -48,7 +54,7 @@ For setup, configuration, Markdown syntax, and deployment guides, follow the doc
 
 ## ❤️ About Suzu
 
-After years of frustration with the maintenance, security risks, and performance issues of other frameworks, I decided to create Suzu Blog using **Next.js**. It is simple, efficient, and highly customizable, designed for anyone looking to build a modern blog quickly. If you enjoy using it, please consider giving it a star! ⭐ I hope you find it as enjoyable as I do!
+After years of frustration with the maintenance, security risks, and performance issues of other frameworks, I decided to create Suzu Blog using **Next.js**. It is simple, efficient, and highly customizable, designed for anyone looking to build a modern blog quickly.
 
 ## 🔗 Community Support
 
@@ -77,4 +83,6 @@ This project is licensed under the [AGPL-3.0 License][license-link]. See the [LI
 [tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
+[vercel-button]: https://vercel.com/button
+[vercel-deploy-link]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FZL-Asica%2FSuzuBlog&env=ENABLE_EXPERIMENTAL_COREPACK&envDescription=This%20is%20option%20to%20enable%20corepack%20by%20default%20to%20use%20pnpm.%20Set%20this%20to%201.&envLink=https%3A%2F%2Fvercel.com%2Fdocs%2Fbuilds%2Fconfigure-a-build%23corepack&project-name=suzu-blog&repository-name=SuzuBlog&redirect-url=https%3A%2F%2Fsuzu.zla.app%2F&demo-title=ZLA%20%E5%B0%8F%E7%AB%99%20(Demo)&demo-description=ZL%20Asica%2C%20the%20creator%20of%20SuzuBlog%2C%20personal%20Blog.&demo-url=https%3A%2F%2Fzla.pub%2F
 [vercel-link]: https://vercel.com

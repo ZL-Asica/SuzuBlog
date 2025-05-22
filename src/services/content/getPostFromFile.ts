@@ -1,10 +1,9 @@
 import { statSync } from 'node:fs'
 
-import { getConfig } from '@/services/config'
-import { generateHierarchicalSlug } from '@/services/utils'
-
-import { defaultTo, forEach, replace, trim } from 'es-toolkit/compat'
 import { read as matterRead } from 'gray-matter'
+import { getConfig } from '@/services/config'
+
+import { generateHierarchicalSlug } from '@/services/utils'
 
 const config = getConfig()
 
@@ -55,7 +54,7 @@ const generateTOC = (content: string): TocItems[] => {
 // Helper function to create post abstract
 const processPostAbstract = (contentRaw: string, excerpt: string): string => {
   let contentStripped = excerpt.length > 0 ? excerpt : contentRaw
-  contentStripped = trim(contentStripped).slice(0, 150)
+  contentStripped = contentStripped.trim().slice(0, 150)
 
   const patterns: [RegExp, string][] = [
     [/#* (.*)/g, '$1'], // Headings
@@ -71,8 +70,8 @@ const processPostAbstract = (contentRaw: string, excerpt: string): string => {
     [/^\d+\.\s+/g, ''], // Ordered list markers
   ]
 
-  forEach(patterns, ([pattern, replacement]) => {
-    contentStripped = replace(contentStripped, pattern, replacement)
+  patterns.forEach(([pattern, replacement]) => {
+    contentStripped = contentStripped.replace(pattern, replacement)
   })
 
   return contentStripped
@@ -92,13 +91,13 @@ const getPostFromFile = (filePath: string, slug: string, fullData: boolean = tru
     author: (data.author as string)?.slice(0, 30) || config.author.name,
     thumbnail: (data.thumbnail ?? config.background) as string,
     date,
-    tags: defaultTo(data.tags) as string[],
-    categories: defaultTo(data.categories) as string[],
-    redirect: defaultTo(data.redirect) as string,
-    showComments: defaultTo(data.showComments, true) as boolean,
-    showLicense: defaultTo(data.showLicense, true) as boolean,
-    showThumbnail: defaultTo(data.showThumbnail, true) as boolean,
-    autoSlug: defaultTo(data.autoSlug, true) as boolean,
+    tags: data.tags as string[] | undefined,
+    categories: data.categories as string[] | undefined,
+    redirect: data.redirect as string | undefined,
+    showComments: (data.showComments ?? true) as boolean,
+    showLicense: (data.showLicense ?? true) as boolean,
+    showThumbnail: (data.showThumbnail ?? true) as boolean,
+    autoSlug: (data.autoSlug ?? true) as boolean,
   }
 
   let toc: TocItems[] = []
@@ -108,7 +107,7 @@ const getPostFromFile = (filePath: string, slug: string, fullData: boolean = tru
 
   return {
     slug,
-    postAbstract: processPostAbstract(contentRaw, defaultTo(excerpt, '')),
+    postAbstract: processPostAbstract(contentRaw, excerpt ?? ''),
     frontmatter,
     contentRaw,
     lastModified,

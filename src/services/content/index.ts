@@ -6,19 +6,17 @@ import process from 'node:process'
 
 import getPostFromFile from '@/services/content/getPostFromFile'
 
-import { filter, lowerCase, replace } from 'es-toolkit/compat'
-
 const postsDirectory = path.join(process.cwd(), 'posts')
 
 const getAllPosts = async (): Promise<PostListData[]> => {
   const fileNames = await fsPromise.readdir(postsDirectory)
-  const markdownFiles = filter(fileNames, fileName => fileName.endsWith('.md'))
+  const markdownFiles = fileNames.filter(fileName => fileName.endsWith('.md'))
 
   const allPosts = await Promise.all(
     markdownFiles.map(async (fileName) => {
       const { slug, postAbstract, frontmatter, lastModified, contentRaw } = getPostFromFile(
         path.join(postsDirectory, fileName),
-        replace(fileName, /\.md$/, ''),
+        fileName.replace(/\.md$/, ''),
         false, // Fetch only partial data for list view
       )
       return { slug, postAbstract, frontmatter, lastModified, contentRaw }
@@ -33,7 +31,7 @@ const getAllPosts = async (): Promise<PostListData[]> => {
 
 const getPostData = async (slug: string): Promise<FullPostData | null> => {
   const filePath
-    = lowerCase(slug) === 'about' || lowerCase(slug) === 'friends'
+    = slug.toLowerCase() === 'about' || slug.toLowerCase() === 'friends'
       ? path.join(postsDirectory, '_pages', `${slug}.md`)
       : path.join(postsDirectory, `${slug}.md`)
 

@@ -6,6 +6,8 @@
 
 🚀 **[在线演示](https://www.zla.pub)** | 📚 **[使用文档](https://suzu.zla.app)**
 
+如果你喜欢这个项目，请考虑给它一个 ⭐！我希望你能和我一样享受使用它的乐趣！拜托了这对我真的很重要！
+
 [![GitHub License][license-badge]][license-link] [![Latest Release][release-badge]][release-link]
 
 [![Node.js][node-badge]][node-link] [![pnpm Version][pnpm-badge]][pnpm-link] | [![Next.js][nextjs-badge]][nextjs-link] [![Tailwind CSS][tailwind-badge]][tailwind-link] | [![Vercel][vercel-badge]][vercel-link] [![Eslint][eslint-badge]][eslint-link] [![Prettier][prettier-badge]][prettier-link]
@@ -24,7 +26,11 @@
 
 ## 🚀 快速上手
 
-Suzu Blog 的安装、配置、Markdown 语法、部署等详细教程，请参考：
+想要搭建你自己的 Suzu Blog？只需点击下方按钮，即可通过 Vercel 一键部署：
+
+[![Deploy with Vercel][vercel-button]][vercel-deploy-link]
+
+需要了解如何配置、撰写 Markdown 或部署网站？请查阅完整文档：
 
 📖 **[Suzu Blog 官方文档](https://suzu.zla.app)**
 
@@ -48,7 +54,7 @@ Suzu Blog 的安装、配置、Markdown 语法、部署等详细教程，请参�
 
 ## ❤️ 关于 Suzu
 
-在多年使用各种博客框架的过程中，我深受 **维护成本高、安全隐患多、性能不稳定** 等问题的困扰。最终，我决定基于 **Next.js** 打造 Suzu Blog —— 一个 **简洁、高效、可高度自定义** 的博客模板，帮助任何人快速搭建现代化博客。如果你喜欢这个项目，请考虑给它一个 ⭐！我希望你能和我一样享受使用它的乐趣！
+在多年使用各种博客框架的过程中，我深受 **维护成本高、安全隐患多、性能不稳定** 等问题的困扰。最终，我决定基于 **Next.js** 打造 Suzu Blog —— 一个 **简洁、高效、可高度自定义** 的博客模板，帮助任何人快速搭建现代化博客。
 
 ## 🔗 社区支持
 
@@ -77,4 +83,6 @@ Suzu Blog 的安装、配置、Markdown 语法、部署等详细教程，请参�
 [tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white
 [tailwind-link]: https://tailwindcss.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
+[vercel-button]: https://vercel.com/button
+[vercel-deploy-link]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FZL-Asica%2FSuzuBlog&env=ENABLE_EXPERIMENTAL_COREPACK&envDescription=This%20is%20option%20to%20enable%20corepack%20by%20default%20to%20use%20pnpm.%20Set%20this%20to%201.&envLink=https%3A%2F%2Fvercel.com%2Fdocs%2Fbuilds%2Fconfigure-a-build%23corepack&project-name=suzu-blog&repository-name=SuzuBlog&redirect-url=https%3A%2F%2Fsuzu.zla.app%2F&demo-title=ZLA%20%E5%B0%8F%E7%AB%99%20(Demo)&demo-description=ZL%20Asica%2C%20the%20creator%20of%20SuzuBlog%2C%20personal%20Blog.&demo-url=https%3A%2F%2Fzla.pub%2F
 [vercel-link]: https://vercel.com

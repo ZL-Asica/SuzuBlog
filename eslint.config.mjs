@@ -16,11 +16,6 @@ export default antfu({
     'react-dom/no-dangerously-set-innerhtml': 'off',
   },
 }, {
-  files: ['src/app/**/loading.tsx'],
-  rules: {
-    'react/no-array-index-key': 'off',
-  },
-}, {
   files: ['src/components/anime/**/*.tsx'],
   rules: {
     'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
