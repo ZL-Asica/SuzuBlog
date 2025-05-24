@@ -21,6 +21,15 @@ export default antfu({
     'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
   },
 }, {
+  files: ['posts/**/*.md'],
+  rules: {
+    'react-hooks/rules-of-hooks': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'react/display-name': 'off',
+    'react/prop-types': 'off',
+    'antfu/no-top-level-await': 'off',
+  },
+}, {
   // TODO: Need wait for their support for tailwindcss v4
   // ! Not support tailwindcss v4 yet
   // files: ['**/*.{ts,tsx}'],

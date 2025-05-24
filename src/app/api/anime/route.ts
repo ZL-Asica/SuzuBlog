@@ -1,6 +1,6 @@
-import { AnimeRequestSchema, AnimeResponseSchema } from '@/schemas/anime'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { AnimeRequestSchema, AnimeResponseSchema } from '@/schemas'
 
 export async function GET(req: Request) {
   try {

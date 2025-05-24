@@ -47,7 +47,8 @@ Need help with setup, customization, or deployment? Check out the full documenta
 │   ├── app                   # Next.js App Router
 │   ├── components            # Reusable components
 │   ├── services              # Logic for content parsing, configuration, etc.
-│   └── types.d.ts            # Global type definitions
+│   ├── schemas               # Zod schemas
+│   └── types                 # Global type definitions
 ├── package.json              # Project dependencies and scripts
 └── pnpm-lock.yaml            # pnpm dependency lock file
 ```

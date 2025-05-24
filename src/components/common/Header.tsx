@@ -1,11 +1,11 @@
 'use client'
 
+import type { Config } from '@/schemas'
 import { useClickOutside, useHideOnScrollDown, useToggle } from '@zl-asica/react'
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
-
 import HeaderMenu from './HeaderMenu'
 
 interface HeaderProps {

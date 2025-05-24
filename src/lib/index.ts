@@ -1,0 +1,1 @@
+export { socialDataTemplate } from './socialDataTemplate'

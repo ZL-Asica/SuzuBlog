@@ -1,11 +1,22 @@
+import type { FriendLink } from '@/schemas'
 import { CustomImage } from '@/components/ui'
+import { friendLinkSchema } from '@/schemas'
 
 const renderFriendLinks = (linksChildren: string, transition: Translation) => {
-  let links: FriendLink[] = []
+  const links: FriendLink[] = []
   try {
-    links = JSON.parse(linksChildren.replace(/\}\s*,\s*\{/g, '},{')) as FriendLink[]
-    if (!Array.isArray(links)) {
+    const rawJson = JSON.parse(linksChildren.replace(/\}\s*,\s*\{/g, '},{')) as FriendLink[]
+    if (!Array.isArray(rawJson)) {
       throw new TypeError('Parsed links is not an array')
+    }
+    for (const item of rawJson) {
+      const parsed = friendLinkSchema.safeParse(item)
+      if (parsed.success) {
+        links.push(parsed.data)
+      }
+      else {
+        console.error('[SuzuBlog-friends] Failed to parse Friend Links JSON:', parsed.error)
+      }
     }
   }
   catch (error) {
