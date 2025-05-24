@@ -1,5 +1,17 @@
 # SuzuBlog Changelog
 
+## 1.9.3 (2025-05-23)
+
+### Patch Changes
+
+- Improve config settings and validation
+
+  - Refactor config settings from watch the file to Singleton pattern.
+  - Add zod validation for config settings. Add error handling and clear error message for the user.
+  - Add zod schema for Friend Links to validate the data.
+  - Extract Head part code as a single component.
+  - Move the icons/links as a setting option in the config settings.
+
 ## 1.9.2 (2025-05-20)
 
 ### Patch Changes

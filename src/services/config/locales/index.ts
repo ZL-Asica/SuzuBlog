@@ -1,3 +1,7 @@
-export { default as en } from './en'
-export { default as ja } from './ja'
-export { default as zh } from './zh'
+import en from './en'
+import ja from './ja'
+import zh from './zh'
+
+const translations = { en, ja, zh }
+
+export { translations }

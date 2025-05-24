@@ -1,6 +1,6 @@
 {
   "name": "suzu-blog",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "private": true,
   "packageManager": "pnpm@10.11.0",
   "author": {
@@ -23,7 +23,6 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "commitlint": "commitlint --edit",
     "prepare": "husky"
   },
   "dependencies": {
@@ -46,20 +45,18 @@
     "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "twikoo": "^1.6.43",
+    "twikoo": "^1.6.44",
     "yaml": "^2.8.0",
-    "zod": "^3.25.7"
+    "zod": "^3.25.28"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.1",
+    "@antfu/eslint-config": "^4.13.2",
     "@changesets/cli": "^2.29.4",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
     "@eslint-react/eslint-plugin": "^1.49.0",
     "@next/eslint-plugin-next": "^15.3.2",
     "@tailwindcss/postcss": "^4.1.7",
-    "@types/node": "^22.15.19",
-    "@types/react": "^19.1.4",
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@types/rss": "^0.0.32",
     "eslint": "^9.27.0",

@@ -77,7 +77,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
     redirect(redirectUrl)
   }
 
-  const config: Config = getConfig()
+  const config = getConfig()
 
   // JSON-LD for the article
   const jsonLd = {

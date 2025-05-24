@@ -1,64 +1,7 @@
+import type { SocialMedia } from '@/schemas/config'
+import { capitalize, isEmpty } from '@zl-asica/react/utils'
 import Link from 'next/link'
-import {
-  FaBilibili,
-  FaBluesky,
-  FaEnvelope,
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaOrcid,
-  FaRss,
-  FaTelegram,
-  FaYoutube,
-  FaZhihu,
-} from 'react-icons/fa6'
-
-const socialData: SocialData = {
-  github_username: {
-    urlTemplate: 'https://github.com/{username}',
-    icon: FaGithub,
-  },
-  linkedin_username: {
-    urlTemplate: 'https://www.linkedin.com/in/{username}',
-    icon: FaLinkedin,
-  },
-  instagram_id: {
-    urlTemplate: 'https://www.instagram.com/{username}',
-    icon: FaInstagram,
-  },
-  orcid_id: {
-    urlTemplate: 'https://orcid.org/{username}',
-    icon: FaOrcid,
-  },
-  telegram_username: {
-    urlTemplate: 'https://t.me/{username}',
-    icon: FaTelegram,
-  },
-  bluesky_username: {
-    urlTemplate: 'https://bsky.app/profile/{username}',
-    icon: FaBluesky,
-  },
-  youtube_id: {
-    urlTemplate: 'https://www.youtube.com/@{username}',
-    icon: FaYoutube,
-  },
-  zhihu_username: {
-    urlTemplate: 'https://www.zhihu.com/people/{username}',
-    icon: FaZhihu,
-  },
-  bilibili_id: {
-    urlTemplate: 'https://space.bilibili.com/{username}',
-    icon: FaBilibili,
-  },
-  email: {
-    urlTemplate: 'mailto:{username}',
-    icon: FaEnvelope,
-  },
-  rss: {
-    urlTemplate: '{username}',
-    icon: FaRss,
-  },
-}
+import { socialDataTemplate } from '@/lib'
 
 interface socialMediaLinksProps {
   socialMedia: SocialMedia
@@ -75,14 +18,12 @@ const SocialMediaLinks = ({
     <div
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}
     >
-      {(Object.entries(socialMedia) as [keyof SocialMedia, string | null][])
-        .filter(([key, username]) =>
-          key in socialData && username !== null && String(username) !== 'false',
-        )
+      {Object.entries(socialMedia)
+        .filter(([key, username]) => key in socialDataTemplate && !isEmpty(username))
         .map(([key, username]) => {
-          const { urlTemplate, icon: IconComponent } = socialData[key]
+          const { urlTemplate, icon: IconComponent } = socialDataTemplate[key as keyof typeof socialDataTemplate]
 
-          const label = key.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
+          const label = capitalize(key.replace(/_/g, ' '))
 
           return (
             <Link
@@ -101,7 +42,7 @@ const SocialMediaLinks = ({
             >
               <IconComponent
                 size={iconSize}
-                className="text-hover-primary transition-all-700 group-hover:scale-150"
+                className="text-hover-primary transition-all-500 group-hover:scale-150"
                 aria-hidden="true"
               />
             </Link>

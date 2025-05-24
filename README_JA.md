@@ -47,6 +47,7 @@
 │   ├── app                   # Next.js App Router
 │   ├── components            # 再利用可能なコンポーネント
 │   ├── services              # コンテンツ解析、設定処理などのロジック
+│   ├── schemas               # Zod Schemas
 │   └── types                 # グローバル型定義
 ├── package.json              # プロジェクト依存関係とスクリプト
 └── pnpm-lock.yaml            # pnpm 依存関係ロックファイル

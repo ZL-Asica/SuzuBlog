@@ -1,7 +1,9 @@
 'use client'
 
 import type { ReactElement } from 'react'
+import type { Config } from '@/schemas'
 import { useTheme } from '@zl-asica/react'
+import { isEmpty } from '@zl-asica/react/utils'
 import { House, Info, Moon, Newspaper, Sun, TrainFront, TvMinimalPlay, UsersRound } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -33,7 +35,7 @@ const HeaderMenu = ({ config, isMobile, ulClassName, onClickHandler }: HeaderMen
     { href: '/about', label: translation.about.title, icon: <Info /> },
   ]
 
-  if (config.anilist_username !== undefined && config.anilist_username !== null && config.anilist_username.length > 1) {
+  if (!isEmpty(config.anilist_username)) {
     menuItems[3].children = [{ href: '/about/anime', label: translation.anime.title, icon: <TvMinimalPlay /> }]
   }
 

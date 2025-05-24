@@ -13,7 +13,7 @@ interface AnimeCardProps {
 }
 
 const AnimeCard = ({ sortedLists, lang, translation }: AnimeCardProps) => {
-  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [showNotes, setShowNotes] = useState<number | null>(null)
 
   useEffect(() => {
