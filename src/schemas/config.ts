@@ -125,8 +125,8 @@ export const userConfigSchema = z.object({
   // Social media
   socialMedia: socialMediaSchema,
   // Comments
-  twikooEnvId: z.string().url('Twikoo environment ID must be a valid URL').nullable().optional().default(null),
-  disqusShortname: z.string().nullable().optional().default(null),
+  twikooEnvId: z.string().url('Twikoo environment ID must be a valid URL').transform(val => val.trim()).nullable().optional().default(null),
+  disqusShortname: z.string().transform(val => val.trim()).nullable().optional().default(null),
 
   // Custom code blocks
   headerJavascript: z
@@ -136,10 +136,11 @@ export const userConfigSchema = z.object({
     .describe('Custom JavaScript code to be included inside the <head> section of your site. One script url per line. Could be a CDN or a local file.'),
   slotFooter: z
     .string()
+    .transform(val => val.trim())
     .nullable()
     .optional()
-    .default(null)
-    .describe('Custom HTML code to be included inside the <footer> section of your site.'),
+    .describe('Custom HTML code to be included inside the <footer> section of your site.')
+    .default(null),
 })
 
 export type SocialMediaKey = keyof typeof socialMediaSchema.shape

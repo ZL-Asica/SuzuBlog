@@ -118,11 +118,11 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
         )}
         <div className="mt-10" />
         {post.frontmatter.showComments && (
-          config.twikooEnvId !== null
+          config.twikooEnvId !== null && config.twikooEnvId.length > 0
             ? (
                 <TwikooComments environmentId={config.twikooEnvId} />
               )
-            : config.disqusShortname !== null
+            : config.disqusShortname !== null && config.disqusShortname.length > 0
               ? (
                   <DisqusComments disqusShortname={config.disqusShortname} />
                 )

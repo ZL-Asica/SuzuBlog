@@ -69,7 +69,8 @@ export default function RootLayout(
         links={config.links}
       />
 
-      <body className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-dvh flex-col antialiased`}>
+      {/* min-h-screen for fallback in case min-h-dvh is not supported */}
+      <body className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-screen min-h-dvh flex-col antialiased`}>
         <ScrollPositionBar />
         <Header config={config} />
         <main className="grow mt-20 motion-safe:animate-fade-in-down">

@@ -53,7 +53,7 @@ const Footer = ({ config }: FooterProps) => {
             ZL Asica
           </Link>
         </p>
-        {config.slotFooter !== null && (
+        {config.slotFooter !== null && config.slotFooter.length > 0 && (
           <div dangerouslySetInnerHTML={{ __html: config.slotFooter }} />
         )}
       </div>
