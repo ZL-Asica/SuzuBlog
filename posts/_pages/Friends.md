@@ -19,13 +19,13 @@ showThumbnail: false
 {
 "title": "SuzuBlog",
 "link": "https://suzu.zla.app/",
-"img": "https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512",
+"img": "https://gravatar.zla.app/avatar/me",
 "des": "也就是这个站点所使用的博客系统"
 },
 {
 "title": "个人学术网站",
 "link": "https://elaraliu.com/",
-"img": "https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512",
+"img": "https://gravatar.zla.app/avatar/me",
 "des": "我的个人学术网站(英文)"
 },
 {
@@ -283,7 +283,7 @@ showThumbnail: false
 {
   "title": "ZLA 小站",
   "link": "https://zla.pub/",
-  "img": "https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512",
+  "img": "https://gravatar.zla.app/avatar/me",
   "des": "月亮不抱你，星星会落在你怀里✨🌙"
 }
 ```
@@ -294,7 +294,7 @@ showThumbnail: false
 博主: ZL Asica
 名称: ZLA 小站
 地址: https://zla.pub/
-图标: https://gravatar.zla.app/avatar/de403bb7bb2abb235c02dffd7ce5419a?s=512
+图标: https://gravatar.zla.app/avatar/me
 描述: 月亮不抱你，星星会落在你怀里✨🌙
 RSS: https://zla.pub/feed.xml
 ```
