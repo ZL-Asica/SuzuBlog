@@ -1,3 +1,5 @@
+import type { HeadLink } from '@/schemas'
+import { assignUUID } from '@zl-asica/react/utils'
 import Script from 'next/script'
 
 interface HeadProps {
@@ -5,6 +7,7 @@ interface HeadProps {
   siteUrl: string
   headerJavascript: string[]
   googleAnalytics: null | string
+  links: HeadLink[]
 }
 
 const Head = async ({
@@ -12,13 +15,19 @@ const Head = async ({
   siteUrl,
   headerJavascript,
   googleAnalytics,
+  links,
 }: HeadProps) => {
   return (
     <>
-      {/* icons */}
-      <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
-      <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+      {assignUUID(links).map(link => (
+        <link
+          key={link.id}
+          rel={link.rel}
+          type={link.type}
+          href={link.href}
+          sizes={link.sizes}
+        />
+      ))}
 
       {/* If rss set in config */}
       {rss !== null

@@ -1,4 +1,4 @@
-import type { SocialMedia, SocialMediaKey, UserConfig } from './config'
+import type { HeadLink, SocialMedia, SocialMediaKey, UserConfig } from './config'
 import type { FriendLink } from './frinedLink'
 
 export interface Config extends UserConfig {
@@ -6,7 +6,7 @@ export interface Config extends UserConfig {
   friendLinks: FriendLink[]
 }
 
-export type { FriendLink, SocialMedia, SocialMediaKey, UserConfig }
+export type { FriendLink, HeadLink, SocialMedia, SocialMediaKey, UserConfig }
 export { AnimeRequestSchema, AnimeResponseSchema } from './anime'
 export { userConfigSchema } from './config'
 export { friendLinkSchema } from './frinedLink'

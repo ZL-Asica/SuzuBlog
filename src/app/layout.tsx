@@ -66,6 +66,7 @@ export default function RootLayout(
         siteUrl={config.siteUrl}
         headerJavascript={config.headerJavascript}
         googleAnalytics={config.googleAnalytics}
+        links={config.links}
       />
 
       <body className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-dvh flex-col antialiased`}>

@@ -29,6 +29,30 @@ slogan: "As long as the code or the developer is able to run, it's all good."
 googleAnalytics:
 
 # ######################
+# HTML HEAD SETTINGS
+# ######################
+# Feel free to add more links in Head for your site for better SEO.
+# You could generate the links/icons by using https://realfavicongenerator.net/
+# Recommend put your icons in /public/icons folder. And follow the examples below.
+# Each item here will be rendered as a link tag in the <head> section of your site.
+# <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+# - rel
+#   type(optional)
+#   href
+#   sizes(optional)
+links:
+  - rel: icon
+    type: image/png
+    href: /icons/favicon-96x96.png
+    sizes: 96x96
+  - rel: icon
+    type: image/svg+xml
+    href: /icons/favicon.svg
+  - rel: apple-touch-icon
+    href: /icons/apple-touch-icon.png
+    sizes: 180x180
+
+# ######################
 # POSTS SETTINGS
 # ######################
 # How many posts you want to display per page. (default(not set): 5, max: 15)

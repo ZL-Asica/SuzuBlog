@@ -26,6 +26,13 @@ const creativeCommonsSchema = z.object({
     .describe('Creative Commons link'),
 })
 
+const headLinkSchema = z.object({
+  rel: z.string().describe('The rel attribute of the link tag'),
+  type: z.string().optional().describe('The type attribute of the link tag'),
+  href: z.string().describe('The href attribute of the link tag'),
+  sizes: z.string().optional().describe('The sizes attribute of the link tag'),
+})
+
 const StrOrNum = z
   .union([z.string(), z.number()])
   .transform(val => String(val).trim())
@@ -82,6 +89,8 @@ export const userConfigSchema = z.object({
     .nullable()
     .optional()
     .default(null),
+  // Icons settings
+  links: z.array(headLinkSchema).optional().default([]),
   // Posts settings
   postsPerPage: z
     .number()
@@ -136,3 +145,4 @@ export const userConfigSchema = z.object({
 export type SocialMediaKey = keyof typeof socialMediaSchema.shape
 export type SocialMedia = z.infer<typeof socialMediaSchema>
 export type UserConfig = z.infer<typeof userConfigSchema>
+export type HeadLink = z.infer<typeof headLinkSchema>
