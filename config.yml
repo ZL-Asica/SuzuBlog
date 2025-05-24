@@ -1,15 +1,20 @@
 # ######################
 # SITE SETTINGS
 # ######################
-title: Suzu # The name of your blog, used in titles and meta tags.
-subTitle: Next.js Blog Template # A short description that appears after the main title.
-description: 'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.' # A longer description for SEO and meta tags.
-keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica' # Comma-separated keywords for SEO purposes.
+# The name of your blog, used in titles and meta tags.
+title: Suzu
+# A short description that appears after the main title.
+subTitle: Next.js Blog Template
+# A longer description for SEO and meta tags.
+description: 'Suzu is a minimalist blog template with a serene sakura-inspired theme, blending modern design with a touch of traditional Japanese aesthetics.'
+# Comma-separated keywords for SEO purposes.
+keywords: 'Suzu, Next.js, markdown blog, Tailwind CSS, blog template, sakura, ZL Asica'
 author:
   name: ZL Asica # Your name, displayed as the author of the blog.
   link: 'https://www.zla.pub' # Link to your personal website or blog.
-# Language setting: Use ISO 639-1 code (e.g., 'en' for English, 'zh' for Chinese)
-lang: zh
+# Language setting: Use BCP 47 tag
+# e.g., 'en' for English, 'zh-CN' for Simplified Chinese, 'zh-HK' for Traditional Chinese Hong Kong style
+lang: zh-CN
 # Your public root url, used for SEO and meta tags.
 # !Do not include a ending slash
 siteUrl: 'https://suzu.zla.app'
@@ -87,7 +92,8 @@ disqusShortname:
 # CUSTOM CODE BLOCKS
 # ! WARNING: Only modify these if you understand the purpose of custom scripts.
 # ######################
-# Add custom JavaScript code to be included inside the <head> section of your site. One script per line.
+# Add custom JavaScript code to be included inside the <head> section of your site.
+# One script url per line. Could be a CDN or a local file.
 headerJavascript:
   - https://cdn.jsdelivr.net/gh/zl-asica/web-cdn/js/zlasica.js
 # Add custom HTML code to be included inside the <footer> section of your site.

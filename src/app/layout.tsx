@@ -8,7 +8,7 @@ import { getConfig } from '@/services/config'
 
 import './globals.css'
 
-const config: Config = getConfig()
+const config = getConfig()
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -60,9 +60,6 @@ export const metadata: Metadata = {
 export default function RootLayout(
   { children }: Readonly<{ children: React.ReactNode }>,
 ) {
-  const config: Config = getConfig()
-  const googleAnalytics = config.googleAnalytics ?? ''
-
   return (
     <html lang={config.lang}>
       {/* icons */}
@@ -87,10 +84,10 @@ export default function RootLayout(
         <Script key={jsFile} src={jsFile} strategy="afterInteractive" />
       ))}
       {/* Google Analytics Script */}
-      {googleAnalytics && (
+      {config.googleAnalytics !== null && (
         <>
           <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics}`}
             strategy="afterInteractive"
           />
           <Script id="google-analytics" strategy="afterInteractive">
@@ -100,7 +97,7 @@ export default function RootLayout(
               dataLayer.push(arguments);
             }
             gtag('js', new Date());
-            gtag('config', '${googleAnalytics}');
+            gtag('config', '${config.googleAnalytics}');
           `}
           </Script>
         </>

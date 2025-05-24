@@ -1,3 +1,4 @@
+import type { Config } from '@/schemas'
 import { loadUserConfig } from './configLoader'
 import { loadFriendLinks } from './friendLinks'
 import { getTranslationContent } from './translation'

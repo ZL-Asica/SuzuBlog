@@ -1,3 +1,4 @@
+import type { Config } from '@/schemas'
 import dynamic from 'next/dynamic'
 import { CustomImage } from '@/components/ui'
 import CategoriesTagsList from './CategoriesTagsList'
@@ -117,11 +118,11 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
         )}
         <div className="mt-10" />
         {post.frontmatter.showComments && (
-          config.twikooEnvId != null && config.twikooEnvId.trim() !== ''
+          config.twikooEnvId !== null
             ? (
                 <TwikooComments environmentId={config.twikooEnvId} />
               )
-            : config.disqusShortname != null && config.disqusShortname.trim() !== ''
+            : config.disqusShortname !== null
               ? (
                   <DisqusComments disqusShortname={config.disqusShortname} />
                 )

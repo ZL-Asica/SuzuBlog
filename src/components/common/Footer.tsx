@@ -1,16 +1,16 @@
 'use client'
 
+import type { Config } from '@/schemas'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
 import SocialMediaLink from '@/components/common/SocialMediaLinks'
 
 interface FooterProps {
   config: Config
 }
 
-const getYearDisplay = (startYear: number | null | undefined, currentYear: number) => {
-  if (startYear != null && !Number.isNaN(startYear) && startYear < currentYear) {
+const getYearDisplay = (startYear: number | null, currentYear: number) => {
+  if (startYear !== null && startYear < currentYear) {
     return `${startYear} - `
   }
   return ''
@@ -53,7 +53,7 @@ const Footer = ({ config }: FooterProps) => {
             ZL Asica
           </Link>
         </p>
-        {config.slotFooter && (
+        {config.slotFooter !== null && (
           <div dangerouslySetInnerHTML={{ __html: config.slotFooter }} />
         )}
       </div>

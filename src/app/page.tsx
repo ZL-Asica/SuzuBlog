@@ -6,7 +6,7 @@ import SocialMediaLinks from '@/components/common/SocialMediaLinks'
 import { getConfig } from '@/services/config'
 
 async function Home() {
-  const config: Config = getConfig()
+  const config = getConfig()
 
   // JSON-LD for the entire site
   const jsonLd = {

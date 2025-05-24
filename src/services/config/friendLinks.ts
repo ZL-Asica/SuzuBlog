@@ -1,6 +1,8 @@
+import type { FriendLink } from '@/schemas'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+import { friendLinkSchema } from '@/schemas'
 
 const FRIEND_LINKS_FILE_PATH = path.join(
   process.cwd(),
@@ -22,9 +24,15 @@ const parseFriendLinks = (markdown: string): FriendLink[] => {
     const json = block.replace(/```Links|```/g, '').trim()
 
     try {
-      const parsed = JSON.parse(json) as FriendLink[] | undefined
-      if (parsed !== undefined && Array.isArray(parsed)) {
-        links.push(...parsed)
+      const rawJson = JSON.parse(json) as unknown[]
+      for (const item of rawJson) {
+        const parsed = friendLinkSchema.safeParse(item)
+        if (parsed.success) {
+          links.push(parsed.data)
+        }
+        else {
+          console.error('Invalid JSON in Links block:', { err: parsed.error, block: json })
+        }
       }
     }
     catch (err) {
