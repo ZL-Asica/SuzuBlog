@@ -47,6 +47,7 @@
 │   ├── app                   # Next.js App Router
 │   ├── components            # 复用组件
 │   ├── services              # 服务逻辑（内容解析、配置加载等）
+│   ├── schemas               # Zod Schemas
 │   └── types                 # 全局类型定义
 ├── package.json              # 项目依赖与脚本
 └── pnpm-lock.yaml            # pnpm 依赖锁定
