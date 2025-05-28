@@ -26,13 +26,19 @@ showThumbnail: false
 "title": "个人学术网站",
 "link": "https://elaraliu.com/",
 "img": "https://gravatar.zla.app/avatar/me",
-"des": "我的个人学术网站(英文)"
+"des": "我的个人学术网站 (英文)"
 },
 {
 "title": "React 工具库",
 "link": "https://react.zla.app/",
 "img": "https://react.zla.app/logo.png",
 "des": "我自己搭建和维护的 React 工具库"
+},
+{
+"title": "Gravatar Worker",
+"link": "https://gravatar.zla.app/",
+"img": "https://gravatar.zla.app/avatar/me",
+"des": "我自己搭建和维护的 Gravatar 镜像 CDN"
 }
 ]
 ```
@@ -252,18 +258,19 @@ showThumbnail: false
 "link": "https://aciano.top/",
 "img": "https://bu.dusays.com/2024/07/15/6694b499da8df.jpg",
 "des": "零碎的岛屿总会找到海."
+},
+{
+"title": "ZMTU",
+"link": "https://zmtu.com",
+"img": "https://zmtu.com/static/images/app/App_Logo.png",
+"des": "ACG二次元社区，我们的征途是星辰大海！"
 }
 ]
 ```
 
-## 失效友链
+<!-- ## 失效友链
 
-> 麻烦出现在下面的朋友在看到后尽快修复或评论区留言更新信息，谢谢！
-
-```Links
-[
-]
-```
+> 麻烦出现在下面的朋友在看到后尽快修复或评论区留言更新信息，谢谢！ -->
 
 ## 添加友链
 
@@ -275,9 +282,10 @@ showThumbnail: false
 
 若想交换友链，请符合以下情况：
 
-1. 网站采取 HTTPS 协议，且非 `.github.io` 或 `.pages.dev` 等非自由域名。
-2. 网站类型不限，但请不要是违法违规内容。
+1. 网站采取 HTTPS 协议。
+2. 网站类型不限，但请不要是违法、违规、不适宜等内容。
 3. 网站可以正常访问，并具有一定的内容和更新频率。
+4. 非 `.github.io`、`.pages.dev`、`.vercel.app`、`netlify.app`、`.web.app` 等非自有域名（非严格要求，只要更新频率稳定即可）。
 
 ```json
 {
