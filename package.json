@@ -71,7 +71,7 @@
     "postcss-preset-env": "^10.1.6",
     "prettier": "^3.5.3",
     "rss": "^1.2.2",
-    "tailwindcss": "^4.1.7",
+    "tailwindcss": "^4.1.8",
     "typescript": "^5.8.3"
   },
   "lint-staged": {
