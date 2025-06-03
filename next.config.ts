@@ -29,6 +29,10 @@ const nextConfig: NextConfig = {
             key: 'X-Theme-URL',
             value: 'https://suzu.zla.app',
           },
+          {
+            key: 'X-Robots-Tag',
+            value: 'all',
+          },
         ],
       },
     ]
