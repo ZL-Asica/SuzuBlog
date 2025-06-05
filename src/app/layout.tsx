@@ -54,6 +54,7 @@ export const metadata: Metadata = {
     description: config.description,
     images: config.avatar,
   },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout(
