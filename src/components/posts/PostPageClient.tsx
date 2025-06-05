@@ -1,10 +1,10 @@
 'use client'
 
-import { Pagination } from '@/components/ui'
-import { useSearchedPosts, useUpdateURL } from '@/hooks'
 import { backToTop, clamp } from '@zl-asica/react'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
+import { Pagination } from '@/components/ui'
+import { useSearchedPosts, useUpdateURL } from '@/hooks'
 import PostListLayout from './PostList'
 
 interface PostPageClientProps {

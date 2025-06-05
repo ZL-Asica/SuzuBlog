@@ -1,14 +1,14 @@
 'use client'
 
 import type { ChangeEvent } from 'react'
-import { Select } from '@/components/ui'
-import { useUpdateURL } from '@/hooks'
-import { validateParameters } from '@/services/utils'
 import { useClickOutside, useToggle } from '@zl-asica/react'
 import { clsx } from 'clsx'
 import Form from 'next/form'
 import { useSearchParams } from 'next/navigation'
 import { useRef, useState } from 'react'
+import { Select } from '@/components/ui'
+import { useUpdateURL } from '@/hooks'
+import { validateParameters } from '@/services/utils'
 
 interface SearchInputProps {
   categories: string[]

@@ -1,6 +1,6 @@
-import { sanitizeQuery } from '@/services/utils'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
+import { sanitizeQuery } from '@/services/utils'
 
 const useUpdateURL = () => {
   const router = useRouter()
