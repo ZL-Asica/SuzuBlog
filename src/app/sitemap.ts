@@ -24,15 +24,17 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // Generate sitemap entries for each post
-  const postUrls = posts.map(post =>
-    makeSitemapItem(`${siteUrl}/${post.slug}`, {
-      changeFrequency: 'weekly',
-      priority: 0.5,
-      images: post.frontmatter.showThumbnail
-        ? generateImgUrlArray(siteUrl, post.frontmatter.thumbnail)
-        : undefined,
-    }),
-  )
+  const postUrls = posts
+    .filter(post => post.frontmatter.redirect === undefined)
+    .map(post =>
+      makeSitemapItem(`${siteUrl}/${post.slug}`, {
+        changeFrequency: 'weekly',
+        priority: 0.5,
+        images: post.frontmatter.showThumbnail
+          ? generateImgUrlArray(siteUrl, post.frontmatter.thumbnail)
+          : undefined,
+      }),
+    )
   const homepage = makeSitemapItem(siteUrl, {
     changeFrequency: 'yearly',
     priority: 1,
