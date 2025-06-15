@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import process from 'node:process'
 import { notFound } from 'next/navigation'
 import AnimeListCollection from '@/components/anime/AnimeListCollection'
+import { fetchAnilistData } from '@/lib/actions/anilist'
 import { buildWebsiteJsonLd } from '@/lib/buildJsonLd'
 import { buildMetadata } from '@/lib/buildMetadata'
-import { AnimeResponseSchema } from '@/schemas/anime'
 import { getConfig } from '@/services/config'
 
 export const revalidate = 300 // 5 minutes for whole page
@@ -31,27 +30,14 @@ export default async function AnimePage() {
     return notFound()
   }
 
-  const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? config.siteUrl
-    : 'http://localhost:3000'
+  const annilistRes = await fetchAnilistData(anilist_username)
 
-  const response = await fetch(`${API_BASE_URL}/api/anime?userName=${anilist_username}`)
-
-  if (!response.ok) {
-    console.error(`Failed to fetch anime data: ${response.statusText}`)
+  if (!annilistRes.success || !annilistRes.data) {
+    console.error(`Failed to fetch anime data: ${annilistRes.message}`)
     return notFound()
   }
 
-  const data = await response.json() as unknown
-
-  const parsedAnimeData = AnimeResponseSchema.safeParse(data)
-
-  if (parsedAnimeData.success === false) {
-    console.error(`Zod validation failed: ${JSON.stringify(parsedAnimeData.error.format())}`)
-    return notFound()
-  }
-
-  const animeData = parsedAnimeData.data
+  const animeData = annilistRes.data
 
   const animeTranslation = config.translation.anime
   const jsonLd = buildWebsiteJsonLd({
