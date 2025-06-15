@@ -1,67 +1,64 @@
-import type { Config } from '@/schemas'
-import type { AnimeResponse } from '@/schemas/anime'
-import TOC from '@/components/article/TOC'
+import type { AniListList, AniListListEntry } from '@/schemas/anime'
+import type { AnilistAnimeNameStyle } from '@/schemas/config'
 import AnimeCard from './AnimeCard'
 
 interface AnimeListProps {
-  animeData: AnimeResponse
-  userName: string
-  config: Config
+  sortedLists: AniListList[]
+  tocList: TocItems[]
+  anilistAnimeNameStyle: AnilistAnimeNameStyle
+  lang: string
 }
 
-const SORT_ORDER = ['Watching', 'Completed', 'Paused', 'Dropped', 'Planning']
-
-const AnimeList = ({ animeData, userName, config }: AnimeListProps) => {
-  const {
-    translation,
-    author: { name: author },
-    lang,
-    anilist_anime_name_style,
-  } = config
-
-  const sortedLists = animeData?.data?.MediaListCollection?.lists.sort(
-    (a, b) => SORT_ORDER.indexOf(a.name) - SORT_ORDER.indexOf(b.name),
-  )
-
-  const tocList: TocItems[] = sortedLists.map((list, index) => ({
-    slug: list.name,
-    title: `${index + 1}. ${translation.anime.status[list.name.toLowerCase()]}`,
-    level: 2,
-  }))
-
+const AnimeList = ({
+  sortedLists,
+  tocList,
+  anilistAnimeNameStyle,
+  lang,
+}: AnimeListProps) => {
   return (
     <>
-      <div className="container mx-auto animate-fadeInDown p-6 pb-2 mt-5">
-        <h1 className="text-4xl font-bold">
-          {translation.anime.title}
-        </h1>
-        <p className="text-gray-400 mt-2">
-          {`${author}${translation.anime.description}`}
-        </p>
-        <a
-          href={`https://anilist.co/user/${userName}`}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="text-gray-400 mt-2 underline-interactive hover:text-primary-300"
-        >
-          {translation.anime.source}
-          AniList
-        </a>
-
-        <AnimeCard
-          sortedLists={sortedLists}
-          anilistAnimeNameStyle={anilist_anime_name_style}
-          lang={lang}
-          translation={translation}
-        />
-
-      </div>
-      <TOC
-        items={tocList}
-        translation={translation}
-        autoSlug={false}
-        showThumbnail={false}
-      />
+      {sortedLists.map((list: AniListList, listIndex) => {
+        const listTitle = tocList.find(toc => toc.slug === list.status.toLowerCase())?.title
+        return (
+          <div key={list.name} className="mt-10">
+            <h2 id={list.status.toLowerCase()} className="text-2xl font-semibold border-b border-gray-700 pb-2">
+              <a href={`#${list.status.toLowerCase()}`}>
+                {listTitle}
+              </a>
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-6 mt-4">
+              {/* Show each anime entry */}
+              {list.entries
+                .sort((a, b) =>
+                  (b.score ?? 0) - (a.score ?? 0)
+                  || (b.notes !== null ? 1 : 0) - (a.notes !== null ? 1 : 0)
+                  || (b.progress ?? 0) - (a.progress ?? 0),
+                )
+                .map((entry: AniListListEntry, entryIndex) => {
+                  // Prefer user's config first, then their annilist prefer
+                  // finally fallback to language based
+                  const titleType = anilistAnimeNameStyle !== null
+                    ? anilistAnimeNameStyle
+                    : entry.media.title.userPreferred !== null && Object.keys(entry.media.title).includes(entry.media.title.userPreferred)
+                      ? entry.media.title.userPreferred
+                      : lang === 'ja'
+                        ? 'native'
+                        : 'romaji'
+                  const animeTitle = entry.media.title[titleType as keyof typeof entry.media.title] ?? entry.media.title.romaji
+                  return (
+                    <AnimeCard
+                      key={entry.id}
+                      entry={entry}
+                      animeTitle={animeTitle}
+                      listIndex={listIndex}
+                      entryIndex={entryIndex}
+                    />
+                  )
+                })}
+            </div>
+          </div>
+        )
+      })}
     </>
   )
 }

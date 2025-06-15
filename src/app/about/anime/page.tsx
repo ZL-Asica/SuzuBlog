@@ -3,7 +3,7 @@ import process from 'node:process'
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
 
-import AnimeList from '@/components/anime/AnimeList'
+import AnimeListCollection from '@/components/anime/AnimeListCollection'
 import { AnimeResponseSchema } from '@/schemas/anime'
 import { getConfig } from '@/services/config'
 
@@ -47,9 +47,7 @@ export default async function AnimePage() {
     ? config.siteUrl
     : 'http://localhost:3000'
 
-  const response = await fetch(`${API_BASE_URL}/api/anime?userName=${anilist_username}`, {
-    next: { tags: ['anime'], revalidate: 600 }, // Cache for 10 minutes
-  })
+  const response = await fetch(`${API_BASE_URL}/api/anime?userName=${anilist_username}`)
 
   if (!response.ok) {
     console.error(`Failed to fetch anime data: ${response.statusText}`)
@@ -86,7 +84,7 @@ export default async function AnimePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-      <AnimeList
+      <AnimeListCollection
         animeData={animeData}
         userName={anilist_username}
         config={config}

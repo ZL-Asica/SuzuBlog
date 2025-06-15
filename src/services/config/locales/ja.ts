@@ -33,10 +33,11 @@ const ja: Translation = {
     description: 'の动画ページです。データはAnilistから取得しています。',
     source: 'データソース: ',
     status: {
-      watching: '視聴中',
+      current: '視聴中',
+      repeating: '見なおし',
       completed: '完了',
-      paused: '一時停止',
       dropped: '中止',
+      paused: '一時停止',
       planning: '計画',
     },
   },
