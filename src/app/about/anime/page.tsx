@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import process from 'node:process'
-import Head from 'next/head'
 import { notFound } from 'next/navigation'
-
 import AnimeListCollection from '@/components/anime/AnimeListCollection'
+import { buildWebsiteJsonLd } from '@/lib/buildJsonLd'
+import { buildMetadata } from '@/lib/buildMetadata'
 import { AnimeResponseSchema } from '@/schemas/anime'
 import { getConfig } from '@/services/config'
 
@@ -13,33 +13,21 @@ export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig()
   const animeTranslation = config.translation.anime
 
-  return {
+  return buildMetadata({
     title: `${animeTranslation.title} - ${config.title}`,
     description: `${config.title}${animeTranslation.description} - ${config.description}`,
-    alternates: { canonical: `${config.siteUrl}/about/anime` },
-    openGraph: {
-      siteName: config.title,
-      title: `${animeTranslation.title} - ${config.title}`,
-      description: `${config.title}${animeTranslation.description} - ${config.description}`,
-      url: '/about/anime',
-      images: config.avatar,
-      type: 'website',
-      locale: config.lang,
-    },
-    twitter: {
-      card: 'summary',
-      title: `${animeTranslation.title} - ${config.title}`,
-      description: `${config.title}${animeTranslation.description} - ${config.description}`,
-      images: config.avatar,
-    },
-  }
+    urlPath: '/about/anime',
+    ogType: 'website',
+    image: config.avatar,
+    indexAble: config.anilist_username !== null,
+  })
 }
 
 export default async function AnimePage() {
   const config = getConfig()
   const anilist_username = config.anilist_username
 
-  if (anilist_username === undefined || anilist_username === null) {
+  if (anilist_username === null) {
     return notFound()
   }
 
@@ -66,24 +54,19 @@ export default async function AnimePage() {
   const animeData = parsedAnimeData.data
 
   const animeTranslation = config.translation.anime
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    'name': config.author.name,
-    'description': `${config.title}${animeTranslation.description} - ${config.description}`,
-    'url': `${config.siteUrl}/about/anime`,
-    'image': config.avatar,
-    'sameAs': config.author.link,
-  }
+  const jsonLd = buildWebsiteJsonLd({
+    title: `${animeTranslation.title} - ${config.title}`,
+    description: `${config.title}${animeTranslation.description} - ${config.description}`,
+    urlPath: '/about/anime',
+    image: config.avatar,
+  })
 
   return (
     <>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <AnimeListCollection
         animeData={animeData}
         userName={anilist_username}

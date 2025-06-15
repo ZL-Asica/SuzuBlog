@@ -45,6 +45,7 @@
     "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
+    "schema-dts": "^1.1.5",
     "twikoo": "^1.6.44",
     "yaml": "^2.8.0",
     "zod": "^3.25.64"

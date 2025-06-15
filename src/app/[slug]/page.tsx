@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
-import Head from 'next/head'
+import { uniqueArray } from '@zl-asica/react/utils'
 import { notFound, redirect } from 'next/navigation'
 import { ArticlePage } from '@/components/article'
+import { buildArticleJsonLd } from '@/lib/buildJsonLd'
+
+import { buildMetadata } from '@/lib/buildMetadata'
 import { getConfig } from '@/services/config'
 import { getAllPosts, getPostData } from '@/services/content'
-
 import { generateLLMsTXTs, generateRssFeed } from '@/services/utils'
 
 // build static params for all posts
@@ -20,52 +22,38 @@ export async function generateStaticParams() {
   }))
 }
 
-interface Properties {
+export const dynamicParams = false
+
+interface ParamPropos {
   params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: Properties): Promise<Metadata> {
+export async function generateMetadata({ params }: ParamPropos): Promise<Metadata> {
   // get post data
   const { slug } = await params
   const postData: FullPostData | null = await getPostData(slug)
 
   const config = getConfig()
-  const metaKeywords = [
+  const metaKeywords = uniqueArray([
     ...(postData?.frontmatter.tags || []),
     ...(postData?.frontmatter.categories || []),
     postData?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
     'blog',
-  ].join(', ')
+  ])
 
-  return {
+  return buildMetadata({
     title: `${postData?.frontmatter.title} - ${config.title}`,
     description: postData?.postAbstract ?? config.description ?? 'Default description',
     keywords: metaKeywords,
-    alternates: { canonical: `${config.siteUrl}/${slug}` },
-    publisher: postData?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
-    openGraph: {
-      siteName: config.title,
-      type: 'article',
-      authors: postData?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
-      tags: metaKeywords,
-      modifiedTime: postData?.frontmatter.date,
-      title: postData?.frontmatter.title ?? config.title ?? 'Default Title',
-      description: postData?.postAbstract ?? config.description ?? 'Default description',
-      images: postData?.frontmatter.showThumbnail !== false ? postData?.frontmatter.thumbnail : undefined,
-      url: `/${slug}`,
-      locale: config.lang,
-    },
-    twitter: {
-      card: 'summary',
-      title: postData?.frontmatter.title ?? config.title ?? 'Default Title',
-      description: postData?.postAbstract ?? config.description ?? 'Default description',
-      images: postData?.frontmatter.showThumbnail !== false ? postData?.frontmatter.thumbnail : undefined,
-    },
-  }
+    urlPath: `/${slug}`,
+    ogType: 'article',
+    image: postData?.frontmatter.showThumbnail !== false ? postData?.frontmatter.thumbnail : undefined,
+    indexAble: postData?.frontmatter.redirect === undefined,
+  })
 }
 
 // PostPage component that receives the params directly
-export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
+export default async function PostPage(props: ParamPropos) {
   const parameters = await props.params
   const post: FullPostData | null = await getPostData(parameters.slug)
   if (!post) {
@@ -79,44 +67,29 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
 
   const config = getConfig()
 
+  const metaKeywords = uniqueArray([
+    ...(post?.frontmatter.tags || []),
+    ...(post?.frontmatter.categories || []),
+    post?.frontmatter.author ?? config.author.name ?? 'Unknown Author',
+    'blog',
+  ])
+
   // JSON-LD for the article
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    'headline': post?.frontmatter.title,
-    'description': post?.postAbstract || config.description,
-    'author': {
-      '@type': 'Person',
-      'name': post?.frontmatter.author || config.author.name,
-    },
-    'datePublished': post?.frontmatter.date,
-    'dateModified': post?.lastModified || post?.frontmatter.date,
-    'mainEntityOfPage': {
-      '@type': 'WebPage',
-      '@id': `${config.siteUrl}/${post.slug}`,
-    },
-    'image': post?.frontmatter.showThumbnail !== false ? post?.frontmatter.thumbnail : undefined,
-    'publisher': {
-      '@type': 'Organization',
-      'name': config.title,
-      'logo': {
-        '@type': 'ImageObject',
-        'url': config.avatar,
-      },
-    },
-  }
+  const jsonLd = buildArticleJsonLd({
+    title: `${post.frontmatter.title} - ${config.title}`,
+    description: post.postAbstract || config.description,
+    keywords: metaKeywords,
+    urlPath: `/${post.slug}`,
+    image: post.frontmatter.showThumbnail !== false ? post.frontmatter.thumbnail : undefined,
+  })
 
   return (
     <>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ArticlePage config={config} post={post} />
     </>
   )
 }
-
-export const dynamicParams = false

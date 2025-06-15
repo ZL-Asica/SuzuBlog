@@ -3,8 +3,9 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
 import { BackToTop, Footer, Head, Header, ScrollPositionBar } from '@/components/common'
-import { getConfig } from '@/services/config'
+import { buildMetadata } from '@/lib/buildMetadata'
 
+import { getConfig } from '@/services/config'
 import './globals.css'
 
 const config = getConfig()
@@ -29,33 +30,14 @@ const jetBrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(config.siteUrl),
+export const metadata: Metadata = buildMetadata({
   title: `${config.title} - ${config.subTitle}`,
   description: config.description,
-  keywords: config.keywords,
-  generator: 'SuzuBlog with Next.js',
-  creator: 'ZL Asica',
-  publisher: config.author.name,
-  alternates: { canonical: config.siteUrl },
-  authors: [{ url: config.author.link, name: config.author.name }],
-  openGraph: {
-    siteName: `${config.title} - ${config.subTitle}`,
-    title: `${config.title} - ${config.subTitle}`,
-    images: config.avatar,
-    description: config.description,
-    type: 'website',
-    locale: config.lang,
-    url: config.siteUrl,
-  },
-  twitter: {
-    card: 'summary',
-    title: `${config.title} - ${config.subTitle}`,
-    description: config.description,
-    images: config.avatar,
-  },
-  robots: { index: true, follow: true },
-}
+  keywords: config.keywords !== null ? config.keywords.split(',').map(k => k.trim()) : [],
+  urlPath: '/',
+  ogType: 'website',
+  image: config.avatar,
+})
 
 export default function RootLayout(
   { children }: Readonly<{ children: React.ReactNode }>,

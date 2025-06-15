@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 import { getConfig } from '@/services/config'
 import { getAllPosts } from '@/services/content'
-import { generateImageUrl } from '@/services/utils'
+import { generateImgUrlArray } from '@/services/utils'
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const config = getConfig()
@@ -29,7 +29,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.5,
       images: post.frontmatter.showThumbnail
-        ? generateImageUrl(siteUrl, post.frontmatter.thumbnail)
+        ? generateImgUrlArray(siteUrl, post.frontmatter.thumbnail)
         : undefined,
     }),
   )
@@ -40,7 +40,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const aboutPage = makeSitemapItem(`${siteUrl}/about`, {
     priority: 0.8,
-    images: generateImageUrl(siteUrl, config.avatar),
+    images: generateImgUrlArray(siteUrl, config.avatar),
   })
 
   const showAnime = Boolean(config.anilist_username?.trim())
