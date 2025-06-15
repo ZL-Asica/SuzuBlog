@@ -30,14 +30,14 @@ export default async function AnimePage() {
     return notFound()
   }
 
-  const annilistRes = await fetchAnilistData(anilist_username)
+  const anilistRes = await fetchAnilistData(anilist_username)
 
-  if (!annilistRes.success || !annilistRes.data) {
-    console.error(`Failed to fetch anime data: ${annilistRes.message}`)
+  if (!anilistRes.success || !anilistRes.data) {
+    console.error(`Failed to fetch anime data: ${anilistRes.message}`)
     return notFound()
   }
 
-  const animeData = annilistRes.data
+  const animeData = anilistRes.data
 
   const animeTranslation = config.translation.anime
   const jsonLd = buildWebsiteJsonLd({

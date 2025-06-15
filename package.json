@@ -1,6 +1,6 @@
 {
   "name": "suzu-blog",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "author": {
@@ -64,7 +64,6 @@
     "eslint-plugin-format": "^1.0.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "eslint-plugin-tailwindcss": "^3.18.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.1",
     "postcss": "^8.5.5",

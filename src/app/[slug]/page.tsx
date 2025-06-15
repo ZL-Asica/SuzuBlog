@@ -24,11 +24,11 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false
 
-interface ParamPropos {
+interface ParamProps {
   params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: ParamPropos): Promise<Metadata> {
+export async function generateMetadata({ params }: ParamProps): Promise<Metadata> {
   // get post data
   const { slug } = await params
   const postData: FullPostData | null = await getPostData(slug)
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: ParamPropos): Promise<Metadat
 }
 
 // PostPage component that receives the params directly
-export default async function PostPage(props: ParamPropos) {
+export default async function PostPage(props: ParamProps) {
   const parameters = await props.params
   const post: FullPostData | null = await getPostData(parameters.slug)
   if (!post) {
