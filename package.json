@@ -88,12 +88,6 @@
     "singleQuote": true
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "last 2 versions",
-      "not dead",
-      "no op_mini all"
-    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
