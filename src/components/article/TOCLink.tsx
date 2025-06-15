@@ -9,13 +9,16 @@ interface TOCLinkProps {
   autoSlug: boolean
 }
 
-const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) => {
+const TOCLink = ({
+  item,
+  activeSlug,
+  handleLinkClick,
+  autoSlug,
+}: TOCLinkProps) => {
   const isActive = activeSlug === item.slug
-  const titleSlug = autoSlug ? slugPrefix(item.slug, item.level) : ''
 
   return (
     <li
-      key={item.slug}
       className={`list-none py-1 text-base transition-all ${
         isActive ? 'font-bold text-primary' : 'text-gray-dark'
       } `}
@@ -29,7 +32,7 @@ const TOCLink = ({ item, activeSlug, handleLinkClick, autoSlug }: TOCLinkProps) 
         }}
         className="block break-words no-underline transition-all text-hover-primary"
       >
-        {`${titleSlug}${item.title}`}
+        {`${autoSlug ? slugPrefix(item.slug, item.level) : ''}${item.title}`}
       </a>
     </li>
   )

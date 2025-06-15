@@ -38,6 +38,8 @@ const StrOrNum = z
   .transform(val => String(val).trim())
 const optionalStrOrNum = StrOrNum.nullable().optional().default(null)
 
+const anilistAnimeNameStyleSchema = z.enum(['romaji', 'english', 'native']).nullable().optional().default(null)
+
 const socialMediaSchema = z.object({
   github_username: optionalStrOrNum,
   linkedin_username: optionalStrOrNum,
@@ -122,6 +124,7 @@ export const userConfigSchema = z.object({
     .describe('Start year of the blog that will be displayed on the footer'),
   // Pages settings
   anilist_username: optionalStrOrNum.describe('AniList username'),
+  anilist_anime_name_style: anilistAnimeNameStyleSchema,
   // Social media
   socialMedia: socialMediaSchema,
   // Comments
@@ -147,3 +150,4 @@ export type SocialMediaKey = keyof typeof socialMediaSchema.shape
 export type SocialMedia = z.infer<typeof socialMediaSchema>
 export type UserConfig = z.infer<typeof userConfigSchema>
 export type HeadLink = z.infer<typeof headLinkSchema>
+export type AnilistAnimeNameStyle = z.infer<typeof anilistAnimeNameStyleSchema>

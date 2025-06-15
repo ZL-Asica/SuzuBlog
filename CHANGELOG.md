@@ -1,5 +1,18 @@
 # SuzuBlog Changelog
 
+## 1.10.0 (2025-06-15)
+
+### Minor Changes
+
+- Update anime page function and TOC performance and style
+
+  - Update anime page settings and some factors may caused by the new introduced config setting.
+  - Move list rendering into server side to improve performance (the part contains map and sort).
+  - Change `Notes` to dynamic import to save needs.
+  - Update `TOC` detection logic use ref to replace state to reduce re-rendering and improve performance.
+  - Fix `TOC` click the link may be hidden by the header issue.
+  - Improve `TOC` auto centering function.
+
 ## 1.9.3 (2025-05-23)
 
 ### Patch Changes
