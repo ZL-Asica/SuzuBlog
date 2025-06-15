@@ -1,0 +1,46 @@
+.shiki {
+  padding: 0.5rem 0.01rem;
+  counter-reset: shiki-line;
+  background: none !important;
+  background-color: transparent !important;
+}
+
+.shiki .line {
+  padding-right: 0.5rem;
+  counter-increment: shiki-line;
+}
+
+.shiki .line::before {
+  content: counter(shiki-line);
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  text-align: right;
+  color: #cfcfcf;
+  opacity: 0.5;
+}
+
+.scrollbar-custom {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-200) transparent;
+}
+
+/* For WebKit browsers */
+.scrollbar-custom::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-200);
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-400);
+}
