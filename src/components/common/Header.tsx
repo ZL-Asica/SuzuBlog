@@ -43,7 +43,7 @@ const Header = ({ config }: HeaderProps) => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 z-50 w-full backdrop-blur-xl bg-background/60 shadow-md transition-transform-300
+      className={`fixed top-0 left-0 z-50 w-full backdrop-blur-xl bg-background shadow-md transition-transform-300
         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
     >

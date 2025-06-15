@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "adam-bender.commit-message-editor",
     "zignd.html-css-class-completion",
     "yoavbls.pretty-ts-errors",
     "meganrogge.template-string-converter",

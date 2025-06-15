@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 import { getConfig } from '@/services/config'
 import { getAllPosts } from '@/services/content'
-import { generateImageUrl } from '@/services/utils'
+import { generateImgUrlArray } from '@/services/utils'
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const config = getConfig()
@@ -24,15 +24,17 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // Generate sitemap entries for each post
-  const postUrls = posts.map(post =>
-    makeSitemapItem(`${siteUrl}/${post.slug}`, {
-      changeFrequency: 'weekly',
-      priority: 0.5,
-      images: post.frontmatter.showThumbnail
-        ? generateImageUrl(siteUrl, post.frontmatter.thumbnail)
-        : undefined,
-    }),
-  )
+  const postUrls = posts
+    .filter(post => post.frontmatter.redirect === undefined)
+    .map(post =>
+      makeSitemapItem(`${siteUrl}/${post.slug}`, {
+        changeFrequency: 'weekly',
+        priority: 0.5,
+        images: post.frontmatter.showThumbnail
+          ? generateImgUrlArray(siteUrl, post.frontmatter.thumbnail)
+          : undefined,
+      }),
+    )
   const homepage = makeSitemapItem(siteUrl, {
     changeFrequency: 'yearly',
     priority: 1,
@@ -40,7 +42,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const aboutPage = makeSitemapItem(`${siteUrl}/about`, {
     priority: 0.8,
-    images: generateImageUrl(siteUrl, config.avatar),
+    images: generateImgUrlArray(siteUrl, config.avatar),
   })
 
   const showAnime = Boolean(config.anilist_username?.trim())
