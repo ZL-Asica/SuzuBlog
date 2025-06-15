@@ -43,7 +43,7 @@ const Header = ({ config }: HeaderProps) => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 z-50 w-full bg-background shadow-md transition-transform-300
+      className={`fixed top-0 left-0 z-50 w-full backdrop-blur-xl bg-background/60 shadow-md transition-transform-300
         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
     >
@@ -74,9 +74,9 @@ const Header = ({ config }: HeaderProps) => {
         <div
           id="mobile-menu"
           ref={menuReference}
-          className={`transition-all-300 fixed right-0 top-0 z-50 h-screen w-1/2 bg-background shadow-lg md:hidden ${
-            isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-          }`}
+          className={`transition-all-300 fixed right-0 top-0 z-50 h-screen w-1/2 min-w-52 max-w-64 backdrop-blur-xl bg-background/70 shadow-2xl md:hidden
+            ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+          `}
         >
           <HeaderMenu
             config={config}
@@ -89,7 +89,7 @@ const Header = ({ config }: HeaderProps) => {
         {/* Backdrop */}
         {isOpen && (
           <div
-            className="fixed inset-0 z-40 h-screen w-screen bg-black/70 transition-opacity-300"
+            className="fixed inset-0 z-40 h-screen w-screen bg-black/70 transition-opacity-300 md:hidden"
             onClick={(event_) => {
               event_.preventDefault()
               event_.stopPropagation()

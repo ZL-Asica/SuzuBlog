@@ -1,46 +1,51 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { AnimeRequestSchema, AnimeResponseSchema } from '@/schemas'
+import { AnimeResponseSchema } from '@/schemas'
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
-    const userName = searchParams.get('userName')
+    const userName = searchParams.get('userName')?.trim() ?? ''
 
-    const parsedParams = AnimeRequestSchema.parse({ userName })
+    if (userName.length <= 1) {
+      return NextResponse.json({ error: 'Username Issue' }, { status: 400 })
+    }
 
     const query = `
       query ($userName: String) {
         MediaListCollection(userName: $userName, type: ANIME) {
           lists {
             name
+            status
+            isCustomList
             entries {
+              id
+              score
+              progress
+              status
+              notes
               media {
                 id
-                title {
-                  romaji
-                  english
-                  native
-                }
+                averageScore
+                episodes
+                format
+                status
                 coverImage {
                   extraLarge
                   large
                   medium
                 }
-                status
-                episodes
-                format
-                averageScore
+                title {
+                  english
+                  native
+                  romaji
+                  userPreferred
+                }
               }
-              score
-              progress
-              status
-              notes
             }
           }
         }
-      }
-    `
+      }    `
 
     const response = await fetch('https://graphql.anilist.co', {
       method: 'POST',
@@ -48,8 +53,14 @@ export async function GET(req: Request) {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({ query, variables: { userName: parsedParams.userName } }),
+      body: JSON.stringify({ query, variables: { userName } }),
     })
+
+    if (!response.ok) {
+      const errorBody = await response.text()
+      console.error('GraphQL API error:', errorBody)
+      return NextResponse.json({ error: 'Upstream API error' }, { status: 502 })
+    }
 
     const data = await response.json() as unknown
 
@@ -59,6 +70,7 @@ export async function GET(req: Request) {
   }
   catch (error) {
     if (error instanceof z.ZodError) {
+      console.error('Zod validation error:', error.errors)
       return NextResponse.json({ error: error.errors }, { status: 400 })
     }
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })

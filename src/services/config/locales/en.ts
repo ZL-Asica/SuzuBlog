@@ -33,10 +33,11 @@ const en: Translation = {
     description: '\'s anime list page, data from Anilist.',
     source: 'Data Source: ',
     status: {
-      watching: 'Watching',
+      current: 'Watching',
+      repeating: 'Repeating',
       completed: 'Completed',
-      paused: 'Paused',
       dropped: 'Dropped',
+      paused: 'Paused',
       planning: 'Planning',
     },
   },

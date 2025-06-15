@@ -1,72 +1,99 @@
-'use client'
-
 import { useClickOutside, useToggle } from '@zl-asica/react'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { centerActiveLink, findClosestSlug, scrollToSlug } from '@/lib'
 
-const useTOCLogic = () => {
+/**
+ * Hook for controlling Table of Contents (TOC) logic, including:
+ * - active slug detection by scroll
+ * - smooth scrolling to sections
+ * - responsive sidebar toggling
+ *
+ * @param items The table of content items will be shown
+ * @param visibleOffset The fixed header height to offset when scrolling
+ */
+const useTOCLogic = (
+  items: TocItems[],
+  visibleOffset: number = 10,
+) => {
   const [activeSlug, setActiveSlug] = useState('')
   const [isOpen, toggleOpen] = useToggle()
   const tocReference = useRef<HTMLElement>(null)
+  const headingsRef = useRef<HTMLElement[]>([])
+  const activeSlugRef = useRef('')
+  const ignoreNextUpdate = useRef(false)
   const router = useRouter()
 
   const handleLinkClick = (slug: string) => {
-    const targetElement = document.querySelector(`#${CSS.escape(slug)}`)
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+    ignoreNextUpdate.current = true
+    scrollToSlug(slug, visibleOffset)
+
+    setTimeout(() => {
+      activeSlugRef.current = slug
       setActiveSlug(slug)
-      router.push(`#${slug}`, { scroll: false })
-    }
+      ignoreNextUpdate.current = false
+    }, 100)
+
+    router.push(`#${slug}`, { scroll: false })
     if (isOpen) {
       toggleOpen()
     }
   }
 
   const updateActiveSlug = useCallback(() => {
-    const headings = document.querySelectorAll('h2, h3, h4, h5, h6')
-    let currentSlug = ''
-    for (const heading of headings) {
-      if (heading.getBoundingClientRect().top <= 10) {
-        currentSlug = heading.id
-      }
+    if (ignoreNextUpdate.current) {
+      return
     }
-    if (currentSlug !== activeSlug) {
-      setActiveSlug(currentSlug)
+
+    const slug = findClosestSlug(headingsRef.current, visibleOffset)
+
+    if (slug !== null && slug !== activeSlugRef.current) {
+      activeSlugRef.current = slug
+      setActiveSlug(slug)
     }
+  }, [visibleOffset])
+
+  // Update TOC scroll position to center active link
+  useEffect(() => {
+    if (!tocReference.current || !activeSlug) {
+      return
+    }
+
+    requestAnimationFrame(() => {
+      centerActiveLink(tocReference.current!, activeSlug)
+    })
   }, [activeSlug])
 
+  // Scroll listener (with rAF throttling)
   useEffect(() => {
-    if (tocReference.current && activeSlug) {
-      const activeLink = tocReference.current.querySelector(
-        `a[href="#${CSS.escape(activeSlug)}"]`,
-      )
-      if (activeLink) {
-        const container = tocReference.current
-        const { offsetTop: linkTop } = activeLink as HTMLElement
-        const containerScroll = container.scrollTop
-        const containerHeight = container.clientHeight
-
-        // Ensure the active link is visible and vertically centered
-        const offset = linkTop - containerHeight / 2
-        if (containerScroll !== offset) {
-          container.scrollTo({
-            top: offset,
-            behavior: 'smooth',
-          })
-        }
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSlug()
+          ticking = false
+        })
+        ticking = true
       }
     }
-  }, [activeSlug, updateActiveSlug])
 
-  useEffect(() => {
-    const handleScroll = () => updateActiveSlug()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [activeSlug, updateActiveSlug])
+  }, [updateActiveSlug])
 
+  // Initialize headings
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    headingsRef.current = items
+      .map(({ slug }) =>
+        document.querySelector<HTMLElement>(`#${CSS.escape(slug)}`))
+      .filter((el): el is HTMLElement => !!el)
+  }, [items])
+
+  // Click outside to close on mobile
   useClickOutside(tocReference, () => {
     if (isOpen) {
       toggleOpen()

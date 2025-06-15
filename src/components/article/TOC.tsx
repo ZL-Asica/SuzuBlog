@@ -19,7 +19,13 @@ const TOC = ({
   autoSlug = true,
   showThumbnail = true,
 }: TOCProps) => {
-  const { activeSlug, isOpen, toggleOpen, handleLinkClick, tocReference } = useTOCLogic()
+  const {
+    activeSlug,
+    isOpen,
+    toggleOpen,
+    handleLinkClick,
+    tocReference,
+  } = useTOCLogic(items, 100)
   const isTop = !useIsTop(showThumbnail ? 150 : 50)
   const isBottom = !useIsBottom(50)
   const isVisible = isTop && isBottom
@@ -29,9 +35,7 @@ const TOC = ({
   }
 
   return (
-    <div
-      className={`transition-opacity-300 ${isVisible ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
-    >
+    <div className={`transition-opacity-300 ${isVisible ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
       <button
         type="button"
         hidden={!isVisible}

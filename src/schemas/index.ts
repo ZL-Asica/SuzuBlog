@@ -7,6 +7,6 @@ export interface Config extends UserConfig {
 }
 
 export type { FriendLink, HeadLink, SocialMedia, SocialMediaKey, UserConfig }
-export { AnimeRequestSchema, AnimeResponseSchema } from './anime'
+export { AnimeResponseSchema } from './anime'
 export { userConfigSchema } from './config'
 export { friendLinkSchema } from './frinedLink'

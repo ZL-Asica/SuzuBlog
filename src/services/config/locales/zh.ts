@@ -32,10 +32,11 @@ const zh: Translation = {
     description: ' 的动漫列表页面，数据来自 Anilist。',
     source: '数据来源：',
     status: {
-      watching: '在看',
+      current: '在看',
+      repeating: '重看',
       completed: '已看完',
-      paused: '暂停',
       dropped: '弃坑',
+      paused: '暂停',
       planning: '计划',
     },
   },

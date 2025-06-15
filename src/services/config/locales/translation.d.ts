@@ -31,11 +31,13 @@ interface Translation {
     title: string
     description: string
     source: string
+    // const SORT_ORDER = ['CURRENT', 'REPEATING', 'COMPLETED', 'DROPPED', 'PAUSED', 'PLANNING']
     status: {
-      watching: string
+      current: string
+      repeating: string
       completed: string
-      paused: string
       dropped: string
+      paused: string
       planning: string
     }
   }
