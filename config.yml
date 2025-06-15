@@ -78,6 +78,11 @@ startYear: 2017 # Leave empty if you do not want to display a start year.
 # Add your AniList username if you want to display your AniList profile.
 # Leave the field empty if you do not want to display your AniList profile.
 anilist_username: zlasica # Your AniList username. https://anilist.co/user/username
+# Set the desired anime name style you want to use.
+# Options: 'romaji', 'english', 'native'
+# Fallback to 'romaji' if the specified style is not available.
+# Default for `ja` locale is 'native', for other locales is 'english'.
+anilist_anime_name_style: english
 
 # ######################
 # SOCIAL MEDIA SETTINGS
