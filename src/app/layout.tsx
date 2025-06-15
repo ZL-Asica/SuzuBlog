@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import process from 'node:process'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
@@ -51,15 +52,18 @@ export default function RootLayout(
         googleAnalytics={config.googleAnalytics}
         links={config.links}
       />
-
-      {/* min-h-screen for fallback in case min-h-dvh is not supported */}
-      <body className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-screen min-h-dvh flex-col antialiased`}>
+      <body className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-screen flex-col antialiased`}>
         <ScrollPositionBar />
         <Header config={config} />
         <main className="grow mt-20 motion-safe:animate-fade-in-down">
           {children}
-          <Analytics />
-          <SpeedInsights />
+          {process.env.VERCEL === '1'
+            && (
+              <>
+                <Analytics />
+                <SpeedInsights />
+              </>
+            )}
         </main>
         <BackToTop />
         <Footer config={config} />
