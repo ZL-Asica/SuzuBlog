@@ -4,7 +4,6 @@ import rehypeRaw from 'rehype-raw'
 import remarkGemoji from 'remark-gemoji'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
-
 import createMarkdownComponents from './markdownComponents'
 
 import 'katex/dist/katex.min.css'

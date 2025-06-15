@@ -1,5 +1,15 @@
 # SuzuBlog Changelog
 
+## 1.11.0 (2025-06-15)
+
+### Minor Changes
+
+- Enhances SEO and replaces the syntax highlighter with Shiki
+
+  - Switched from `react-syntax-highlighter` to `shiki` and added custom CSS and copy functionality
+  - Consolidated metadata and JSON-LD generation using `buildMetadata` and `build*JsonLd` helpers
+  - Removed unused configs, updated dependencies, and refined project/editor settings
+
 ## 1.10.0 (2025-06-15)
 
 ### Minor Changes

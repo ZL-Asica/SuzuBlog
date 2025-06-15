@@ -1,15 +1,24 @@
-const generateImageUrl = (
+export const generateImageUrl = (
   siteUrl: string,
   image?: string,
-): string[] | undefined => {
+): string | undefined => {
   if (image === undefined || image === null || image.trim() === '') {
     return undefined
   }
   if (image.startsWith('http')) {
-    return [image]
+    return image
   }
   const normalizedPath = image.startsWith('/') ? image : `/images/${image}`
-  return [`${siteUrl}${normalizedPath}`]
+  return `${siteUrl}${normalizedPath}`
 }
 
-export default generateImageUrl
+export const generateImgUrlArray = (
+  siteUrl: string,
+  image?: string,
+): string[] | undefined => {
+  const img = generateImageUrl(siteUrl, image)
+  if (img === undefined) {
+    return undefined
+  }
+  return [img]
+}

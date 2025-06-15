@@ -1,7 +1,6 @@
 import type { SocialMedia } from '@/schemas/config'
-import { capitalize, isEmpty } from '@zl-asica/react/utils'
 import Link from 'next/link'
-import { socialDataTemplate } from '@/lib'
+import { generateSocialMediaData } from '@/lib/socialDataTemplate'
 
 interface socialMediaLinksProps {
   socialMedia: SocialMedia
@@ -19,21 +18,17 @@ const SocialMediaLinks = ({
       className={`mx-4 mb-5 flex flex-wrap justify-center gap-y-4 space-x-4 ${className}`}
     >
       {Object.entries(socialMedia)
-        .filter(([key, username]) => key in socialDataTemplate && !isEmpty(username))
         .map(([key, username]) => {
-          const { urlTemplate, icon: IconComponent } = socialDataTemplate[key as keyof typeof socialDataTemplate]
-
-          const label = capitalize(key.replace(/_/g, ' '))
+          const socialMediaData = generateSocialMediaData(key, String(username))
+          if (socialMediaData === null) {
+            return null
+          }
+          const { href, label, IconComponent } = socialMediaData
 
           return (
             <Link
               key={label}
-              href={urlTemplate.replace(
-                '{username}',
-                key === 'rss'
-                  ? '/feed.xml'
-                  : encodeURIComponent(String(username)),
-              )}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}

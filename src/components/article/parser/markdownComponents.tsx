@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react'
 import type { Components as MarkdownComponents } from 'react-markdown'
+import dynamic from 'next/dynamic'
 import { isValidElement } from 'react'
 import { CustomImage, SakuraIcon } from '@/components/ui'
 import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
 import { KEY_ICONS } from './keyboardIcons'
-import CodeBlock from './renderCodeBlock'
-import renderFriendLinks from './renderFriendLinks'
+
+const CodeBlock = dynamic(async () => import('./codeBlock/renderCodeBlock'))
+const FriendLinks = dynamic(async () => import('./FriendLinks'))
 
 const createMarkdownComponents = (translation: Translation, autoSlug: boolean = true): MarkdownComponents => {
   // Set initial heading levels
@@ -223,11 +225,10 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
       return match
         ? (
             <CodeBlock
-              match={match}
+              matchedLang={match[1]}
               translation={translation}
-            >
-              {children}
-            </CodeBlock>
+              children={children}
+            />
           )
         : (
             <code
@@ -246,9 +247,11 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         && typeof (children.props as { className?: string }).className === 'string' && (children.props as { className?: string }).className !== null && (children.props as { className?: string }).className !== ''
         && (children.props as { className?: string }).className === 'language-Links'
       ) {
-        return renderFriendLinks(
-          (children.props as { children: string }).children,
-          translation,
+        return (
+          <FriendLinks
+            linksChildren={(children.props as { children?: string }).children ?? ''}
+            translation={translation}
+          />
         )
       }
 

@@ -1,6 +1,5 @@
 import antfu from '@antfu/eslint-config'
 import nextPlugin from '@next/eslint-plugin-next'
-// import tailwind from "eslint-plugin-tailwindcss";
 
 export default antfu({
   formatters: true,
@@ -29,9 +28,4 @@ export default antfu({
     'react/prop-types': 'off',
     'antfu/no-top-level-await': 'off',
   },
-}, {
-  // TODO: Need wait for their support for tailwindcss v4
-  // ! Not support tailwindcss v4 yet
-  // files: ['**/*.{ts,tsx}'],
-  // ...tailwind.configs["flat/recommended"],
 })
