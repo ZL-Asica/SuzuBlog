@@ -89,9 +89,7 @@ export default async function AnimePage() {
       <AnimeList
         animeData={animeData}
         userName={anilist_username}
-        author={config.author.name}
-        lang={config.lang}
-        translation={config.translation}
+        config={config}
       />
     </>
   )

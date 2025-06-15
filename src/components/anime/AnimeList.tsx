@@ -1,3 +1,4 @@
+import type { Config } from '@/schemas'
 import type { AnimeResponse } from '@/schemas/anime'
 import TOC from '@/components/article/TOC'
 import AnimeCard from './AnimeCard'
@@ -5,14 +6,19 @@ import AnimeCard from './AnimeCard'
 interface AnimeListProps {
   animeData: AnimeResponse
   userName: string
-  author: string
-  lang: string
-  translation: Translation
+  config: Config
 }
 
 const SORT_ORDER = ['Watching', 'Completed', 'Paused', 'Dropped', 'Planning']
 
-const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeListProps) => {
+const AnimeList = ({ animeData, userName, config }: AnimeListProps) => {
+  const {
+    translation,
+    author: { name: author },
+    lang,
+    anilist_anime_name_style,
+  } = config
+
   const sortedLists = animeData?.data?.MediaListCollection?.lists.sort(
     (a, b) => SORT_ORDER.indexOf(a.name) - SORT_ORDER.indexOf(b.name),
   )
@@ -26,8 +32,12 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
   return (
     <>
       <div className="container mx-auto animate-fadeInDown p-6 pb-2 mt-5">
-        <h1 className="text-4xl font-bold">{translation.anime.title}</h1>
-        <p className="text-gray-400 mt-2">{`${author}${translation.anime.description}`}</p>
+        <h1 className="text-4xl font-bold">
+          {translation.anime.title}
+        </h1>
+        <p className="text-gray-400 mt-2">
+          {`${author}${translation.anime.description}`}
+        </p>
         <a
           href={`https://anilist.co/user/${userName}`}
           target="_blank"
@@ -38,10 +48,20 @@ const AnimeList = ({ animeData, userName, author, lang, translation }: AnimeList
           AniList
         </a>
 
-        <AnimeCard sortedLists={sortedLists} lang={lang} translation={translation} />
+        <AnimeCard
+          sortedLists={sortedLists}
+          anilistAnimeNameStyle={anilist_anime_name_style}
+          lang={lang}
+          translation={translation}
+        />
 
       </div>
-      <TOC items={tocList} translation={translation} autoSlug={false} showThumbnail={false} />
+      <TOC
+        items={tocList}
+        translation={translation}
+        autoSlug={false}
+        showThumbnail={false}
+      />
     </>
   )
 }
