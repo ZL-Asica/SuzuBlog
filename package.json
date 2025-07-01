@@ -71,7 +71,7 @@
     "postcss-preset-env": "^10.2.3",
     "prettier": "^3.5.3",
     "rss": "^1.2.2",
-    "shiki": "^3.6.0",
+    "shiki": "^3.7.0",
     "tailwindcss": "^4.1.10",
     "typescript": "^5.8.3"
   },
