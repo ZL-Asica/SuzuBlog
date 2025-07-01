@@ -65,7 +65,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.1",
+    "lint-staged": "^16.1.2",
     "postcss": "^8.5.5",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^10.2.3",
