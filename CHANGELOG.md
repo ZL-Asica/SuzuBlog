@@ -1,11 +1,16 @@
 # SuzuBlog Changelog
 
+## 1.11.1 (2025-08-01)
+
+### Patch Changes
+
+- Minor bug fix and deps bump up
+
 ## 1.11.0 (2025-06-15)
 
 ### Minor Changes
 
 - Enhances SEO and replaces the syntax highlighter with Shiki
-
   - Switched from `react-syntax-highlighter` to `shiki` and added custom CSS and copy functionality
   - Consolidated metadata and JSON-LD generation using `buildMetadata` and `build*JsonLd` helpers
   - Removed unused configs, updated dependencies, and refined project/editor settings
@@ -15,7 +20,6 @@
 ### Minor Changes
 
 - Update anime page function and TOC performance and style
-
   - Update anime page settings and some factors may caused by the new introduced config setting.
   - Move list rendering into server side to improve performance (the part contains map and sort).
   - Change `Notes` to dynamic import to save needs.
@@ -28,7 +32,6 @@
 ### Patch Changes
 
 - Improve config settings and validation
-
   - Refactor config settings from watch the file to Singleton pattern.
   - Add zod validation for config settings. Add error handling and clear error message for the user.
   - Add zod schema for Friend Links to validate the data.
@@ -52,7 +55,6 @@
 ### Minor Changes
 
 - Add auto-generation for llms.txt & llms-full.txt
-
   - Add auto-generation for `llms.txt` and `llms-full.txt` files at build time.
     - Followed the guidelines on [llmstxt.org](https://llmstxt.org/) to generate the files.
     - This allows real time MCP, RAG, or LLM model doing web searching by itself could better understand the context of the whole website.
@@ -78,7 +80,6 @@
 ### Minor Changes
 
 - Add responsive pagination UI
-
   - Move Pagination component to a separate file for better organization.
   - Added ARIA support for pagination.
   - Update i18n for pagination.
@@ -90,9 +91,7 @@
 ### Patch Changes
 
 - Switch to useRouter for pagination and search
-
   - feat(search): use useRouter from Next.js instead of history API
-
     - Introduce `useUpdateURL` hook to manage URL updates.
     - Replace `history.` with `useRouter` for better integration with Next.js.
     - With `useRouter`, fix the scroll behavior when current page changes.
@@ -100,7 +99,6 @@
     - Extract `SearchInput` component from `PostPageClient` to `src/app/posts/page.tsx` for better organization and performance (categories and tags array also generated without re-rendering).
 
   - chore: some updates on minor details
-
     - Finally remove `tailwind.config.ts` from README (since from v4.0.0 it has been removed)
     - Update manifest theme color.
     - Fix thumbnail showing when parameter `showThumbnail` is set to `false`.
@@ -115,7 +113,6 @@
 ### Minor Changes
 
 - improve search function
-
   - Search function is now implemented with MiniSearch instead of manually filtering the posts.
   - Add full-text search support.
   - Add fuzzy search support.
@@ -127,7 +124,6 @@
 ### Patch Changes
 
 - Performance improvement
-
   - Make two main fonts "display:swap" and "preload:true" to improve performance.
   - Honor "motion-safe" for page fade-in animation for accessibility.
   - Set main page avatar "loading:eager" to make sure this image is loaded first.
@@ -138,7 +134,6 @@
 ### Patch Changes
 
 - Bump up deps and fix env compatibility error in Windows
-
   - Bump up dependencies.
   - Fix npm script "build". Remove NODE_NO_WARNINGS env variable from the script to avoid incompatibility issues on Windows.
 
@@ -147,7 +142,6 @@
 ### Minor Changes
 
 - Update color palette, styles updates, fix aria issues
-
   - Primary, secondary, accent color update. Corresponding utils added.
   - h5, h6 new styles added.
   - h3, h4 border sharpeness issue fixed.
@@ -160,7 +154,6 @@
 ### Patch Changes
 
 - Fix anime page styling issue
-
   - Forget to update anime page.
   - Also update dark mode styling to improve contrast.
 
@@ -169,11 +162,9 @@
 ### Minor Changes
 
 - Theme cleanup and style refine
-
   - feat(makrdown): add style for checkbox related
 
   - 7daad73: style(global): styles clean up and re-structure
-
     - Move reusable styles into `styles` folder.
     - Fix custom scroll bar consistence.
     - Fix minor styling issue and contract issue.
@@ -195,7 +186,6 @@
 ### Patch Changes
 
 - 005a095: Add Changeset for version managing
-
   - Bump up Next.js version to 15.2.2, which solved Twikoo support issue (crypto-js TypeError).
   - Add version badge in README.md.
   - Add more different grammar and syntax for Markdown inside sample-post.md.
@@ -210,25 +200,21 @@
 ## 1.4.0 (2025-03-08)
 
 - fbf97ab: Notes showing issue on hover and mobile in `about/anime` page
-
   - Addressing anime page issue with notes on hover (desktop) and on click (mobile) (#141).
   - Extract `AnimeCard` and `Notes` components from `AnimeList` (#140).
   - Handle hover logic differently for desktop.
   - Add onClick() event to show notes on mobile.
 
 - 0c9c327: add new markdown parsing logic
-
   - markdown content parsing logic and improves styles (#139).
   - Fixed issues #137 and #138.
 
 ## 1.3.0 (2025-03-01)
 
 - e5f644a: Set anime images to unoptimized
-
   - Set anime images to unoptimized to prevent Next.js from optimizing them.
 
 - b9a030f: Fix anime header issue #135
 
 - 815a211: add anime tracking page (#134)
-
   - This PR introduces the **Anime List** feature #133 , integrating AniList API to fetch and display my personal anime tracking data under `/about/anime`. It also includes a new API endpoint (`GET /api/anime`) to handle data retrieval. The header menu now highlights the current page dynamically, improving navigation clarity. Additionally, I refactored the scroll progress bar into its own component (`ScrollPositionBar.tsx`) for better maintainability. Fixed an issue where the scroll bar was hidden behind headers. The overall UI/UX could use some refinement, especially for submenu interactions and hover effects on different devices. Also, styling details need to be revisited to better align with the rest of the site.
