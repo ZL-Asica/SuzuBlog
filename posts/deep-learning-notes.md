@@ -45,26 +45,21 @@ autoSlug: false
 - Parameters: $w \in R^{n_x}, b \in R $
 
 - Output $\hat{y} = \sigma(w^Tx + b)$
-
   - $\sigma(z)=\dfrac{1}{1+e^{-z}}$
   - If $z $ large, $\sigma(z)\approx\dfrac{1}{1+0}\approx1$
   - If $z $ large negative number, $\sigma(z)\approx\dfrac{1}{1+Bignum}\approx0$
 
 - Loss (error) function:
-
   - $\hat{y} = \sigma(w^Tx + b)$, where $\sigma(z)=\dfrac{1}{1+e^{-z}}$
-
     - $z^{(i)}=w^Tx^{(i)}+b$
 
   - Want $y^{(i)} \approx \hat{y}^{(i)} $
 
   - $L(y, \hat{y}) = -[y \log(\hat{y}) + (1 - y) \log(1 - \hat{y})]$
-
     - If $y=1: L(\hat{y}, y)=-\log{\hat{y}} $ <- want $\log{\hat{y}}$ as large as possible, want $\hat{y}$ large
     - If $y=0: L(\hat{y}, y)=-\log{(1-\hat{y})} $ <- want $\log{(1-\hat{y})}$ as large as possible, want $\hat{y}$ small
 
 - Cost function
-
   - $J(w, b)=\dfrac{1}{m}\sum\limits_{i=1}^{m}L(\hat{y}^{(i)},y^{(i)})=-\dfrac{1}{m}\sum\limits_{i=1}^{m}L[y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)})]$
 
 #### 1.2.3 Gradient Descent
@@ -106,14 +101,12 @@ autoSlug: false
 #### 1.2.4 Computational Graph
 
 - $J(a,b,c)=3(a+bc)$
-
   - $u=bc$
   - $v=a+u$
   - $J=3v$
   - Left to right computation
 
 - Derivatives with a Computation Graph
-
   - $\dfrac{dJ}{dv}=3$
     - $\dfrac{dJ}{da}=3$
     - $\dfrac{dv}{da}=1$
@@ -126,7 +119,6 @@ autoSlug: false
 - avoid explicit for-loops.
 
 - $J=0;dw=np.zeros((n_x,1));db=0$
-
   - for $i=1$ to $m$
     - $z^{(i)}=w^Tx^{(i)}+b$
     - $a^{(i)}=\sigma (z^{(i)})$
@@ -139,7 +131,6 @@ autoSlug: false
 - $Z=np.dot(w.T,x)+b$ ; b(1,1)-->Broodcasting
 
 - Vectorization Logistic Regression
-
   - $dz^{(1)}=a^{(1)}-y^{(1)}; dz^{(2)}=a^{(2)}-y^{(2)}...$
   - $dz=[dz^{(1)}, dz^{(2)},...,dz^{(m)}]$ $1\times m$
   - $A=[a^{(1)}, a^{(2)}, ..., a^{(m)}]$ $Y=[y^{(1)}, y^{(2)}, ..., y^{(m)}]$
@@ -157,7 +148,6 @@ autoSlug: false
     - $b:=b-\alpha db$
 
 - Broadcasting(same as bsxfun in Matlab/Octave)
-
   - $(m,n)$+-\*/$(1,n)$->$(m,n)$ 1->m will be all the same number.
   - $(m,n)$+-\*/$(m,1)$->$(m,n)$ 1->n will be all the same number
   - Don't use $a = np.random.randn(5)$ $a.shape = (5,)$ "rank 1 array"
@@ -166,7 +156,6 @@ autoSlug: false
   - Fix rank 1 array by $a = a.reshape((5,1))$
 
 - Logistic Regression Cost Function
-
   - Lost
     - $p(y|x)=\hat{y}^y(1-\hat{y})^{(1-y)}$
     - If $y=1$: $p(y|x)=\hat{y}$
@@ -185,19 +174,16 @@ autoSlug: false
 - ![deep-learning-notes_1-3-1](https://s2.loli.net/2023/11/20/EHtqxOI6c5NQuG8.jpg)
 
 - Input layer, hidden layer, output layer
-
   - $a^{[0]}=x$ -> $a^{[1]}=[[a^{[1]}_1,a^{[1]}_2,a^{[1]}_3,a^{[1]}_4]]$ -> $a^{[2]}$
   - Layers count by # of hidden layer+# of output layer.
 
 - $x_1,x_2,x_3$ -> $4\space hidden\space nodes$ -> $Output\space layer$
-
   - First hidden node: $z^{[1]}_1=w^{[1]T}_1+b^{[1]}_1, a^{[1]}_1=\sigma(z^{[1]}_1)$
   - Seconde hidden node: $z^{[1]}_2=w^{[1]T}_2+b^{[1]}_2, a^{[1]}_2=\sigma(z^{[1]}_2)$
   - Third hidden node: $z^{[1]}_3=w^{[1]T}_3+b^{[1]}_3, a^{[1]}_3=\sigma(z^{[1]}_3)$
   - Forth hidden node: $z^{[1]}_4=w^{[1]T}_4+b^{[1]}_4, a^{[1]}_4=\sigma(z^{[1]}_4)$
 
 - Vectorization
-
   - $w^{[1]}=\begin{gathered}\begin{bmatrix}-w^{[1]T}_1- \\ -w^{[1]T}_2- \\ -w^{[1]T}_3- \\ -w^{[1]T}_4- \end{bmatrix}\end{gathered} (4,3)matrix$
   - $z^{[1]}=\begin{gathered}\begin{bmatrix}-w^{[1]T}_1- \\ -w^{[1]T}_2- \\ -w^{[1]T}_3- \\ -w^{[1]T}_4- \end{bmatrix}\end{gathered}\cdot \begin{gathered}\begin{bmatrix}x_1 \\ x_2 \\ x_3 \end{bmatrix}\end{gathered} + \begin{gathered}\begin{bmatrix}b^{[1]}_1 \\ b^{[1]}_2 \\b^{[1]}_3 \\ b^{[1]}_4 \end{bmatrix}\end{gathered} =\begin{gathered}\begin{bmatrix}w^{[1]T}_1\cdot x+b^{[1]}_1 \\ w^{[1]T}_2\cdot x+b^{[1]}_2 \\ w^{[1]T}_3\cdot x++b^{[1]}_3 \\ w^{[1]T}_4\cdot x+b^{[1]}_4 \end{bmatrix}\end{gathered}=\begin{gathered}\begin{bmatrix}z^{[1]}_1 \\ z^{[1]}_2 \\z^{[1]}_3 \\ z^{[1]}_4 \end{bmatrix}\end{gathered}$
   - $a^{[1]}=\begin{gathered}\begin{bmatrix}a^{[1]}_1 \\ a^{[1]}_2 \\a^{[1]}_3 \\ a^{[1]}_4 \end{bmatrix}\end{gathered}=\sigma(z^{[1]})$
@@ -206,14 +192,12 @@ autoSlug: false
   - $a^{[2](i)}$: layer $2$; example $i$
 
 - for i=1 to m:
-
   - $z^{[1](i)}=W^{[1]}\cdot x(i)+b^{[1]}$
   - $a^{[1](i)}=\sigma(z^{[1](i)})$
   - $z^{[2](i)}=W^{[2]}\cdot a^{[1](i)}+b^{[2]}$
   - $a^{[2](i)}=\sigma(z^{[2](i)})$
 
 - Vectorizing of the above for loop
-
   - $X=\begin{gathered}\begin{bmatrix}| & | & | & | \\ x^{(1)}, &  x^{(2)}, & ..., & x^{(m)} \\ | & | & | & |\end{bmatrix}\end{gathered} (n_x,m)matrix$ n is different hidden units
   - $Z^{[1]}=W^{[1]}\cdot X+b^{[1]}$
   - $A^{[1]}=\sigma(Z^{[1]})$
@@ -224,46 +208,39 @@ autoSlug: false
 #### 1.3.2 Activation Functions
 
 - $g^{[i]}$: activation function of layer $i$
-
   - Sigmoid: $a=\dfrac{1}{1+e^{[-z]}}$
   - Tanh: $a=\dfrac{e^z-e^{[-z]}}{e^z+e^{[-z]}}$
   - ReLU: $a=max(0,z)$
   - Leaky ReLu: $a=max(0.01z, z)$
 
 - Rules to choose activation function
-
   1. Output is between {0, 1}, choose sigmoid.
   2. Default choose ReLu.
 
 - Why need non-liner activation function
-
   - Use linear hidden layer will be useless to have multiple hidden layers. It will become $a=w'x+b'$.
   - Linear may sometime use at output layer but with non-linear at hidden layers.
 
 #### 1.3.3 Forward and Backward Propogation
 
 - Derivative of activation function
-
   - Sigmoid: $g'(z)=\dfrac{d}{dz}g(z)=\dfrac{1}{1+e^{[-z]}}(1-\dfrac{1}{1+e^{[-z]}})=g(z)(1-g(z))=a(1-a)$
   - Tanh: $g'(z)=\dfrac{d}{dz}g(z)=1-(tanh(z))^2$
   - ReLU: $g'(z)=\left\{\begin{array}{lr}0&if \space z<0 \\1&if \space z\geq0\\\usepackage{undefined}&\usepackage{if \space z=0}\end{array}\right.$
   - Leaky ReLU: $g'(z)=\left\{\begin{array}{lr}0.01&if \space z<0 \\1&if \space z\geq0\end{array}\right.$
 
 - Gradient descent for neural networks
-
   - Parameters: $w^{[1]}(n^{[1]},n^{[2]}), b^{[1]}(n^{[2]},1),w^{[2]}(n^{[2]},n^{[1]}), b^{[2]}(n^{[2]},1)$
   - $n_x=n^{[0]},n^{[1]},n^{[2]}=1$
   - Cost function: $J(w^{[1]}, b^{[1]},w^{[2]}, b^{[2]})=\dfrac{1}{m}\sum\limits_{i=1}^nL(\hat{y},y)$
 
 - Forward propagation:
-
   - $Z^{[1]}=W^{[1]}\cdot X+b^{[1]}$
   - $A^{[1]}=g^{[1]}(Z^{[1]})$
   - $Z^{[2]}=W^{[2]}\cdot A^{[1]}+b^{[2]}$
   - $A^{[2]}=g^{[2]}(Z^{[2]})=\sigma(Z^{[2]})$
 
 - Back Propogation:
-
   - $dZ^{[2]}=A^{[2]}-Y$ $Y=[y^{(1)},y^{(2)},...,y^{(m)}]$
 
   - $dW^{[2]}=\dfrac{1}{m}dZ^{[2]}A^{[1]T}$
@@ -271,7 +248,6 @@ autoSlug: false
   - $db^{[2]}=\dfrac{1}{m}np.sum(dZ^{[2]},axis=1,keepdims=True)$
 
   - $dZ^{[1]}=W^{[2]T}dZ^{[2]}*g'^{[1]}(Z^{1})$
-
     - $(n^{[1]},m)->element-wise\space product->(n^{[1]},m)$
 
   - $dW^{[1]}=\dfrac{1}{m}dZ^{[1]}X^{T}$
@@ -279,7 +255,6 @@ autoSlug: false
   - $db^{[1]}=\dfrac{1}{m}np.sum(dZ^{[1]},axis=1,keepdims=True)$
 
 - Random Initialization
-
   - $x_1,x_2->a_1^{[1]},a_2^{[1]}->a_1^{[2]}->\hat{y}$
   - $w^{[1]}=np.random.randn((2,2))*0.01$
   - $b^{[1]}=np.zeros((2,1))$
@@ -303,20 +278,17 @@ autoSlug: false
 #### 1.4.2 Forward Propagation in a Deep Network
 
 - General: $Z^{[l]}=w^{[l]}A^{[l-1]}+b^{[l]}, A^{[l]}=g^{[l]}(Z^{[l]})$
-
   - $x: z^{[1]}=w^{[1]}a^{[0]}+b^{[1]}, a^{[1]}=g^{[1]}(z^{[1]})$ $a^{[0]}=X$
   - $z^{[2]}=w^{[2]}a^{[1]}+b^{[2]}, a^{[1]}=g^{[2]}(z^{[2]})$
   - ...
   - $z^{[4]}=w^{[4]}a^{[3]}+b^{[4]}, a^{[4]}=g^{[4]}(z^{[4]})=\hat{y}$
 
 - Vectorizing:
-
   - $Z^{[1]}=w^{[1]}A^{[0]}+b^{[1]}, A^{[1]}=g^{[1]}(Z^{[1]})$ $A^{[0]}=X$
   - $Z^{[2]}=w^{[2]}A^{[1]}+b^{[2]}, A^{[2]}=g^{[2]}(Z^{[2]})$
   - $\hat{Y}=g(Z^{[4]})=A^{[4]}$
 
 - Matrix dimensions
-
   - ![deep-learning-notes_1-4-2](https://s2.loli.net/2023/11/20/a6emOyncIbRlo8w.jpg)
   - $z^{[1]}=w^{[1]}\cdot x+b^{[1]}$
   - $z^{[1]}=(3,1),w^{[1]}=(3,2),x=(2,1),b^{[1]}=(3,1)$
@@ -325,14 +297,12 @@ autoSlug: false
   - $z^{[l]},a^{[l]}=(n^{[l]},1),Z^{[l]}/dZ^{[l]},A^{[l]}/dA^{[l]}=(n^{[l]},1)$ $l=0, A^{[0]}=X=(n^{[0]},m)$
 
 - Why deep representation?
-
   - Earier layers learn simple features; later deeper layers put together to detect more complex things.
   - Circuit theory and deep learning: Informally: There are functions you can compute with a "small" L-layer deep neural network that shallower networks require exponentially more hidden units to compute.
 
 #### 1.4.3 Building Blocks of Deep Neural Networks
 
 - Forward and backward functions
-
   - ![deep-learning-notes_1-4-3](https://s2.loli.net/2023/11/20/PBfq6ISu2h8vKeV.jpg)
   - Layer $l:w^{[l]},b^{[l]}$
   - Forward: Input $a^{[l-1]}$, output $a^{[l]}$
@@ -341,34 +311,26 @@ autoSlug: false
   - Backward: Input $da^{[l]}, cache(z^{[l]})$, output $da^{[l-1]},dw^{[l]},db^{[l]}$
 
 - One iteration of gradient descent of neural network
-
   - ![deep-learning-notes_1-4-3-2](https://s2.loli.net/2023/11/20/35UIkJnmlSHt82j.jpg)
 
 - How to implement?
-
   - Forward propagation for layer $l$
-
     - Input $a^{[l-1]}$, output $a^{[l]},cache\space (z^{[l]})$
-
       - $z^{[l]}=w^{[l]}a^{[l-1]}+b^{[l]}$
       - $a^{[l]}=g^{[l]}(z^{[l]})$
 
     - Vectoried
-
       - $Z^{[l]}=W^{[l]}A^{[l-1]}+b^{[l]}$
       - $A^{[l]}=g^{[l]}(Z^{[l]})$
 
   - Backward propagation for layer $l$
-
     - Input $da^{[l]}, cache(z^{[l]})$, output $da^{[l-1]},dw^{[l]},db^{[l]}$
-
       - $dz^{[l]}=da^{[l]}*g'^{[l]}(z^{[l]})$
       - $dw^{[l]}=dz^{[l]}\cdot a^{[l-1]}$
       - $db^{[l]}=dz^{[l]}$
       - $da^{[l-1]}=w^{[l]T}\cdot dz^{[l]}$
 
     - Vectorized:
-
       - $dZ^{[l]}=dA^{[l]}*g'^{[l]}(Z^{[l]})$
       - $dW^{[l]}=\dfrac{1}{m}dZ^{[l]}A^{[l-1]T}$
       - $db^{[l]}=\dfrac{1}{m}np.sum(dZ^{[l]},axis=1,keepdims=True)$
@@ -379,7 +341,6 @@ autoSlug: false
 - Parameters: $W^{[1]}, b^{[1]}, W^{[2]}, b^{[2]},...$
 
 - Hyperparameters (will affect/control/determine parameters):
-
   - learning rate $\alpha$
   - \# iterations
   - \# of hidden units $n^{[1]},n^{[2]},...$
@@ -444,8 +405,8 @@ autoSlug: false
     - $w^{[l]}:=w^{[l]}-\alpha dw^{[l]}$ (keep the same)
     - Weight decay
       - $w^{[l]}:=w^{[l]}-\alpha[(from\space backprop)+\dfrac{\lambda}{m}w^{[l]}]$
-      - ​ $=w^{[l]}-\dfrac{\alpha\lambda}{m}w^{[l]}-\alpha(from\space backprop)$
-      - ​ $=(1-\dfrac{\alpha\lambda}{m})w^{[l]}-\alpha(from\space backprop)$
+      - $=w^{[l]}-\dfrac{\alpha\lambda}{m}w^{[l]}-\alpha(from\space backprop)$
+      - $=(1-\dfrac{\alpha\lambda}{m})w^{[l]}-\alpha(from\space backprop)$
 - How does regularization prevent overfitting: $\lambda$ bigger $w^{[l]}$ smaller $z^{[l]}$ smaller, which will make the activation function nearly linear(take tanh as an example). This will cause the network really hard to draw boundary with curve.
 - Dropout regularization
   - ![deep-learning-notes_2-1-3-2](https://s2.loli.net/2023/11/21/WTqeEg4MDPbtK12.jpg)
@@ -547,37 +508,31 @@ autoSlug: false
 #### 2.2.2 Exponentially weighted averages
 
 - $V_t = \beta V_{t-1} + (1 - \beta) \theta_t$
-
   - $V_t$ is the weighted average at time $t$.
   - $\theta_t$ is the actual observed value at time $t$.
   - $\beta$ is the decay rate (usually between 0 and 1).
   - $V_{t-1}$ is the weighted average at the previous time step.
 
 - Impact of Decay Rate $\beta$: The value of $\beta$ significantly affects the smoothness of the weighted average curve:
-
   - A larger $\beta$ makes the curve smoother, as it gives more weight to past observations, thereby reducing the impact of recent changes on the weighted average.
   - A smaller $\beta$ makes the curve more responsive to recent changes, as it gives more weight to recent observations.
 
 - Interpretation of $\dfrac{(1-\epsilon)^{\frac{1}{\epsilon}}}{\text{some constant}} = \dfrac{1}{e}$
-
   - Defining $\epsilon$ as $1 - \beta$ provides insight into how the influence of past data gradually diminishes as $\beta$ approaches 1 (i.e., $\epsilon$ approaches 0).
   - As $\epsilon$ approaches 0, $(1-\epsilon)^{\frac{1}{\epsilon}}$ approaches $ \dfrac{1}{e}$, indicating that even though past data is given more weight (high $ \beta$), its actual impact on the current value is decreasing.
 
 - Implementation
-
   - $v_{\theta}:=0$
   - Repear for each day:
     - Get the next $\theta_t$
     - $v_\theta:=\beta v_\theta+(1-\beta)\theta_t$
 
 - Bias correction in exponentially weighted averages
-
   - Bias correction is applied to counteract the initial bias in exponentially weighted averages, especially when the number of data points is small or at the start of the calculation.
   - $\dfrac{v_t}{1-\beta^t}$ Here, $v_t $ is the uncorrected exponentially weighted average at time $t$, and $\beta$ is the decay rate.
   - It ensures that the moving averages are not underestimated, particularly when $\beta$ is high and in the early stages of the iteration. With iteration goes on, the affect of this correction will become smaller since $\beta^t$ is closer to 1.
 
 - Gradient descent with momentum
-
   - On iteration t:
     - Compute $dw, db$ on current mini-batch (whole batch if not using mini-batch)
     - $v_{dw}=\beta v_{dw}+(1-\beta)dw$
@@ -642,21 +597,18 @@ autoSlug: false
 #### 2.3.2 Using an appropriate scale to pick hyperparameters
 
 - Learning rate: $\alpha = 0.0001,...,1$
-
   - $r=-4*np.random.rand()$ ---- $r\in[-4,0]$
     - $r\in[a,b]$
     - $a=log_{10}0.0001 = -4, b=log_{10}1 = 0$
   - $\alpha=10^r$ ----- $\alpha\in[10^{-4}...10^0]$
 
 - Exponentially Weighted Averages Decay Rate: $\beta=0.9(last\space 10),...,0.999(last\space1000)$
-
   - $1-\beta=0.1,...,0.001\space r\in[-3,-1]$
     - Reason for focusing on this instead of single $\beta$: $\beta$ is too close to 1, small changes may have big affects.
   - $1-\beta=10^r$
   - $\beta=1-10^r$
 
 - In practice:
-
   - Re-test/Re-evaluate occasionally.
   - Babysitting one model (don't have enough training capacity) (Panda): One model at one time.
   - Training many models in parallel (Caviar): Can try many at same time.
@@ -727,7 +679,6 @@ autoSlug: false
 #### 3.1.1 Setting up your goal
 
 - Orthogonalization
-
   - Chain of assumptions in ML
     - Fir training set well on cost function: bigger network; Adam
     - Fit dev set well on cost function: Regularization; Bigger training set
@@ -735,7 +686,6 @@ autoSlug: false
     - Perorms well in real world: Change dev set or cost function
 
 - Single number evaluation metric
-
   - Precision: In examples recognized, what percentage are actually true.
   - Recall: What percentage of target are correctly recognized in whole test set.
   - F1 Score: Average of precision and recall. $\dfrac{1}{\dfrac{1}{P}+\dfrac{1}{R}}$ (harmonic mean)
@@ -743,9 +693,7 @@ autoSlug: false
   - Use average error rate instead of single error rate for each classes in estimate many classes at same time.
 
 - Satisficing and optimizing matrics
-
   - Consider classifiers with accuracy and running time.
-
     - maximize accuracy and subject to running time <= 100ms
     - Accuracy: optimizing
     - Running time: satisfiying
@@ -753,24 +701,19 @@ autoSlug: false
   - N metic: 1 optimizing, n-1 satisficing
 
 - Train/dev/test distributions
-
   - Come from same distribution. (Use randomly shuffle)
   - Choose a dev set and test set to reflect data you expect to get in the future and consider important to do well on.
 
 - Size of dev/test set
-
   - For large data set, use 98% training, 1% dev, 1% test
   - Size of test set: Set your test set to be big enough to give high confidence in the overall performance of your system.
   - Sometime use only train+dev, without test set.
 
 - When to change dev/test sets and metrics
-
   - Filter pornographic images out of error rate:
-
     - ![deep-learning-notes_3-1-1](https://s2.loli.net/2023/11/28/LqKNWzu4PyxGgbf.jpg)
 
   - Two Steps
-
     1. How to define a metric to evaluate classifiers.
     2. How to do well on this metric.
 
@@ -896,7 +839,6 @@ autoSlug: false
 #### 4.1.1 Convolutional operatin
 
 - Vertical Edge Detection
-
   - Used to identify vertical edges in images, which is a crucial step in image analysis and understanding.
   - A small matrix, typically 3x3 or 5x5, is used as a convolution kernel to detect vertical edges.
   - The kernel slides over the image, moving one pixel at a time.
@@ -912,7 +854,6 @@ autoSlug: false
   - Based on this matrix example below, it will detect lighter on the left and darker on the right.
 
 - Horizontal Edge Detection
-
   - Brighter on the top and darker on the bottom
   - $
     \begin{bmatrix}
@@ -924,9 +865,7 @@ autoSlug: false
   - TBC
 
 - Other Common Filters
-
   - Sobel filter
-
     - $
       \begin{bmatrix}
       1 & 0 & -1 \\
@@ -945,15 +884,12 @@ autoSlug: false
       $
 
 - Padding
-
   - nxn \* fxf = n-f+1 x n-f+1
   - Problems of convolution:
-
     - Shrinking output
     - Through away information from edge.
 
   - Add a padding(p) of 0
-
     - n+2pxn+2p \* fxf = n+2p-f+1 x n+2p-f+1
 
   - Valid convolutions: No padding
@@ -961,20 +897,17 @@ autoSlug: false
   - f is usually odd.
 
 - Strided convolution
-
   - Stepping s steps instead of 1.
   - $\dfrac{n+2p-f}{s}+1$ x $\dfrac{n+2p-f}{s}+1$ (If not integer, bound down to the nearest integer.)
 
 - cross-correlation is the real name of convolution in DL.
 - Convolution over volume
-
   - Set the filter into the same volume as the input matrix. (e.g. RGB image with 3x3x3 filter)
   - If only look at an individual channel, just make other channel with all 0.
   - If consider vertical and horitental seperately, each output 4x4, the final could stack together get a 4x4x2 volume.
   - $n\times n\times n_c * f\times f \times n_c$ -> $n-f+1 \times n-f+1 \times n_c^{'}$ (\# of filters)
 
 - One layer of a CNN
-
   - Each output add a bias and apply non-learner to it. ReLU(Output+b) --> Consider stack all outputs after this as volume as the a in a=g(z)
   - Consider output as the same as the w in z=wa+b.
   - Number of parameters in one layer: If you have 10 filters that are 3x3x 3 in one layer of a neural network, how many parameters does that layer have？(Consider 3x3x3 + bias, it will be 280 parameters)
@@ -991,7 +924,6 @@ autoSlug: false
   - Weights: $f^{[l]}\times f^{[l]}\times n_C^{[l-1]}\times n_C^{[l]}$ (The last quantity is \# filters in layer l)
   - bias: $n_C^{[l]}$ - $(1,1,1,n_C^{[l]})$
 - A simple example ConvNet
-
   - ![deep-learning-notes_4-1-1](https://s2.loli.net/2023/12/03/kLT6ir7dZzPOafx.jpg)
   - Get the final output(7x7x40) and take it as a 1960 vector pass through logistic/softmax to get out actual final value.
 
@@ -1069,7 +1001,6 @@ autoSlug: false
 ##### 4.2.1.4 ResNets
 
 - Residual block
-
   - ![deep-learning-notes_4-2-1-4-1](https://s2.loli.net/2023/12/04/Z1W9ofDxBlUyegz.jpg)
   - Main Path: $a^{[l]}$ --> Linear --> ReLU --> $a^{[l+1]}$ --> Linear --> ReLU --> $a^{[l+2]}$
     - $z^{[l+1]}=W^{[l+1]}a^{[l]}+b^{[l+1]}$ $a^{[l+1]}=g(z^{[l+1]})$ $z^{[l+2]}=W^{[l+2]}a^{[l+1]}+b^{[l+2]}$ $a^{[l+2]}=g(z^{[l+2]})$
@@ -1079,7 +1010,6 @@ autoSlug: false
 - In normal plain network, the trainning error with increasing number of layers in theory will continuesly decrease. But in reality it will decrease but increase after a sweet point. What ResNet performs is decreasing training error with numbers of layers increase and the training error not increasing again.
 
 - Why do residual networks work?
-
   - ![deep-learning-notes_4-2-1-4-2](https://s2.loli.net/2023/12/04/9FGXNdz8lqtmnAh.jpg)
 
   - Residual networks introduce a shortcut or skip connection that allows the network to learn identity functions effectively.
@@ -1144,9 +1074,7 @@ autoSlug: false
   - Cost of depthwise seprable convolution / normal convolution
     - $\dfrac{1}{n_c} + \dfrac{1}{f^2}$
 - MobileNet v2 Bottleneck
-
   - Residual Connection
-
     - ![MobileNet v2 Bottleneck](https://s2.loli.net/2024/01/10/LR3SMIsuQZmTbiH.png)
     - Expansion
     - Depthwise
@@ -1217,27 +1145,22 @@ autoSlug: false
   - ![Convolution implementation of sliding windows](https://s2.loli.net/2024/01/12/Ju5TjpoefSyzt3w.png)
   - Instead of do 4 times 14x14x3, new conv fc share the computation, directly using the 2x2x4.
 - Output accurate bounding boxes
-
   - YOLO algorithm
-
     - Find the medium point of target and working into the boundary box that contains that point.
     - ![YOLO algorithm](https://s2.loli.net/2024/01/13/7LoM6JaibGInBzr.png)
     - ![YOLO algorithm-2](https://s2.loli.net/2024/01/13/VeFyJ18fQ7kMjKz.png)
 
   - Intersection over union (IoU)
-
     - Use to check accuracy.
     - Size of intersection / size of reunion (normally "Correct" if loU $\geq$ 0.5)
     - ![loU](https://s2.loli.net/2024/01/13/4GsDhIeF71TVgZv.png)
 
   - Non-max suppression
-
     - Leave the maximum accuracy one, supprese all with high IoU.
     - ![Non-max suppression-1](https://s2.loli.net/2024/01/13/GC6AuH4Rr3zE8if.png)
     - ![Non-max suppression-2](https://s2.loli.net/2024/01/13/VhZCJRq1im3GBFO.png)
 
   - Anchor Boxes
-
     - Predefine anchor boxes, associate ojects with anchor boxes.
     - If objects more than assigned anchor boxes, not works. Not same shape, not works.
     - ![Anchor Boxes-1](https://s2.loli.net/2024/01/13/EVAghCZjYbF7wzQ.png)
@@ -1252,17 +1175,13 @@ autoSlug: false
   - Fast R-CNN: Propose regions. Use convolution implementation of sliding windows to classify all the proposed regions.
   - Faster R-CNN: Use convolutional network to propose regions.
 - Semantic Segmentation with U-Net
-
   - Per-pixel class labels
-
     - ![Per-pixel class labels](https://s2.loli.net/2024/01/13/UBQ4Xdpg7O9yZFz.png)
 
   - Deep Learning for Semantic Segmentation
-
     - ![Deep Learning for Semantic Segmentation](https://s2.loli.net/2024/01/13/rt2LA5zhEg6Mx1V.png)
 
   - Transpose Convolution
-
     - Increase the image size.
     - ![Transpose Convolution - 1](https://s2.loli.net/2024/01/13/ULDT1WobnV4F3Pu.png)
     - ![Transpose Convolution - 2](https://s2.loli.net/2024/01/13/GdOkYNRx8VycA6K.png)
@@ -1291,7 +1210,6 @@ autoSlug: false
     - d(img1, img2) = degree of difference between images
     - If d(img1, img2) $\le \tau$ "same" $\textgreater \space \tau$ "Different"
 - Siamese network
-
   - ![Siamese network](https://s2.loli.net/2024/01/16/eT1uh8jkNFc3gAy.png)
   - Input two differnet images into two CNN and ge the result of them.
   - Such as input $x^{(1)}, x^{(2)}$ seperately into two differnt CNN, and the output will be the encoding of each of them $f(x^{(1)}), f(x^{(2)})$
@@ -1302,21 +1220,17 @@ autoSlug: false
     - If $x^{(i)}, x^{(j)}$ are the different person, $||f(x^{(i)}) - f(x^{(j)})||^2$ is large..
 
 - Triplet Loss
-
   - Learning objective: (Anchor, Positive), (Anchor, Negative)
-
     - Want: $||f(A) - f(P)||^2 + \alpha \le ||f(A) - f(N)||^2$ $\alpha$ is the margin (similar to SVM)
     - $||f(A) - f(P)||^2 - ||f(A) - f(N)||^2 + \alpha \le 0$
 
   - Loss function
-
     - Given 3 images A, P, N:
     - $L(A, P, N) = max(||f(A) - f(P)||^2 - ||f(A) - f(N)||^2 + \alpha, 0)$
     - $J = \sum\limits_{i=1}^m L(A^{(i)},P^{(i)},N^{(i)})$
 
   - If have a training set of 10K pictures of 1k persons. Put those 10K into triplet A, P, N, then put into the loss function.
   - Choosing the triplets A, P, N
-
     - During training, if A, P, N are chosen randomly, $d(A,P) +\alpha \le d(A, N)$ is easily satisfied.
     - Choose triplets that're "hard" to train on. (such as choose $d(A,P) \approx d(A,N)$)
 

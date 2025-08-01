@@ -80,10 +80,10 @@ export const fetchAnilistData = async (
   }
   catch (error) {
     if (error instanceof z.ZodError) {
-      console.error('Zod validation error:', error.errors)
+      console.error('Zod validation error:', error.issues)
       return {
         success: false,
-        message: error.errors.map(e => e.message).join(', '),
+        message: error.issues.map(e => e.message).join(', '),
       }
     }
     console.error('Internal Server Error:', error)

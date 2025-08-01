@@ -21,7 +21,7 @@ export const personJsonLd: WithContext<Person> = {
   '@type': 'Person',
   'name': config.author.name,
   'description': config.description,
-  'image': config.avatar,
+  'image': generateImageUrl(config.siteUrl, config.avatar),
   'sameAs': Object.entries(config.socialMedia)
     .map(([key, username]) => {
       const socialMediaRes = generateSocialMediaLink(key, String(username), true)
