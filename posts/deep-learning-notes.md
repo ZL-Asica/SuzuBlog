@@ -43,26 +43,21 @@ autoSlug: false
 - Parameters: $w \in R^{n_x}, b \in R $
 
 - Output $\hat{y} = \sigma(w^Tx + b)$
-
   - $\sigma(z)=\dfrac{1}{1+e^{-z}}$
   - If $z $ large, $\sigma(z)\approx\dfrac{1}{1+0}\approx1$
   - If $z $ large negative number, $\sigma(z)\approx\dfrac{1}{1+Bignum}\approx0$
 
 - Loss (error) function:
-
   - $\hat{y} = \sigma(w^Tx + b)$, where $\sigma(z)=\dfrac{1}{1+e^{-z}}$
-
     - $z^{(i)}=w^Tx^{(i)}+b$
 
   - Want $y^{(i)} \approx \hat{y}^{(i)} $
 
   - $L(y, \hat{y}) = -[y \log(\hat{y}) + (1 - y) \log(1 - \hat{y})]$
-
     - If $y=1: L(\hat{y}, y)=-\log{\hat{y}} $ <- want $\log{\hat{y}}$ as large as possible, want $\hat{y}$ large
     - If $y=0: L(\hat{y}, y)=-\log{(1-\hat{y})} $ <- want $\log{(1-\hat{y})}$ as large as possible, want $\hat{y}$ small
 
 - Cost function
-
   - $J(w, b)=\dfrac{1}{m}\sum\limits_{i=1}^{m}L(\hat{y}^{(i)},y^{(i)})=-\dfrac{1}{m}\sum\limits_{i=1}^{m}L[y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)})]$
 
 #### 1.2.3 Gradient Descent
@@ -104,14 +99,12 @@ autoSlug: false
 #### 1.2.4 Computational Graph
 
 - $J(a,b,c)=3(a+bc)$
-
   - $u=bc$
   - $v=a+u$
   - $J=3v$
   - Left to right computation
 
 - Derivatives with a Computation Graph
-
   - $\dfrac{dJ}{dv}=3$
     - $\dfrac{dJ}{da}=3$
     - $\dfrac{dv}{da}=1$
@@ -124,7 +117,6 @@ autoSlug: false
 - avoid explicit for-loops.
 
 - $J=0;dw=np.zeros((n_x,1));db=0$
-
   - for $i=1$ to $m$
     - $z^{(i)}=w^Tx^{(i)}+b$
     - $a^{(i)}=\sigma (z^{(i)})$
@@ -137,7 +129,6 @@ autoSlug: false
 - $Z=np.dot(w.T,x)+b$ ; b(1,1)-->Broodcasting
 
 - Vectorization Logistic Regression
-
   - $dz^{(1)}=a^{(1)}-y^{(1)}; dz^{(2)}=a^{(2)}-y^{(2)}...$
   - $dz=[dz^{(1)}, dz^{(2)},...,dz^{(m)}]$ $1\times m$
   - $A=[a^{(1)}, a^{(2)}, ..., a^{(m)}]$ $Y=[y^{(1)}, y^{(2)}, ..., y^{(m)}]$
@@ -155,7 +146,6 @@ autoSlug: false
     - $b:=b-\alpha db$
 
 - Broadcasting(same as bsxfun in Matlab/Octave)
-
   - $(m,n)$+-\*/$(1,n)$->$(m,n)$ 1->m will be all the same number.
   - $(m,n)$+-\*/$(m,1)$->$(m,n)$ 1->n will be all the same number
   - Don't use $a = np.random.randn(5)$ $a.shape = (5,)$ "rank 1 array"
@@ -164,7 +154,6 @@ autoSlug: false
   - Fix rank 1 array by $a = a.reshape((5,1))$
 
 - Logistic Regression Cost Function
-
   - Lost
     - $p(y|x)=\hat{y}^y(1-\hat{y})^{(1-y)}$
     - If $y=1$: $p(y|x)=\hat{y}$
@@ -183,19 +172,16 @@ autoSlug: false
 - ![deep-learning-notes_1-3-1](https://s2.loli.net/2023/11/20/EHtqxOI6c5NQuG8.jpg)
 
 - Input layer, hidden layer, output layer
-
   - $a^{[0]}=x$ -> $a^{[1]}=[[a^{[1]}_1,a^{[1]}_2,a^{[1]}_3,a^{[1]}_4]]$ -> $a^{[2]}$
   - Layers count by # of hidden layer+# of output layer.
 
 - $x_1,x_2,x_3$ -> $4\space hidden\space nodes$ -> $Output\space layer$
-
   - First hidden node: $z^{[1]}_1=w^{[1]T}_1+b^{[1]}_1, a^{[1]}_1=\sigma(z^{[1]}_1)$
   - Seconde hidden node: $z^{[1]}_2=w^{[1]T}_2+b^{[1]}_2, a^{[1]}_2=\sigma(z^{[1]}_2)$
   - Third hidden node: $z^{[1]}_3=w^{[1]T}_3+b^{[1]}_3, a^{[1]}_3=\sigma(z^{[1]}_3)$
   - Forth hidden node: $z^{[1]}_4=w^{[1]T}_4+b^{[1]}_4, a^{[1]}_4=\sigma(z^{[1]}_4)$
 
 - Vectorization
-
   - $w^{[1]}=\begin{gathered}\begin{bmatrix}-w^{[1]T}_1- \\ -w^{[1]T}_2- \\ -w^{[1]T}_3- \\ -w^{[1]T}_4- \end{bmatrix}\end{gathered} (4,3)matrix$
   - $z^{[1]}=\begin{gathered}\begin{bmatrix}-w^{[1]T}_1- \\ -w^{[1]T}_2- \\ -w^{[1]T}_3- \\ -w^{[1]T}_4- \end{bmatrix}\end{gathered}\cdot \begin{gathered}\begin{bmatrix}x_1 \\ x_2 \\ x_3 \end{bmatrix}\end{gathered} + \begin{gathered}\begin{bmatrix}b^{[1]}_1 \\ b^{[1]}_2 \\b^{[1]}_3 \\ b^{[1]}_4 \end{bmatrix}\end{gathered} =\begin{gathered}\begin{bmatrix}w^{[1]T}_1\cdot x+b^{[1]}_1 \\ w^{[1]T}_2\cdot x+b^{[1]}_2 \\ w^{[1]T}_3\cdot x++b^{[1]}_3 \\ w^{[1]T}_4\cdot x+b^{[1]}_4 \end{bmatrix}\end{gathered}=\begin{gathered}\begin{bmatrix}z^{[1]}_1 \\ z^{[1]}_2 \\z^{[1]}_3 \\ z^{[1]}_4 \end{bmatrix}\end{gathered}$
   - $a^{[1]}=\begin{gathered}\begin{bmatrix}a^{[1]}_1 \\ a^{[1]}_2 \\a^{[1]}_3 \\ a^{[1]}_4 \end{bmatrix}\end{gathered}=\sigma(z^{[1]})$
@@ -204,14 +190,12 @@ autoSlug: false
   - $a^{[2](i)}$: layer $2$; example $i$
 
 - for i=1 to m:
-
   - $z^{[1](i)}=W^{[1]}\cdot x(i)+b^{[1]}$
   - $a^{[1](i)}=\sigma(z^{[1](i)})$
   - $z^{[2](i)}=W^{[2]}\cdot a^{[1](i)}+b^{[2]}$
   - $a^{[2](i)}=\sigma(z^{[2](i)})$
 
 - Vectorizing of the above for loop
-
   - $X=\begin{gathered}\begin{bmatrix}| & | & | & | \\ x^{(1)}, &  x^{(2)}, & ..., & x^{(m)} \\ | & | & | & |\end{bmatrix}\end{gathered} (n_x,m)matrix$ n is different hidden units
   - $Z^{[1]}=W^{[1]}\cdot X+b^{[1]}$
   - $A^{[1]}=\sigma(Z^{[1]})$
@@ -222,53 +206,45 @@ autoSlug: false
 #### 1.3.2 Activation Functions
 
 - $g^{[i]}$: activation function of layer $i$
-
   - Sigmoid: $a=\dfrac{1}{1+e^{[-z]}}$
   - Tanh: $a=\dfrac{e^z-e^{[-z]}}{e^z+e^{[-z]}}$
   - ReLU: $a=max(0,z)$
   - Leaky ReLu: $a=max(0.01z, z)$
 
 - Rules to choose activation function
-
   1. Output is between {0, 1}, choose sigmoid.
   2. Default choose ReLu.
 
 - Why need non-liner activation function
-
   - Use linear hidden layer will be useless to have multiple hidden layers. It will become $a=w'x+b'$.
   - Linear may sometime use at output layer but with non-linear at hidden layers.
 
 #### 1.3.3 Forward and Backward Propagation
 
 - Derivative of activation function
-
   - Sigmoid: $g'(z)=\dfrac{d}{dz}g(z)=\dfrac{1}{1+e^{[-z]}}(1-\dfrac{1}{1+e^{[-z]}})=g(z)(1-g(z))=a(1-a)$
   - Tanh: $g'(z)=\dfrac{d}{dz}g(z)=1-(tanh(z))^2$
   - ReLU: $g'(z)=\left\{\begin{array}{lr}0&if \space z<0 \\1&if \space z\geq0\\\usepackage{undefined}&\usepackage{if \space z=0}\end{array}\right.$
   - Leaky ReLU: $g'(z)=\left\{\begin{array}{lr}0.01&if \space z<0 \\1&if \space z\geq0\end{array}\right.$
 
 - Gradient descent for neural networks
-
   - Parameters: $w^{[1]}(n^{[1]},n^{[2]}), b^{[1]}(n^{[2]},1),w^{[2]}(n^{[2]},n^{[1]}), b^{[2]}(n^{[2]},1)$
   - $n_x=n^{[0]},n^{[1]},n^{[2]}=1$
   - Cost function: $J(w^{[1]}, b^{[1]},w^{[2]}, b^{[2]})=\dfrac{1}{m}\sum\limits_{i=1}^nL(\hat{y},y)$
 
 - Forward propagation:
-
   - $Z^{[1]}=W^{[1]}\cdot X+b^{[1]}$
   - $A^{[1]}=g^{[1]}(Z^{[1]})$
   - $Z^{[2]}=W^{[2]}\cdot A^{[1]}+b^{[2]}$
   - $A^{[2]}=g^{[2]}(Z^{[2]})=\sigma(Z^{[2]})$
 
 - Back Propagation:
-
   - $dZ^{[2]}=A^{[2]}-Y$ $Y=[y^{(1)},y^{(2)},...,y^{(m)}]$
   - $dW^{[2]}=\dfrac{1}{m}dZ^{[2]}A^{[1]T}$
 
   - $db^{[2]}=\dfrac{1}{m}np.sum(dZ^{[2]},axis=1,keepdims=True)$
 
   - $dZ^{[1]}=W^{[2]T}dZ^{[2]}*g'^{[1]}(Z^{1})$
-
     - $(n^{[1]},m)->element-wise\space product->(n^{[1]},m)$
 
   - $dW^{[1]}=\dfrac{1}{m}dZ^{[1]}X^{T}$
@@ -276,7 +252,6 @@ autoSlug: false
   - $db^{[1]}=\dfrac{1}{m}np.sum(dZ^{[1]},axis=1,keepdims=True)$
 
 - Random Initialization
-
   - $x_1,x_2->a_1^{[1]},a_2^{[1]}->a_1^{[2]}->\hat{y}$
   - $w^{[1]}=np.random.randn((2,2))*0.01$
   - $b^{[1]}=np.zeros((2,1))$
@@ -300,20 +275,17 @@ autoSlug: false
 #### 1.4.2 Forward Propagation in a Deep Network
 
 - General: $Z^{[l]}=w^{[l]}A^{[l-1]}+b^{[l]}, A^{[l]}=g^{[l]}(Z^{[l]})$
-
   - $x: z^{[1]}=w^{[1]}a^{[0]}+b^{[1]}, a^{[1]}=g^{[1]}(z^{[1]})$ $a^{[0]}=X$
   - $z^{[2]}=w^{[2]}a^{[1]}+b^{[2]}, a^{[1]}=g^{[2]}(z^{[2]})$
   - ...
   - $z^{[4]}=w^{[4]}a^{[3]}+b^{[4]}, a^{[4]}=g^{[4]}(z^{[4]})=\hat{y}$
 
 - Vectorizing:
-
   - $Z^{[1]}=w^{[1]}A^{[0]}+b^{[1]}, A^{[1]}=g^{[1]}(Z^{[1]})$ $A^{[0]}=X$
   - $Z^{[2]}=w^{[2]}A^{[1]}+b^{[2]}, A^{[2]}=g^{[2]}(Z^{[2]})$
   - $\hat{Y}=g(Z^{[4]})=A^{[4]}$
 
 - Matrix dimensions
-
   - ![deep-learning-notes_1-4-2](https://s2.loli.net/2023/11/20/a6emOyncIbRlo8w.jpg)
   - $z^{[1]}=w^{[1]}\cdot x+b^{[1]}$
   - $z^{[1]}=(3,1),w^{[1]}=(3,2),x=(2,1),b^{[1]}=(3,1)$
@@ -322,14 +294,12 @@ autoSlug: false
   - $z^{[l]},a^{[l]}=(n^{[l]},1),Z^{[l]}/dZ^{[l]},A^{[l]}/dA^{[l]}=(n^{[l]},1)$ $l=0, A^{[0]}=X=(n^{[0]},m)$
 
 - Why deep representation?
-
   - Earier layers learn simple features; later deeper layers put together to detect more complex things.
   - Circuit theory and deep learning: Informally: There are functions you can compute with a "small" L-layer deep neural network that shallower networks require exponentially more hidden units to compute.
 
 #### 1.4.3 Building Blocks of Deep Neural Networks
 
 - Forward and backward functions
-
   - ![deep-learning-notes_1-4-3](https://s2.loli.net/2023/11/20/PBfq6ISu2h8vKeV.jpg)
   - Layer $l:w^{[l]},b^{[l]}$
   - Forward: Input $a^{[l-1]}$, output $a^{[l]}$
@@ -338,34 +308,26 @@ autoSlug: false
   - Backward: Input $da^{[l]}, cache(z^{[l]})$, output $da^{[l-1]},dw^{[l]},db^{[l]}$
 
 - One iteration of gradient descent of neural network
-
   - ![deep-learning-notes_1-4-3-2](https://s2.loli.net/2023/11/20/35UIkJnmlSHt82j.jpg)
 
 - How to implement?
-
   - Forward propagation for layer $l$
-
     - Input $a^{[l-1]}$, output $a^{[l]},cache\space (z^{[l]})$
-
       - $z^{[l]}=w^{[l]}a^{[l-1]}+b^{[l]}$
       - $a^{[l]}=g^{[l]}(z^{[l]})$
 
     - Vectoried
-
       - $Z^{[l]}=W^{[l]}A^{[l-1]}+b^{[l]}$
       - $A^{[l]}=g^{[l]}(Z^{[l]})$
 
   - Backward propagation for layer $l$
-
     - Input $da^{[l]}, cache(z^{[l]})$, output $da^{[l-1]},dw^{[l]},db^{[l]}$
-
       - $dz^{[l]}=da^{[l]}*g'^{[l]}(z^{[l]})$
       - $dw^{[l]}=dz^{[l]}\cdot a^{[l-1]}$
       - $db^{[l]}=dz^{[l]}$
       - $da^{[l-1]}=w^{[l]T}\cdot dz^{[l]}$
 
     - Vectorized:
-
       - $dZ^{[l]}=dA^{[l]}*g'^{[l]}(Z^{[l]})$
       - $dW^{[l]}=\dfrac{1}{m}dZ^{[l]}A^{[l-1]T}$
       - $db^{[l]}=\dfrac{1}{m}np.sum(dZ^{[l]},axis=1,keepdims=True)$
@@ -376,7 +338,6 @@ autoSlug: false
 - Parameters: $W^{[1]}, b^{[1]}, W^{[2]}, b^{[2]},...$
 
 - Hyperparameters (will affect/control/determine parameters):
-
   - learning rate $\alpha$
   - \# iterations
   - \# of hidden units $n^{[1]},n^{[2]},...$
@@ -441,8 +402,8 @@ autoSlug: false
     - $w^{[l]}:=w^{[l]}-\alpha dw^{[l]}$ (keep the same)
     - Weight decay
       - $w^{[l]}:=w^{[l]}-\alpha[(from\space backprop)+\dfrac{\lambda}{m}w^{[l]}]$
-      - ​ $=w^{[l]}-\dfrac{\alpha\lambda}{m}w^{[l]}-\alpha(from\space backprop)$
-      - ​ $=(1-\dfrac{\alpha\lambda}{m})w^{[l]}-\alpha(from\space backprop)$
+      - $=w^{[l]}-\dfrac{\alpha\lambda}{m}w^{[l]}-\alpha(from\space backprop)$
+      - $=(1-\dfrac{\alpha\lambda}{m})w^{[l]}-\alpha(from\space backprop)$
 - How does regularization prevent overfitting: $\lambda$ bigger $w^{[l]}$ smaller $z^{[l]}$ smaller, which will make the activation function nearly linear(take tanh as an example). This will cause the network really hard to draw boundary with curve.
 - Dropout regularization
   - ![deep-learning-notes_2-1-3-2](https://s2.loli.net/2023/11/21/WTqeEg4MDPbtK12.jpg)
@@ -544,37 +505,31 @@ autoSlug: false
 #### 2.2.2 Exponentially weighted averages
 
 - $V_t = \beta V_{t-1} + (1 - \beta) \theta_t$
-
   - $V_t$ is the weighted average at time $t$.
   - $\theta_t$ is the actual observed value at time $t$.
   - $\beta$ is the decay rate (usually between 0 and 1).
   - $V_{t-1}$ is the weighted average at the previous time step.
 
 - Impact of Decay Rate $\beta$: The value of $\beta$ significantly affects the smoothness of the weighted average curve:
-
   - A larger $\beta$ makes the curve smoother, as it gives more weight to past observations, thereby reducing the impact of recent changes on the weighted average.
   - A smaller $\beta$ makes the curve more responsive to recent changes, as it gives more weight to recent observations.
 
 - Interpretation of $\dfrac{(1-\epsilon)^{\frac{1}{\epsilon}}}{\text{some constant}} = \dfrac{1}{e}$
-
   - Defining $\epsilon$ as $1 - \beta$ provides insight into how the influence of past data gradually diminishes as $\beta$ approaches 1 (i.e., $\epsilon$ approaches 0).
   - As $\epsilon$ approaches 0, $(1-\epsilon)^{\frac{1}{\epsilon}}$ approaches $ \dfrac{1}{e}$, indicating that even though past data is given more weight (high $ \beta$), its actual impact on the current value is decreasing.
 
 - Implementation
-
   - $v_{\theta}:=0$
   - Repear for each day:
     - Get the next $\theta_t$
     - $v_\theta:=\beta v_\theta+(1-\beta)\theta_t$
 
 - Bias correction in exponentially weighted averages
-
   - Bias correction is applied to counteract the initial bias in exponentially weighted averages, especially when the number of data points is small or at the start of the calculation.
   - $\dfrac{v_t}{1-\beta^t}$ Here, $v_t $ is the uncorrected exponentially weighted average at time $t$, and $\beta$ is the decay rate.
   - It ensures that the moving averages are not underestimated, particularly when $\beta$ is high and in the early stages of the iteration. With iteration goes on, the affect of this correction will become smaller since $\beta^t$ is closer to 1.
 
 - Gradient descent with momentum
-
   - On iteration t:
     - Compute $dw, db$ on current mini-batch (whole batch if not using mini-batch)
     - $v_{dw}=\beta v_{dw}+(1-\beta)dw$
@@ -639,21 +594,18 @@ autoSlug: false
 #### 2.3.2 Using an appropriate scale to pick hyperparameters
 
 - Learning rate: $\alpha = 0.0001,...,1$
-
   - $r=-4*np.random.rand()$ ---- $r\in[-4,0]$
     - $r\in[a,b]$
     - $a=log_{10}0.0001 = -4, b=log_{10}1 = 0$
   - $\alpha=10^r$ ----- $\alpha\in[10^{-4}...10^0]$
 
 - Exponentially Weighted Averages Decay Rate: $\beta=0.9(last\space 10),...,0.999(last\space1000)$
-
   - $1-\beta=0.1,...,0.001\space r\in[-3,-1]$
     - Reason for focusing on this instead of single $\beta$: $\beta$ is too close to 1, small changes may have big affects.
   - $1-\beta=10^r$
   - $\beta=1-10^r$
 
 - In practice:
-
   - Re-test/Re-evaluate occasionally.
   - Babysitting one model (don't have enough training capacity) (Panda): One model at one time.
   - Training many models in parallel (Caviar): Can try many at same time.
@@ -724,7 +676,6 @@ autoSlug: false
 #### 3.1.1 Setting up your goal
 
 - Orthogonalization
-
   - Chain of assumptions in ML
     - Fir training set well on cost function: bigger network; Adam
     - Fit dev set well on cost function: Regularization; Bigger training set
@@ -732,7 +683,6 @@ autoSlug: false
     - Perorms well in real world: Change dev set or cost function
 
 - Single number evaluation metric
-
   - Precision: In examples recognized, what percentage are actually true.
   - Recall: What percentage of target are correctly recognized in whole test set.
   - F1 Score: Average of precision and recall. $\dfrac{1}{\dfrac{1}{P}+\dfrac{1}{R}}$ (harmonic mean)
@@ -740,9 +690,7 @@ autoSlug: false
   - Use average error rate instead of single error rate for each classes in estimate many classes at same time.
 
 - Satisfying and optimizing matrics
-
   - Consider classifiers with accuracy and running time.
-
     - maximize accuracy and subject to running time <= 100ms
     - Accuracy: optimizing
     - Running time: satisfying
@@ -750,24 +698,19 @@ autoSlug: false
   - N metic: 1 optimizing, n-1 satisfying
 
 - Train/dev/test distributions
-
   - Come from same distribution. (Use randomly shuffle)
   - Choose a dev set and test set to reflect data you expect to get in the future and consider important to do well on.
 
 - Size of dev/test set
-
   - For large data set, use 98% training, 1% dev, 1% test
   - Size of test set: Set your test set to be big enough to give high confidence in the overall performance of your system.
   - Sometime use only train+dev, without test set.
 
 - When to change dev/test sets and metrics
-
   - Filter pornographic images out of error rate:
-
     - ![deep-learning-notes_3-1-1](https://s2.loli.net/2023/11/28/LqKNWzu4PyxGgbf.jpg)
 
   - Two Steps
-
     1. How to define a metric to evaluate classifiers.
     2. How to do well on this metric.
 
@@ -893,7 +836,6 @@ autoSlug: false
 #### 4.1.1 Convolutional operatin
 
 - Vertical Edge Detection
-
   - Used to identify vertical edges in images, which is a crucial step in image analysis and understanding.
   - A small matrix, typically 3x3 or 5x5, is used as a convolution kernel to detect vertical edges.
   - The kernel slides over the image, moving one pixel at a time.
@@ -909,7 +851,6 @@ autoSlug: false
   - Based on this matrix example below, it will detect lighter on the left and darker on the right.
 
 - Horizontal Edge Detection
-
   - Brighter on the top and darker on the bottom
   - $
     \begin{bmatrix}
@@ -921,9 +862,7 @@ autoSlug: false
   - TBC
 
 - Other Common Filters
-
   - Sobel filter
-
     - $
       \begin{bmatrix}
       1 & 0 & -1 \\
@@ -942,15 +881,12 @@ autoSlug: false
       $
 
 - Padding
-
   - nxn \* fxf = n-f+1 x n-f+1
   - Problems of convolution:
-
     - Shrinking output
     - Through away information from edge.
 
   - Add a padding(p) of 0
-
     - n+2pxn+2p \* fxf = n+2p-f+1 x n+2p-f+1
 
   - Valid convolutions: No padding
@@ -958,20 +894,17 @@ autoSlug: false
   - f is usually odd.
 
 - Strided convolution
-
   - Stepping s steps instead of 1.
   - $\dfrac{n+2p-f}{s}+1$ x $\dfrac{n+2p-f}{s}+1$ (If not integer, bound down to the nearest integer.)
 
 - cross-correlation is the real name of convolution in DL.
 - Convolution over volume
-
   - Set the filter into the same volume as the input matrix. (e.g. RGB image with 3x3x3 filter)
   - If only look at an individual channel, just make other channel with all 0.
   - If consider vertical and horizontal seperately, each output 4x4, the final could stack together get a 4x4x2 volume.
   - $n\times n\times n_c * f\times f \times n_c$ -> $n-f+1 \times n-f+1 \times n_c^{'}$ (\# of filters)
 
 - One layer of a CNN
-
   - Each output add a bias and apply non-learner to it. ReLU(Output+b) --> Consider stack all outputs after this as volume as the a in a=g(z)
   - Consider output as the same as the w in z=wa+b.
   - Number of parameters in one layer: If you have 10 filters that are 3x3x 3 in one layer of a neural network, how many parameters does that layer have？(Consider 3x3x3 + bias, it will be 280 parameters)
@@ -988,7 +921,6 @@ autoSlug: false
   - Weights: $f^{[l]}\times f^{[l]}\times n_C^{[l-1]}\times n_C^{[l]}$ (The last quantity is \# filters in layer l)
   - bias: $n_C^{[l]}$ - $(1,1,1,n_C^{[l]})$
 - A simple example ConvNet
-
   - ![deep-learning-notes_4-1-1](https://s2.loli.net/2023/12/03/kLT6ir7dZzPOafx.jpg)
   - Get the final output(7x7x40) and take it as a 1960 vector pass through logistic/softmax to get out actual final value.
 
@@ -1066,7 +998,6 @@ autoSlug: false
 ##### 4.2.1.4 ResNets
 
 - Residual block
-
   - ![deep-learning-notes_4-2-1-4-1](https://s2.loli.net/2023/12/04/Z1W9ofDxBlUyegz.jpg)
   - Main Path: $a^{[l]}$ --> Linear --> ReLU --> $a^{[l+1]}$ --> Linear --> ReLU --> $a^{[l+2]}$
     - $z^{[l+1]}=W^{[l+1]}a^{[l]}+b^{[l+1]}$ $a^{[l+1]}=g(z^{[l+1]})$ $z^{[l+2]}=W^{[l+2]}a^{[l+1]}+b^{[l+2]}$ $a^{[l+2]}=g(z^{[l+2]})$
@@ -1076,7 +1007,6 @@ autoSlug: false
 - In normal plain network, the training error with increasing number of layers in theory will continuesly decrease. But in reality it will decrease but increase after a sweet point. What ResNet performs is decreasing training error with numbers of layers increase and the training error not increasing again.
 
 - Why do residual networks work?
-
   - ![deep-learning-notes_4-2-1-4-2](https://s2.loli.net/2023/12/04/9FGXNdz8lqtmnAh.jpg)
 
   - Residual networks introduce a shortcut or skip connection that allows the network to learn identity functions effectively.
@@ -1141,9 +1071,7 @@ autoSlug: false
   - Cost of depthwise separable convolution / normal convolution
     - $\dfrac{1}{n_c} + \dfrac{1}{f^2}$
 - MobileNet v2 Bottleneck
-
   - Residual Connection
-
     - ![MobileNet v2 Bottleneck](https://s2.loli.net/2024/01/10/LR3SMIsuQZmTbiH.png)
     - Expansion
     - Depthwise
@@ -1214,27 +1142,22 @@ autoSlug: false
   - ![Convolution implementation of sliding windows](https://s2.loli.net/2024/01/12/Ju5TjpoefSyzt3w.png)
   - Instead of do 4 times 14x14x3, new conv fc share the computation, directly using the 2x2x4.
 - Output accurate bounding boxes
-
   - YOLO algorithm
-
     - Find the medium point of target and working into the boundary box that contains that point.
     - ![YOLO algorithm](https://s2.loli.net/2024/01/13/7LoM6JaibGInBzr.png)
     - ![YOLO algorithm-2](https://s2.loli.net/2024/01/13/VeFyJ18fQ7kMjKz.png)
 
   - Intersection over union (IoU)
-
     - Use to check accuracy.
     - Size of intersection / size of reunion (normally "Correct" if loU $\geq$ 0.5)
     - ![loU](https://s2.loli.net/2024/01/13/4GsDhIeF71TVgZv.png)
 
   - Non-max suppression
-
     - Leave the maximum accuracy one, suppress all with high IoU.
     - ![Non-max suppression-1](https://s2.loli.net/2024/01/13/GC6AuH4Rr3zE8if.png)
     - ![Non-max suppression-2](https://s2.loli.net/2024/01/13/VhZCJRq1im3GBFO.png)
 
   - Anchor Boxes
-
     - Predefine anchor boxes, associate objects with anchor boxes.
     - If objects more than assigned anchor boxes, not works. Not same shape, not works.
     - ![Anchor Boxes-1](https://s2.loli.net/2024/01/13/EVAghCZjYbF7wzQ.png)
@@ -1249,17 +1172,13 @@ autoSlug: false
   - Fast R-CNN: Propose regions. Use convolution implementation of sliding windows to classify all the proposed regions.
   - Faster R-CNN: Use convolutional network to propose regions.
 - Semantic Segmentation with U-Net
-
   - Per-pixel class labels
-
     - ![Per-pixel class labels](https://s2.loli.net/2024/01/13/UBQ4Xdpg7O9yZFz.png)
 
   - Deep Learning for Semantic Segmentation
-
     - ![Deep Learning for Semantic Segmentation](https://s2.loli.net/2024/01/13/rt2LA5zhEg6Mx1V.png)
 
   - Transpose Convolution
-
     - Increase the image size.
     - ![Transpose Convolution - 1](https://s2.loli.net/2024/01/13/ULDT1WobnV4F3Pu.png)
     - ![Transpose Convolution - 2](https://s2.loli.net/2024/01/13/GdOkYNRx8VycA6K.png)
@@ -1288,7 +1207,6 @@ autoSlug: false
     - d(img1, img2) = degree of difference between images
     - If d(img1, img2) $\le \tau$ "same" $\textgreater \space \tau$ "Different"
 - Siamese network
-
   - ![Siamese network](https://s2.loli.net/2024/01/16/eT1uh8jkNFc3gAy.png)
   - Input two differnet images into two CNN and ge the result of them.
   - Such as input $x^{(1)}, x^{(2)}$ seperately into two different CNN, and the output will be the encoding of each of them $f(x^{(1)}), f(x^{(2)})$
@@ -1299,21 +1217,17 @@ autoSlug: false
     - If $x^{(i)}, x^{(j)}$ are the different person, $||f(x^{(i)}) - f(x^{(j)})||^2$ is large..
 
 - Triplet Loss
-
   - Learning objective: (Anchor, Positive), (Anchor, Negative)
-
     - Want: $||f(A) - f(P)||^2 + \alpha \le ||f(A) - f(N)||^2$ $\alpha$ is the margin (similar to SVM)
     - $||f(A) - f(P)||^2 - ||f(A) - f(N)||^2 + \alpha \le 0$
 
   - Loss function
-
     - Given 3 images A, P, N:
     - $L(A, P, N) = max(||f(A) - f(P)||^2 - ||f(A) - f(N)||^2 + \alpha, 0)$
     - $J = \sum\limits_{i=1}^m L(A^{(i)},P^{(i)},N^{(i)})$
 
   - If have a training set of 10K pictures of 1k persons. Put those 10K into triplet A, P, N, then put into the loss function.
   - Choosing the triplets A, P, N
-
     - During training, if A, P, N are chosen randomly, $d(A,P) +\alpha \le d(A, N)$ is easily satisfied.
     - Choose triplets that're "hard" to train on. (such as choose $d(A,P) \approx d(A,N)$)
 
@@ -1372,7 +1286,7 @@ autoSlug: false
   - $a^{<0>} = \vec{O}$
   - $a^{<1>}=g_1(w_{aa}a^{<0>}+w_{ax}x^{<1>}+b_a)$ <-- Tanh/ReLu
   - $\hat{y}^{<1>}=g_2(w_{ya}a^{<1>}+b_y)$ <-- Sigmoid
-  - $a^{<t>}=g(w_{aa}a^{<t-1>}+w_{ax}x^{<t>}+b_a)=g(w_a[a^{<t-1>},x^{<t>}]+b_a)$​ where $[w_{aa}, w_{ax}]=w_a$
+  - $a^{<t>}=g(w_{aa}a^{<t-1>}+w_{ax}x^{<t>}+b_a)=g(w_a[a^{<t-1>},x^{<t>}]+b_a)$ where $[w_{aa}, w_{ax}]=w_a$
     - ![RNN-Simplify Notation](https://s2.loli.net/2024/01/27/7htU923fvaXL1Ji.png)
   - $\hat{y}^{<t>}=g_2(w_{ya}a^{<t>}+b_y)=g(w_ya^{<t>}+b_y)$
   -
@@ -1385,7 +1299,6 @@ autoSlug: false
 - Loss at Each Timestep: $L^{<t>}(\hat{y}^{<t>}, y^{<t>}) = -y^{<t>}log\hat{y}^{<t>}-(1-y^{<t>})log(1 - \hat{y}^{<t>})$
 
 - Gradient Calculations for BPTT:
-
   - Gradient of the Loss w.r.t. Output at Each Timestep:
     $\dfrac{\partial L^{<t>}}{\partial \hat{y}^{<t>}} = -\dfrac{y^{<t>}}{\hat{y}^{<t>}} + \dfrac{1 - y^{<t>}}{1 - \hat{y}^{<t>}}$
 
@@ -1397,7 +1310,6 @@ autoSlug: false
     $\dfrac{\partial L}{\partial b} = \sum_{t=1}^{T_y} \dfrac{\partial L^{<t>}}{\partial \hat{y}^{<t>}} \cdot \dfrac{\partial \hat{y}^{<t>}}{\partial b}$
 
 - Weight Update in Gradient Descent:
-
   - Update Rule for Weights:
     $W := W - \alpha \dfrac{\partial L}{\partial W}$
   - Update Rule for Biases:
@@ -1406,7 +1318,6 @@ autoSlug: false
 #### 5.1.3 Different types of RNNs
 
 - Types
-
   - One to one:
     - The standard form of a neural network where there is one input and one output.
     - Example: A basic classification or regression task where each input data point maps to a single output.
@@ -1425,12 +1336,10 @@ autoSlug: false
   - ![RNN Types](https://s2.loli.net/2024/01/29/osybvZVnXBquf2L.png)
 
 - Learning Model and Sequence Generation:
-
   - Speech recognition: calculate the probability based on words before.
     - ![Speech Recognition](https://s2.loli.net/2024/01/29/XNftwsivROo3LnI.png)
 
 - Sampling Novel Sequences:
-
   - Generating Based on Previous Word:
     - In this process, a model generates a sequence (like a sentence) word by word.
     - Each new word is sampled based on the probabilities provided by the model, considering the previously generated words.
@@ -1443,11 +1352,9 @@ autoSlug: false
     This technique is commonly used in text generation tasks like story generation, chatbots, and language modeling.
 
 - Character-level language model:
-
   - Vocabulary: Alphabet-Based and Words-Based.
 
 - Vanishing Gradients with RNNs:
-
   - Long-Term Dependencies:
     In RNNs, earlier words in a sequence can have significant effects on later words, such as determining singular or plural forms or setting the context for subsequent words.
   - Challenge of Long-Term Dependencies:
@@ -1463,16 +1370,16 @@ autoSlug: false
 
 #### 5.1.4 Gated Recurrent Unit (GRU)
 
-- C = memory cell - $c^{<t>}=a^{<t>}$​​ (Just for now, LSTM different)
+- C = memory cell - $c^{<t>}=a^{<t>}$ (Just for now, LSTM different)
   - In GRUs, the concept of a memory cell is simplified compared to LSTMs.
-- Candidate Memory: $\tilde{c}^{<t>}=tanh(w_c [c^{<t-1>}, x^{<t>}] + b_c)$​​ Previous memory and current input.
+- Candidate Memory: $\tilde{c}^{<t>}=tanh(w_c [c^{<t-1>}, x^{<t>}] + b_c)$ Previous memory and current input.
   - Sometime in paper shows: $\tilde{h}$
   - This represents the candidate memory, computed as a combination of the previous memory and the current input.
 - Update Gate: $\Gamma_u=\sigma (w_u[c^{<t-1>}, x^{<t>}] + b_u)$
   - Decides how much of the candidate memory should be used to update the current memory cell.
 - Relevance Gate: $\Gamma_r=\sigma (w_r[c^{<t-1>}, x^{<t>}] + b_r)$
   - It decides how much of the past information (from previous timesteps) needs to be forgotten.
-- $c^{<t>} = \Gamma_u * \tilde{c}^{<t>} + (1 - \Gamma_u) * c^{<t-1>}$​ ($*$​​ - element-wise)
+- $c^{<t>} = \Gamma_u * \tilde{c}^{<t>} + (1 - \Gamma_u) * c^{<t-1>}$ ($*$ element-wise)
   - Sometime in paper show: $h$
   - The current memory cell is updated by an element-wise multiplication of the update gate with the candidate memory, and the complementary part of the update gate with the previous memory.
   - This formula allows the GRU to retain or forget information effectively, balancing between the candidate memory and the previous memory.
@@ -1492,7 +1399,6 @@ My own understanding (based on the above image):
 2. Reset Gate ($$r_t$$): How much past information to forget
 
    $$r_t = \sigma(W_r x_t + U_r h_{t-1})$$
-
    - Input $$x_t$$ (blue line, bottom to top): multiplied with weight matrix $$W_r$$.
    - Hidden state $$h_{t-1}$$ (orange line, top to bottom): multiplied with weight matrix $$U_r$$.
    - The results are added, then passed through a sigmoid activation $$\sigma$$ to compute $$r_t$$.
@@ -1501,7 +1407,6 @@ My own understanding (based on the above image):
 3. Update Gate ($$z_t$$): How much of the new memory to keep
 
    $$z_t = \sigma(W_z x_t + U_z h_{t-1})$$
-
    - Input $$x_t$$: multiplied with weight matrix $$W_z$$.
    - Hidden state $$h_{t-1}$$: multiplied with weight matrix $$U_z$$.
    - The two products are summed and passed through a sigmoid activation to get $$z_t$$.
@@ -1510,7 +1415,6 @@ My own understanding (based on the above image):
 4. Candidate Hidden State ($$\tilde{h}_t$$)
 
    $$\tilde{h}_t = \tanh(W x_t + U (r_t \odot h_{t-1}))$$
-
    - Compute element-wise product of $$r_t$$ and $$h_{t-1}$$: $$r_t \odot h_{t-1}$$.
    - Multiply input $$x_t$$ with weight matrix $$W$$.
    - Multiply the reset-modified hidden state with weight matrix $$U$$.
@@ -1520,7 +1424,6 @@ My own understanding (based on the above image):
 5. Final Hidden State ($$h_t$$): Combine old and new memory
 
    $$h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$$
-
    - Left part: $$1 - z_t$$ multiplied with $$h_{t-1}$$ (retain old memory).
    - Right part: $$z_t$$ multiplied with $$\tilde{h}_t$$ (add new memory).
    - Combine both to get the final hidden state $$h_t$$.
@@ -1553,7 +1456,6 @@ My own understanding (based on the above image):
 2. Forget Gate ($$f_t$$): How much past memory to forget
 
    $$f_t = \sigma(W_f x_t + U_f h_{t-1} + b_f)$$
-
    - Input $$x_t$$: multiplied with weight matrix $$W_f$$.
    - Hidden state $$h_{t-1}$$: multiplied with weight matrix $$U_f$$.
    - Add both results and apply sigmoid activation to get $$f_t$$.
@@ -1562,7 +1464,6 @@ My own understanding (based on the above image):
 3. Input Gate ($$i_t$$): How much new information to write
 
    $$i_t = \sigma(W_i x_t + U_i h_{t-1} + b_i)$$
-
    - Input $$x_t$$ and hidden state $$h_{t-1}$$ processed with weights $$W_i$$ and $$U_i$$.
    - Output is passed through sigmoid to get $$i_t$$.
    - Controls how much new candidate memory to allow in.
@@ -1570,14 +1471,12 @@ My own understanding (based on the above image):
 4. Candidate Cell State ($$\tilde{c}_t$$)
 
    $$\tilde{c}_t = \tanh(W_c x_t + U_c h_{t-1} + b_c)$$
-
    - Input $$x_t$$ and hidden state $$h_{t-1}$$ transformed and summed.
    - Apply tanh to generate candidate memory $$\tilde{c}_t$$.
 
 5. Update Cell State ($$c_t$$): Combine old and new memory
 
    $$c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t$$
-
    - Forget gate $$f_t$$ decides how much of the old memory $$c_{t-1}$$ to keep.
    - Input gate $$i_t$$ decides how much of the candidate memory $$\tilde{c}_t$$ to write in.
    - Combine both to get updated cell state $$c_t$$.
@@ -1585,13 +1484,11 @@ My own understanding (based on the above image):
 6. Output Gate ($$o_t$$): What to output from the cell
 
    $$o_t = \sigma(W_o x_t + U_o h_{t-1} + b_o)$$
-
    - Controls how much of the current cell state to expose as output.
 
 7. Final Hidden State ($$h_t$$): Compute output
 
    $$h_t = o_t \odot \tanh(c_t)$$
-
    - Cell state $$c_t$$ is passed through tanh, then modulated by output gate $$o_t$$.
    - The result is the final hidden state $$h_t$$, which can be passed to the next time step or used as output.
 
@@ -1617,7 +1514,6 @@ $$o_t = \sigma(W_o x_t + U_o h_{t-1} + V_o \odot c_t + b_o)$$
 1. Input and Hidden States: $$x_t$$, $$\overrightarrow{h}_{t-1}$$, and $$\overleftarrow{h}_{t+1}$$
 
    In a BRNN, the input sequence is processed **in both forward and backward directions**:
-
    - The **forward RNN** computes hidden states from left to right: $$\overrightarrow{h}_t$$
    - The **backward RNN** computes hidden states from right to left: $$\overleftarrow{h}_t$$
    - The final hidden state at time step $$t$$ is typically the **concatenation** (or sometimes sum) of both:
@@ -1627,7 +1523,6 @@ $$o_t = \sigma(W_o x_t + U_o h_{t-1} + V_o \odot c_t + b_o)$$
 2. Forward Hidden State ($$\overrightarrow{h}_t$$): Process input left to right
 
    $$\overrightarrow{h}_t = \tanh(W_x^{(f)} x_t + W_h^{(f)} \overrightarrow{h}_{t-1} + b^{(f)})$$
-
    - Processes input from $$t = 1$$ to $$T$$.
    - Uses forward weights $$W_x^{(f)}, W_h^{(f)}, b^{(f)}$$.
    - Computes hidden state based on current input and previous forward hidden state.
@@ -1635,7 +1530,6 @@ $$o_t = \sigma(W_o x_t + U_o h_{t-1} + V_o \odot c_t + b_o)$$
 3. Backward Hidden State ($$\overleftarrow{h}_t$$): Process input right to left
 
    $$\overleftarrow{h}_t = \tanh(W_x^{(b)} x_t + W_h^{(b)} \overleftarrow{h}_{t+1} + b^{(b)})$$
-
    - Processes input from $$t = T$$ to $$1$$ (reversed).
    - Uses backward weights $$W_x^{(b)}, W_h^{(b)}, b^{(b)}$$.
    - Computes hidden state based on current input and _next_ backward hidden state.
@@ -1643,7 +1537,6 @@ $$o_t = \sigma(W_o x_t + U_o h_{t-1} + V_o \odot c_t + b_o)$$
 4. Final Output ($$y_t$$): Merge forward and backward context
 
    $$y_t = g([\overrightarrow{h}_t ; \overleftarrow{h}_t])$$
-
    - Combines both directions by concatenating or summing $$\overrightarrow{h}_t$$ and $$\overleftarrow{h}_t$$.
    - Function $$g(\cdot)$$ can be:
      - A linear layer for classification
@@ -1665,23 +1558,18 @@ Each layer is a separate RNN with its own parameters: $$h_t^{(l)} = \tanh(W_x^{(
 #### 5.2.1 Word Representation
 
 - 1-hot representation (1-d vector)
-
-  - $$O_{5391}$$​ means this is in a 1d vector at 5391th position.
+  - $$O_{5391}$$ means this is in a 1d vector at 5391th position.
 
 - Featurized representation: word embedding
-
   - multiple dimensions (Normally 300-dimension)
   - ![Featurized representation](https://s2.loli.net/2024/02/26/T7Dkh6IauFeXrUl.png)
 
 - Visualizing word embeddings (t-SNE)
-
   - Similar to cluster
   - ![t-SNE](https://s2.loli.net/2024/02/26/HDEcrgX4uRq9Ool.png)
 
 - Using Word Embedding
-
   - Transfer learning and word embeddings
-
     1. Learn word embeddings from large text corpus. (1-100B words)
 
        (Or download pre-trained embedding online.)
@@ -1693,15 +1581,12 @@ Each layer is a separate RNN with its own parameters: $$h_t^{(l)} = \tanh(W_x^{(
     3. Optional: Continue to finetune the word embedding with new data.
 
 - Properties of word embeddings
-
   - Analogies using word vectors
-
     - ![Analogies using word vectors](https://s2.loli.net/2024/02/26/XtPDBoKJhfMNiea.png)
 
     - Cosine similarity
 
     - $sim(e_w, e_{king} - e_{man}+e_{woman})$
-
       - $sim(u,v)=\dfrac{u^Tv}{||u||_2||v||_2}$
 
       <img src="https://s2.loli.net/2024/02/26/uYemy5jBGTcZw8V.png" alt="Cosine similarity" style="zoom: 50%;" />
@@ -1718,7 +1603,7 @@ Each layer is a separate RNN with its own parameters: $$h_t^{(l)} = \tanh(W_x^{(
     - $O_c$: 1-hot; $E$: Embedding matrix; $e_c$ embedding vector
     - $o_{softmax}$: output of softmax layer (probability); $\hat{y}$: the output.
   - Softmax: $p(t|c) = \dfrac{e^{\theta_t^T e_c}}{\sum_{j=1}^{10,000}e^{\theta_j^T e_c}}$
-    - $\theta_t$​ = parameter associated with output t.
+    - $\theta_t$ = parameter associated with output t.
     - This softmax function describe in given context work $c$, the probability of $t$ become the target word.
   - $L(\hat{y},y)=-\sum_{i=1}^{10,000}y_i log\hat{y_i}$
   - How to sample the context c?
@@ -1732,39 +1617,33 @@ Each layer is a separate RNN with its own parameters: $$h_t^{(l)} = \tanh(W_x^{(
 My own understanding (Word2vec with Skip-gram):
 
 1. Input and Target Words: $$w_t$$ (center word) and $$w_{t+j}$$ (context word)
-
    - The Skip-gram model receives a single input word $$w_t$$ (center word).
    - The training objective is to predict one or more context words $$w_{t+j}$$ where $$j \in [-c, c], j \ne 0$$ and $$c$$ is the context window size.
 
 2. Input Word Representation: One-hot encoding and Embedding Lookup
-
    - The input word $$w_t$$ is first represented as a one-hot vector $$x \in \mathbb{R}^{V}$$, where $$V$$ is the vocabulary size.
    - This vector is multiplied by an embedding matrix $$E \in \mathbb{R}^{V \times d}$$ to retrieve the dense word vector:
      $$v_{w_t} = E^\top x = E_{w_t} \in \mathbb{R}^{d}$$
    - $$v_{w_t}$$ is the **embedding vector** for the input word.
 
 3. Output Layer: Predicting context word probabilities
-
    - The model tries to compute a score for **every word in the vocabulary** as a possible context word.
    - This is done by multiplying the embedding vector with an output weight matrix $$U \in \mathbb{R}^{V \times d}$$ and applying a softmax function:
      $$P(w_{context} \mid w_t) = \text{softmax}(U v_{w_t}) = \frac{\exp(U_{w}^\top v_{w_t})}{\sum_{w' \in V} \exp(U_{w'}^\top v_{w_t})}$$
    - For each actual context word $$w_{t+j}$$, we maximize this probability.
 
 4. Loss Function: Cross-entropy over context words
-
    - The loss is the negative log-likelihood over the context window:
      $$\mathcal{L} = - \sum_{-c \leq j \leq c,\; j \ne 0} \log P(w_{t+j} \mid w_t)$$
    - This encourages the model to place actual context words close to the center word in vector space.
 
 5. Optimization Tricks (for efficiency)
-
    - In practice, computing softmax over a large vocabulary is expensive.
    - Two common approximations are used:
      - **Negative Sampling**: Only update a small number of negative samples + one positive
      - **Hierarchical Softmax**: Replace softmax with a binary tree of decisions
 
 6. Output: Word Embedding Matrix
-
    - After training, the **rows of the input embedding matrix $$E$$** (or average of input and output vectors) are used as final word vectors.
    - These vectors capture semantic and syntactic word relationships.
 
@@ -1773,19 +1652,16 @@ My own understanding (Word2vec with Skip-gram):
 ![GloVe.png](https://s2.loli.net/2025/04/10/bw3TxRSHG7o91q6.png)
 
 1. Motivation: Combine global co-occurrence with local context
-
    - Word2Vec (Skip-gram) learns from local context windows.
    - GloVe is designed to use **global word co-occurrence statistics** across the entire corpus.
    - The key insight: **ratios of co-occurrence probabilities** capture semantic relationships.
 
 2. Co-occurrence Matrix: $$X_{ij}$$
-
    - Build a symmetric matrix $$X \in \mathbb{R}^{V \times V}$$ where:
      - $$X_{ij}$$ = number of times word $$j$$ appears in the context of word $$i$$
    - This matrix captures the **global statistical information** about the corpus.
 
 3. Learning Objective: Weighted least squares regression
-
    - Learn word vectors $$w_i, w_j$$ and biases $$b_i, b_j$$ for each word pair $$i, j$$
    - The goal is to approximate:
      $$w_i^\top \tilde{w}_j + b_i + \tilde{b}_j \approx \log(X_{ij})$$
@@ -1796,7 +1672,6 @@ My own understanding (Word2vec with Skip-gram):
      - $$b_i$$ and $$\tilde{b}_j$$ are scalar biases
 
 4. Cost Function
-
    - Use a **weighted squared error** to train only on nonzero entries of $$X_{ij}$$:
      $$J = \sum_{i,j=1}^{V} f(X_{ij}) \left( w_i^\top \tilde{w}_j + b_i + \tilde{b}_j - \log(X_{ij}) \right)^2$$
    - Weighting function:
@@ -1814,13 +1689,11 @@ My own understanding (Word2vec with Skip-gram):
      - $$x_{\text{max}} = 100$$
 
 5. Output Word Vectors
-
    - Final word representation is typically:
      $$\text{Embedding}(w_i) = w_i + \tilde{w}_i$$
    - Combines both **target** and **context** word embeddings.
 
 6. Key Properties
-
    - GloVe learns vectors such that **vector differences encode meaningful relationships**, e.g.:
      - $$\text{king} - \text{man} + \text{woman} \approx \text{queen}$$
    - Works well for analogies and capturing **linear semantic structure**.
@@ -1832,7 +1705,6 @@ My own understanding (Word2vec with Skip-gram):
 ![Sentiment-Classification-1.png](https://s2.loli.net/2025/04/10/VERKa5Tsi9zLrXe.png)
 
 - Debiasing Word Embeddings
-
   - Word embeddings can reflect gender, ethnicity, age, sexual orientation, and other biases of the text used to train the model.
 
     Man: King as Woman: Queen
@@ -1853,7 +1725,6 @@ My own understanding (Word2vec with Skip-gram):
 ![Seq2Seq.png](https://s2.loli.net/2025/04/10/uPZyKOb1tVxpD6J.png)
 
 1. Architecture Overview
-
    - A Seq2Seq model consists of two main components:
      - **Encoder**: processes the input sequence into a fixed-length vector.
      - **Decoder**: generates the output sequence based on the encoder output.
@@ -1863,7 +1734,6 @@ My own understanding (Word2vec with Skip-gram):
 
    For an input sequence $$x = (x_1, x_2, \dots, x_T)$$, the encoder RNN updates its hidden state at each time step:
    $$h_t^{(enc)} = \text{RNN}(x_t, h_{t-1}^{(enc)})$$
-
    - The final hidden state $$h_T^{(enc)}$$ is used to represent the entire input sequence.
    - In LSTM-based encoders, both hidden state $$h_T^{(enc)}$$ and cell state $$c_T^{(enc)}$$ are passed to the decoder.
 
@@ -1871,19 +1741,16 @@ My own understanding (Word2vec with Skip-gram):
 
    Given the target sequence $$y = (y_1, y_2, \dots, y_{T'})$$, the decoder predicts each output token one at a time:
    $$h_t^{(dec)} = \text{RNN}(y_{t-1}, h_{t-1}^{(dec)})$$
-
    - The initial hidden state $$h_0^{(dec)}$$ is set to the encoder's final state:
      $$h_0^{(dec)} = h_T^{(enc)}$$
    - At each time step, the decoder predicts the next word:
      $$\hat{y}_t = \text{softmax}(W_{out} h_t^{(dec)} + b_{out})$$
 
 4. Training: Teacher Forcing
-
    - During training, the decoder receives the **true previous token** $$y_{t-1}$$ as input.
    - This technique is called **teacher forcing**, and it helps the model converge faster.
 
 5. Inference: Autoregressive Decoding
-
    - During inference (e.g. translation), the decoder only has access to its **own previous prediction**:
      Input to decoder at time t:
      - Training: true y\_{t-1}
@@ -1893,19 +1760,16 @@ My own understanding (Word2vec with Skip-gram):
      - A max length is reached
 
 6. Loss Function
-
    - Typically use cross-entropy loss over each predicted token:
      $$\mathcal{L} = - \sum_{t=1}^{T'} \log P(y_t \mid y_{<t}, x)$$
    - The model learns to predict each output token given all previous ones and the encoded input.
 
 7. Enhancements
-
    - **Bidirectional Encoder**: Use BRNN to capture both past and future context in the input.
    - **Attention Mechanism**: Instead of using only the final encoder state, let the decoder attend to all encoder states dynamically.
    - **Beam Search**: Improves inference quality by exploring multiple decoding paths.
 
 8. Use Cases
-
    - Machine Translation (e.g., English → French)
    - Text Summarization
    - Dialogue Generation
@@ -1918,7 +1782,6 @@ My own understanding (Word2vec with Skip-gram):
 ![beam-search-2.png](https://s2.loli.net/2025/04/10/hpXITPeC54wQ86g.png)
 
 1. Motivation: Why not greedy decoding?
-
    - **Greedy decoding** picks the word with the highest probability at each step.
    - However, this doesn't guarantee a globally optimal sequence.
    - It might choose a high-probability first word that leads to a poor overall sequence.
@@ -1926,7 +1789,6 @@ My own understanding (Word2vec with Skip-gram):
 2. Beam Search Idea
 
    > Beam Search keeps track of the **top-k most likely partial sequences** at each time step, instead of just the single best one.
-
    - The number $$k$$ is called the **beam width**.
    - At each time step:
      - All possible continuations of each sequence in the beam are explored.
@@ -1935,7 +1797,6 @@ My own understanding (Word2vec with Skip-gram):
 3. Beam Search Algorithm
 
    Suppose beam width = $$k$$.
-
    1. **Initialization**:
       - Start with the initial token (e.g., $$<s>$$) in the beam.
       - Set initial score for all hypotheses = 0.
@@ -1949,7 +1810,6 @@ My own understanding (Word2vec with Skip-gram):
       - Stop when all sequences in the beam have generated the $$</s>$$ (end-of-sequence) token, or max length reached.
 
 4. Normalization
-
    - Longer sequences tend to have lower total log-probability.
 
    - To correct this, use **length normalization**:
@@ -1969,7 +1829,6 @@ My own understanding (Word2vec with Skip-gram):
    | Top-k / Nucleus Sampling | Sample from top-k or p-mass        | Good for open-gen     | Less suitable for precise tasks |
 
 6. Tips
-
    - Beam width 1 = Greedy decoding
    - Beam width 5~10 is commonly used in practice
    - Larger beam widths can improve quality, but **too large may lead to generic/boring outputs** ("I don't know" problem)
@@ -1977,13 +1836,11 @@ My own understanding (Word2vec with Skip-gram):
 #### 5.3.3 Bilingual Evaluation Understudy - BLEU Score
 
 1. Motivation: How to evaluate generated sequences?
-
    - We want to compare a generated sentence (candidate) against one or more reference sentences.
    - BLEU measures **n-gram overlap** between candidate and reference.
    - It's an automatic metric that correlates fairly well with human judgment.
 
 2. Input Definitions
-
    - **Candidate sentence**: the output generated by the model (e.g. machine translation).
    - **Reference sentence(s)**: human-written correct outputs.
    - **n-gram**: contiguous sequence of n words.
@@ -1993,7 +1850,6 @@ My own understanding (Word2vec with Skip-gram):
    > Count **how many n-grams in the candidate** also appear in the reference(s).
 
    For each n-gram size (typically from 1 to 4):
-
    1. Count all **n-grams** in candidate sentence.
    2. Count **how many appear in the reference(s)**.
    3. Clip the counts so repeats aren’t overcounted.
@@ -2002,7 +1858,6 @@ My own understanding (Word2vec with Skip-gram):
 
    For each $$n$$-gram size:
    $$P_n = \frac{\text{\# matched n-grams}}{\text{\# candidate n-grams}}$$
-
    - This is called **modified precision**, because we "clip" the match count to the max times it appears in any reference.
 
 5. Brevity Penalty (BP)
@@ -2010,7 +1865,6 @@ My own understanding (Word2vec with Skip-gram):
    > To penalize overly short outputs.
 
    Let:
-
    - $$c$$ = length of candidate
    - $$r$$ = effective reference length (usually closest to $$c$$)
 
@@ -2028,7 +1882,6 @@ My own understanding (Word2vec with Skip-gram):
 
    With weights $$w_n$$ for each n-gram (commonly uniform, e.g. 0.25 for n=1~4):
    $$\text{BLEU} = BP \cdot \exp\left( \sum_{n=1}^{N} w_n \log P_n \right)$$
-
    - Typically use **up to 4-grams** ($$N = 4$$).
    - If any $$P_n = 0$$, the BLEU becomes 0 (use smoothing in practice).
 
@@ -2038,13 +1891,11 @@ My own understanding (Word2vec with Skip-gram):
    `the cat is on the mat`
    **Candidate**:
    `the cat the cat on the mat`
-
    - Unigram match: 5 / 7 = 0.714
    - Bigram match: 3 / 6 = 0.5
    - BLEU = $$BP \cdot \sqrt{0.714 \cdot 0.5} \approx 0.597$$
 
 8. Advantages
-
    - Automatic, fast, widely adopted
    - Works well with multiple references
    - Captures **exact word-level overlap**
@@ -2059,7 +1910,6 @@ My own understanding (Word2vec with Skip-gram):
    | Better for machine translation | Less effective for open-ended generation (like chatbots) |
 
 10. Tips
-
     - BLEU is better with **multiple references**
     - Apply **smoothing** (e.g. `BLEU+1`) for short sentences
     - Combine with other metrics like ROUGE, METEOR, BERTScore for better evaluation
@@ -2069,13 +1919,11 @@ My own understanding (Word2vec with Skip-gram):
 ![attention-model-1](https://s2.loli.net/2025/04/10/XNUSRjTmu32WLqE.png)
 
 1. Motivation: Why Attention?
-
    - In standard Seq2Seq models, the encoder compresses the entire input sequence into a **fixed-length vector**.
    - This creates a bottleneck, especially for long sequences, because the decoder has limited access to detailed information.
    - **Attention allows the decoder to “look back” at all encoder hidden states**, dynamically focusing on the most relevant parts of the input.
 
 2. Encoder Hidden States
-
    - The encoder processes an input sequence $$x = (x_1, x_2, \dots, x_T)$$
    - At each time step, it produces a hidden state:
      $$h_t^{(enc)} = \text{EncoderRNN}(x_t, h_{t-1}^{(enc)})$$
@@ -2083,7 +1931,6 @@ My own understanding (Word2vec with Skip-gram):
      $$H = [h_1^{(enc)}, h_2^{(enc)}, \dots, h_T^{(enc)}]$$
 
 3. Decoder Hidden State
-
    - At decoding step $$t$$, the decoder has a current hidden state $$s_t$$:
      $$s_t = \text{DecoderRNN}(y_{t-1}, s_{t-1}, c_{t})$$
    - Note: the decoder will compute a **context vector** $$c_t$$ using attention over the encoder outputs.
@@ -2091,7 +1938,6 @@ My own understanding (Word2vec with Skip-gram):
    ![attention-model-2](https://s2.loli.net/2025/04/10/PYhRydEb125uVCT.png)
 
 4. Attention Weights: $$\alpha_{t,i}$$
-
    - For each encoder hidden state $$h_i$$, compute a **relevance score** with respect to the decoder state $$s_t$$:
      $$e_{t,i} = \text{score}(s_t, h_i)$$
    - Common scoring functions:
@@ -2102,33 +1948,28 @@ My own understanding (Word2vec with Skip-gram):
      $$\alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_{j=1}^{T} \exp(e_{t,j})}$$
 
 5. Context Vector: $$c_t$$
-
    - The context vector is a **weighted sum of encoder hidden states**:
      $$c_t = \sum_{i=1}^{T} \alpha_{t,i} \cdot h_i$$
    - It represents what the decoder “attends to” when generating the next token.
 
 6. Final Decoder Output
-
    - The context vector $$c_t$$ is combined with the decoder state $$s_t$$ to generate the output:
      $$\tilde{s}_t = \tanh(W_c [c_t ; s_t])$$
      $$\hat{y}_t = \text{softmax}(W_o \tilde{s}_t + b_o)$$
    - The output is a probability distribution over the vocabulary.
 
 7. Summary of Steps at Time Step $$t$$
-
    1. Compute attention scores $$e_{t,i}$$ between $$s_t$$ and each $$h_i$$
    2. Normalize to get weights $$\alpha_{t,i}$$
    3. Compute context vector $$c_t$$ as weighted sum
    4. Combine $$c_t$$ and $$s_t$$ to predict output $$\hat{y}_t$$
 
 8. Benefits of Attention
-
    - Removes fixed-length bottleneck
    - Improves translation quality, especially for long inputs
    - Offers **interpretability**: shows which parts of input are attended to
 
 9. Variants
-
    - Bahdanau Attention (additive)
 
      ![attention-Bahdanau](https://s2.loli.net/2025/04/11/IwlaFkjqOxJ9KL6.png)
@@ -2150,7 +1991,6 @@ My own understanding (Word2vec with Skip-gram):
    $$
    h_t^{(enc)} = \text{RNN}_{enc}(x_t, h_{t-1}^{(enc)})
    $$
-
    - $$h_t^{(enc)}$$: the encoder's hidden state at time $$t$$
    - Final encoder output: sequence of hidden states
 
@@ -2161,7 +2001,6 @@ My own understanding (Word2vec with Skip-gram):
 2. Decoder Initialization
 
    At decoding time step $$t$$:
-
    - $$s_t$$: decoder hidden state at time step $$t$$
    - Initial decoder state $$s_0$$ is usually set as:
 
@@ -2178,7 +2017,6 @@ My own understanding (Word2vec with Skip-gram):
    $$
    e_{t,i} = v_a^\top \tanh(W_s s_{t-1} + W_h h_i)
    $$
-
    - $$s_{t-1}$$: decoder’s previous hidden state
    - $$h_i$$: encoder hidden state at position $$i$$
    - $$W_s, W_h, v_a$$: trainable weight matrices/vectors
@@ -2190,7 +2028,6 @@ My own understanding (Word2vec with Skip-gram):
    $$
    \alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_{j=1}^{T} \exp(e_{t,j})}
    $$
-
    - $$\alpha_{t,i}$$ is the attention given to encoder step $$i$$ at decoder step $$t$$
 
 5. Context vector $$c_t$$
@@ -2200,7 +2037,6 @@ My own understanding (Word2vec with Skip-gram):
    $$
    c_t = \sum_{i=1}^{T} \alpha_{t,i} \cdot h_i
    $$
-
    - $$c_t$$ is the attention-based summary of input relevant to the current decoding step
 
 6. Decoder hidden state $$s_t$$
@@ -2222,13 +2058,11 @@ My own understanding (Word2vec with Skip-gram):
    $$
    \hat{y}_t = \text{softmax}(W_o \tilde{s}_t + b_o)
    $$
-
    - $$\hat{y}_t$$: probability distribution over vocabulary
 
 8. Overall Summary of Bahdanau Attention Steps
 
    At each decoder time step $$t$$:
-
    1. Compute alignment scores for all encoder states:
       $$
       e_{t,i} = v_a^\top \tanh(W_s s_{t-1} + W_h h_i)
@@ -2257,31 +2091,26 @@ My own understanding (Word2vec with Skip-gram):
 ![Encoder Self Attention](https://s2.loli.net/2025/04/11/zCEKxgYdoVZOXFq.gif)
 
 1. Motivation: Why Self-Attention?
-
    - In regular attention, the decoder attends to the encoder outputs.
    - In **Self-Attention**, each word in a sequence attends to **other words in the same sequence**.
    - This allows the model to capture dependencies between all tokens — no matter how far apart.
 
 2. Inputs: Embedding Matrix $$X$$
-
    - Input is a sequence of token embeddings:
 
    $$
    X = [x_1, x_2, \dots, x_n]^\top \in \mathbb{R}^{n \times d}
    $$
-
    - Each $$x_i$$ is a $$d$$-dimensional vector, $$n$$ is sequence length.
 
 3. Linear Projections: Queries, Keys, and Values
 
    ![QKV Explaine](https://s2.loli.net/2025/04/11/IoeM4Dv7q6GLrb9.png)
-
    - Compute three matrices from $$X$$ using learnable weights:
 
    $$
    Q = X W^Q, \quad K = X W^K, \quad V = X W^V
    $$
-
    - Dimensions:
      - $$W^Q, W^K, W^V \in \mathbb{R}^{d \times d_k}$$
      - $$Q, K, V \in \mathbb{R}^{n \times d_k}$$
@@ -2289,25 +2118,21 @@ My own understanding (Word2vec with Skip-gram):
 4. Scaled Dot-Product Attention
 
    ![QKV Attention Formula](https://s2.loli.net/2025/04/11/DyzwRTK7ZABICUL.png)
-
    - For each token, compute attention score between its **query** and all **keys**:
 
    $$
    \text{Attention}(Q, K, V) = \text{softmax}\left( \frac{Q K^\top}{\sqrt{d_k}} \right) V
    $$
-
    - The matrix multiplication $$Q K^\top$$ gives a $$n \times n$$ attention matrix.
    - The softmax ensures that attention weights over all positions sum to 1.
    - Then multiply by $$V$$ to get the weighted sum of value vectors.
 
 5. Output of Self-Attention
-
    - The final output is a new matrix:
 
    $$
    Z = \text{Attention}(Q, K, V)
    $$
-
    - Each row $$z_i$$ is a new representation of token $$x_i$$, enriched with contextual information from all other tokens.
 
 #### 5.4.2 Multi-Head Attention
@@ -2315,12 +2140,10 @@ My own understanding (Word2vec with Skip-gram):
 ![Multi Head Attention Animation](https://s2.loli.net/2025/04/11/j76cpmH4boivrlO.gif)
 
 1. Motivation: Why Multiple Heads?
-
    - A single self-attention head can only capture **one type of similarity** or relationship at a time.
    - **Multi-Head Attention** allows the model to attend to information **from different representation subspaces** and at different positions in parallel.
 
 2. Input: Embedding Matrix $$X \in \mathbb{R}^{n \times d}$$
-
    - $$n$$ = sequence length, $$d$$ = embedding dimension.
    - From input $$X$$, we will create multiple independent **query, key, value** projections.
 
@@ -2331,7 +2154,6 @@ My own understanding (Word2vec with Skip-gram):
    $$
    Q_i = X W_i^Q, \quad K_i = X W_i^K, \quad V_i = X W_i^V
    $$
-
    - Where:
      - $$W_i^Q, W_i^K, W_i^V \in \mathbb{R}^{d \times d_k}$$
        - Typically, $$d_k = d / h$$ so that concatenated heads still match original dimensionality.
@@ -2343,17 +2165,14 @@ My own understanding (Word2vec with Skip-gram):
    $$
    \text{head}_i = \text{Attention}(Q_i, K_i, V_i) = \text{softmax} \left( \frac{Q_i K_i^\top}{\sqrt{d_k}} \right) V_i
    $$
-
    - Resulting shape: $$\text{head}_i \in \mathbb{R}^{n \times d_k}$$
 
 5. Concatenation of All Heads
-
    - All heads are concatenated along the feature dimension:
 
    $$
    \text{MultiHead}(X) = [\text{head}_1; \text{head}_2; \dots; \text{head}_h] W^O
    $$
-
    - Where:
      - $$[\,\cdot\,]$$ means concatenation along last dimension
      - $$W^O \in \mathbb{R}^{d \times d}$$ is a learnable projection matrix to map back to original dimension
@@ -2379,7 +2198,6 @@ My own understanding (Word2vec with Skip-gram):
 > Transformer = Stacked Self-Attention + Feedforward + Residual + LayerNorm
 
 1. Motivation: Why Transformer?
-
    - RNNs suffer from **sequential bottlenecks** and **long-term dependency issues**.
    - Transformer replaces recurrence entirely with **self-attention + feed-forward layers**, enabling:
      - Full parallelization
@@ -2397,11 +2215,9 @@ My own understanding (Word2vec with Skip-gram):
    ```
 
    Each encoder/decoder is made up of **multiple stacked identical blocks** (usually 6 or 12).
-
    - Feed Forward Network (FFN)
 
    ![Transformer FFN](https://s2.loli.net/2025/04/11/K3z5oFyWngqlAUY.png)
-
    - Residual Connections + Layer Norm
 
    ![Transformer Residual](https://s2.loli.net/2025/04/11/vmD5EcjIwBiRpsd.png)
@@ -2411,7 +2227,6 @@ My own understanding (Word2vec with Skip-gram):
 3. Encoder Block (each of N layers)
 
    Each encoder layer consists of:
-
    1. **Multi-Head Self-Attention**
    2. **Feed-Forward Network (FFN)**
    3. **Residual Connections + LayerNorm**
@@ -2425,7 +2240,6 @@ My own understanding (Word2vec with Skip-gram):
 4. Decoder Block (each of N layers)
 
    Each decoder layer consists of:
-
    1. **Masked Multi-Head Self-Attention** (prevents attending to future tokens)
    2. **Encoder-Decoder Attention** (attend over encoder outputs)
    3. **Feed-Forward Network (FFN)**
@@ -2450,13 +2264,11 @@ My own understanding (Word2vec with Skip-gram):
    $$
    PE_{(pos, 2i+1)} = \cos \left( \frac{pos}{10000^{2i / d}} \right)
    $$
-
    - This allows the model to distinguish token order.
 
 6. Multi-Head Attention (recap)
 
    For input matrix $$X$$:
-
    - Compute:
      $$
      Q = X W^Q, \quad K = X W^K, \quad V = X W^V
@@ -2477,16 +2289,13 @@ My own understanding (Word2vec with Skip-gram):
    $$
    \text{FFN}(x) = \max(0, x W_1 + b_1) W_2 + b_2
    $$
-
    - Typically $$W_1 \in \mathbb{R}^{d \times d_{ff}}$$ where $$d_{ff} \gg d$$ (e.g., 2048 vs 512)
 
 8. Masking
-
    - **Padding Mask**: prevent attention to padding tokens.
    - **Look-ahead Mask (causal mask)**: ensure decoder can't peek at future tokens during training.
 
 9. Output Layer
-
    - Decoder output is passed to a **linear layer + softmax** to predict the next token:
      $$
      \hat{y}_t = \text{softmax}(W_o z_t + b_o)

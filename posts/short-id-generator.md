@@ -53,16 +53,16 @@ thumbnail: https://r2.img.zla.app/2024/12/12/7922b4.webp
 通过 `Zod` 定义输入结构，确保输入数据合法。
 
 ```typescript
-import { z } from 'zod';
+import { z } from 'zod'
 
 // 输入数据的类型约束
 const idSchema = z.object({
   inputValues: z.array(z.string().min(1, 'Strings cannot be empty')),
   randomBias: z.string().optional(),
-  length: z.number().int().min(1).default(6)
-});
+  length: z.number().int().min(1).default(6),
+})
 
-export type IdInput = z.infer<typeof idSchema>;
+export type IdInput = z.infer<typeof idSchema>
 ```
 
 我们需要获取的是一个计算时所基于的数据，也就是 `inputValues`，这个数据可以是 `UID` 和当前要上传的文件名所组成的一个 `array` 数组，也可以是一些其他的有一定唯一性的数据。`randomBias` 是一个可选的随机偏置字符串，用于增加哈希的随机性，防止同一个用户在同一时间戳上传多个文件时生成相同的 ID（虽然一般不大可能这样，但是还是要考虑到这种情况）。`length` 是生成的 ID 的长度，这个长度可以根据实际情况进行调整。
@@ -75,34 +75,36 @@ export type IdInput = z.infer<typeof idSchema>;
 /**
  * @param {string[]} inputValues - 用户提供的输入数组，例如 UID 或上下文数据。
  * @param {string} [randomBias] - 可选的随机偏置字符串，默认使用随机数。
- * @param {number} [length=6] - 生成的短 ID 长度。
+ * @param {number} [length] - 生成的短 ID 长度。
  * @returns {Promise<string>} - 返回生成的短 ID。
  */
 export const generateUniqueId = async (
   inputValues: string[],
   randomBias: string = Math.random().toString(36).substring(2),
-  length: number = 6
+  length: number = 6,
 ): Promise<string> => {
-  idSchema.parse({ inputValues, randomBias, length }); // 校验输入数据
+  idSchema.parse({ inputValues, randomBias, length }) // 校验输入数据
 
-  const encoder = new TextEncoder(); // 创建文本编码器
-  const uniqueId = encoder.encode(inputValues.join('') + Date.now() + randomBias); // 合并输入数据，并添加当前时间戳和预定义的随机偏置
+  const encoder = new TextEncoder() // 创建文本编码器
+  const uniqueId = encoder.encode(
+    inputValues.join('') + Date.now() + randomBias,
+  ) // 合并输入数据，并添加当前时间戳和预定义的随机偏置
 
   // 防止不支持（IE 11 都支持我想不到还有什么不支持的）
   if (crypto?.subtle?.digest) {
     // 进行 SHA-256 哈希计算，返回 ArrayBuffer
-    const hashBuffer = await crypto.subtle.digest('SHA-256', uniqueId);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', uniqueId)
     // 将 ArrayBuffer 转换为 Uint8Array
-    const hashArray = [...new Uint8Array(hashBuffer)];
+    const hashArray = [...new Uint8Array(hashBuffer)]
     // 将每个字节转换为 2 位十六进制字符串，并拼接为最终的哈希值
-    const hash = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-    return hash.slice(0, length);
+    const hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+    return hash.slice(0, length)
   }
 
   // 基本不可用的一个回退方案，只能支持小并发的情况
-  const fallbackSimple = Math.random().toString(36) + Date.now().toString(36);
-  return fallbackSimple.slice(0, length);
-};
+  const fallbackSimple = Math.random().toString(36) + Date.now().toString(36)
+  return fallbackSimple.slice(0, length)
+}
 ```
 
 ### 使用示例
@@ -110,11 +112,11 @@ export const generateUniqueId = async (
 以下是如何在项目中调用该函数的示例：
 
 ```typescript
-import { generateUniqueId } from './shortIdGenerator';
+import { generateUniqueId } from './shortIdGenerator'
 
-const inputs = ['user123', 'photo.png'];
+const inputs = ['user123', 'photo.png']
 // 指定输出长度为 10
-const id = await generateUniqueId(inputs, undefined, 10);
+const id = await generateUniqueId(inputs, undefined, 10)
 ```
 
 ## 并发冲突分析

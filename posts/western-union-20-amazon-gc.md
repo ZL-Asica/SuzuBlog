@@ -1,5 +1,5 @@
 ---
-title: 西联汇款Western Union薅羊毛-向国内转账100刀即可送 $20亚马逊GC(0成本0手续费)
+title: 西联汇款Western Union薅羊毛-向国内转账100刀即可送 $20亚马逊GC(0成本0手续费)
 date: '2021-11-09 15:03:00'
 thumbnail: /images/projects/wu.jpg
 categories:

@@ -180,7 +180,6 @@ ffmpeg -i in.flv -vcodec copy -acodec copy out.mp4
    ```
 
 2. 对于 .mp4（或其他）格式的视频文件，麻烦一些，遵循下述步骤：
-
    1. 首先创建一个文本文件，命名为**filelist.txt**，内容如下：
 
       ```txt

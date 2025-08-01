@@ -16,15 +16,20 @@ tags:
 ## 平台介绍
 
 树莓派 3b+、一张插在树莓派上作为系统盘的金士顿 64GB 的 tf 卡、固定的公网 ip、长时间通电以及能够稳定的网速。
-  系统版本：Raspbian GNU/Linux 10 (buster)
-  软件：qBittorrent-nox
-  网络环境：山东联通
+
+系统版本：Raspbian GNU/Linux 10 (buster)
+
+软件：qBittorrent-nox
+
+网络环境：山东联通
 
 ## 准备工作
 
 首先你需要固定你的公网 IP，这是为了稳定你的种子下载和上传的速度，并且能够方便你在外网对你的树莓派的种子下载上传进行管理。如果你不知道公网 ip 为何物亦或是不知道如何固定公网 ip 请自行查阅，本文将不多赘述。
-  要在 Linux 上使用 qBittorrent Web UI，你无需安装完整的 qBittorent 桌面应用程序，有一个基于终端的 qBittorrent 应用程序可用，它被称为 qBittorrent-Nox。
-  注意：Web UI 功能不仅限于 qBittorrent-mox 应用程序，此功能还可以与传统的 qBittorent Linux 桌面应用程序一起使用，该应用程序可通过 Flapak 安装。
+
+要在 Linux 上使用 qBittorrent Web UI，你无需安装完整的 qBittorent 桌面应用程序，有一个基于终端的 qBittorrent 应用程序可用，它被称为 qBittorrent-Nox。
+
+注意：Web UI 功能不仅限于 qBittorrent-mox 应用程序，此功能还可以与传统的 qBittorent Linux 桌面应用程序一起使用，该应用程序可通过 Flapak 安装。
 
 ## 安装过程
 

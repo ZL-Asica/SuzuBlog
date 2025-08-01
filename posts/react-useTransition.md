@@ -57,7 +57,7 @@ const handleChange = (e) => {
   setQuery(input) // 高优先级
 
   startTransition(() => {
-    setFiltered(data.filter((item) => item.name.includes(input))) // 低优先级
+    setFiltered(data.filter(item => item.name.includes(input))) // 低优先级
   })
 }
 ```
@@ -134,14 +134,16 @@ const handleSubmit = (e) => {
 使用 `isPending` 提示用户数据正在加载：
 
 ```tsx
-{
-  isPending && <p>Loading...</p>
-}
-;<ul>
-  {filtered.map((item) => (
-    <li key={item.id}>{item.name}</li>
-  ))}
-</ul>
+<>
+  isPending &&
+  {' '}
+  <p>Loading...</p>
+  <ul>
+    {filtered.map(item => (
+      <li key={item.id}>{item.name}</li>
+    ))}
+  </ul>
+</>
 ```
 
 你还可以加上 spinner、skeleton 等效果提升体验。
