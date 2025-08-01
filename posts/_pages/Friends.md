@@ -264,6 +264,18 @@ showThumbnail: false
 "link": "https://zmtu.com",
 "img": "https://zmtu.com/static/images/app/App_Logo.png",
 "des": "ACG二次元社区，我们的征途是星辰大海！"
+},
+{
+"title": "世男Sky的个人博客",
+"link": "https://www.shinansky.me",
+"img": "https://www.shinansky.me/myicon",
+"des": "是谁来自山川湖海，却囿于昼夜、厨房与爱？"
+},
+{
+"title": "Codfish Blog",
+"link": "https://codfish.top",
+"img": "https://codfish.top/favicon/1.jpg",
+"des": "🐟🐟🐟"
 }
 ]
 ```
