@@ -1,5 +1,12 @@
 # SuzuBlog Changelog
 
+## 1.11.2 (2025-08-02)
+
+### Patch Changes
+
+- Fix social media link render unexpected
+  - Social media links render even when user not set the username #190.
+
 ## 1.11.1 (2025-08-01)
 
 ### Patch Changes

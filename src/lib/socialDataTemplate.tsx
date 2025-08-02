@@ -69,45 +69,80 @@ const socialDataTemplate: SocialData = {
 }
 
 export const generateSocialMediaLink = (
-  key: string,
-  username: string | null,
+  key: SocialMediaKey | string,
+  username: string | number | boolean | null,
   onlyExternal: boolean = false,
 ): {
   href: string
   IconComponent: React.ComponentType<{ size: number, className?: string }>
 } | null => {
-  if (typeof username !== 'string') {
+  // Special handling for RSS - check if it's explicitly disabled
+  if (key === 'rss') {
+    // If username is false, null, or falsy string, don't show RSS
+    if (username === false || username === 'false' || username === null || username === 'null' || username === 'undefined' || username === 'none' || (typeof username === 'string' && username.trim() === '')) {
+      return null
+    }
+    // Skip RSS for external-only requests
+    if (onlyExternal) {
+      return null
+    }
+    // Show RSS icon linking to /feed.xml
+    return {
+      href: '/feed.xml',
+      IconComponent: socialDataTemplate.rss.icon,
+    }
+  }
+
+  // Convert username to string for validation
+  const usernameStr = username === null ? null : String(username)
+
+  // Validate username for all other social media
+  if (usernameStr === null || usernameStr.trim() === '' || isEmpty(usernameStr) || usernameStr === 'null' || usernameStr === 'undefined' || usernameStr === 'none') {
     return null
   }
 
-  if (isEmpty(username) || !(key in socialDataTemplate)) {
+  // Skip internal links if onlyExternal is true
+  if (onlyExternal && key === 'email') {
     return null
   }
 
-  if (onlyExternal && (key === 'rss' || key === 'email')) {
+  // Check if key exists in socialDataTemplate
+  if (!(key in socialDataTemplate)) {
     return null
-  }
-
-  let href: string
-
-  if (key === 'rss' && Boolean(username)) {
-    href = '/feed.xml'
-  }
-  if (key === 'email') {
-    href = `mailto:${username}`
   }
 
   const { urlTemplate, icon: IconComponent } = socialDataTemplate[key as keyof typeof socialDataTemplate]
-  if (!urlTemplate) {
-    return null
+  let href: string
+
+  if (key === 'email') {
+    // For email, validate it's not empty after trimming
+    const trimmedEmail = usernameStr.trim()
+    if (!trimmedEmail) {
+      return null
+    }
+    href = `mailto:${trimmedEmail}`
   }
-  href = urlTemplate.replace('{username}', encodeURIComponent(username))
+  else {
+    // For all other social media, use the template
+    href = urlTemplate.replace('{username}', encodeURIComponent(usernameStr.trim()))
+  }
+
   return { href, IconComponent }
 }
 
+/**
+ * Generates social media data for a given key and username.
+ * Returns an object containing the href, label, and icon component.
+ * If the key or username is invalid, returns null.
+ *
+ * @param key - The social media key (e.g., 'github_username', 'email', 'rss').
+ * @param username - The username or identifier for the social media profile.
+ * @param onlyExternal - If true, only generates external links (skips email and RSS).
+ * @returns An object containing the link, label, and icon component, or null if invalid.
+ */
 export const generateSocialMediaData = (
-  key: string,
-  username: string | null,
+  key: SocialMediaKey | string,
+  username: string | number | boolean | null,
   onlyExternal: boolean = false,
 ): {
   href: string

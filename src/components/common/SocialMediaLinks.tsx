@@ -19,7 +19,7 @@ const SocialMediaLinks = ({
     >
       {Object.entries(socialMedia)
         .map(([key, username]) => {
-          const socialMediaData = generateSocialMediaData(key, String(username))
+          const socialMediaData = generateSocialMediaData(key, username)
           if (socialMediaData === null) {
             return null
           }
@@ -42,7 +42,8 @@ const SocialMediaLinks = ({
               />
             </Link>
           )
-        })}
+        })
+        .filter(Boolean)}
     </div>
   )
 }
