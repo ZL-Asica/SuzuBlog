@@ -7,7 +7,6 @@ const authorSchema = z.object({
     .max(50, 'Author name must be less than 50 characters')
     .describe('Author name'),
   link: z
-    .string()
     .url('Author link must be a valid URL')
     .describe('Author link, such as portfolio, blog, GitHub, etc.'),
 })
@@ -21,7 +20,6 @@ const creativeCommonsSchema = z.object({
     .min(1, 'Creative Commons type is required')
     .describe('Creative Commons type'),
   link: z
-    .string()
     .url('Creative Commons link must be a valid URL')
     .describe('Creative Commons link'),
 })
@@ -58,7 +56,7 @@ const socialMediaSchema = z.object({
   youtube_id: optionalStrOrNum,
   zhihu_username: optionalStrOrNum,
   bilibili_id: optionalStrOrNum,
-  email: z.string().email('Email must be a valid email address').optional().nullable().default(null),
+  email: z.email('Email must be a valid email address').optional().nullable().default(null),
   rss: z.boolean().nullable().optional().default(null).describe('Whether to display the RSS icon, leave empty to fully disable the RSS feed'),
 })
 
@@ -74,7 +72,6 @@ export const userConfigSchema = z.object({
     .describe('Site language in BCP 47 format like "en", "zh-CN", or "zh-Hans".')
     .default('en'),
   siteUrl: z
-    .string()
     .url()
     .transform(val => val.replace(/\/+$/, ''))
     .describe('Site URL without trailing slash'),
@@ -128,7 +125,7 @@ export const userConfigSchema = z.object({
   // Social media
   socialMedia: socialMediaSchema,
   // Comments
-  twikooEnvId: z.string().url('Twikoo environment ID must be a valid URL').transform(val => val.trim()).nullable().optional().default(null),
+  twikooEnvId: z.url('Twikoo environment ID must be a valid URL').transform(val => val.trim()).nullable().optional().default(null),
   disqusShortname: z.string().transform(val => val.trim()).nullable().optional().default(null),
 
   // Custom code blocks
