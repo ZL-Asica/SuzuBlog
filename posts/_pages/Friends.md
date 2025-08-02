@@ -276,6 +276,12 @@ showThumbnail: false
 "link": "https://codfish.top",
 "img": "https://codfish.top/favicon/1.jpg",
 "des": "🐟🐟🐟"
+},
+{
+"title": "Houliabc’s ink",
+"link": "https://houliabc.dpdns.org/",
+"img": "https://houlir2.dpdns.org/2025/07/64867dedb8166e9e70d3317d62e7f69f.jpg",
+"des": "他说世界上怕就怕“认真”二字"
 }
 ]
 ```
@@ -286,7 +292,9 @@ showThumbnail: false
 
 ## 添加友链
 
-可以直接在下面评论区，使用如下格式留言，方便我复制粘贴。
+可以直接在下面评论区，使用如下格式留言，方便我复制粘贴（可以直接使用 markdown 代码块语法更加方便复制）。
+
+特别欢迎使用了我的 SuzuBlog 的朋友们添加友链！
 
 只要我在你的页面中看到了我的链接且你的链接没有问题，我会第一时间添加！
 
