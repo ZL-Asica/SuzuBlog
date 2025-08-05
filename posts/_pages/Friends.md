@@ -268,7 +268,7 @@ showThumbnail: false
 {
 "title": "世男Sky的个人博客",
 "link": "https://www.shinansky.me",
-"img": "https://www.shinansky.me/myicon",
+"img": "https://cdn.jsdelivr.net/gh/ShinanSky/imgsavings@refs/heads/main/shinanskyicon.jpg",
 "des": "是谁来自山川湖海，却囿于昼夜、厨房与爱？"
 },
 {
@@ -282,6 +282,12 @@ showThumbnail: false
 "link": "https://houliabc.dpdns.org/",
 "img": "https://houlir2.dpdns.org/2025/07/64867dedb8166e9e70d3317d62e7f69f.jpg",
 "des": "他说世界上怕就怕“认真”二字"
+},
+{
+"title": "Abel",
+"link": "https://chen-huaneng.github.io/",
+"img": "https://cdn.jsdelivr.net/gh/chen-huaneng/chen-huaneng.github.io@main/imgs/banner/avatar.jpg",
+"des": "梦想是去世界各地旅行！"
 }
 ]
 ```
@@ -326,5 +332,9 @@ showThumbnail: false
 描述: 月亮不抱你，星星会落在你怀里✨🌙
 RSS: https://zla.pub/feed.xml
 ```
+
+使用 GitHub 作为图床的朋友们请使用 [jsDelivr 转换工具](https://www.jsdelivr.com/github)将图片链接转换为 jsDelivr 的链接。
+
+使用 Gravatar 的朋友们请使用[我自己搭建的 Gravatar 加速站](https://gravatar.zla.app/) 来获取头像链接。
 
 需要更新头像或者链接请留言，有时间会处理的。若没有及时处理请给我发邮件催一下，联系方式 zl at zla dot app。
