@@ -254,12 +254,6 @@ showThumbnail: false
 "des": "将科技玩到极致！"
 },
 {
-"title": "Aciano",
-"link": "https://aciano.top/",
-"img": "https://bu.dusays.com/2024/07/15/6694b499da8df.jpg",
-"des": "零碎的岛屿总会找到海."
-},
-{
 "title": "ZMTU",
 "link": "https://zmtu.com",
 "img": "https://zmtu.com/static/images/app/App_Logo.png",
@@ -288,13 +282,36 @@ showThumbnail: false
 "link": "https://chen-huaneng.github.io/",
 "img": "https://cdn.jsdelivr.net/gh/chen-huaneng/chen-huaneng.github.io@main/imgs/banner/avatar.jpg",
 "des": "梦想是去世界各地旅行！"
+},
+{
+"title": "星辰の笔记",
+"link": "https://blog.strarry.top/",
+"img": "https://blog.strarry.top/avatar.jpg",
+"des": "Code | Think | Share | Repeat"
+},
+{
+"title": "THW’s Blog",
+"link": "https://thw.lol",
+"img": "https://thw.lol/wp-content/uploads/2025/07/1753346514-DM_20250723205301_001.jpg",
+"des": "Live a good life meet slowly"
 }
 ]
 ```
 
-<!-- ## 失效友链
+## 失效友链
 
-> 麻烦出现在下面的朋友在看到后尽快修复或评论区留言更新信息，谢谢！ -->
+> 麻烦出现在下面的朋友在看到后尽快修复或评论区留言更新信息，谢谢！
+
+```Links
+[
+{
+"title": "Aciano",
+"link": "https://aciano.top/",
+"img": "https://bu.dusays.com/2024/07/15/6694b499da8df.jpg",
+"des": "零碎的岛屿总会找到海."
+}
+]
+```
 
 ## 添加友链
 
