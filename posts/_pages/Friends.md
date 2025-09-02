@@ -130,7 +130,7 @@ showThumbnail: false
 {
 "title": "Canmi",
 "link": "https://arc.canmi.icu/",
-"img": "https://arc.canmi.icu/img/Canmi.webp",
+"img": "https://avatars.githubusercontent.com/u/72544151?v=4",
 "des": "彩笔猫猫"
 },
 {
@@ -292,7 +292,7 @@ showThumbnail: false
 {
 "title": "THW’s Blog",
 "link": "https://thw.lol",
-"img": "https://thw.lol/wp-content/uploads/2025/07/1753346514-DM_20250723205301_001.jpg",
+"img": "https://img.dooki.cloud/i/2025/08/29/68b09e116c4b6.webp",
 "des": "Live a good life meet slowly"
 }
 ]
