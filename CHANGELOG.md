@@ -1,5 +1,13 @@
 # SuzuBlog Changelog
 
+## 1.11.3 (2025-09-23)
+
+### Patch Changes
+
+- Small bugs fixed and bump up dependencies
+  - Fix fuzzy search for CJK characters #193
+  - Bump up dependencies
+
 ## 1.11.2 (2025-08-02)
 
 ### Patch Changes
