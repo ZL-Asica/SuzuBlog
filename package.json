@@ -73,7 +73,7 @@
     "rss": "^1.2.2",
     "shiki": "^3.13.0",
     "tailwindcss": "^4.1.13",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,yml,css,scss,less,styl,html,md,mdx}": [
