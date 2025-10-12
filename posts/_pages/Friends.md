@@ -278,12 +278,6 @@ showThumbnail: false
 "des": "他说世界上怕就怕“认真”二字"
 },
 {
-"title": "Abel",
-"link": "https://chen-huaneng.github.io/",
-"img": "https://cdn.jsdelivr.net/gh/chen-huaneng/chen-huaneng.github.io@main/imgs/banner/avatar.jpg",
-"des": "梦想是去世界各地旅行！"
-},
-{
 "title": "星辰の笔记",
 "link": "https://blog.strarry.top/",
 "img": "https://blog.strarry.top/avatar.jpg",
@@ -294,6 +288,24 @@ showThumbnail: false
 "link": "https://thw.lol",
 "img": "https://img.dooki.cloud/i/2025/08/29/68b09e116c4b6.webp",
 "des": "Live a good life meet slowly"
+},
+{
+"title": "Sakun Notebook",
+"link": "https://www.sakun.space/",
+"img": "https://www.sakun.space/images/avatar.png",
+"des": "一个声豚的自我救赎"
+},
+{
+"title": "XUIOO",
+"link": "https://blog.xuioo.com/",
+"img": "https://blog.xuioo.com/27c69590279fdc3be2cd7c901e3d07ad.jpg",
+"des": "一叶障目，不见泰山；两耳塞豆，不闻雷霆。"
+},
+{
+"title": "mccsjs",
+"link": "https://mccsjs.eu.org/",
+"img": "https://mccsjs.eu.org/img/head.jpg",
+"des": "素敵な一日が始まります🎉🎉🎉"
 }
 ]
 ```
@@ -309,6 +321,12 @@ showThumbnail: false
 "link": "https://aciano.top/",
 "img": "https://bu.dusays.com/2024/07/15/6694b499da8df.jpg",
 "des": "零碎的岛屿总会找到海."
+},
+{
+"title": "Abel",
+"link": "https://chen-huaneng.github.io/",
+"img": "https://cdn.jsdelivr.net/gh/chen-huaneng/chen-huaneng.github.io@main/imgs/banner/avatar.jpg",
+"des": "梦想是去世界各地旅行！"
 }
 ]
 ```
