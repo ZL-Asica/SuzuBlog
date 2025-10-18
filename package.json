@@ -1,6 +1,6 @@
 {
   "name": "suzu-blog",
-  "version": "1.11.3",
+  "version": "1.11.4",
   "private": true,
   "packageManager": "pnpm@10.18.3",
   "author": {
