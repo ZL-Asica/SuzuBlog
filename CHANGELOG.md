@@ -1,5 +1,11 @@
 # SuzuBlog Changelog
 
+## 1.11.4 (2025-10-18)
+
+### Patch Changes
+
+- Bump up dependencies
+
 ## 1.11.3 (2025-09-23)
 
 ### Patch Changes
