@@ -1,5 +1,22 @@
 # SuzuBlog Changelog
 
+## 1.11.5 (2025-10-25)
+
+### Patch Changes
+
+- Upgrade Next.js to 16.0.0
+  - Update `.node-version` to `22.21.0`
+  - Update `pnpm` to `10.19.0`
+  - Update Next.js to `16.0.0` (see: [https://nextjs.org/blog/next-16](https://nextjs.org/blog/next-16))
+  - Update `@next/eslint-plugin-next` to `16.0.0`
+  - Remove `eslint` configuration from `next.config.ts` as it's no longer needed nor supported in Next.js 16
+
+## 1.11.4 (2025-10-18)
+
+### Patch Changes
+
+- Bump up dependencies
+
 ## 1.11.3 (2025-09-23)
 
 ### Patch Changes
