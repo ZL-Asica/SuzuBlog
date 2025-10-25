@@ -312,6 +312,12 @@ showThumbnail: false
 "link": "https://chen-huaneng.github.io/",
 "img": "https://cdn.jsdelivr.net/gh/chen-huaneng/chen-huaneng.github.io@main/static/images/android-chrome-512x512.png",
 "des": "梦想是去世界各地旅行！"
+},
+{
+"title": "SatouのBlog",
+"link": "https://www.matsusatou.top/",
+"img": "https://cdn.jsdelivr.net/gh/SokiSama/picked@main/avatar.jpg",
+"des": "彼女の愛は、甘くて痛い"
 }
 ]
 ```
