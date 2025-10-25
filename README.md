@@ -73,7 +73,7 @@ This project is licensed under the [AGPL-3.0 License][license-link]. See the [LI
 [license-link]: ./LICENSE
 [nextjs-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [nextjs-link]: https://nextjs.org
-[node-badge]: https://img.shields.io/badge/node%3E=18.18-339933?logo=node.js&logoColor=white
+[node-badge]: https://img.shields.io/badge/node%3E=20.9.0-339933?logo=node.js&logoColor=white
 [node-link]: https://nodejs.org/
 [pnpm-badge]: https://img.shields.io/github/package-json/packageManager/ZL-Asica/SuzuBlog?label=&logo=pnpm&logoColor=fff&color=F69220
 [pnpm-link]: https://pnpm.io/
