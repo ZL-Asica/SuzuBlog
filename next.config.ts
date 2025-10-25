@@ -1,9 +1,6 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  eslint: {
-    dirs: ['src'],
-  },
   async headers() {
     return [{
       source: '/(.*)',

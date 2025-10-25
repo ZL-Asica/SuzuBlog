@@ -1,8 +1,8 @@
 {
   "name": "suzu-blog",
-  "version": "1.11.4",
+  "version": "1.11.5",
   "private": true,
-  "packageManager": "pnpm@10.18.3",
+  "packageManager": "pnpm@10.19.0",
   "author": {
     "name": "ZL Asica",
     "email": "zl@zla.app",
@@ -34,7 +34,7 @@
     "katex": "^0.16.25",
     "lucide-react": "^0.546.0",
     "minisearch": "^7.2.0",
-    "next": "15.5.6",
+    "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-icons": "^5.5.0",
@@ -53,12 +53,12 @@
     "@antfu/eslint-config": "^6.0.0",
     "@changesets/cli": "^2.29.7",
     "@eslint-react/eslint-plugin": "^2.2.2",
-    "@next/eslint-plugin-next": "^15.5.6",
+    "@next/eslint-plugin-next": "16.0.0",
     "@shikijs/transformers": "^3.13.0",
     "@tailwindcss/postcss": "^4.1.14",
     "@types/node": "^24.8.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "@types/rss": "^0.0.32",
     "eslint": "^9.38.0",
     "eslint-plugin-format": "^1.0.2",
@@ -75,14 +75,6 @@
     "tailwindcss": "^4.1.14",
     "typescript": "5.9.3"
   },
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,json,yml,css,scss,less,styl,html,md,mdx}": [
-      "eslint --fix"
-    ],
-    "**/*.{md,mdx}": [
-      "prettier --write"
-    ]
-  },
   "prettier": {
     "semi": false,
     "singleQuote": true
@@ -92,6 +84,20 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.2",
+      "@types/react-dom": "19.2.2"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,yml,css,scss,less,styl,html,md,mdx}": [
+      "eslint --fix"
+    ],
+    "**/*.{md,mdx}": [
+      "prettier --write"
     ]
   }
 }
