@@ -318,6 +318,12 @@ showThumbnail: false
 "link": "https://www.matsusatou.top/",
 "img": "https://cdn.jsdelivr.net/gh/SokiSama/picked@main/avatar.jpg",
 "des": "彼女の愛は、甘くて痛い"
+},
+{
+"title": "时隐重工",
+"link": "https://shiyin.cafe/",
+"img": "https://shiyina.com:233/favicon.ico",
+"des": "兴趣使然的未来主义建造者"
 }
 ]
 ```
