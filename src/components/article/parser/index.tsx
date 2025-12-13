@@ -1,3 +1,5 @@
+'use server'
+
 import Markdown from 'react-markdown'
 import rehypeKatex from 'rehype-katex'
 import rehypeRaw from 'rehype-raw'
@@ -13,7 +15,7 @@ interface MarkdownContentProps {
   translation: Translation
 }
 
-const MarkdownContent = ({ post, translation }: MarkdownContentProps) => {
+const MarkdownContent = async ({ post, translation }: MarkdownContentProps) => {
   const markdownComponents = createMarkdownComponents(
     translation,
     post.frontmatter.autoSlug,

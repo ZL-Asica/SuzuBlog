@@ -2,7 +2,7 @@
 
 import type { Config } from '@/schemas'
 import { useClickOutside, useHideOnScrollDown, useToggle } from '@zl-asica/react'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
@@ -14,18 +14,37 @@ interface HeaderProps {
 
 const Header = ({ config }: HeaderProps) => {
   const [isOpen, toggleOpen] = useToggle()
-  const siteTitle = config.title
   const menuReference = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const isHeaderVisible = useHideOnScrollDown(headerRef)
   const pathname = usePathname()
   const isHomePage = pathname === '/'
-  const headerRef = useRef<HTMLElement>(null)
-  const isHeaderVisible = useHideOnScrollDown(headerRef)
 
   useClickOutside(menuReference, () => {
     if (isOpen) {
       toggleOpen()
     }
   })
+
+  useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+
+    const firstLink = menuReference.current?.querySelector<HTMLAnchorElement>('a')
+    firstLink?.focus()
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        toggleOpen()
+        buttonRef.current?.focus()
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isOpen, toggleOpen])
 
   // Avoid scrolling when the menu is open (mobile)
   useEffect(() => {
@@ -47,41 +66,69 @@ const Header = ({ config }: HeaderProps) => {
         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
     >
+      <a
+        href="#main-content"
+        className="
+          sr-only focus:not-sr-only
+          focus:fixed focus:left-4 focus:top-4 focus:z-60
+          focus:rounded-md focus:bg-background focus:px-3 focus:py-2
+          focus:text-sm focus:font-semibold focus:text-foreground
+          focus:shadow-lg focus:ring-2 focus:ring-primary-300
+          focus:outline-none
+        "
+        onClick={(e) => {
+          e.preventDefault()
+          const el = document.getElementById('main-content')
+          el?.focus()
+        }}
+      >
+        {config.translation.aria.skipToContent}
+      </a>
+
       {/* Navigation Menu */}
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 bg-background">
+      <nav
+        className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 bg-background"
+        aria-label="Main navigation"
+      >
         {/* Logo */}
         <Link
           href="/"
-          aria-label={`Navigate to Home Page of ${siteTitle}`}
+          aria-label={`${config.translation.navigate} ${config.title}`}
           className="transition-all-300 text-hover-primary text-2xl font-bold text-foreground no-underline"
         >
-          {isHomePage ? <h1>{siteTitle}</h1> : <p>{siteTitle}</p>}
+          {isHomePage ? <h1>{config.title}</h1> : config.title}
         </Link>
 
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="transition-transform-300 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-foretext-foreground text-2xl bg-foreground text-background shadow-md hover:scale-110 md:hidden"
+          ref={buttonRef}
+          className="transition-transform-300 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-2xl text-background shadow-md hover:scale-110 md:hidden"
           onClick={toggleOpen}
-          aria-label="Toggle menu"
-          aria-expanded={isOpen ? 'true' : 'false'}
+          aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isOpen}
           aria-controls="mobile-menu"
+          aria-pressed={isOpen}
         >
-          {!isOpen && <Menu strokeWidth={2.5} />}
+          {isOpen ? <X aria-hidden strokeWidth={2.5} /> : <Menu aria-hidden strokeWidth={2.5} />}
         </button>
 
         {/* Mobile Menu */}
         <div
           id="mobile-menu"
           ref={menuReference}
-          className={`transition-all-300 fixed right-0 top-0 z-50 h-screen w-1/2 min-w-52 max-w-64 backdrop-blur-xl bg-background/70 shadow-2xl md:hidden
-            ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+          aria-hidden={!isOpen}
+          className={`transition-all-300 fixed right-0 top-0 z-50 h-screen w-1/2 min-w-52 max-w-64 backdrop-blur-xl bg-background/95 shadow-2xl md:hidden
+            ${isOpen
+      ? 'translate-x-0 opacity-100 visible pointer-events-auto'
+      : 'translate-x-full opacity-0 invisible pointer-events-none'
+    }
           `}
         >
           <HeaderMenu
             config={config}
             isMobile
-            ulClassName="flex flex-col items-start gap-4 p-6"
+            className="flex flex-col items-start gap-4 p-6"
             onClickHandler={toggleOpen}
           />
         </div>
@@ -90,12 +137,8 @@ const Header = ({ config }: HeaderProps) => {
         {isOpen && (
           <div
             className="fixed inset-0 z-40 h-screen w-screen bg-black/70 transition-opacity-300 md:hidden"
-            onClick={(event_) => {
-              event_.preventDefault()
-              event_.stopPropagation()
-              toggleOpen()
-            }}
-            aria-hidden
+            onClick={toggleOpen}
+            aria-hidden="true"
           />
         )}
 
@@ -103,7 +146,7 @@ const Header = ({ config }: HeaderProps) => {
         <HeaderMenu
           config={config}
           isMobile={false}
-          ulClassName="hidden md:flex md:gap-6"
+          className="hidden md:flex md:gap-6"
         />
       </nav>
     </header>

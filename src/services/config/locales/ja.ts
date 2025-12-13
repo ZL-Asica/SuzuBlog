@@ -44,8 +44,12 @@ const ja: Translation = {
   post: {
     thumbnail: 'サムネイル: ',
     readMore: '続きを読む ',
-    copy: 'コピーする',
-    copied: 'コピーしました！',
+    copy: {
+      copy: 'コピー',
+      copied: 'コピーしました！',
+      copyAriaLabel: 'コードをクリップボードにコピー',
+      copyFailed: 'コピーに失敗しました',
+    },
     categories: 'カテゴリ: ',
     noCategories: 'カテゴリなし',
     tags: 'タグ: ',
@@ -64,7 +68,11 @@ const ja: Translation = {
   },
   aria: {
     travellings: '開通の道',
-    theme: 'テーマ',
+    skipToContent: 'コンテンツにスキップ',
+    theme: {
+      light: 'ライトテーマに切り替え',
+      dark: 'ダークテーマに切り替え',
+    },
     pagination: {
       label: 'ページネーションナビゲーション',
       prev: '前のページ',

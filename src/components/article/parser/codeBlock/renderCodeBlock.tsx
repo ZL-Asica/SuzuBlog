@@ -6,7 +6,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers'
-import { createHighlighter } from 'shiki'
+import { codeToHtml } from 'shiki'
 import CodeBlockCopy from './CodeBlockCopy'
 
 import './shiki.css'
@@ -23,15 +23,10 @@ const CodeBlock = async ({
   children,
 }: CodeBlockProps) => {
   const cleanedChildren = String(children).replace(/\n$/, '')
-  const matchedLangLo = matchedLang.toLowerCase()
+  const lang = matchedLang.toLowerCase()
 
-  const highlighter = await createHighlighter({
-    themes: ['nord'],
-    langs: [matchedLangLo],
-  })
-
-  const code = highlighter.codeToHtml(cleanedChildren, {
-    lang: matchedLangLo,
+  const html = await codeToHtml(cleanedChildren, {
+    lang,
     theme: 'nord',
     transformers: [
       transformerMetaHighlight(),
@@ -42,17 +37,15 @@ const CodeBlock = async ({
     ],
   })
 
-  highlighter.dispose()
-
   return (
     <div className="relative font-mono">
-      <CodeBlockCopy
-        cleanedCode={cleanedChildren}
-        translation={translation}
+      <CodeBlockCopy cleanedCode={cleanedChildren} translation={translation} />
+      <div
+        className="scrollbar-custom"
+        tabIndex={0}
+        aria-label={`Code block (${lang})`}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
-      <div className="scrollbar-custom">
-        <code dangerouslySetInnerHTML={{ __html: code }} />
-      </div>
     </div>
   )
 }
