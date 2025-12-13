@@ -292,8 +292,8 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // Table related
     table: ({ children }) => (
-      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md overflow-hidden">
-        <table className="w-full rounded-lg border text-left overflow-hidden">
+      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md overflow-y-auto">
+        <table className="w-full rounded-lg border text-left overflow-y-auto">
           {children}
         </table>
       </div>
