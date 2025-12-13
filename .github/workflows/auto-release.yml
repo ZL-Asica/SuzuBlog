@@ -4,73 +4,61 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Tag name for release (leave empty to use latest pushed tag)
+        description: Tag name for release (optional)
         required: false
   push:
-    tags:
-      - 'v*.*.*' # Match only version-like tags (e.g., v1.0.0, v2.1.3)
+    branches: [main]
 
 permissions:
-  contents: write # Required for GitHub release creation
+  contents: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (full history + tags)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch full commit history and tags
+          fetch-depth: 0
 
       - name: Determine Tag Name
         id: get_tag
+        shell: bash
         run: |
-          # If manually triggered, use the input tag; otherwise, use github.ref_name
+          # 1) manually triggered with tag input, use that tag
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ github.event.inputs.tag }}" ]]; then
-            TAG_NAME="${{ github.event.inputs.tag }}"
-          else
-            TAG_NAME="${{ github.ref_name }}"
+            echo "TAG_NAME=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+            exit 0
           fi
+
+          # 2) main push triggered: find the "semver tag newly introduced to main by this push/merge"
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          # push payload before/after are the SHAs before and after the ref update
+          # Find the first semver tag (sorted from highest to lowest) that is reachable from after but not from before
+          TAG_NAME=""
+          for t in $(git tag --list 'v*.*.*' --sort=-v:refname); do
+            c=$(git rev-list -n 1 "$t")
+            if git merge-base --is-ancestor "$c" "$AFTER" && ! git merge-base --is-ancestor "$c" "$BEFORE"; then
+              TAG_NAME="$t"
+              break
+            fi
+          done
 
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
           echo "Resolved TAG_NAME: $TAG_NAME"
 
-      - name: Get Previous Tag
-        id: get_prev_tag
-        run: |
-          # Get the last tag before the new one, or empty if this is the first tag
-          LAST_TAG=$(git tag --sort=-creatordate | grep -v "$TAG_NAME" | head -n 1 || echo "")
-
-          # If no previous tag exists, use the root commit
-          if [[ -z "$LAST_TAG" ]]; then
-            LAST_TAG=$(git rev-list --max-parents=0 HEAD)
-            echo "First release detected, using root commit: $LAST_TAG"
-          fi
-
-          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
-          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_OUTPUT
-
-      - name: Skip Release if No Previous Tag
-        if: env.LAST_TAG == ''
-        run: |
-          echo "No previous tag found, skipping release..."
-          exit 0
+      - name: Skip if no tag found
+        if: env.TAG_NAME == ''
+        run: echo "No new semver tag introduced on this main update. Skip."
 
       - name: Generate GitHub Release
+        if: env.TAG_NAME != ''
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/') # Ensures release runs only on tag pushes
         with:
-          tag_name: ${{ env.TAG_NAME }} # Ensure correct tag name is used
-          name: ${{ env.TAG_NAME }} # Release Name
-          body: |
-            📢 **SuzuBlog new version released!** 🚀
-            新版本发布！请查看自动生成的 Release Notes 🔽
-
-            ## Full Changelog
-            [View Full Changelog](https://github.com/ZL-Asica/SuzuBlog/blob/main/CHANGELOG.md)
-
-            ${{ github.event.release.body }}
+          tag_name: ${{ env.TAG_NAME }}
+          name: ${{ env.TAG_NAME }}
+          generate_release_notes: true
           draft: false
           prerelease: false
-          generate_release_notes: true
