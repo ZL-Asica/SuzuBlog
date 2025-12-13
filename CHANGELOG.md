@@ -1,5 +1,31 @@
 # SuzuBlog Changelog
 
+## 1.11.6 (2025-12-13)
+
+### Patch Changes
+
+- Bump up dependencies, solve `CVE-2025-55182`, update code block style
+
+  - Fixes:
+    - Solve the critical security vulnerability bug [CVE-2025-55182](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components).
+    - Fix shiki highlighter multiple rendering issue that causes performance degradation.
+  - Dependencies:
+    - Bump up dependencies to the latest versions.
+    - Remove prettier and corresponding configurations since it's no longer used.
+    - Switch changeset to bumpp for version management.
+    - Update `.node-version` to `24.11.1`
+    - Update `pnpm` to `10.25.0`
+  - Changes:
+    - Update Workflow for auto relase with bumpp.
+    - Update code block copy button style and text.
+    - Add ARIA label for better accessibility.
+    - Add toast notification when copy fails.
+    - Improv the logic of code block copy button status handling.
+    - Improv header menu a11y, asethics, and interaction experience.
+      - Add `skip to content` link for better accessibility.
+      - Adjust header aria attributes for better screen reader support.
+      - Style updates for better aesthetics.
+
 ## 1.11.5 (2025-10-25)
 
 ### Patch Changes
@@ -123,7 +149,9 @@
 ### Patch Changes
 
 - Switch to useRouter for pagination and search
+
   - feat(search): use useRouter from Next.js instead of history API
+
     - Introduce `useUpdateURL` hook to manage URL updates.
     - Replace `history.` with `useRouter` for better integration with Next.js.
     - With `useRouter`, fix the scroll behavior when current page changes.
@@ -131,6 +159,7 @@
     - Extract `SearchInput` component from `PostPageClient` to `src/app/posts/page.tsx` for better organization and performance (categories and tags array also generated without re-rendering).
 
   - chore: some updates on minor details
+
     - Finally remove `tailwind.config.ts` from README (since from v4.0.0 it has been removed)
     - Update manifest theme color.
     - Fix thumbnail showing when parameter `showThumbnail` is set to `false`.
@@ -194,9 +223,11 @@
 ### Minor Changes
 
 - Theme cleanup and style refine
+
   - feat(makrdown): add style for checkbox related
 
   - 7daad73: style(global): styles clean up and re-structure
+
     - Move reusable styles into `styles` folder.
     - Fix custom scroll bar consistence.
     - Fix minor styling issue and contract issue.
@@ -232,6 +263,7 @@
 ## 1.4.0 (2025-03-08)
 
 - fbf97ab: Notes showing issue on hover and mobile in `about/anime` page
+
   - Addressing anime page issue with notes on hover (desktop) and on click (mobile) (#141).
   - Extract `AnimeCard` and `Notes` components from `AnimeList` (#140).
   - Handle hover logic differently for desktop.
@@ -244,6 +276,7 @@
 ## 1.3.0 (2025-03-01)
 
 - e5f644a: Set anime images to unoptimized
+
   - Set anime images to unoptimized to prevent Next.js from optimizing them.
 
 - b9a030f: Fix anime header issue #135

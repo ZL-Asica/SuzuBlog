@@ -44,14 +44,18 @@ interface Translation {
   post: {
     thumbnail: string
     readMore: string
-    copy: string
-    copied: string
     categories: string
     noCategories: string
     tags: string
     noTags: string
     toc: string
     tocToggle: string
+    copy: {
+      copy: string
+      copied: string
+      copyAriaLabel: string
+      copyFailed: string
+    }
     copyright: {
       author: string
       title: string
@@ -64,7 +68,11 @@ interface Translation {
   }
   aria: {
     travellings: string
-    theme: string
+    skipToContent: string
+    theme: {
+      light: string
+      dark: string
+    }
     pagination: {
       label: string
       prev: string

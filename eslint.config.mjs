@@ -1,6 +1,7 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
+  ignores: ['next-env.d.ts'],
   formatters: true,
   nextjs: true,
   typescript: {

@@ -43,8 +43,12 @@ const zh: Translation = {
   post: {
     thumbnail: '封面：',
     readMore: '阅读全文 ',
-    copy: '点击复制',
-    copied: '已复制',
+    copy: {
+      copy: '复制',
+      copied: '已复制！',
+      copyAriaLabel: '将代码复制到剪贴板',
+      copyFailed: '复制失败',
+    },
     categories: '分类：',
     noCategories: '无分类',
     tags: '标签：',
@@ -63,7 +67,11 @@ const zh: Translation = {
   },
   aria: {
     travellings: '开往',
-    theme: '主题',
+    skipToContent: '跳过导航，直接进入内容',
+    theme: {
+      light: '切换到浅色主题',
+      dark: '切换到深色主题',
+    },
     pagination: {
       label: '分页导航',
       prev: '上一页',

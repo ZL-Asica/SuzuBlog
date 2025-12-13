@@ -263,7 +263,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           : 'CODE'
 
       return (
-        <pre className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-sm shadow-slate-950 transition-all-300 hover:shadow-md dark:shadow-slate-700">
+        <div className="relative overflow-hidden rounded-lg bg-gray-700 pt-8 shadow-sm shadow-slate-950 transition-all-300 hover:shadow-md dark:shadow-slate-700">
           {/* MacOS window buttons */}
           <div className="absolute left-3 top-2 flex space-x-2" aria-hidden="true">
             <span className="h-3 w-3 rounded-full bg-red-500 transition-all-300 hover:ring-1 hover:ring-white hover:scale-105" />
@@ -277,7 +277,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
           </div>
 
           {children}
-        </pre>
+        </div>
       )
     },
     kbd: ({ children }) => {
@@ -292,8 +292,8 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
 
     // Table related
     table: ({ children }) => (
-      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md overflow-hidden">
-        <table className="w-full rounded-lg border text-left overflow-hidden">
+      <div className="my-6 w-full rounded-lg border border-gray-300 shadow-md overflow-y-auto">
+        <table className="w-full rounded-lg border text-left overflow-y-auto">
           {children}
         </table>
       </div>

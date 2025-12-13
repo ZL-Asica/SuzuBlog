@@ -3,6 +3,7 @@ import process from 'node:process'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from 'next/font/google'
+import { Toaster } from 'sonner'
 import { BackToTop, Footer, Head, Header, ScrollPositionBar } from '@/components/common'
 import { buildMetadata } from '@/lib/buildMetadata'
 
@@ -53,9 +54,14 @@ export default function RootLayout(
         links={config.links}
       />
       <body className={`${inter.variable} ${notoSansSC.variable} ${jetBrainsMono.variable} font-sans flex max-h-full min-h-screen flex-col antialiased`}>
+        <Toaster richColors position="top-center" />
         <ScrollPositionBar />
         <Header config={config} />
-        <main className="grow mt-20 motion-safe:animate-fade-in-down">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="grow mt-20 motion-safe:animate-fade-in-down"
+        >
           {children}
           {process.env.VERCEL === '1'
             && (
