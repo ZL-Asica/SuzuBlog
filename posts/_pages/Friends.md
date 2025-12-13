@@ -324,6 +324,12 @@ showThumbnail: false
 "link": "https://shiyin.cafe/",
 "img": "https://shiyina.com:233/favicon.ico",
 "des": "兴趣使然的未来主义建造者"
+},
+{
+"title": "Hmily",
+"link": "https://www.hmily.ren/",
+"img": "https://lsc.hmily.ren/image/260.png",
+"des": "生活探索日记🌙"
 }
 ]
 ```
