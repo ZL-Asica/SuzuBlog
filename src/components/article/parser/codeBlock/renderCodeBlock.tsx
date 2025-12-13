@@ -40,7 +40,12 @@ const CodeBlock = async ({
   return (
     <div className="relative font-mono">
       <CodeBlockCopy cleanedCode={cleanedChildren} translation={translation} />
-      <div className="scrollbar-custom" dangerouslySetInnerHTML={{ __html: html }} />
+      <div
+        className="scrollbar-custom"
+        tabIndex={0}
+        aria-label={`Code block (${lang})`}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </div>
   )
 }

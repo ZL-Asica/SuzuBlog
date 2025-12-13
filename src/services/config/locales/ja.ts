@@ -44,8 +44,12 @@ const ja: Translation = {
   post: {
     thumbnail: 'サムネイル: ',
     readMore: '続きを読む ',
-    copy: 'コピーする',
-    copied: 'コピーしました！',
+    copy: {
+      copy: 'コピー',
+      copied: 'コピーしました！',
+      copyAriaLabel: 'コードをクリップボードにコピー',
+      copyFailed: 'コピーに失敗しました',
+    },
     categories: 'カテゴリ: ',
     noCategories: 'カテゴリなし',
     tags: 'タグ: ',

@@ -44,8 +44,12 @@ const en: Translation = {
   post: {
     thumbnail: 'Thumbnail: ',
     readMore: 'Read more about ',
-    copy: 'Copy',
-    copied: 'Copied!',
+    copy: {
+      copy: 'Copy',
+      copied: 'Copied!',
+      copyAriaLabel: 'Copy code to clipboard',
+      copyFailed: 'Copy Failed',
+    },
     categories: 'Categories: ',
     noCategories: 'No Categories',
     tags: 'Tags: ',

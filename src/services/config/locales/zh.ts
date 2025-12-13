@@ -43,8 +43,12 @@ const zh: Translation = {
   post: {
     thumbnail: '封面：',
     readMore: '阅读全文 ',
-    copy: '点击复制',
-    copied: '已复制',
+    copy: {
+      copy: '复制',
+      copied: '已复制！',
+      copyAriaLabel: '将代码复制到剪贴板',
+      copyFailed: '复制失败',
+    },
     categories: '分类：',
     noCategories: '无分类',
     tags: '标签：',

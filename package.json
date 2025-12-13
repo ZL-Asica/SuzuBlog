@@ -43,6 +43,7 @@
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "schema-dts": "^1.1.5",
+    "sonner": "^2.0.7",
     "twikoo": "^1.6.44",
     "yaml": "^2.8.2",
     "zod": "^4.1.13"
