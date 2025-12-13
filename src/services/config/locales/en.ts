@@ -68,7 +68,11 @@ const en: Translation = {
   },
   aria: {
     travellings: 'travellings',
-    theme: 'Theme',
+    skipToContent: 'Skip to content',
+    theme: {
+      light: 'Switch to light theme',
+      dark: 'Switch to dark theme',
+    },
     pagination: {
       label: 'Pagination Navigation',
       prev: 'Prev',

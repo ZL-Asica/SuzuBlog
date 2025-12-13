@@ -57,7 +57,11 @@ export default function RootLayout(
         <Toaster richColors position="top-center" />
         <ScrollPositionBar />
         <Header config={config} />
-        <main className="grow mt-20 motion-safe:animate-fade-in-down">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="grow mt-20 motion-safe:animate-fade-in-down"
+        >
           {children}
           {process.env.VERCEL === '1'
             && (

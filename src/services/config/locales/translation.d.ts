@@ -68,7 +68,11 @@ interface Translation {
   }
   aria: {
     travellings: string
-    theme: string
+    skipToContent: string
+    theme: {
+      light: string
+      dark: string
+    }
     pagination: {
       label: string
       prev: string

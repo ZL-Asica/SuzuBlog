@@ -67,7 +67,11 @@ const zh: Translation = {
   },
   aria: {
     travellings: '开往',
-    theme: '主题',
+    skipToContent: '跳过导航，直接进入内容',
+    theme: {
+      light: '切换到浅色主题',
+      dark: '切换到深色主题',
+    },
     pagination: {
       label: '分页导航',
       prev: '上一页',

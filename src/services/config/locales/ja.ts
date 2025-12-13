@@ -68,7 +68,11 @@ const ja: Translation = {
   },
   aria: {
     travellings: '開通の道',
-    theme: 'テーマ',
+    skipToContent: 'コンテンツにスキップ',
+    theme: {
+      light: 'ライトテーマに切り替え',
+      dark: 'ダークテーマに切り替え',
+    },
     pagination: {
       label: 'ページネーションナビゲーション',
       prev: '前のページ',

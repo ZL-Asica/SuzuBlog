@@ -132,31 +132,6 @@ body {
   color: var(--color-foreground);
 }
 
-/****************************************************
- * ACCESSIBILITY
- ****************************************************/
-
-/* Remove default focus outline */
-*:focus {
-  outline: none;
-}
-
-/* Add focus outline for keyboard users */
-*:focus-visible {
-  outline: 2px solid var(--colors-accent-500);
-  outline-offset: 4px;
-}
-
-/* Enhance focus for form inputs */
-h2:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--colors-secondary-500);
-  outline-offset: 2px;
-}
-
 /* Color Utils */
 @utility text-primary {
   color: var(--color-primary-300);
