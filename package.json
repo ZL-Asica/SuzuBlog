@@ -1,6 +1,6 @@
 {
   "name": "suzu-blog",
-  "version": "1.11.6",
+  "version": "1.11.7",
   "private": true,
   "packageManager": "pnpm@10.25.0",
   "author": {
@@ -49,12 +49,12 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.6.1",
+    "@antfu/eslint-config": "^6.7.1",
     "@eslint-react/eslint-plugin": "^2.3.13",
     "@next/eslint-plugin-next": "16.0.10",
     "@shikijs/transformers": "^3.20.0",
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.4",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@types/rss": "^0.0.32",
@@ -62,7 +62,7 @@
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.1.0",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-react-refresh": "^0.4.25",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",

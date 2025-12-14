@@ -60,6 +60,8 @@ const HeaderMenu = ({ config, isMobile, className, onClickHandler }: HeaderMenuP
             ? currentPath === '/'
             : currentPath === item.href || currentPath.startsWith(`${item.href}/`)
 
+        const hasSubMenu = item.children !== undefined && item.children.length > 0
+
         return (
           <Fragment key={item.href}>
             <li className="group relative flex w-full items-center justify-center rounded-lg hover:bg-gray-light">
@@ -70,7 +72,10 @@ const HeaderMenu = ({ config, isMobile, className, onClickHandler }: HeaderMenuP
                   ${isActive ? 'text-primary' : 'text-foreground/90'}
                   ${isMobile ? 'text-xl font-semibold' : 'text-lg'}
                 `}
-                onClick={onClickHandler}
+                onClick={() => {
+                  onClickHandler?.()
+                  !isMobile && hasSubMenu && blurActive()
+                }}
                 aria-label={`${translation.navigate} ${item.label}`}
                 aria-current={isActive ? 'page' : undefined}
               >
