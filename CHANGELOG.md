@@ -1,5 +1,14 @@
 # SuzuBlog Changelog
 
+## 1.11.7 (2025-12-14)
+
+- Fix stylling and UX issues
+  - Adjust the positioning logic of anime notes to ensure they not hidding any other elements.
+  - Added ring effect to notes for better visibility against various backgrounds.
+  - Fix desktop dropdown not close when clicking a parent menu with children.
+- Dependencies:
+  - Update `.node-version` to `24.12.0`
+
 ## 1.11.6 (2025-12-13)
 
 ### Patch Changes
