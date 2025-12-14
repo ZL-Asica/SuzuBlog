@@ -41,24 +41,28 @@ const AnimeCard = ({
   return (
     <div
       key={entry.media.id}
-      className="relative group bg-gray-800 rounded-lg shadow-md transition-all duration-300 hover:scale-105"
+      className="relative z-2 group bg-gray-800 rounded-lg shadow-md transition-all duration-300 hover:scale-105"
       onClick={() => {
         if (isMobile) {
           setShowNotes(showNotes === entry.media.id ? null : entry.media.id)
         }
       }}
+      aria-label={animeTitle}
+      aria-describedby={entry.notes !== null && entry.notes.trim() !== ''
+        ? `notes-${entry.media.id}`
+        : undefined}
     >
       {/* Show note indicator */}
       {(entry.notes !== null && entry.notes.trim() !== '') && (
         <div
           className="absolute top-2 right-2 z-1 flex items-center bg-black/70 px-2 py-1 rounded-lg shadow-md"
         >
-          <MessageCircle className="text-primary-400 fill-current" size={20} />
+          <MessageCircle className="text-primary-400 fill-current" size={20} aria-hidden={true} />
         </div>
       )}
 
       {/* Cover Image (16:9) */}
-      <div className="relative w-full aspect-[9/16] rounded-lg overflow-hidden">
+      <div className="relative w-full aspect-9/16 rounded-lg overflow-hidden">
         <Image
           src={
             entry.media.coverImage.extraLarge
@@ -75,7 +79,7 @@ const AnimeCard = ({
       </div>
 
       {/* Title & Progress */}
-      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-2 text-white shadow-lg">
+      <div className="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/90 to-transparent p-2 text-white shadow-lg">
         <h3 className="text-lg font-semibold leading-tight">
           {animeTitle}
         </h3>
@@ -96,7 +100,7 @@ const AnimeCard = ({
         <p className="text-sm font-medium">
           {entry.score ?? 'N/A'}
         </p>
-        <Star className="ml-1 fill-current" size={20} />
+        <Star className="ml-1 fill-current" size={20} aria-hidden={true} />
       </div>
 
       {/* Hover Note */}
