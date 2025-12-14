@@ -45,17 +45,17 @@ FFmpeg的官网为[https://ffmpeg.org/download.html](https://ffmpeg.org/download
 
 ### macOS
 
-1. command+空格打开聚焦搜索，输入terminal并回车打开终端
+1. <kbd>Command</kbd> + <kbd>空格</kbd> 打开聚焦搜索（Spotlight），输入 Terminal 并回车打开终端
    ![terminal](https://r2.img.zla.app/2024/11/25/ecb82191.webp)
-2. 输入下述命令安装homebrew
+2. 如果你还没有安装过 Homebrew 的话，输入下述命令安装
 
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
    ```
 
-   homebrew安装过程中可能会需要root权限(管理员权限)，届时需要输入你的系统密码，输入时不会显示你输入的内容，输入完成回车即可
+   Homebrew 安装过程中会需要 root 权限(管理员权限)，届时需要输入你的系统密码，输入时不会显示你输入的内容，输入完成回车即可
 
-3. homebrew安装完成后输入下述命令安装ffmpeg
+3. Homebrew 安装完成后输入下述命令安装 ffmpeg
 
    ```bash
    brew install ffmpeg
@@ -258,4 +258,4 @@ ffmpeg -i in.mp3 -filter:a atempo=2.0 out.mp3
 
 ## 总结
 
-FFmpeg是一个非常厉害的格式转化与压制的软件，虽然没有GUI，但是只要掌握了几个基本的命令就足以完成绝大多数人的使用需求，Windows、macOS、Linux全平台试用。而且由于FFmpeg是一个开源软件，所以你可以根据你的个性化需求对该软件进行定制。同样如果你有更多的使用需求可以去查阅FFmpeg的官方文档选择你所需要的参数。如果对本文中有任何建议或者问题欢迎在下方评论区留言~
+FFmpeg是一个非常厉害的格式转化与压制的软件，虽然没有 GUI，但是只要掌握了几个基本的命令就足以完成绝大多数人的使用需求，Windows、macOS、Linux 全平台试用。而且由于 FFmpeg 是一个开源软件，所以你可以根据你的个性化需求对该软件进行定制（请遵循相关开源协议）。同样如果你有更多的使用需求可以去查阅 FFmpeg 的官方文档选择你所需要的参数。如果对本文中有任何建议或者问题欢迎在下方评论区留言~
