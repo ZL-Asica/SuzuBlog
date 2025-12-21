@@ -6,9 +6,10 @@ title: ZLA 小站
 # A short description that appears after the main title.
 subTitle: ZL Asica 的个人小站
 # A longer description for SEO and meta tags.
-description: ZL Asica 的个人小站，发布个人技术和生活内容。走过路过都进来看看哦 ( ง⁼̴̀ω⁼̴ )ง⁼³₌₃ ～～～ # A longer description for SEO and meta tags.
+description: ZL Asica 的个人博客，记录旅行与生活，也分享前端/全栈/HCI 开发笔记、TypeScript/React/Next.js 及更多实战、以及个人开源项目的技术剖析与复盘。
+# A longer description for SEO and meta tags.
 # Comma-separated keywords for SEO purposes.
-keywords: 'blog, 技术, ZL Asica, ZLA, 嫒希卡'
+keywords: 'ZL Asica, ZLA, 个人博客, 旅行, 年度总结, 留学申请, 技术博客, 前端, 全栈, HCI, TypeScript, JavaScript, React, Next.js, Node.js, Web 开发, 开源项目, 工程实践'
 author:
   name: ZL Asica # Your name, displayed as the author of the blog.
   link: 'https://zla.pub' # Link to your personal website or blog.
@@ -92,15 +93,15 @@ anilist_anime_name_style: english
 # The order of the social media icons is determined by the order below.
 socialMedia:
   github_username: ZL-Asica # Your GitHub username. https://github.com/username
-  linkedin_username: elara-liu # Your LinkedIn username. https://www.linkedin.com/in/username
-  instagram_id: zl_asica # Your Instagram username.
-  orcid_id: 0009-0008-7221-2324 # Your ORCID iD.
-  telegram_username: zl_asica # Your Telegram username. https://t.me/username
+  linkedin_username: # Your LinkedIn username. https://www.linkedin.com/in/username
+  instagram_id: # Your Instagram username.
+  orcid_id: # Your ORCID iD.
+  telegram_username: # Your Telegram username. https://t.me/username
   bluesky_username: zla.app # Your Bluesky username (without prefix). https://bsky.app/profile/{username}
-  youtube_id: ZL-Asica # Your YouTube channel ID. https://www.youtube.com/@username
+  youtube_id: # Your YouTube channel ID. https://www.youtube.com/@username
   zhihu_username: zl-asica # Your Zhihu username. https://www.zhihu.com/people/username
   bilibili_id: 29018759 # Your Bilibili ID. https://space.bilibili.com/username
-  email: zl@zla.app # Your email address.
+  email: # Your email address.
   rss: true # Display the RSS icon.
 
 # ######################
