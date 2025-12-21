@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { isEmpty } from '@zl-asica/react/utils'
 import { notFound } from 'next/navigation'
 import AnimeListCollection from '@/components/anime/AnimeListCollection'
 import { fetchAnilistData } from '@/lib/actions/anilist'
@@ -12,13 +13,16 @@ export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig()
   const animeTranslation = config.translation.anime
 
+  const animePageExisits = config.anilist_username !== null && !isEmpty(config.anilist_username)
+
   return buildMetadata({
     title: `${animeTranslation.title} - ${config.title}`,
     description: `${config.title}${animeTranslation.description} - ${config.description}`,
     urlPath: '/about/anime',
     ogType: 'website',
     image: config.avatar,
-    indexAble: config.anilist_username !== null,
+    index: animePageExisits,
+    follow: animePageExisits,
   })
 }
 
@@ -26,7 +30,7 @@ export default async function AnimePage() {
   const config = getConfig()
   const anilist_username = config.anilist_username
 
-  if (anilist_username === null) {
+  if (anilist_username === null || isEmpty(anilist_username)) {
     return notFound()
   }
 

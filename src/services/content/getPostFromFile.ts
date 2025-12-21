@@ -98,6 +98,7 @@ const getPostFromFile = (filePath: string, slug: string, fullData: boolean = tru
     showLicense: (data.showLicense ?? true) as boolean,
     showThumbnail: (data.showThumbnail ?? true) as boolean,
     autoSlug: (data.autoSlug ?? true) as boolean,
+    status: data.status as PostStatus | undefined,
   }
 
   let toc: TocItems[] = []

@@ -11,7 +11,8 @@ interface MetadataInput {
   urlPath?: string
   ogType?: OpenGraphType
   image?: string
-  indexAble?: boolean
+  index?: boolean
+  follow?: boolean
 }
 
 export const buildMetadata = ({
@@ -21,7 +22,8 @@ export const buildMetadata = ({
   urlPath = '/',
   ogType = 'website',
   image,
-  indexAble = true,
+  index = true,
+  follow = true,
 }: MetadataInput): Metadata => {
   const config = getConfig()
   const fullUrl = `${config.siteUrl}${urlPath}`
@@ -57,7 +59,7 @@ export const buildMetadata = ({
     },
     creator: 'ZL-Asica',
     publisher: config.author.name,
-    robots: { index: indexAble, follow: indexAble },
+    robots: { index, follow },
     authors: [{ name: config.author.name, url: config.author.link }],
     alternates: { canonical: fullUrl },
   }
