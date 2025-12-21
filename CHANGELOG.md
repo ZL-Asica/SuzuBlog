@@ -1,5 +1,19 @@
 # SuzuBlog Changelog
 
+## 1.12.1 (2025-12-20)
+
+- Fix ci workflow for auto release to include tag push directly to main branch.
+
+## 1.12.0 (2025-12-20)
+
+- Add new `status` field to post frontmatter
+  - New `status` field in post frontmatter to control the visibility and discoverability of posts.
+  - Possible values:
+    - `published` (default)
+    - `unlisted` (page exists, but not discoverable via listings/feeds)
+    - `draft` (preview-friendly, gated in production)
+    - `hidden` (never rendered unless explicitly allowed)
+
 ## 1.11.7 (2025-12-14)
 
 - Fix stylling and UX issues

@@ -22,7 +22,7 @@ export function generateMetadata(): Metadata {
 export default async function PostsPage() {
   const config = getConfig()
   const translation = config.translation
-  const posts: PostListData[] = await getAllPosts()
+  const posts = await getAllPosts('list')
 
   const jsonLd = buildWebsiteJsonLd({
     title: `${translation.posts.title} - ${config.title}`,

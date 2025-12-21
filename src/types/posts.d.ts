@@ -1,3 +1,6 @@
+type PostStatus = 'published' | 'unlisted' | 'draft' | 'hidden'
+type PostUsage = 'page' | 'list' | 'track'
+
 // Frontmatter for each post md file
 interface Frontmatter {
   title: string
@@ -11,6 +14,7 @@ interface Frontmatter {
   showLicense?: boolean
   showThumbnail?: boolean
   autoSlug?: boolean
+  status?: PostStatus
 }
 
 // Post data

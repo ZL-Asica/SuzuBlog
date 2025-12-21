@@ -7,19 +7,24 @@ import { buildArticleJsonLd } from '@/lib/buildJsonLd'
 import { buildMetadata } from '@/lib/buildMetadata'
 import { getConfig } from '@/services/config'
 import { getAllPosts, getPostData } from '@/services/content'
+import { canUsePost, isFollowable, isIndexable, resolveStatus } from '@/services/content/postVisibility'
 import { generateLLMsTXTs, generateRssFeed } from '@/services/utils'
 
 // build static params for all posts
 export async function generateStaticParams() {
-  const posts = await getAllPosts()
   const config = getConfig()
+
+  // Posts for rendering
+  const pagePosts = await getAllPosts('page')
+  // Posts for RSS and LLMs
+  const trackPosts = await getAllPosts('track')
+
   if (config.socialMedia.rss !== null) {
-    await generateRssFeed(posts, config)
+    await generateRssFeed(trackPosts, config)
   }
-  await generateLLMsTXTs(posts, config)
-  return posts.map(post => ({
-    slug: post.slug,
-  }))
+  await generateLLMsTXTs(trackPosts, config)
+
+  return pagePosts.map(post => ({ slug: post.slug }))
 }
 
 export const dynamicParams = false
@@ -31,9 +36,17 @@ interface ParamProps {
 export async function generateMetadata({ params }: ParamProps): Promise<Metadata> {
   // get post data
   const { slug } = await params
-  const postData: FullPostData | null = await getPostData(slug)
+  const postData = await getPostData(slug)
 
   const config = getConfig()
+
+  if (!postData) {
+    notFound()
+  }
+
+  const status = resolveStatus(postData.frontmatter.status)
+  const pageAllowed = canUsePost(status, 'page')
+
   const metaKeywords = uniqueArray([
     ...(postData?.frontmatter.tags || []),
     ...(postData?.frontmatter.categories || []),
@@ -48,15 +61,21 @@ export async function generateMetadata({ params }: ParamProps): Promise<Metadata
     urlPath: `/${slug}`,
     ogType: 'article',
     image: postData?.frontmatter.showThumbnail !== false ? postData?.frontmatter.thumbnail : undefined,
-    indexAble: postData?.frontmatter.redirect === undefined,
+    index: pageAllowed && isIndexable(status) && postData.frontmatter.redirect === undefined,
+    follow: pageAllowed && isFollowable(status) && postData.frontmatter.redirect === undefined,
   })
 }
 
 // PostPage component that receives the params directly
 export default async function PostPage(props: ParamProps) {
   const parameters = await props.params
-  const post: FullPostData | null = await getPostData(parameters.slug)
+  const post = await getPostData(parameters.slug)
   if (!post) {
+    return notFound()
+  }
+
+  const status = resolveStatus(post.frontmatter.status)
+  if (!canUsePost(status, 'page')) {
     return notFound()
   }
 
