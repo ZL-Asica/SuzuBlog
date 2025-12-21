@@ -5,10 +5,11 @@ import path from 'node:path'
 import process from 'node:process'
 
 import getPostFromFile from '@/services/content/getPostFromFile'
+import { canUsePost, resolveStatus } from './postVisibility'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-const getAllPosts = async (): Promise<PostListData[]> => {
+const getAllPosts = async (usage: PostUsage = 'list'): Promise<PostListData[]> => {
   const fileNames = await fsPromise.readdir(postsDirectory)
   const markdownFiles = fileNames.filter(fileName => fileName.endsWith('.md'))
 
@@ -17,15 +18,19 @@ const getAllPosts = async (): Promise<PostListData[]> => {
       const { slug, postAbstract, frontmatter, lastModified, contentRaw } = getPostFromFile(
         path.join(postsDirectory, fileName),
         fileName.replace(/\.md$/, ''),
-        false, // Fetch only partial data for list view
+        false,
       )
       return { slug, postAbstract, frontmatter, lastModified, contentRaw }
     }),
   )
 
-  return allPosts.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
+  const filtered = allPosts.filter((post) => {
+    const status = resolveStatus(post.frontmatter.status)
+    return canUsePost(status, usage)
+  })
+
+  return filtered.sort(
+    (a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
   )
 }
 
