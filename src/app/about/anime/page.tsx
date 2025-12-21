@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig()
   const animeTranslation = config.translation.anime
 
-  const animePageExisits = config.anilist_username !== null && !isEmpty(config.anilist_username)
+  const animePageExists = config.anilist_username !== null && !isEmpty(config.anilist_username)
 
   return buildMetadata({
     title: `${animeTranslation.title} - ${config.title}`,
@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
     urlPath: '/about/anime',
     ogType: 'website',
     image: config.avatar,
-    index: animePageExisits,
-    follow: animePageExisits,
+    index: animePageExists,
+    follow: animePageExists,
   })
 }
 

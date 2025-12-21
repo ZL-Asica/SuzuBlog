@@ -23,13 +23,13 @@ export function canUsePost(status: PostStatus, usage: PostUsage): boolean {
         return !isProd || allowDrafts
       }
       if (status === 'hidden') {
-        // Default hidden in prod
+        // Only show hidden posts in development mode and if ALLOW_HIDDEN is set to true
         return (!isProd && allowHidden)
       }
       return false
     }
     case 'list': {
-      // Wether include the post in post lists
+      // Whether include the post in post lists
       if (status === 'published') {
         return true
       }
@@ -39,7 +39,7 @@ export function canUsePost(status: PostStatus, usage: PostUsage): boolean {
       return false
     }
     case 'track': {
-      // "scrwaler track" entry: RSS/LLMs/sitemap/internal crawling
+      // "crawler track" entry: RSS/LLMs/sitemap/internal crawling
       return status === 'published'
     }
     default:

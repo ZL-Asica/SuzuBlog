@@ -41,14 +41,7 @@ export async function generateMetadata({ params }: ParamProps): Promise<Metadata
   const config = getConfig()
 
   if (!postData) {
-    return buildMetadata({
-      title: config.title,
-      description: config.description ?? '',
-      urlPath: `/${slug}`,
-      ogType: 'article',
-      index: false,
-      follow: false,
-    })
+    notFound()
   }
 
   const status = resolveStatus(postData.frontmatter.status)
