@@ -19,4 +19,4 @@ This is a **hidden** post (stronger than `draft`).
 
 This status is intended for internal notes or permanently hidden pages.
 
-If you really want to render hidden pages locally for debugging, set `ALLOW_HIDDEN=true`.
+If you really want to render hidden pages locally for debugging in a non-production environment, set `ALLOW_HIDDEN=true`.

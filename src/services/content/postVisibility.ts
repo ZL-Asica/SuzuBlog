@@ -15,7 +15,7 @@ export function resolveStatus(raw?: unknown): PostStatus {
 export function canUsePost(status: PostStatus, usage: PostUsage): boolean {
   switch (usage) {
     case 'page': {
-      // Whether render the post on static params
+      // Whether to render the post on static params
       if (status === 'published' || status === 'unlisted') {
         return true
       }
@@ -29,7 +29,7 @@ export function canUsePost(status: PostStatus, usage: PostUsage): boolean {
       return false
     }
     case 'list': {
-      // Whether include the post in post lists
+      // Whether to include the post in post lists
       if (status === 'published') {
         return true
       }
