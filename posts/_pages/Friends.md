@@ -105,8 +105,8 @@ showThumbnail: false
 },
 {
 "title": "摸鱼の客栈",
-"link": "https://blog.hanbaka.cn",
-"img": "https://r2.img.zla.app/2024/12/09/b53e62.webp",
+"link": "https://blog.fwneko.com",
+"img": "https://blog.fwneko.com/logo.gif",
 "des": "没事摸摸鱼，反正焦虑也解决不了问题"
 },
 {
@@ -330,6 +330,12 @@ showThumbnail: false
 "link": "https://www.hmily.ren/",
 "img": "https://lsc.hmily.ren/image/260.png",
 "des": "生活探索日记🌙"
+},
+{
+"title": "Astral Reverie",
+"link": "https://montrong.cn",
+"img": "https://gravatar.zla.app/avatar/08cbf988db9d9a0eb8facc39241836efe1242bf586d8253d546c87807f66000b?d=initials&name=Montrong",
+"des": "如梦幻，如初见。"
 }
 ]
 ```
