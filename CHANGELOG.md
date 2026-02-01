@@ -1,5 +1,12 @@
 # SuzuBlog Changelog
 
+## 1.12.2 (2026-1-31)
+
+- Update dependencies
+  - Bump up `Next.js` to `16.1.6`
+  - Bump up `React` to `19.2.4`
+
+
 ## 1.12.1 (2025-12-20)
 
 - Fix ci workflow for auto release to include tag push directly to main branch.
