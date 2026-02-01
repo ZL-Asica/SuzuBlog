@@ -104,12 +104,6 @@ showThumbnail: false
 "des": "致以无暇之人"
 },
 {
-"title": "摸鱼の客栈",
-"link": "https://blog.fwneko.com",
-"img": "https://blog.fwneko.com/logo.gif",
-"des": "没事摸摸鱼，反正焦虑也解决不了问题"
-},
-{
 "title": "Ethan",
 "link": "https://hanlife02.com",
 "img": "https://hanlife02.com/api/v2/objects/avatar/evcvs61h0ajgvoai07.jpeg",
@@ -170,10 +164,10 @@ showThumbnail: false
 "des": "以万象之不息，致不息之万象。"
 },
 {
-"title": "s22y",
-"link": "https://blog.s22y.moe",
-"img": "https://blog.s22y.moe/logo_small.webp",
-"des": "去码头整点薯条。"
+"title": "Meorion",
+"link": "https://blog.meorion.moe",
+"img": "https://gravatar.s22y.moe/avatar/me",
+"des": "去码头整点薯条🍟"
 },
 {
 "title": "晓雨杂记",
@@ -285,9 +279,9 @@ showThumbnail: false
 },
 {
 "title": "THW’s Blog",
-"link": "https://thw.lol",
-"img": "https://img.dooki.cloud/i/2025/08/29/68b09e116c4b6.webp",
-"des": "Live a good life meet slowly"
+"link": "https://blog.tianhw.top",
+"img": "https://image.tianhw.top/avatar.webp",
+"des": "前途似海，来日方长"
 },
 {
 "title": "Sakun Notebook",
@@ -336,6 +330,12 @@ showThumbnail: false
 "link": "https://montrong.cn",
 "img": "https://gravatar.zla.app/avatar/08cbf988db9d9a0eb8facc39241836efe1242bf586d8253d546c87807f66000b?d=initials&name=Montrong",
 "des": "如梦幻，如初见。"
+},
+{
+"title": "TangShiMei 的小空间",
+"link": "https://tang-blog.leleosd.top/",
+"img": "https://tang-blog.leleosd.top/img/favicon.ico",
+"des": "生活探索日记🌙"
 }
 ]
 ```
@@ -351,6 +351,12 @@ showThumbnail: false
 "link": "https://aciano.top/",
 "img": "https://bu.dusays.com/2024/07/15/6694b499da8df.jpg",
 "des": "零碎的岛屿总会找到海."
+},
+{
+"title": "摸鱼の客栈",
+"link": "https://blog.fwneko.com",
+"img": "https://blog.fwneko.com/logo.gif",
+"des": "没事摸摸鱼，反正焦虑也解决不了问题"
 }
 ]
 ```
@@ -371,6 +377,7 @@ showThumbnail: false
 2. 网站类型不限，但请不要是违法、违规、不适宜等内容。
 3. 网站可以正常访问，并具有一定的内容和更新频率。
 4. 非 `.github.io`、`.pages.dev`、`.vercel.app`、`netlify.app`、`.web.app` 等非自有域名（非严格要求，只要更新频率稳定即可）。
+5. 头像不要使用 ico，尽量不要用 gif 动图，以免影响页面加载速度和图片自动优化。
 
 ```json
 {
