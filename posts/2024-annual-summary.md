@@ -259,7 +259,7 @@ thumbnail: 'https://r2.img.zla.app/2024/12/31/d1501d.webp'
 
 ###### 江苏-南京、苏州
 
-![江苏-南京](https://r2.img.zla.app/2024/12/31/265a5a.png)
+![江苏-南京](https://r2.img.zla.app/2024/12/31/265a5a.avif)
 
 ![江苏-苏州](https://r2.img.zla.app/2024/12/31/34302c.png)
 

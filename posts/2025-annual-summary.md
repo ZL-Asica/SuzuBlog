@@ -135,7 +135,7 @@ Moody Tongue 的菜品和氛围都非常棒。作为一家曾经的米二，即�
 
 ![航旅纵横 2025 年度总结](https://s2.loli.net/2026/02/05/2xSLrhQXCMtFPRO.png)
 
-![Flighty 2025 年度总结](https://s2.loli.net/2026/02/05/2meyHsrYjRnUElo.png)
+![Flighty 2025 年度总结](https://r2.img.zla.app/2026/02/10/OKfZ7k3P.webp)
 
 #### 车
 
