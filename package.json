@@ -70,7 +70,7 @@
     "postcss-preset-env": "^11.1.2",
     "rss": "^1.2.2",
     "shiki": "^3.22.0",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.1",
     "typescript": "5.9.3"
   },
   "browserslist": {
