@@ -31,6 +31,13 @@ interface Translation {
     title: string
     description: string
     source: string
+    nameDisplay: {
+      label: string
+      japanese: string
+      english: string
+      romaji: string
+      helper: string
+    }
     // const SORT_ORDER = ['CURRENT', 'REPEATING', 'COMPLETED', 'DROPPED', 'PAUSED', 'PLANNING']
     status: {
       current: string

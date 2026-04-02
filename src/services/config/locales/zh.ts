@@ -31,6 +31,13 @@ const zh: Translation = {
     title: '动漫列表',
     description: ' 的动漫列表页面，数据来自 Anilist。',
     source: '数据来源：',
+    nameDisplay: {
+      label: '标题显示语言',
+      japanese: '日文',
+      english: '英文',
+      romaji: '罗马音',
+      helper: '默认会按浏览器首选语言自动设置。你的选择会缓存 30 天，并在访问时自动续期；同时会尽量匹配可用的中文别名。',
+    },
     status: {
       current: '在看',
       repeating: '重看',

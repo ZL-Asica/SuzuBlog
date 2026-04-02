@@ -44,6 +44,7 @@ export const fetchAnilistData = async (
                   romaji
                   userPreferred
                 }
+                synonyms
               }
             }
           }

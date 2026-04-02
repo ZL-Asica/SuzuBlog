@@ -32,6 +32,13 @@ const en: Translation = {
     title: 'Anime List',
     description: '\'s anime list page, data from Anilist.',
     source: 'Data Source: ',
+    nameDisplay: {
+      label: 'Anime title language',
+      japanese: 'Japanese',
+      english: 'English',
+      romaji: 'Romaji',
+      helper: 'Default follows your browser language and saves for 30 days. Chinese synonym matching is auto-applied when possible.',
+    },
     status: {
       current: 'Watching',
       repeating: 'Repeating',

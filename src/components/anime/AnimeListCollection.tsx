@@ -1,5 +1,8 @@
+'use client'
+
 import type { Config } from '@/schemas'
 import type { AnimeResponse } from '@/schemas/anime'
+import { useEffect, useMemo, useState } from 'react'
 import TOC from '@/components/article/TOC'
 import AnimeList from './AnimeList'
 
@@ -10,14 +13,94 @@ interface AnimeListCollectionProps {
 }
 
 const SORT_ORDER = ['CURRENT', 'REPEATING', 'COMPLETED', 'DROPPED', 'PAUSED', 'PLANNING']
+const STORAGE_KEY = 'anime-title-display-preference'
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000
+
+type AnimeTitleDisplayStyle = 'native' | 'english' | 'romaji'
+
+const detectDefaultTitleStyle = (): AnimeTitleDisplayStyle => {
+  if (typeof window === 'undefined') {
+    return 'romaji'
+  }
+
+  const preferredLanguage = navigator.languages?.[0] ?? navigator.language
+  const normalizedLanguage = preferredLanguage.toLowerCase()
+
+  if (normalizedLanguage.startsWith('ja')) {
+    return 'native'
+  }
+
+  if (normalizedLanguage.startsWith('en')) {
+    return 'english'
+  }
+
+  return 'romaji'
+}
+
+const loadTitleStylePreference = (): AnimeTitleDisplayStyle => {
+  if (typeof window === 'undefined') {
+    return 'romaji'
+  }
+
+  try {
+    const rawPreference = window.localStorage.getItem(STORAGE_KEY)
+
+    if (rawPreference === null) {
+      const detectedStyle = detectDefaultTitleStyle()
+      const expiresAt = Date.now() + THIRTY_DAYS_MS
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ value: detectedStyle, expiresAt }))
+      return detectedStyle
+    }
+
+    const parsedPreference = JSON.parse(rawPreference) as { value?: AnimeTitleDisplayStyle, expiresAt?: number }
+
+    if (parsedPreference.expiresAt === undefined || parsedPreference.expiresAt <= Date.now()) {
+      window.localStorage.removeItem(STORAGE_KEY)
+      return loadTitleStylePreference()
+    }
+
+    const selectedStyle = parsedPreference.value
+    const safeStyle = selectedStyle === 'native' || selectedStyle === 'english' || selectedStyle === 'romaji'
+      ? selectedStyle
+      : detectDefaultTitleStyle()
+
+    window.localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ value: safeStyle, expiresAt: Date.now() + THIRTY_DAYS_MS }),
+    )
+
+    return safeStyle
+  }
+  catch {
+    return detectDefaultTitleStyle()
+  }
+}
 
 const AnimeListCollection = ({ animeData, userName, config }: AnimeListCollectionProps) => {
   const {
     translation,
     author: { name: author },
-    lang,
     anilist_anime_name_style,
   } = config
+  const [selectedTitleStyle, setSelectedTitleStyle] = useState<AnimeTitleDisplayStyle>('romaji')
+
+  useEffect(() => {
+    const defaultStyle = loadTitleStylePreference()
+    setSelectedTitleStyle(defaultStyle)
+  }, [])
+
+  const controlledTitleStyle = useMemo(
+    () => anilist_anime_name_style ?? selectedTitleStyle,
+    [anilist_anime_name_style, selectedTitleStyle],
+  )
+
+  const onTitleStyleChange = (style: AnimeTitleDisplayStyle) => {
+    setSelectedTitleStyle(style)
+    window.localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ value: style, expiresAt: Date.now() + THIRTY_DAYS_MS }),
+    )
+  }
 
   const sortedLists = animeData.data.MediaListCollection.lists.sort(
     (a, b) => SORT_ORDER.indexOf(a.status) - SORT_ORDER.indexOf(b.status),
@@ -48,11 +131,33 @@ const AnimeListCollection = ({ animeData, userName, config }: AnimeListCollectio
           AniList
         </a>
 
+        {anilist_anime_name_style === null && (
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-gray-300">
+            <span className="font-medium text-gray-200">{translation.anime.nameDisplay.label}</span>
+            <div className="inline-flex rounded-lg border border-gray-700 bg-gray-800/50 p-1">
+              {([
+                { key: 'native', label: translation.anime.nameDisplay.japanese },
+                { key: 'english', label: translation.anime.nameDisplay.english },
+                { key: 'romaji', label: translation.anime.nameDisplay.romaji },
+              ] as const).map(item => (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => onTitleStyleChange(item.key)}
+                  className={`rounded-md px-3 py-1 transition-colors ${controlledTitleStyle === item.key ? 'bg-primary text-background' : 'text-gray-300 hover:text-primary-300'}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <p className="w-full text-xs text-gray-400">{translation.anime.nameDisplay.helper}</p>
+          </div>
+        )}
+
         <AnimeList
           sortedLists={sortedLists}
           tocList={tocList}
-          anilistAnimeNameStyle={anilist_anime_name_style}
-          lang={lang}
+          selectedTitleStyle={controlledTitleStyle}
         />
       </div>
       <TOC

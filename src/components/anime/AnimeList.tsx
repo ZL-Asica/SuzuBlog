@@ -1,19 +1,59 @@
 import type { AniListList, AniListListEntry } from '@/schemas/anime'
-import type { AnilistAnimeNameStyle } from '@/schemas/config'
 import AnimeCard from './AnimeCard'
 
 interface AnimeListProps {
   sortedLists: AniListList[]
   tocList: TocItems[]
-  anilistAnimeNameStyle: AnilistAnimeNameStyle
-  lang: string
+  selectedTitleStyle: 'native' | 'english' | 'romaji'
+}
+
+const chineseCharacterRegex = /\p{Script=Han}/u
+
+const resolveChineseTitle = (entry: AniListListEntry): string | null => {
+  const nativeTitle = entry.media.title.native
+  if (nativeTitle !== null && chineseCharacterRegex.test(nativeTitle)) {
+    return nativeTitle
+  }
+
+  const matchedSynonym = entry.media.synonyms.find(synonym => chineseCharacterRegex.test(synonym))
+  return matchedSynonym ?? null
+}
+
+const isChinesePreferredLanguage = (): boolean => {
+  if (typeof navigator === 'undefined') {
+    return false
+  }
+
+  const preferredLanguages = navigator.languages?.length
+    ? navigator.languages
+    : [navigator.language]
+
+  return preferredLanguages.some(language => language.toLowerCase().startsWith('zh'))
+}
+
+const resolveAnimeTitle = (
+  entry: AniListListEntry,
+  selectedTitleStyle: 'native' | 'english' | 'romaji',
+): string => {
+  const chineseTitle = isChinesePreferredLanguage() ? resolveChineseTitle(entry) : null
+  const titles = entry.media.title
+
+  switch (selectedTitleStyle) {
+    case 'native':
+      return chineseTitle ?? titles.native ?? titles.romaji
+    case 'english':
+      return titles.english ?? chineseTitle ?? titles.romaji
+    case 'romaji':
+      return titles.romaji
+    default:
+      return titles.romaji
+  }
 }
 
 const AnimeList = ({
   sortedLists,
   tocList,
-  anilistAnimeNameStyle,
-  lang,
+  selectedTitleStyle,
 }: AnimeListProps) => {
   return (
     <>
@@ -35,16 +75,7 @@ const AnimeList = ({
                   || (b.progress ?? 0) - (a.progress ?? 0),
                 )
                 .map((entry: AniListListEntry, entryIndex) => {
-                  // Prefer user's config first, then their annilist prefer
-                  // finally fallback to language based
-                  const titleType = anilistAnimeNameStyle !== null
-                    ? anilistAnimeNameStyle
-                    : entry.media.title.userPreferred !== null && Object.keys(entry.media.title).includes(entry.media.title.userPreferred)
-                      ? entry.media.title.userPreferred
-                      : lang === 'ja'
-                        ? 'native'
-                        : 'romaji'
-                  const animeTitle = entry.media.title[titleType as keyof typeof entry.media.title] ?? entry.media.title.romaji
+                  const animeTitle = resolveAnimeTitle(entry, selectedTitleStyle)
                   return (
                     <AnimeCard
                       key={entry.id}

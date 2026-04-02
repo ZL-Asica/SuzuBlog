@@ -17,6 +17,7 @@ const AniListMediaSchema = z.object({
     romaji: z.string(),
     userPreferred: z.string().nullable(),
   }),
+  synonyms: z.array(z.string()),
 })
 
 const AniListListEntrySchema = z.object({

@@ -32,6 +32,13 @@ const ja: Translation = {
     title: '动画',
     description: 'の动画ページです。データはAnilistから取得しています。',
     source: 'データソース: ',
+    nameDisplay: {
+      label: 'タイトル表示言語',
+      japanese: '日本語',
+      english: '英語',
+      romaji: 'ローマ字',
+      helper: '既定はブラウザ言語に合わせます。選択内容は30日間保存され、期限が自動更新されます。中国語の同義語一致にも可能な範囲で対応します。',
+    },
     status: {
       current: '視聴中',
       repeating: '見なおし',
