@@ -1,4 +1,5 @@
 import type { AniListList, AniListListEntry } from '@/schemas/anime'
+import { useEffect, useMemo, useState } from 'react'
 import AnimeCard from './AnimeCard'
 
 interface AnimeListProps {
@@ -8,6 +9,7 @@ interface AnimeListProps {
 }
 
 const chineseCharacterRegex = /\p{Script=Han}/u
+const chineseTitleCache = new Map<number, string | null>()
 
 const resolveChineseTitle = (entry: AniListListEntry): string | null => {
   const nativeTitle = entry.media.title.native
@@ -17,6 +19,38 @@ const resolveChineseTitle = (entry: AniListListEntry): string | null => {
 
   const matchedSynonym = entry.media.synonyms.find(synonym => chineseCharacterRegex.test(synonym))
   return matchedSynonym ?? null
+}
+
+const fetchChineseTitleFromJikan = async (malId: number): Promise<string | null> => {
+  const cachedTitle = chineseTitleCache.get(malId)
+
+  if (cachedTitle !== undefined) {
+    return cachedTitle
+  }
+
+  try {
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${malId}`)
+
+    if (!response.ok) {
+      chineseTitleCache.set(malId, null)
+      return null
+    }
+
+    const json = await response.json() as {
+      data?: {
+        title_synonyms?: string[]
+      }
+    }
+
+    const chineseSynonym = json.data?.title_synonyms?.find(synonym => chineseCharacterRegex.test(synonym)) ?? null
+    chineseTitleCache.set(malId, chineseSynonym)
+
+    return chineseSynonym
+  }
+  catch {
+    chineseTitleCache.set(malId, null)
+    return null
+  }
 }
 
 const isChinesePreferredLanguage = (): boolean => {
@@ -34,8 +68,9 @@ const isChinesePreferredLanguage = (): boolean => {
 const resolveAnimeTitle = (
   entry: AniListListEntry,
   selectedTitleStyle: 'native' | 'english' | 'romaji',
+  chineseTitleLookup: Record<number, string | null>,
 ): string => {
-  const chineseTitle = isChinesePreferredLanguage() ? resolveChineseTitle(entry) : null
+  const chineseTitle = chineseTitleLookup[entry.media.id] ?? resolveChineseTitle(entry)
   const titles = entry.media.title
 
   switch (selectedTitleStyle) {
@@ -55,6 +90,51 @@ const AnimeList = ({
   tocList,
   selectedTitleStyle,
 }: AnimeListProps) => {
+  const [chineseTitleLookup, setChineseTitleLookup] = useState<Record<number, string | null>>({})
+
+  const allEntries = useMemo(
+    () => sortedLists.flatMap(list => list.entries),
+    [sortedLists],
+  )
+
+  useEffect(() => {
+    if (!isChinesePreferredLanguage()) {
+      return
+    }
+
+    const targetEntries = allEntries.filter(entry => entry.media.idMal !== null)
+    const unresolvedEntries = targetEntries.filter(entry => chineseTitleLookup[entry.media.id] === undefined)
+
+    if (unresolvedEntries.length === 0) {
+      return
+    }
+
+    const loadChineseTitles = async () => {
+      const fetchedEntries = await Promise.all(
+        unresolvedEntries.map(async (entry) => {
+          const fallbackChineseTitle = resolveChineseTitle(entry)
+
+          if (fallbackChineseTitle !== null || entry.media.idMal === null) {
+            return [entry.media.id, fallbackChineseTitle] as const
+          }
+
+          const jikanChineseTitle = await fetchChineseTitleFromJikan(entry.media.idMal)
+          return [entry.media.id, jikanChineseTitle] as const
+        }),
+      )
+
+      setChineseTitleLookup((previousLookup) => {
+        const nextLookup = { ...previousLookup }
+        for (const [mediaId, chineseTitle] of fetchedEntries) {
+          nextLookup[mediaId] = chineseTitle
+        }
+        return nextLookup
+      })
+    }
+
+    void loadChineseTitles()
+  }, [allEntries, chineseTitleLookup])
+
   return (
     <>
       {sortedLists.map((list: AniListList, listIndex) => {
@@ -75,7 +155,7 @@ const AnimeList = ({
                   || (b.progress ?? 0) - (a.progress ?? 0),
                 )
                 .map((entry: AniListListEntry, entryIndex) => {
-                  const animeTitle = resolveAnimeTitle(entry, selectedTitleStyle)
+                  const animeTitle = resolveAnimeTitle(entry, selectedTitleStyle, chineseTitleLookup)
                   return (
                     <AnimeCard
                       key={entry.id}

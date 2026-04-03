@@ -37,7 +37,7 @@ const en: Translation = {
       japanese: 'Japanese',
       english: 'English',
       romaji: 'Romaji',
-      helper: 'Default follows your browser language and saves for 30 days. Chinese synonym matching is auto-applied when possible.',
+      helper: 'Default follows your browser language and saves for 30 days. Chinese title matching will try AniList plus MyAnimeList (via Jikan) when available.',
     },
     status: {
       current: 'Watching',

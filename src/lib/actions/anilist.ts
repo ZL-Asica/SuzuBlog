@@ -29,6 +29,7 @@ export const fetchAnilistData = async (
               notes
               media {
                 id
+                idMal
                 averageScore
                 episodes
                 format

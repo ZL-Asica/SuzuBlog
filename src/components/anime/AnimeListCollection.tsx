@@ -2,7 +2,7 @@
 
 import type { Config } from '@/schemas'
 import type { AnimeResponse } from '@/schemas/anime'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import TOC from '@/components/article/TOC'
 import AnimeList from './AnimeList'
 
@@ -80,7 +80,6 @@ const AnimeListCollection = ({ animeData, userName, config }: AnimeListCollectio
   const {
     translation,
     author: { name: author },
-    anilist_anime_name_style,
   } = config
   const [selectedTitleStyle, setSelectedTitleStyle] = useState<AnimeTitleDisplayStyle>('romaji')
 
@@ -88,11 +87,6 @@ const AnimeListCollection = ({ animeData, userName, config }: AnimeListCollectio
     const defaultStyle = loadTitleStylePreference()
     setSelectedTitleStyle(defaultStyle)
   }, [])
-
-  const controlledTitleStyle = useMemo(
-    () => anilist_anime_name_style ?? selectedTitleStyle,
-    [anilist_anime_name_style, selectedTitleStyle],
-  )
 
   const onTitleStyleChange = (style: AnimeTitleDisplayStyle) => {
     setSelectedTitleStyle(style)
@@ -131,33 +125,31 @@ const AnimeListCollection = ({ animeData, userName, config }: AnimeListCollectio
           AniList
         </a>
 
-        {anilist_anime_name_style === null && (
-          <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-gray-300">
-            <span className="font-medium text-gray-200">{translation.anime.nameDisplay.label}</span>
-            <div className="inline-flex rounded-lg border border-gray-700 bg-gray-800/50 p-1">
-              {([
-                { key: 'native', label: translation.anime.nameDisplay.japanese },
-                { key: 'english', label: translation.anime.nameDisplay.english },
-                { key: 'romaji', label: translation.anime.nameDisplay.romaji },
-              ] as const).map(item => (
-                <button
-                  key={item.key}
-                  type="button"
-                  onClick={() => onTitleStyleChange(item.key)}
-                  className={`rounded-md px-3 py-1 transition-colors ${controlledTitleStyle === item.key ? 'bg-primary text-background' : 'text-gray-300 hover:text-primary-300'}`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-            <p className="w-full text-xs text-gray-400">{translation.anime.nameDisplay.helper}</p>
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-gray-300">
+          <span className="font-medium text-gray-200">{translation.anime.nameDisplay.label}</span>
+          <div className="inline-flex rounded-lg border border-gray-700 bg-gray-800/50 p-1">
+            {([
+              { key: 'native', label: translation.anime.nameDisplay.japanese },
+              { key: 'english', label: translation.anime.nameDisplay.english },
+              { key: 'romaji', label: translation.anime.nameDisplay.romaji },
+            ] as const).map(item => (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => onTitleStyleChange(item.key)}
+                className={`rounded-md px-3 py-1 transition-colors ${selectedTitleStyle === item.key ? 'bg-primary text-background' : 'text-gray-300 hover:text-primary-300'}`}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
-        )}
+          <p className="w-full text-xs text-gray-400">{translation.anime.nameDisplay.helper}</p>
+        </div>
 
         <AnimeList
           sortedLists={sortedLists}
           tocList={tocList}
-          selectedTitleStyle={controlledTitleStyle}
+          selectedTitleStyle={selectedTitleStyle}
         />
       </div>
       <TOC

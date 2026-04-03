@@ -37,7 +37,7 @@ const ja: Translation = {
       japanese: '日本語',
       english: '英語',
       romaji: 'ローマ字',
-      helper: '既定はブラウザ言語に合わせます。選択内容は30日間保存され、期限が自動更新されます。中国語の同義語一致にも可能な範囲で対応します。',
+      helper: '既定はブラウザ言語に合わせます。選択内容は30日間保存され、期限が自動更新されます。中国語タイトルはAniListに加えてJikan（MyAnimeList）も参照して補完します。',
     },
     status: {
       current: '視聴中',

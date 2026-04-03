@@ -36,7 +36,7 @@ const zh: Translation = {
       japanese: '日文',
       english: '英文',
       romaji: '罗马音',
-      helper: '默认会按浏览器首选语言自动设置。你的选择会缓存 30 天，并在访问时自动续期；同时会尽量匹配可用的中文别名。',
+      helper: '默认会按浏览器首选语言自动设置。你的选择会缓存 30 天，并在访问时自动续期；中文标题会优先匹配 AniList，并尝试通过 Jikan（MyAnimeList）补全。',
     },
     status: {
       current: '在看',

@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 const AniListMediaSchema = z.object({
   id: z.number(),
+  idMal: z.number().nullable(),
   averageScore: z.number().nullable(),
   episodes: z.number().nullable(),
   format: z.enum(['TV', 'TV_SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA', 'MUSIC', 'MANGA', 'NOVEL', 'ONE_SHOT']).nullable(),
