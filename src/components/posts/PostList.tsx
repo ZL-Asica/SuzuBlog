@@ -1,23 +1,33 @@
 import { Clock, Ellipsis } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import readingTime from 'reading-time'
 import { CategoriesTagsList } from '@/components/article'
+import { PostViewCount } from '@/components/common'
 
 interface PostListProps {
   posts: PostListData[]
   translation: Translation
+  siteUrl: string
 }
 
-const PostList = ({ posts, translation }: PostListProps) => {
+const PostList = ({ posts, translation, siteUrl }: PostListProps) => {
   return (
     <div className="mb-10 grid grid-cols-1 gap-10 motion-safe:animate-mask-reveal">
       {posts.map((post, index) => {
         const postTitle = post.frontmatter.title
-        const postRedirect = post.frontmatter.redirect !== undefined && post.frontmatter.redirect !== ''
+        const postRedirect
+          = post.frontmatter.redirect !== undefined
+            && post.frontmatter.redirect !== ''
 
         const postLink = postRedirect
-          ? post.frontmatter.redirect as string
+          ? (post.frontmatter.redirect as string)
           : post.slug
+        const readingMinutes = Math.max(
+          1,
+          Math.ceil(readingTime(post.contentRaw).minutes),
+        )
+        const wordCount = post.contentRaw.replace(/\s+/g, '').length
 
         return (
           <article
@@ -54,9 +64,16 @@ const PostList = ({ posts, translation }: PostListProps) => {
             <div className="m-6 flex h-1/2 flex-col justify-between md:h-auto md:w-5/12">
               <div>
                 {/* Date of Publish */}
-                <div className="mb-1 flex items-center">
+                <div className="mb-1 flex items-center gap-3">
                   <Clock size={18} className="mr-1" />
-                  <span className="text-sm font-medium">{post.frontmatter.date.split(' ')[0]}</span>
+                  <span className="text-sm font-medium">
+                    {post.frontmatter.date.split(' ')[0]}
+                  </span>
+                  <PostViewCount
+                    siteUrl={siteUrl}
+                    postSlug={post.slug}
+                    className="text-sm"
+                  />
                 </div>
                 {/* Title in Frontmatter */}
                 <Link
@@ -67,6 +84,17 @@ const PostList = ({ posts, translation }: PostListProps) => {
                 >
                   <h2 className="mb-2 text-2xl font-bold">{postTitle}</h2>
                 </Link>
+                <p className="mb-2 text-xs text-gray-500">
+                  字数
+                  {' '}
+                  {wordCount}
+                  {' · '}
+                  预计阅读
+                  {' '}
+                  {readingMinutes}
+                  {' '}
+                  分钟
+                </p>
                 {/* Abstract */}
                 <p className="line-clamp-5 text-sm">{post.postAbstract}</p>
               </div>
@@ -78,7 +106,11 @@ const PostList = ({ posts, translation }: PostListProps) => {
                   aria-label={`${postTitle}`}
                   className="self-start text-hover-primary transition-all-500 hover:scale-110"
                 >
-                  <Ellipsis size={32} strokeWidth={3} className="cursor-pointer" />
+                  <Ellipsis
+                    size={32}
+                    strokeWidth={3}
+                    className="cursor-pointer"
+                  />
                 </Link>
 
                 {/* Category */}

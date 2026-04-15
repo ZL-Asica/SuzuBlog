@@ -47,6 +47,7 @@ export default async function PostsPage() {
           posts={posts}
           translation={translation}
           postsPerPage={Math.min(15, config.postsPerPage ?? 5)}
+          siteUrl={config.siteUrl}
         />
       </div>
     </>

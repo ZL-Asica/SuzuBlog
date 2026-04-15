@@ -11,12 +11,14 @@ interface PostPageClientProps {
   posts: PostListData[]
   translation: Translation
   postsPerPage: number
+  siteUrl: string
 }
 
 const PostPageClient = ({
   posts,
   translation,
   postsPerPage,
+  siteUrl,
 }: PostPageClientProps) => {
   const updateURL = useUpdateURL()
   const searchParams = useSearchParams()
@@ -48,7 +50,11 @@ const PostPageClient = ({
         </h2>
       )}
 
-      <PostListLayout posts={currentPosts} translation={translation} />
+      <PostListLayout
+        posts={currentPosts}
+        translation={translation}
+        siteUrl={siteUrl}
+      />
 
       {/* Pagination */}
       <Pagination
