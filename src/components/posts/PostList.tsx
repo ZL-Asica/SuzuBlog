@@ -1,6 +1,7 @@
-import { Clock, Ellipsis } from 'lucide-react'
+import { Clock, Clock as ClockIcon, Ellipsis, FileText } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import readingTime from 'reading-time'
 import { CategoriesTagsList } from '@/components/article'
 
 interface PostListProps {
@@ -53,10 +54,28 @@ const PostList = ({ posts, translation }: PostListProps) => {
             {/* Content */}
             <div className="m-6 flex h-1/2 flex-col justify-between md:h-auto md:w-5/12">
               <div>
-                {/* Date of Publish */}
-                <div className="mb-1 flex items-center">
-                  <Clock size={18} className="mr-1" />
-                  <span className="text-sm font-medium">{post.frontmatter.date.split(' ')[0]}</span>
+                {/* Post metadata */}
+                <div className="mb-1 flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center">
+                    <Clock size={16} className="mr-1" />
+                    <span className="font-medium">{post.frontmatter.date.split(' ')[0]}</span>
+                  </div>
+                  <span className="text-gray-400">•</span>
+                  <div className="flex items-center">
+                    <FileText size={16} className="mr-1" />
+                    <span>
+                      {post.contentRaw.replace(/\s+/g, '').length}
+                      字
+                    </span>
+                  </div>
+                  <span className="text-gray-400">•</span>
+                  <div className="flex items-center">
+                    <ClockIcon size={16} className="mr-1" />
+                    <span>
+                      {Math.max(1, Math.ceil(readingTime(post.contentRaw).minutes))}
+                      分钟阅读
+                    </span>
+                  </div>
                 </div>
                 {/* Title in Frontmatter */}
                 <Link

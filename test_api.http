@@ -1,0 +1,24 @@
+### Test Likes API
+GET http://localhost:3001/api/likes?slug=test-post
+
+### Increment Likes
+POST http://localhost:3001/api/likes
+Content-Type: application/json
+
+{
+  "slug": "test-post"
+}
+
+### Test Site Stats
+GET http://localhost:3001/api/stats/site
+
+### Test Post Views
+GET http://localhost:3001/api/stats/test-post?type=view
+
+### Increment Post View
+POST http://localhost:3001/api/stats/test-post?type=view
+Content-Type: application/json
+
+{
+  "visitorId": "test-visitor-123"
+}
