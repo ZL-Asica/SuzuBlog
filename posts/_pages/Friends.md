@@ -76,7 +76,7 @@ showThumbnail: false
 {
 "title": "「云华」CloudSino",
 "link": "https://cloud.sd.cn/",
-"img": "https://ipfs.crossbell.io/ipfs/QmPv8huiCrnyDkGWHCNnd16vrpmZqt2TpVauhDuMv16Cok?img-quality=75&img-format=auto&img-onerror=redirect&img-width=384",
+"img": "https://cloud.sd.cn/usr/uploads/2025/07/574656472.png",
 "des": "愿我的祝福与你同在！"
 },
 {
@@ -106,7 +106,7 @@ showThumbnail: false
 {
 "title": "Ethan",
 "link": "https://hanlife02.com",
-"img": "https://hanlife02.com/api/v2/objects/avatar/evcvs61h0ajgvoai07.jpeg",
+"img": "https://hanlife02.com/avatar.svg",
 "des": "Don't stay awake for too long"
 },
 {
@@ -166,7 +166,7 @@ showThumbnail: false
 {
 "title": "Meorion",
 "link": "https://blog.meorion.moe",
-"img": "https://gravatar.s22y.moe/avatar/me",
+"img": "https://gravatar.meorion.moe/avatar/me",
 "des": "去码头整点薯条🍟"
 },
 {
@@ -290,12 +290,6 @@ showThumbnail: false
 "des": "一个声豚的自我救赎"
 },
 {
-"title": "XUIOO",
-"link": "https://blog.xuioo.com/",
-"img": "https://blog.xuioo.com/27c69590279fdc3be2cd7c901e3d07ad.jpg",
-"des": "一叶障目，不见泰山；两耳塞豆，不闻雷霆。"
-},
-{
 "title": "mccsjs",
 "link": "https://mccsjs.eu.org/",
 "img": "https://mccsjs.eu.org/img/head.jpg",
@@ -316,7 +310,7 @@ showThumbnail: false
 {
 "title": "时隐重工",
 "link": "https://shiyin.cafe/",
-"img": "https://shiyina.com:233/favicon.ico",
+"img": "https://shiyina.com/favicon.ico",
 "des": "兴趣使然的未来主义建造者"
 },
 {
@@ -332,10 +326,16 @@ showThumbnail: false
 "des": "如梦幻，如初见。"
 },
 {
-"title": "TangShiMei 的小空间",
-"link": "https://tang-blog.leleosd.top/",
-"img": "https://tang-blog.leleosd.top/img/favicon.ico",
-"des": "生活探索日记🌙"
+"title": "狱杰",
+"link": "https://uegee.com/",
+"img": "https://uegee.com/head.jpg",
+"des": "曾几何时 稚嫩的小手也拥有了追越我们的坚强"
+},
+{
+"title": "大熊",
+"link": "https://halo.aizaibao.cn",
+"img": "https://tc.aizaibao.cn/a/2026/04/28/69f0d1289d627.png",
+"des": "日常随笔与灵感收集的小角落"
 }
 ]
 ```
@@ -357,6 +357,18 @@ showThumbnail: false
 "link": "https://blog.fwneko.com",
 "img": "https://blog.fwneko.com/logo.gif",
 "des": "没事摸摸鱼，反正焦虑也解决不了问题"
+},
+{
+"title": "TangShiMei 的小空间",
+"link": "https://blog.224418.xyz/",
+"img": "https://blog.224418.xyz/img/favicon.ico",
+"des": "想和你重新认识一次，从你叫什么开始"
+},
+{
+"title": "XUIOO",
+"link": "https://blog.xuioo.com/",
+"img": "https://blog.xuioo.com/27c69590279fdc3be2cd7c901e3d07ad.jpg",
+"des": "一叶障目，不见泰山；两耳塞豆，不闻雷霆。"
 }
 ]
 ```
