@@ -2,7 +2,7 @@
   "name": "suzu-blog",
   "version": "1.12.2",
   "private": true,
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@11.0.8",
   "author": {
     "name": "ZL Asica",
     "email": "zl@zla.app",
@@ -24,54 +24,54 @@
     "prepare": "husky || true"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.6.1",
-    "@vercel/speed-insights": "^1.3.1",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "@zl-asica/react": "^0.13.0",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
-    "katex": "^0.16.28",
-    "lucide-react": "^0.563.0",
+    "katex": "^0.16.45",
+    "lucide-react": "^1.14.0",
     "minisearch": "^7.2.0",
-    "next": "16.1.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-icons": "^5.5.0",
+    "next": "16.2.4",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-icons": "^5.6.0",
     "react-markdown": "^10.1.0",
     "rehype-katex": "^7.0.1",
     "rehype-raw": "^7.0.0",
     "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "schema-dts": "^1.1.5",
+    "schema-dts": "^2.0.0",
     "sonner": "^2.0.7",
-    "twikoo": "^1.6.44",
-    "yaml": "^2.8.2",
-    "zod": "^4.3.6"
+    "twikoo": "^1.7.9",
+    "yaml": "^2.8.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.2.0",
-    "@eslint-react/eslint-plugin": "^2.8.1",
-    "@next/eslint-plugin-next": "16.1.6",
-    "@shikijs/transformers": "^3.22.0",
-    "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^24.10.4",
-    "@types/react": "19.2.10",
+    "@antfu/eslint-config": "^8.2.0",
+    "@eslint-react/eslint-plugin": "^5.7.3",
+    "@next/eslint-plugin-next": "16.2.4",
+    "@shikijs/transformers": "^4.0.2",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/node": "^24.12.2",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/rss": "^0.0.32",
-    "bumpp": "^10.4.0",
-    "eslint": "^9.39.2",
-    "eslint-plugin-format": "^1.3.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.26",
+    "bumpp": "^11.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-format": "^2.0.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
-    "postcss": "^8.5.6",
+    "nano-staged": "^1.0.2",
+    "postcss": "^8.5.14",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^11.1.2",
+    "postcss-preset-env": "^11.2.1",
     "rss": "^1.2.2",
-    "shiki": "^3.22.0",
-    "tailwindcss": "^4.1.18",
-    "typescript": "5.9.3"
+    "shiki": "^4.0.2",
+    "tailwindcss": "^4.2.4",
+    "typescript": "6.0.3"
   },
   "browserslist": {
     "development": [
@@ -80,7 +80,7 @@
       "last 1 safari version"
     ]
   },
-  "lint-staged": {
+  "nano-staged": {
     "**/*.{js,jsx,ts,tsx,json,yml,css,scss,less,styl,html,md,mdx}": [
       "eslint --fix"
     ]

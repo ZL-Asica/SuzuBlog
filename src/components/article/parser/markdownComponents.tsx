@@ -199,7 +199,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
               : `${translation.newTab}${children?.toString() ?? 'link'}`
           }
           className="text-hover-primary underline-interactive mx-1 break-words font-semibold text-secondary decoration-[#5BCEFA] dark:decoration-[#81E6D9] hover:text-accent-700 dark:hover:text-accent-600"
-          {...(props as Record<string, unknown>)}
+          {...(props)}
         >
           {children}
         </a>
@@ -233,7 +233,7 @@ const createMarkdownComponents = (translation: Translation, autoSlug: boolean = 
         : (
             <code
               className="inline-block rounded-lg bg-primary-300/20 mx-1 px-0.5 font-mono text-base font-bold text-primary-400 dark:text-primary-200"
-              {...(props as Record<string, unknown>)}
+              {...(props)}
             >
               {children}
             </code>

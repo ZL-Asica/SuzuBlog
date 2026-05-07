@@ -43,7 +43,7 @@ const CodeBlockCopy = ({
         toast.error(translation.post.copy.copyFailed)
       }
       finally {
-        timerRef.current = window.setTimeout(() => setStatus('idle'), 2500)
+        timerRef.current = window.setTimeout(setStatus, 2500, 'idle')
       }
     })
   }
