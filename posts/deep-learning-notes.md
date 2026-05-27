@@ -352,7 +352,7 @@ autoSlug: false
 
 #### 2.1.1 Train / Dev / Test sets
 
-- Big data may need only 1% or even less dev/test sets.
+- Big data may need only 1\% or even less dev/test sets.
 - Mismatched: Make sure dev/test come from same distribution
 - Not having a test set might be okay. (Only dev set.)
 
@@ -702,7 +702,7 @@ autoSlug: false
   - Choose a dev set and test set to reflect data you expect to get in the future and consider important to do well on.
 
 - Size of dev/test set
-  - For large data set, use 98% training, 1% dev, 1% test
+  - For large data set, use 98\% training, 1\% dev, 1\% test
   - Size of test set: Set your test set to be big enough to give high confidence in the overall performance of your system.
   - Sometime use only train+dev, without test set.
 
@@ -779,7 +779,7 @@ autoSlug: false
 - Training and testing on different distributions
   - 200,000 from high quality webpages, 10,000 from low quality mobile app (but we care about this).
     - Shuffle before use those data. (not a good option, will cause the influence of what we care small.)
-    - Use mobile app as dev/test set, and just really small part of training set from app. (This we will make our target to what we want.) Maybe 50% in training, 25% in dev, and 25% test.
+    - Use mobile app as dev/test set, and just really small part of training set from app. (This we will make our target to what we want.) Maybe 50\% in training, 25\% in dev, and 25\% test.
 
 #### 3.2.2 Mismatched training and dev/test set
 
@@ -1067,7 +1067,7 @@ autoSlug: false
     - Computational cost = \#filter params x \#filter positions x \#of filters
   - Pointwise Convolution
     - Computational cost = \#filter params x \#filter positions x \# of filters
-      - $n_c * n_c * filters$
+      - $n_c *n_c* filters$
   - Cost of depthwise separable convolution / normal convolution
     - $\dfrac{1}{n_c} + \dfrac{1}{f^2}$
 - MobileNet v2 Bottleneck
@@ -1106,7 +1106,7 @@ autoSlug: false
     - Labeled data
     - Hand engineered features/network architecture/other components
   - Tips for doing well on benchmarks/winning competitions
-    - Ensembling: Train several networks independently and average their outputs ($\hat{y}$) 1-2% better. (3-15 networks)
+    - Ensembling: Train several networks independently and average their outputs ($\hat{y}$) 1-2\% better. (3-15 networks)
     - Multi-crop at test time: Run classifier on multiple versions of test images and average results. (10-crop: center, four corner, also on mirror image the same 5 crops)
   - Use open source code
     - Use architectures of networks published in the literature.
@@ -1379,7 +1379,7 @@ autoSlug: false
   - Decides how much of the candidate memory should be used to update the current memory cell.
 - Relevance Gate: $\Gamma_r=\sigma (w_r[c^{<t-1>}, x^{<t>}] + b_r)$
   - It decides how much of the past information (from previous timesteps) needs to be forgotten.
-- $c^{<t>} = \Gamma_u * \tilde{c}^{<t>} + (1 - \Gamma_u) * c^{<t-1>}$ ($*$ element-wise)
+- $c^{<t>} = \Gamma_u *\tilde{c}^{<t>} + (1 - \Gamma_u)* c^{<t-1>}$ ($*$ element-wise)
   - Sometime in paper show: $h$
   - The current memory cell is updated by an element-wise multiplication of the update gate with the candidate memory, and the complementary part of the update gate with the previous memory.
   - This formula allows the GRU to retain or forget information effectively, balancing between the candidate memory and the previous memory.
@@ -1434,7 +1434,7 @@ My own understanding (based on the above image):
 - Update Gate: $\Gamma_u=\sigma (w_u[a^{<t-1>}, x^{<t>}] + b_u)$
 - Forget Gate: $\Gamma_f=\sigma (w_f[a^{<t-1>}, x^{<t>}] + b_f)$
 - Output Gate: $\Gamma_o=\sigma (w_o[a^{<t-1>}, x^{<t>}] + b_o)$
-- $c^{<t>} = \Gamma_u * \tilde{c}^{<t>} + \Gamma_f * c^{<t-1>}$
+- $c^{<t>} = \Gamma_u *\tilde{c}^{<t>} + \Gamma_f* c^{<t-1>}$
 - $a^{<t>}=$ $\Gamma_o * {tanh} \space (c^{<t>})$
 
 ![LSTM-1](https://s2.loli.net/2025/04/10/IH6wCAZs9QbfWul.png)
