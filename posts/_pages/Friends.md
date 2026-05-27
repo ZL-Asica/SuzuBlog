@@ -336,6 +336,12 @@ showThumbnail: false
 "link": "https://halo.aizaibao.cn",
 "img": "https://tc.aizaibao.cn/a/2026/04/28/69f0d1289d627.png",
 "des": "日常随笔与灵感收集的小角落"
+},
+{
+"title": "A/B’s Blog",
+"link": "https://zmoe.com/",
+"img": "https://zmoe.com/wp-content/uploads/2026/05/cropped-5273c46b-f6d9-4a1e-b6f5-5b5d47a564ef.png",
+"des": "B分之A的自留地"
 }
 ]
 ```
