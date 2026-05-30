@@ -34,6 +34,12 @@ Need help with setup, customization, or deployment? Check out the full documenta
 
 📖 **[Suzu Blog Docs](https://suzu.zla.app)**
 
+## 📚 Repository Docs
+
+- [Architecture](./ARCHITECTURE.md) | [中文](./ARCHITECTURE_ZH.md)
+- [Development Guide](./DEVELOPMENT.md) | [中文](./DEVELOPMENT_ZH.md)
+- [Contribution Guide](./CONTRIBUTING.md) | [中文](./CONTRIBUTING_ZH.md)
+
 ## 🏗️ Project Structure
 
 ```plaintext

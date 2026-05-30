@@ -1,0 +1,258 @@
+name: Prepare Release PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump type (use prerelease when bump up a pre-release)
+        required: true
+        type: choice
+        options: [patch, minor, major, prepatch, preminor, premajor, prerelease]
+      preid:
+        description: Pre-release identifier (only used for pre* bumps)
+        required: false
+        type: choice
+        options: [alpha, beta, rc]
+        default: beta
+      previous_tag:
+        description: Previous tag used as changelog base (optional; defaults to latest semver tag)
+        required: false
+        type: string
+      release_summary:
+        description: Manual release summary prepended to the generated release notes (optional)
+        required: false
+        type: string
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: prepare-release
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history + tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: main
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: pnpm
+
+      - name: Ensure clean working tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Working tree is not clean. Aborting."
+            git status --porcelain
+            exit 1
+          fi
+
+      # 1) bump version (no git tag)
+      - name: Bump version (no tag)
+        id: bump
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUMP="${{ inputs.bump }}"
+          PREID="${{ inputs.preid }}"
+
+          case "$BUMP" in
+            patch|minor|major)
+              npm version "$BUMP" --no-git-tag-version
+              ;;
+            prepatch|preminor|premajor|prerelease)
+              if [ -z "${PREID:-}" ]; then
+                echo "preid is required for $BUMP"
+                exit 1
+              fi
+              npm version "$BUMP" --preid "$PREID" --no-git-tag-version
+              ;;
+            *)
+              echo "Unknown bump type: $BUMP"
+              exit 1
+              ;;
+          esac
+
+          NEXT_VERSION="$(node -p "require('./package.json').version")"
+          echo "NEXT_VERSION=$NEXT_VERSION" >> "$GITHUB_ENV"
+          echo "next_version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Next version: $NEXT_VERSION"
+
+      - name: Refresh pnpm lockfile
+        run: pnpm install --lockfile-only
+
+      # 2) find previous semver tag
+      - name: Find previous semver tag
+        id: prev
+        shell: bash
+        run: |
+          set -euo pipefail
+          PREV_TAG="${{ inputs.previous_tag }}"
+          if [ -z "$PREV_TAG" ]; then
+            PREV_TAG="$(git describe --tags --abbrev=0 --match 'v*.*.*' 2>/dev/null || true)"
+          fi
+          echo "PREV_TAG=$PREV_TAG" >> "$GITHUB_ENV"
+          echo "prev_tag=$PREV_TAG" >> "$GITHUB_OUTPUT"
+          echo "Previous tag: $PREV_TAG"
+
+      # 3) generate release notes via GitHub API (respects .github/release.yml)
+      - name: Generate release notes (GitHub)
+        id: notes
+        uses: actions/github-script@v7
+        env:
+          RELEASE_SUMMARY: ${{ inputs.release_summary }}
+        with:
+          script: |
+            const prev = process.env.PREV_TAG || undefined;
+            const nextTag = `v${process.env.NEXT_VERSION}`;
+            const manualSummary = (process.env.RELEASE_SUMMARY || "").trim();
+            const { owner, repo } = context.repo;
+
+            const res = await github.rest.repos.generateReleaseNotes({
+              owner,
+              repo,
+              tag_name: nextTag,
+              target_commitish: "main",
+              ...(prev ? { previous_tag_name: prev } : {}),
+            });
+
+            const raw = (res.data.body || "").trim();
+            const generated = raw.replace(/^<!--[\s\S]*?-->\s*/m, "").trim();
+
+            let changelog = generated;
+
+            // 1) Drop "What's Changed" heading (any heading level)
+            changelog = changelog.replace(/^\s*#+\s+What's Changed\s*\n+/im, "");
+
+            // 2) Remove "New Contributors" block (heading -> next heading or end)
+            changelog = changelog.replace(
+              /^\s*#+\s+New Contributors\s*\n[\s\S]*?(?=^\s*#+\s|\s*$)/im,
+              ""
+            );
+
+            // 3) Remove "**Full Changelog**: ..." line
+            changelog = changelog.replace(/^\s*\*\*Full Changelog\*\*:[^\n]*\n?/im, "");
+
+            // 4) Normalize headings to "### <Category>"
+            changelog = changelog.replace(/^####\s+/gm, "### ");
+            changelog = changelog.replace(/^##\s+/gm, "### ");
+
+            // 5) Normalize bullets to "- "
+            changelog = changelog.replace(/^\*\s+/gm, "- ");
+
+            // 6) Rewrite "- ... by @user in https://github.com/.../pull/123"
+            //   -> "- ... ([#123](.../pull/123)) by @user"
+            changelog = changelog.replace(
+              /^- (.+?)\s+by\s+(@[A-Za-z0-9-]+)\s+in\s+(https:\/\/github\.com\/[^\/]+\/[^\/]+\/pull\/(\d+))\s*$/gm,
+              (_line, title, user, url, prNumber) => `- ${title} ([#${prNumber}](${url})) by ${user}`
+            );
+
+            // 7) Tidy whitespace
+            changelog = changelog.replace(/\n{3,}/g, "\n\n").trim();
+
+            const releaseBody = generated
+              .replace(/^\s*#+\s+What's Changed\s*\n+/im, "")
+              .replace(/\n{3,}/g, "\n\n")
+              .trim();
+            const body = [manualSummary, releaseBody].filter(Boolean).join("\n\n");
+            const changelogBody = [manualSummary, changelog].filter(Boolean).join("\n\n");
+
+            core.setOutput("name", res.data.name || nextTag);
+            core.setOutput("body_pr", body);
+            core.setOutput("body_changelog", changelogBody);
+
+      # 3.1) If notes empty (e.g., everything excluded), stop early to avoid empty release PR
+      - name: Stop if no release notes
+        if: steps.notes.outputs.body_changelog == ''
+        shell: bash
+        run: |
+          echo "No release notes generated. Skip creating a release PR."
+          exit 0
+
+      # 4) update CHANGELOG.md (Keep a Changelog)
+      - name: Update CHANGELOG.md
+        if: steps.notes.outputs.body_changelog != ''
+        uses: actions/github-script@v7
+        env:
+          RELEASE_NOTES: ${{ steps.notes.outputs.body_changelog }}
+        with:
+          script: |
+            const fs = require("fs");
+
+            const changelogPath = "CHANGELOG.md";
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const nextVersion = process.env.NEXT_VERSION;
+            const nextTag = `v${nextVersion}`;
+            const previousTag = process.env.PREV_TAG || "";
+            const releaseNotes = (process.env.RELEASE_NOTES || "").trim();
+            const releaseDate = new Date().toISOString().slice(0, 10);
+
+            const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            const baseUrl = `https://github.com/${owner}/${repo}`;
+            const releaseUrl = previousTag
+              ? `${baseUrl}/compare/${previousTag}...${nextTag}`
+              : `${baseUrl}/releases/tag/${nextTag}`;
+            const unreleasedHeading = `## [Unreleased](${baseUrl}/compare/${nextTag}...HEAD)`;
+            const releaseBlock = `## [${nextVersion}](${releaseUrl}) - ${releaseDate}\n\n${releaseNotes}`;
+
+            let changelog = fs.readFileSync(changelogPath, "utf8").replace(/\r\n/g, "\n");
+
+            const existingReleasePattern = new RegExp(
+              `\\n## \\[v?${escapeRegExp(nextVersion)}\\](?:\\([^\\n]+\\))? - \\d{4}-\\d{2}-\\d{2}\\n[\\s\\S]*?(?=\\n## \\[|\\n\\[[^\\n]+\\]:|\\s*$)`,
+              "m"
+            );
+            changelog = changelog.replace(existingReleasePattern, "\n");
+
+            const unreleasedPattern = /^## \[Unreleased\](?:\([^)]+\))?\s*$/m;
+            if (!unreleasedPattern.test(changelog)) {
+              core.setFailed("CHANGELOG.md is missing the Unreleased heading.");
+              return;
+            }
+
+            changelog = changelog.replace(unreleasedPattern, unreleasedHeading);
+            changelog = changelog.replace(
+              new RegExp(`^${escapeRegExp(unreleasedHeading)}\\n+`, "m"),
+              `${unreleasedHeading}\n\n${releaseBlock}\n\n`
+            );
+            changelog = changelog.replace(/[ \t]+$/gm, "").trimEnd() + "\n";
+
+            fs.writeFileSync(changelogPath, changelog);
+
+      # 5) create Release PR
+      - name: Create Release PR
+        if: steps.notes.outputs.body_changelog != ''
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: release/v${{ steps.bump.outputs.next_version }}
+          title: 'release: v${{ steps.bump.outputs.next_version }}'
+          commit-message: 'release: v${{ steps.bump.outputs.next_version }}'
+          body: |
+            Auto-generated release PR.
+
+            Previous tag: `${{ steps.prev.outputs.prev_tag }}`
+
+            ## Release notes
+            ${{ steps.notes.outputs.body_pr }}
+
+          labels: release
+          add-paths: |
+            package.json
+            pnpm-lock.yaml
+            CHANGELOG.md

@@ -1,0 +1,166 @@
+name: 🔎 PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths-ignore:
+      - '**/README.md'
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: 🚨 Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: 🧱 Setup Node (cache pnpm)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: pnpm
+
+      - name: 📦 Install deps (frozen)
+        run: pnpm install --frozen-lockfile
+
+      - name: 🚨 Run lint
+        run: pnpm run lint:ci
+
+  build:
+    name: 🏗️ Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: 🧱 Setup Node (cache pnpm)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: pnpm
+
+      - name: 📦 Install deps (frozen)
+        run: pnpm install --frozen-lockfile
+
+      - name: 🏗️ Run build
+        run: pnpm run build
+
+  report:
+    name: 💬 Report
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [lint, build]
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: 🧾 Write job summary
+        shell: bash
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const summaryPath = process.env.GITHUB_STEP_SUMMARY;
+
+          const icon = (o) => o === 'success' ? '✅' : o === 'failure' ? '❌' : '⏭️';
+
+          const lint = process.env.LINT_RESULT || 'skipped';
+          const build = process.env.BUILD_RESULT || 'skipped';
+
+          const lines = [];
+          lines.push('## 🧪 PR Checks');
+          lines.push('');
+          lines.push(`- 🚨 Lint: ${icon(lint)} **${lint}**`);
+          lines.push(`- 🏗️ Build: ${icon(build)} **${build}**`);
+          lines.push('');
+
+          fs.appendFileSync(summaryPath, lines.join('\n') + '\n');
+          EOF
+
+      - name: 💬 Upsert PR comment
+        continue-on-error: true
+        uses: actions/github-script@v7
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+        with:
+          script: |
+            const marker = "<!-- suzublog-pr-checks -->";
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            const icon = (o) => (o === "success" ? "✅" : o === "failure" ? "❌" : "⏭️");
+
+            const lint = process.env.LINT_RESULT || "skipped";
+            const build = process.env.BUILD_RESULT || "skipped";
+
+            const body = [
+              marker,
+              "### 🧪 SuzuBlog PR Checks",
+              "",
+              `- 🚨 Lint: ${icon(lint)} **${lint}**`,
+              `- 🏗️ Build: ${icon(build)} **${build}**`,
+              "",
+              `🔗 Run: ${runUrl}`,
+            ].join("\n");
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+
+            const existing = comments.find(c => (c.body || "").includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body,
+              });
+            }
+
+      - name: ❌ Fail workflow if any required check failed
+        shell: bash
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+        run: |
+          if [ "$LINT_RESULT" != "success" ] || \
+             [ "$BUILD_RESULT" != "success" ]; then
+            echo "One or more required PR checks failed."
+            exit 1
+          fi

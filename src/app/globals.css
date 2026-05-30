@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '../styles/theme.css';
+@import '../components/article/parser/markdown.css';
 
 @theme inline {
   --font-sans:

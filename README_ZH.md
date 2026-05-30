@@ -34,6 +34,12 @@
 
 📖 **[Suzu Blog 官方文档](https://suzu.zla.app)**
 
+## 📚 仓库文档
+
+- [架构说明](./ARCHITECTURE_ZH.md) | [English](./ARCHITECTURE.md)
+- [开发指南](./DEVELOPMENT_ZH.md) | [English](./DEVELOPMENT.md)
+- [贡献指南](./CONTRIBUTING_ZH.md) | [English](./CONTRIBUTING.md)
+
 ## 🏗️ 项目结构
 
 ```plaintext
@@ -73,7 +79,7 @@
 [license-link]: ./LICENSE
 [nextjs-badge]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [nextjs-link]: https://nextjs.org
-[node-badge]: https://img.shields.io/badge/node%3E=18.18-339933?logo=node.js&logoColor=white
+[node-badge]: https://img.shields.io/badge/node%3E=20.9.0-339933?logo=node.js&logoColor=white
 [node-link]: https://nodejs.org/
 [pnpm-badge]: https://img.shields.io/github/package-json/packageManager/ZL-Asica/SuzuBlog?label=&logo=pnpm&logoColor=fff&color=F69220
 [pnpm-link]: https://pnpm.io/

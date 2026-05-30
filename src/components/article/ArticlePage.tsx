@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { CustomImage } from '@/components/ui'
 import CategoriesTagsList from './CategoriesTagsList'
 import MarkdownContent from './parser'
+import { MarkdownArticleInteractions } from './parser/MarkdownArticleInteractions'
 import TOC from './TOC'
 
 const CopyrightInfo = dynamic(async () => import('./CopyrightInfo'))
@@ -106,6 +107,7 @@ const ArticlePage = ({ config, post }: ArticlePageProps) => {
 
         {/* Main Content */}
         <MarkdownContent post={post} translation={translation} />
+        <MarkdownArticleInteractions />
 
         {post.frontmatter.showLicense && (
           <CopyrightInfo

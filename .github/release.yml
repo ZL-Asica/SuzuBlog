@@ -17,7 +17,7 @@ changelog:
       labels: [dependencies]
 
     - title: 📖 Documentation / 文档更新
-      labels: [docs]
+      labels: [docs, documentation]
 
     - title: 🧰 Internal / 内部变更
       labels: [internal, ci, workflow, build]

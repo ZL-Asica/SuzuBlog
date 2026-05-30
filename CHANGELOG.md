@@ -1,17 +1,32 @@
 # SuzuBlog Changelog
 
-## 1.12.2 (2026-1-31)
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased](https://github.com/ZL-Asica/SuzuBlog/compare/v1.13.0...HEAD)
+
+## [1.13.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.12.2...v1.13.0) - 2026-05-30
+
+### 🚀 Features / 新功能
+- feat(markdown): add rich markdown rendering support ([#232](https://github.com/ZL-Asica/SuzuBlog/pull/232)) by @ZL-Asica
+### 📖 Documentation / 文档更新
+- docs(project): align repository documentation ([#234](https://github.com/ZL-Asica/SuzuBlog/pull/234)) by @ZL-Asica
+### 🧰 Internal / 内部变更
+- ci(release): automate release pipeline ([#236](https://github.com/ZL-Asica/SuzuBlog/pull/236)) by @ZL-Asica
+- ci(release): automate release pipeline ci ([#237](https://github.com/ZL-Asica/SuzuBlog/pull/237)) by @ZL-Asica
+
+## [1.12.2](https://github.com/ZL-Asica/SuzuBlog/compare/v1.12.1...v1.12.2) - 2026-01-31
 
 - Update dependencies
   - Bump up `Next.js` to `16.1.6`
   - Bump up `React` to `19.2.4`
 
-
-## 1.12.1 (2025-12-20)
+## [1.12.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.12.0...v1.12.1) - 2025-12-20
 
 - Fix ci workflow for auto release to include tag push directly to main branch.
 
-## 1.12.0 (2025-12-20)
+## [1.12.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.7...v1.12.0) - 2025-12-20
 
 - Add new `status` field to post frontmatter
   - New `status` field in post frontmatter to control the visibility and discoverability of posts.
@@ -21,7 +36,7 @@
     - `draft` (preview-friendly, gated in production)
     - `hidden` (never rendered unless explicitly allowed)
 
-## 1.11.7 (2025-12-14)
+## [1.11.7](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.6...v1.11.7) - 2025-12-14
 
 - Fix stylling and UX issues
   - Adjust the positioning logic of anime notes to ensure they not hidding any other elements.
@@ -30,9 +45,7 @@
 - Dependencies:
   - Update `.node-version` to `24.12.0`
 
-## 1.11.6 (2025-12-13)
-
-### Patch Changes
+## [1.11.6](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.5...v1.11.6) - 2025-12-13
 
 - Bump up dependencies, solve `CVE-2025-55182`, update code block style
 
@@ -56,9 +69,7 @@
       - Adjust header aria attributes for better screen reader support.
       - Style updates for better aesthetics.
 
-## 1.11.5 (2025-10-25)
-
-### Patch Changes
+## [1.11.5](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.4...v1.11.5) - 2025-10-25
 
 - Upgrade Next.js to 16.0.0
   - Update `.node-version` to `22.21.0`
@@ -67,45 +78,33 @@
   - Update `@next/eslint-plugin-next` to `16.0.0`
   - Remove `eslint` configuration from `next.config.ts` as it's no longer needed nor supported in Next.js 16
 
-## 1.11.4 (2025-10-18)
-
-### Patch Changes
+## [1.11.4](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.2...v1.11.4) - 2025-10-18
 
 - Bump up dependencies
 
-## 1.11.3 (2025-09-23)
-
-### Patch Changes
+## [1.11.3](https://github.com/ZL-Asica/SuzuBlog/commit/b6e8cb2) - 2025-09-23
 
 - Small bugs fixed and bump up dependencies
   - Fix fuzzy search for CJK characters #193
   - Bump up dependencies
 
-## 1.11.2 (2025-08-02)
-
-### Patch Changes
+## [1.11.2](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.1...v1.11.2) - 2025-08-02
 
 - Fix social media link render unexpected
   - Social media links render even when user not set the username #190.
 
-## 1.11.1 (2025-08-01)
-
-### Patch Changes
+## [1.11.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.11.0...v1.11.1) - 2025-08-01
 
 - Minor bug fix and deps bump up
 
-## 1.11.0 (2025-06-15)
-
-### Minor Changes
+## [1.11.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.10.0...v1.11.0) - 2025-06-15
 
 - Enhances SEO and replaces the syntax highlighter with Shiki
   - Switched from `react-syntax-highlighter` to `shiki` and added custom CSS and copy functionality
   - Consolidated metadata and JSON-LD generation using `buildMetadata` and `build*JsonLd` helpers
   - Removed unused configs, updated dependencies, and refined project/editor settings
 
-## 1.10.0 (2025-06-15)
-
-### Minor Changes
+## [1.10.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.9.3...v1.10.0) - 2025-06-15
 
 - Update anime page function and TOC performance and style
   - Update anime page settings and some factors may caused by the new introduced config setting.
@@ -115,9 +114,7 @@
   - Fix `TOC` click the link may be hidden by the header issue.
   - Improve `TOC` auto centering function.
 
-## 1.9.3 (2025-05-23)
-
-### Patch Changes
+## [1.9.3](https://github.com/ZL-Asica/SuzuBlog/compare/v1.9.2...v1.9.3) - 2025-05-23
 
 - Improve config settings and validation
   - Refactor config settings from watch the file to Singleton pattern.
@@ -126,21 +123,15 @@
   - Extract Head part code as a single component.
   - Move the icons/links as a setting option in the config settings.
 
-## 1.9.2 (2025-05-20)
-
-### Patch Changes
+## [1.9.2](https://github.com/ZL-Asica/SuzuBlog/compare/v1.9.1...v1.9.2) - 2025-05-20
 
 - Remove useless deps, bump up deps
 
-## 1.9.1 (2025-05-09)
-
-### Patch Changes
+## [1.9.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.9.0...v1.9.1) - 2025-05-09
 
 - Minor bug fix, CI update, and add citation
 
-## 1.9.0 (2025-04-23)
-
-### Minor Changes
+## [1.9.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.8.2...v1.9.0) - 2025-04-23
 
 - Add auto-generation for llms.txt & llms-full.txt
   - Add auto-generation for `llms.txt` and `llms-full.txt` files at build time.
@@ -151,21 +142,15 @@
   - Fix `robots.txt` to allow search engines to crawl some files in `_next` folder.
     - This will fix crawlers are not able to render the website properly (since no css and js files are loaded).
 
-## 1.8.2 (2025-04-21)
-
-### Patch Changes
+## [1.8.2](https://github.com/ZL-Asica/SuzuBlog/compare/v1.8.1...v1.8.2) - 2025-04-21
 
 - Fix sitemap for in site image links
 
-## 1.8.1 (2025-04-20)
-
-### Patch Changes
+## [1.8.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.8.0...v1.8.1) - 2025-04-20
 
 - Fix dynamicParams in post slug page
 
-## 1.8.0
-
-### Minor Changes
+## [1.8.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.7.1...v1.8.0) - 2025-04-12
 
 - Add responsive pagination UI
   - Move Pagination component to a separate file for better organization.
@@ -174,9 +159,7 @@
   - Different pagination styles for mobile and desktop.
   - Now able to handle whatever number of pages.
 
-## 1.7.1 (2025-04-12)
-
-### Patch Changes
+## [1.7.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.7.0...v1.7.1) - 2025-04-12
 
 - Switch to useRouter for pagination and search
 
@@ -199,9 +182,7 @@
     - Color adjusted a little bit. Now the color is different in light and dark mode.
     - Added a new component Select to be used in the search input.
 
-## 1.7.0 (2025-04-11)
-
-### Minor Changes
+## [1.7.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.6.2...v1.7.0) - 2025-04-11
 
 - improve search function
   - Search function is now implemented with MiniSearch instead of manually filtering the posts.
@@ -210,9 +191,7 @@
   - Set different weight for title, categories, tags, and content.
   - Handle page changing while searching.
 
-## 1.6.2 (2025-04-03)
-
-### Patch Changes
+## [1.6.2](https://github.com/ZL-Asica/SuzuBlog/compare/v1.6.1...v1.6.2) - 2025-04-03
 
 - Performance improvement
   - Make two main fonts "display:swap" and "preload:true" to improve performance.
@@ -220,17 +199,13 @@
   - Set main page avatar "loading:eager" to make sure this image is loaded first.
   - Fix `<ul>` and `<li>` tags issues in mobile header menu.
 
-## 1.6.1 (2025-04-02)
-
-### Patch Changes
+## [1.6.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.6.0...v1.6.1) - 2025-04-02
 
 - Bump up deps and fix env compatibility error in Windows
   - Bump up dependencies.
   - Fix npm script "build". Remove NODE_NO_WARNINGS env variable from the script to avoid incompatibility issues on Windows.
 
-## 1.6.0 (2025-03-16)
-
-### Minor Changes
+## [1.6.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.5.1...v1.6.0) - 2025-03-16
 
 - Update color palette, styles updates, fix aria issues
   - Primary, secondary, accent color update. Corresponding utils added.
@@ -240,17 +215,13 @@
   - inline codeblock ml 0.5->1, p 1->0.5.
   - aria-hidden added for decoration DOM elements.
 
-## 1.5.1 (2025-03-15)
-
-### Patch Changes
+## [1.5.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.5.0...v1.5.1) - 2025-03-15
 
 - Fix anime page styling issue
   - Forget to update anime page.
   - Also update dark mode styling to improve contrast.
 
-## 1.5.0 (2025-03-15)
-
-### Minor Changes
+## [1.5.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.4.3...v1.5.0) - 2025-03-15
 
 - Theme cleanup and style refine
 
@@ -268,15 +239,11 @@
   - 2548e85: chore: clean up some code
   - 215b4eb: feat(darkTheme): theme setting only store for 7 days
 
-## 1.4.3 (2025-03-12)
-
-### Patch Changes
+## [1.4.3](https://github.com/ZL-Asica/SuzuBlog/compare/v1.4.2...v1.4.3) - 2025-03-12
 
 - Fix pnpm lock file error
 
-## 1.4.2 (2025-03-12)
-
-### Patch Changes
+## [1.4.2](https://github.com/ZL-Asica/SuzuBlog/compare/v1.4.1...v1.4.2) - 2025-03-12
 
 - 005a095: Add Changeset for version managing
   - Bump up Next.js version to 15.2.2, which solved Twikoo support issue (crypto-js TypeError).
@@ -284,13 +251,13 @@
   - Add more different grammar and syntax for Markdown inside sample-post.md.
   - Remove support in Browserlist for op_mini all, which is not necessary.
 
-## 1.4.1 (2025-03-09)
+## [1.4.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.4.0...v1.4.1) - 2025-03-09
 
 - ac9d6b1: Lock Next.js verson to 15.2.0 due to Twikoo support issue
 
 - 8d395f3: Update CI resealse workflow.
 
-## 1.4.0 (2025-03-08)
+## [1.4.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.3.0...v1.4.0) - 2025-03-08
 
 - fbf97ab: Notes showing issue on hover and mobile in `about/anime` page
 
@@ -303,7 +270,7 @@
   - markdown content parsing logic and improves styles (#139).
   - Fixed issues #137 and #138.
 
-## 1.3.0 (2025-03-01)
+## [1.3.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.2.0...v1.3.0) - 2025-03-01
 
 - e5f644a: Set anime images to unoptimized
 
