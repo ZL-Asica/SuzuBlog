@@ -45,3 +45,4 @@ yarn-error.log*
 hint-report/
 # lighthouse report
 *.report.html
+next-env.d.ts
