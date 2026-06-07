@@ -72,7 +72,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^11.3.0",
     "rss": "^1.2.2",
-    "shiki": "^4.1.0",
+    "shiki": "^4.2.0",
     "tailwindcss": "^4.3.0",
     "typescript": "6.0.3"
   },
