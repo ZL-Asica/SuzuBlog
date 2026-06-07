@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ZL-Asica/SuzuBlog/compare/v1.13.0...HEAD)
+## [Unreleased](https://github.com/ZL-Asica/SuzuBlog/compare/v1.13.1...HEAD)
+
+## [1.13.1](https://github.com/ZL-Asica/SuzuBlog/compare/v1.13.0...v1.13.1) - 2026-06-07
+
+Prepare
+
+### 🐛 Bug Fixes / 修复
+- fix(markdown): reveal emoji spoilers on mobile ([#240](https://github.com/ZL-Asica/SuzuBlog/pull/240)) by @ZL-Asica
+### 🧰 Internal / 内部变更
+- ci(workflows): remove dev target branch check ([#239](https://github.com/ZL-Asica/SuzuBlog/pull/239)) by @ZL-Asica
 
 ## [1.13.0](https://github.com/ZL-Asica/SuzuBlog/compare/v1.12.2...v1.13.0) - 2026-05-30
 
