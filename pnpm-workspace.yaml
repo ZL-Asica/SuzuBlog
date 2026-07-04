@@ -7,6 +7,9 @@ trustPolicyExclude:
   - semver@6.3.1
   - tinyexec@1.2.2
 
+overrides:
+  prettier: 3.8.3
+
 allowBuilds:
   esbuild: true
   sharp: true
