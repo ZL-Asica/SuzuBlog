@@ -2,7 +2,7 @@
   "name": "suzu-blog",
   "version": "1.13.1",
   "private": true,
-  "packageManager": "pnpm@11.12.0+sha512.820a6fbd0d9f04c226638002aead1e45340a9139dd5dc077c1d83ef44aa2481c8eb6637b4c9aa696a3c7e35ba818e49cf27213e5f2b91138d09b7a3e26e898ba",
+  "packageManager": "pnpm@11.14.0+sha512.66c1ac4c7d4762d6d7dde44c7f3e5a73591ed0a0806e751d4ed32d4f004f25b2285a906b1fd8a9e3e621df3b4e2858bf88e50e0cf626bedbe977fe434a5caf85",
   "author": {
     "name": "ZL Asica",
     "email": "zl@zla.app",
@@ -52,10 +52,10 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.1.0",
-    "@eslint-react/eslint-plugin": "^5.14.5",
+    "@eslint-react/eslint-plugin": "^5.17.0",
     "@next/eslint-plugin-next": "16.2.10",
     "@shikijs/transformers": "^4.3.1",
-    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/mdast": "^4.0.4",
     "@types/node": "^24.13.3",
     "@types/react": "19.2.17",
@@ -68,12 +68,12 @@
     "eslint-plugin-react-refresh": "^0.5.3",
     "husky": "^9.1.7",
     "nano-staged": "^1.0.2",
-    "postcss": "^8.5.17",
+    "postcss": "^8.5.19",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^11.3.2",
     "rss": "^1.2.2",
     "shiki": "^4.3.1",
-    "tailwindcss": "^4.3.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "6.0.3"
   },
   "browserslist": {
