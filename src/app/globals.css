@@ -26,3 +26,10 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+
+/* Prevent markdown and LaTeX from overflowing the viewport */
+.markdown-content,
+.prose {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
