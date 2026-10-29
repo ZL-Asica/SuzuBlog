@@ -1,4 +1,4 @@
-## ✨ Features Updates && 🐛 Bug Fix && 🛠 Code Refactor && 📦 Dependency Update
+## [What's New in This Pull Request?]
 
 ### 📌 Description
 
@@ -29,27 +29,23 @@
 ### ✅ Checklist
 
 1. Feature Updates:
-
-- [ ] Code follows project coding style.
-- [ ] Tested in a Next.js environment.
-- [ ] Relevant documentation is updated.
+   - [ ] Code follows project coding style.
+   - [ ] Tested in a Next.js environment.
+   - [ ] Relevant documentation is updated.
 
 2. Bug Fixes:
-
-- [ ] Bug has been reproduced and verified.
-- [ ] Fix does not introduce new issues.
-- [ ] Added necessary tests.
+   - [ ] Bug has been reproduced and verified.
+   - [ ] Fix does not introduce new issues.
+   - [ ] Added necessary tests.
 
 3. Code Refactor:
-
-- [ ] No breaking changes introduced.
-- [ ] Performance improvement validated.
-- [ ] Documentation updated if necessary.
+   - [ ] No breaking changes introduced.
+   - [ ] Performance improvement validated.
+   - [ ] Documentation updated if necessary.
 
 4. Dependency Updates:
-
-- [ ] Verified functionality after update.
-- [ ] Checked for security vulnerabilities using `npm audit` / `pnpm audit`.
+   - [ ] Verified functionality after update.
+   - [ ] Checked for security vulnerabilities using `npm audit` / `pnpm audit`.
 
 ### 📜 Dependency Changes
 

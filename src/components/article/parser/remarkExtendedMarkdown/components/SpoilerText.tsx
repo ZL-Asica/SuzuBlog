@@ -44,11 +44,17 @@ const SpoilerText = ({
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300',
         revealed
           ? 'select-text bg-primary-300/15 text-inherit hover:bg-primary-300/25 dark:bg-primary-200/10 dark:hover:bg-primary-200/20'
-          : 'select-none bg-slate-400/35 text-transparent hover:bg-primary-300/45 dark:bg-slate-200/20 dark:hover:bg-primary-200/30',
+          : 'select-none bg-slate-400/35 text-inherit hover:bg-primary-300/45 dark:bg-slate-200/20 dark:hover:bg-primary-200/30',
         className,
       ].join(' ')}
     >
-      <span aria-hidden={!revealed}>
+      <span
+        aria-hidden={!revealed}
+        className={[
+          'transition-opacity duration-150',
+          revealed ? 'opacity-100' : 'opacity-0',
+        ].join(' ')}
+      >
         {children}
       </span>
     </span>
