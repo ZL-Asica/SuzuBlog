@@ -321,7 +321,7 @@ showThumbnail: false
 },
 {
 "title": "Astral Reverie",
-"link": "https://montrong.cn",
+"link": "https://montrong.com",
 "img": "https://gravatar.zla.app/avatar/08cbf988db9d9a0eb8facc39241836efe1242bf586d8253d546c87807f66000b?d=initials&name=Montrong",
 "des": "如梦幻，如初见。"
 },
@@ -342,6 +342,24 @@ showThumbnail: false
 "link": "https://zmoe.com/",
 "img": "https://zmoe.com/wp-content/uploads/2026/05/cropped-5273c46b-f6d9-4a1e-b6f5-5b5d47a564ef.png",
 "des": "B分之A的自留地"
+},
+{
+"title": "TangShiMei 的小空间",
+"link": "https://blog.224418.xyz/",
+"img": "https://blog.224418.xyz/img/favicon.ico",
+"des": "想和你重新认识一次，从你叫什么开始"
+},
+{
+"title": "Soki Sugar Life",
+"link": "https://www.soki.moe/",
+"img": "https://cdn.jsdelivr.net/gh/SokiSama/picked@main/avatar.jpg",
+"des": "月下彼岸花"
+},
+{
+"title": "若愚",
+"link": "https://www.xrdsxj.com/",
+"img": "https://www.xrdsxj.com/static/face.png",
+"des": "听君之心，行君之意，无问西东"
 }
 ]
 ```
@@ -363,12 +381,6 @@ showThumbnail: false
 "link": "https://blog.fwneko.com",
 "img": "https://blog.fwneko.com/logo.gif",
 "des": "没事摸摸鱼，反正焦虑也解决不了问题"
-},
-{
-"title": "TangShiMei 的小空间",
-"link": "https://blog.224418.xyz/",
-"img": "https://blog.224418.xyz/img/favicon.ico",
-"des": "想和你重新认识一次，从你叫什么开始"
 },
 {
 "title": "XUIOO",
