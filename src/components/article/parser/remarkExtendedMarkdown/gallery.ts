@@ -15,21 +15,25 @@ import { getParagraphText } from './utils'
  * ```
  */
 
+type GalleryMode = 'grid' | 'carousel'
+
 interface GalleryOpen {
-  mode: 'grid'
+  mode: GalleryMode
 }
 
-const GRID_OPEN_RE = /^\s*\[grid\]\s*$/i
+const GRID_OPEN_RE = /^\s*\[grid(?:\s+mode\s*=\s*["']?(grid|carousel)["']?)?\]\s*$/i
 
 const GRID_CLOSE_RE = /^\s*\[\/grid\]\s*$/i
 
 const parseGalleryOpenText = (text: string): GalleryOpen | null => {
-  if (!GRID_OPEN_RE.test(text)) {
+  const match = GRID_OPEN_RE.exec(text)
+
+  if (match == null) {
     return null
   }
 
   return {
-    mode: 'grid',
+    mode: (match[1]?.toLowerCase() as GalleryMode | undefined) ?? 'grid',
   }
 }
 
