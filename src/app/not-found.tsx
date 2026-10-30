@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 function Custom404() {
@@ -14,7 +15,7 @@ function Custom404() {
 
     // Redirect after 10 seconds
     const redirectTimer = setTimeout(() => {
-      globalThis.location.href = '/'
+      redirect('/')
     }, 10_000)
 
     // Clean up both timers on component unmount
