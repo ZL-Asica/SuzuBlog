@@ -1,0 +1,455 @@
+@layer components {
+  .markdown-gallery-grid {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .markdown-gallery-column {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 0%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .markdown-gallery-grid > .markdown-gallery-column > .markdown-gallery-item {
+    position: relative;
+    min-width: 0;
+    width: 100%;
+    overflow: visible;
+    border-radius: 0.75rem;
+  }
+
+  .markdown-gallery-grid [data-markdown-image] {
+    position: relative;
+    margin-block: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .markdown-gallery-grid [data-markdown-image] > button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .markdown-gallery-grid [data-markdown-image] [data-nimg] {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    max-height: none !important;
+    object-fit: cover !important;
+  }
+
+  .markdown-gallery-grid [data-markdown-image] > button {
+    height: auto !important;
+    border-radius: 0.75rem;
+  }
+
+  .markdown-gallery-grid .markdown-image-caption {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-block: 0 !important;
+    overflow: hidden;
+    padding: 0.4rem 0.45rem 0.05rem;
+    color: color-mix(in oklab, var(--color-foreground) 68%, transparent);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .markdown-gallery-grid .markdown-gallery-item:hover .markdown-image-caption,
+  .markdown-gallery-grid .markdown-gallery-item:focus-within .markdown-image-caption {
+    position: absolute;
+    inset-inline: 0.45rem;
+    bottom: 0.45rem;
+    width: max-content;
+    max-width: calc(100% - 0.9rem);
+    overflow: visible;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid color-mix(in oklab, var(--color-foreground) 18%, transparent);
+    border-radius: 0.5rem;
+    background: color-mix(in oklab, var(--color-background) 88%, transparent);
+    box-shadow: 0 0.55rem 1.2rem color-mix(in oklab, var(--color-secondary-900) 18%, transparent);
+    color: var(--color-foreground);
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='mixed-two'] .markdown-gallery-column {
+    justify-content: center;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='featured-three'] > .markdown-gallery-column:first-child {
+    flex-grow: 1.05;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='featured-three'] > .markdown-gallery-column:last-child {
+    flex-grow: 0.95;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='featured-three'] .markdown-gallery-item {
+    display: flex;
+    min-height: 0;
+    flex: 1 1 0%;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='featured-three'] [data-markdown-image] {
+    display: flex !important;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='featured-three'] [data-markdown-image] > button {
+    min-height: 0;
+    flex: 1 1 0%;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='featured-three'] [data-markdown-image] [data-nimg] {
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five'] > .markdown-gallery-column:first-child {
+    flex-grow: 0.95;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five'] > .markdown-gallery-column:last-child {
+    display: grid;
+    flex-grow: 1.05;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    align-content: start;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five']
+    > .markdown-gallery-column:last-child
+    > .markdown-gallery-item {
+    display: flex;
+    min-height: 0;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five'] > .markdown-gallery-column:last-child [data-markdown-image] {
+    display: flex !important;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five']
+    > .markdown-gallery-column:last-child
+    [data-markdown-image]
+    > button {
+    min-height: 0;
+    flex: 1 1 0%;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five']
+    > .markdown-gallery-column:last-child
+    [data-markdown-image]
+    [data-nimg] {
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .markdown-gallery-grid[data-grid-layout='balanced-five']
+    > .markdown-gallery-column:last-child
+    > .markdown-gallery-item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .markdown-gallery-carousel {
+    overflow: visible;
+  }
+
+  .markdown-gallery-carousel-track {
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .markdown-gallery-carousel-track-inner {
+    display: flex;
+    width: 100%;
+    transition: transform 420ms var(--markdown-ease);
+    will-change: transform;
+  }
+
+  .markdown-gallery-carousel-slide {
+    display: flex;
+    flex: 0 0 100%;
+    width: 100%;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .markdown-gallery-carousel-slide[aria-hidden='true'] {
+    pointer-events: none;
+  }
+
+  .markdown-gallery-carousel-slide [data-markdown-image],
+  .markdown-gallery-carousel-slide [data-markdown-image] > button {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .markdown-gallery-carousel-slide [data-markdown-image] > button {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .markdown-gallery-carousel-slide [data-markdown-image] [data-nimg] {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: clamp(16rem, 50vw, 32rem) !important;
+    object-fit: contain !important;
+  }
+
+  .markdown-gallery-carousel-slide [data-markdown-image] .mt-2 {
+    display: none !important;
+  }
+
+  .markdown-gallery-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    padding: 0;
+  }
+
+  .markdown-gallery-carousel-nav {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in oklab, var(--color-foreground) 22%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-primary-300) 84%, var(--color-background));
+    color: var(--color-secondary-900);
+    cursor: pointer;
+    transition:
+      background-color 160ms var(--markdown-ease),
+      color 160ms var(--markdown-ease),
+      transform 160ms var(--markdown-ease),
+      box-shadow 160ms var(--markdown-ease);
+  }
+
+  .markdown-gallery-carousel-nav:hover {
+    background: var(--color-primary-400);
+    color: var(--color-secondary-900);
+    transform: scale(1.05);
+    box-shadow: 0 0.35rem 0.8rem color-mix(in oklab, var(--color-primary-300) 28%, transparent);
+  }
+
+  .markdown-gallery-carousel-nav:active {
+    transform: scale(0.95);
+  }
+
+  .markdown-gallery-carousel-nav:focus-visible,
+  .markdown-gallery-carousel-dot:focus-visible {
+    outline: 2px solid var(--color-primary-300);
+    outline-offset: 3px;
+  }
+
+  .markdown-gallery-carousel-dots {
+    display: flex;
+    max-width: min(45vw, 20rem);
+    align-items: center;
+    gap: 0.45rem;
+    overflow: hidden;
+    padding: 0.35rem 0.15rem;
+    border-radius: 999px;
+  }
+
+  .markdown-gallery-carousel-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-primary-300) 35%, var(--color-foreground));
+    cursor: pointer;
+    transition:
+      width 180ms var(--markdown-ease),
+      background-color 180ms var(--markdown-ease),
+      transform 180ms var(--markdown-ease);
+  }
+
+  .markdown-gallery-carousel-dot:hover {
+    background: color-mix(in oklab, var(--color-primary-300) 72%, var(--color-foreground));
+    transform: scale(1.25);
+  }
+
+  .markdown-gallery-carousel-dot[aria-current='true'] {
+    width: 1.25rem;
+    background: var(--color-primary-300);
+  }
+
+  .markdown-gallery-carousel-counter {
+    min-width: 2.75rem;
+    color: color-mix(in oklab, var(--color-foreground) 72%, transparent);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  .markdown-image-preview {
+    opacity: 0;
+    pointer-events: none;
+    overscroll-behavior: contain;
+    transition: opacity 260ms var(--markdown-ease);
+  }
+
+  .markdown-image-preview[data-visible='true'] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .markdown-image-preview-frame {
+    overflow: visible;
+  }
+
+  .markdown-image-preview-image-shell {
+    display: flex;
+    max-width: 100%;
+    max-height: calc(100dvh - 7rem);
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+      opacity 260ms var(--markdown-ease),
+      transform 320ms var(--markdown-ease);
+    will-change: opacity, transform;
+  }
+
+  .markdown-image-preview-image-shell[data-visible='true'] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .markdown-image-preview-caption {
+    position: fixed;
+    inset-inline: 1rem;
+    bottom: 1rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    max-width: min(48rem, calc(100vw - 2rem));
+    margin-inline: auto;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.5rem;
+    background: color-mix(in oklab, black 42%, transparent);
+    backdrop-filter: blur(0.5rem);
+  }
+
+  .markdown-image-preview-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in oklab, var(--color-primary-200) 58%, transparent);
+    border-radius: 999px;
+    background: var(--color-primary-300);
+    color: var(--color-secondary-900);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition:
+      background-color 160ms var(--markdown-ease),
+      color 160ms var(--markdown-ease),
+      transform 160ms var(--markdown-ease),
+      box-shadow 160ms var(--markdown-ease);
+  }
+
+  .markdown-image-preview-nav:hover {
+    background: var(--color-primary-400);
+    color: var(--color-secondary-900);
+    transform: translateY(-50%) scale(1.06);
+    box-shadow: 0 0.4rem 0.9rem color-mix(in oklab, var(--color-primary-300) 34%, transparent);
+  }
+
+  .markdown-image-preview-nav:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .markdown-image-preview-nav:focus-visible {
+    outline: 2px solid var(--color-primary-200);
+    outline-offset: 3px;
+  }
+
+  .markdown-image-preview-image {
+    animation: markdown-image-preview-enter 320ms var(--markdown-ease) both;
+  }
+
+  .markdown-image-preview-image--previous {
+    animation-name: markdown-image-preview-enter-previous;
+  }
+
+  @keyframes markdown-image-preview-enter {
+    from {
+      opacity: 0;
+      transform: translate3d(1.25rem, 0, 0) scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes markdown-image-preview-enter-previous {
+    from {
+      opacity: 0;
+      transform: translate3d(-1.25rem, 0, 0) scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .markdown-gallery-grid {
+      flex-direction: column;
+    }
+
+    .markdown-gallery-grid .markdown-gallery-column {
+      width: 100%;
+    }
+
+    .markdown-gallery-grid[data-grid-layout='balanced-five'] > .markdown-gallery-column:last-child {
+      grid-template-rows: none;
+      display: flex;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .markdown-tooltip-surface,
+    .markdown-image-preview,
+    .markdown-image-preview-image-shell,
+    .markdown-image-preview-image,
+    .markdown-image-preview-nav,
+    .markdown-gallery-carousel-track-inner,
+    .markdown-gallery-carousel-nav,
+    .markdown-gallery-carousel-dot {
+      transition: none;
+    }
+
+    .markdown-image-preview-image {
+      animation: none;
+    }
+  }
+}
