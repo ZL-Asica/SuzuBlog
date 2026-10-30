@@ -6,6 +6,8 @@ import { createPortal } from 'react-dom'
 import { CustomImage } from '@/components/ui'
 
 const CLOSE_ANIMATION_MS = 320
+const MIN_ZOOM = 1
+const MAX_ZOOM = 4
 
 interface PreviewItem {
   alt: string
@@ -54,6 +56,7 @@ export function MarkdownImagePreview() {
   const [preview, setPreview] = useState<PreviewState | null>(null)
   const [portalReady, setPortalReady] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [zoom, setZoom] = useState(MIN_ZOOM)
   const closeTimerRef = useRef<number | null>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
@@ -85,6 +88,7 @@ export function MarkdownImagePreview() {
       const gallery = getGalleryItems(button)
       triggerRef.current = button
       setVisible(false)
+      setZoom(MIN_ZOOM)
       setPreview({ ...gallery, direction: 'next' })
     }
 
@@ -101,6 +105,10 @@ export function MarkdownImagePreview() {
 
     return () => cancelAnimationFrame(frame)
   }, [preview?.items])
+
+  useEffect(() => {
+    setZoom(MIN_ZOOM)
+  }, [preview?.index])
 
   useEffect(() => {
     if (!visible) {
@@ -149,6 +157,10 @@ export function MarkdownImagePreview() {
         })
   }
 
+  const changeZoom = (delta: number) => {
+    setZoom(current => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, current + delta)))
+  }
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
       event.preventDefault()
@@ -159,7 +171,30 @@ export function MarkdownImagePreview() {
     if (hasNavigation && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       event.preventDefault()
       move(event.key === 'ArrowRight' ? 1 : -1)
+      return
     }
+
+    if (event.key === '+' || event.key === '=') {
+      event.preventDefault()
+      changeZoom(0.25)
+      return
+    }
+
+    if (event.key === '-') {
+      event.preventDefault()
+      changeZoom(-0.25)
+      return
+    }
+
+    if (event.key === '0') {
+      event.preventDefault()
+      setZoom(MIN_ZOOM)
+    }
+  }
+
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    changeZoom(-event.deltaY * 0.002)
   }
 
   const overlay = (
@@ -171,7 +206,7 @@ export function MarkdownImagePreview() {
       aria-label={`Image preview: ${item.alt}`}
       onClick={event => event.target === event.currentTarget && closePreview()}
       onKeyDown={handleKeyDown}
-      onWheel={event => event.preventDefault()}
+      onWheel={handleWheel}
     >
       <button
         ref={closeButtonRef}
@@ -205,16 +240,26 @@ export function MarkdownImagePreview() {
           </>
         )}
 
-        <div className="markdown-image-preview-image-shell" data-visible={visible}>
-          <CustomImage
-            key={`${preview.index}-${item.src}`}
-            className={`markdown-image-preview-image max-h-[calc(100dvh-7rem)] max-w-full rounded-md object-contain shadow-2xl${preview.direction === 'previous' ? ' markdown-image-preview-image--previous' : ''}`}
-            src={item.src}
-            alt={item.alt}
-            width={item.width}
-            height={item.height}
-            priority={false}
-          />
+        <div
+          className="markdown-image-preview-image-shell"
+          data-visible={visible}
+          onDoubleClick={() => setZoom(current => current === MIN_ZOOM ? 2 : MIN_ZOOM)}
+        >
+          <div
+            className="markdown-image-preview-image-zoom"
+            data-zoom={zoom}
+            style={{ transform: `scale(${zoom})` }}
+          >
+            <CustomImage
+              key={`${preview.index}-${item.src}`}
+              className={`markdown-image-preview-image max-h-[calc(100dvh-7rem)] max-w-full rounded-md object-contain shadow-2xl${preview.direction === 'previous' ? ' markdown-image-preview-image--previous' : ''}`}
+              src={item.src}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+              priority={false}
+            />
+          </div>
         </div>
         <div className="markdown-image-preview-caption" aria-live="polite">
           <span className="max-w-3xl text-center text-sm leading-relaxed text-white/85">{item.alt}</span>

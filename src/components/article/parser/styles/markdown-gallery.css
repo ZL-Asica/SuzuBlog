@@ -334,6 +334,12 @@
     transform: scale(1);
   }
 
+  .markdown-image-preview-image-zoom {
+    transition: transform 260ms var(--markdown-ease);
+    transform-origin: center;
+    will-change: transform;
+  }
+
   .markdown-image-preview-caption {
     position: fixed;
     inset-inline: 1rem;
@@ -440,6 +446,7 @@
     .markdown-tooltip-surface,
     .markdown-image-preview,
     .markdown-image-preview-image-shell,
+    .markdown-image-preview-image-zoom,
     .markdown-image-preview-image,
     .markdown-image-preview-nav,
     .markdown-gallery-carousel-track-inner,
