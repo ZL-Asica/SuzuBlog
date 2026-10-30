@@ -24,6 +24,10 @@
     line-height: 1.75;
   }
 
+  .markdown-image-caption {
+    color: color-mix(in oklab, var(--color-foreground) 68%, transparent);
+  }
+
   .markdown-unordered-list > .markdown-list-item {
     position: relative;
     padding-inline-start: 1.35rem;

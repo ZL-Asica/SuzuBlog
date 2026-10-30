@@ -111,6 +111,23 @@ export function MarkdownImagePreview() {
   }, [preview?.index])
 
   useEffect(() => {
+    if (preview == null) {
+      return
+    }
+
+    const scrollX = window.scrollX
+    const scrollY = window.scrollY
+    const restorePagePosition = () => {
+      if (window.scrollX !== scrollX || window.scrollY !== scrollY) {
+        window.scrollTo({ left: scrollX, top: scrollY, behavior: 'auto' })
+      }
+    }
+
+    window.addEventListener('scroll', restorePagePosition, { passive: true })
+    return () => window.removeEventListener('scroll', restorePagePosition)
+  }, [preview])
+
+  useEffect(() => {
     if (!visible) {
       return
     }
@@ -206,7 +223,7 @@ export function MarkdownImagePreview() {
       aria-label={`Image preview: ${item.alt}`}
       onClick={event => event.target === event.currentTarget && closePreview()}
       onKeyDown={handleKeyDown}
-      onWheel={handleWheel}
+      onWheelCapture={event => event.preventDefault()}
     >
       <button
         ref={closeButtonRef}
@@ -243,6 +260,7 @@ export function MarkdownImagePreview() {
         <div
           className="markdown-image-preview-image-shell"
           data-visible={visible}
+          onWheel={handleWheel}
           onDoubleClick={() => setZoom(current => current === MIN_ZOOM ? 2 : MIN_ZOOM)}
         >
           <div

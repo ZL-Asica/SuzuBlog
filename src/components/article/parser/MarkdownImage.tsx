@@ -101,7 +101,7 @@ const getImageClassName = (layout: ImageLayout): string => {
 }
 
 const getButtonClassName = (layout: ImageLayout): string => {
-  const baseClassName = 'group/image relative inline-flex max-w-full cursor-pointer overflow-hidden rounded-md align-middle outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+  const baseClassName = 'group/image relative inline-flex max-w-full cursor-zoom-in overflow-hidden rounded-md align-middle outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background'
 
   if (layout === 'full' || layout === 'wide') {
     return `${baseClassName} w-full justify-center`
@@ -160,8 +160,7 @@ export function MarkdownImage({
 
       {showCaption && (
         <span
-          className="markdown-image-caption mt-2 block text-center text-sm leading-relaxed text-gray-500 dark:text-gray-400"
-          data-image-caption=""
+          className="markdown-image-caption mt-2 block text-center text-sm leading-relaxed"
           title={meta.alt}
         >
           {meta.alt}

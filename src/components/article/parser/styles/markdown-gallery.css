@@ -46,37 +46,48 @@
     border-radius: 0.75rem;
   }
 
-  .markdown-gallery-grid .markdown-image-caption {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    margin-block: 0 !important;
-    overflow: hidden;
-    padding: 0.4rem 0.45rem 0.05rem;
-    color: color-mix(in oklab, var(--color-foreground) 68%, transparent);
-    font-size: 0.78rem;
-    line-height: 1.35;
-    text-align: start;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .markdown-gallery-grid .markdown-gallery-item:hover .markdown-image-caption,
-  .markdown-gallery-grid .markdown-gallery-item:focus-within .markdown-image-caption {
+  .markdown-gallery-grid .markdown-image-caption,
+  .markdown-gallery-carousel-slide .markdown-image-caption {
     position: absolute;
-    inset-inline: 0.45rem;
+    inset-inline-start: 50%;
     bottom: 0.45rem;
+    z-index: 2;
     width: max-content;
     max-width: calc(100% - 0.9rem);
-    overflow: visible;
+    margin-block: 0 !important;
+    overflow: hidden;
     padding: 0.45rem 0.6rem;
     border: 1px solid color-mix(in oklab, var(--color-foreground) 18%, transparent);
     border-radius: 0.5rem;
     background: color-mix(in oklab, var(--color-background) 88%, transparent);
     box-shadow: 0 0.55rem 1.2rem color-mix(in oklab, var(--color-secondary-900) 18%, transparent);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 0.5rem) scale(0.96);
+    transition:
+      opacity 220ms var(--markdown-ease),
+      transform 260ms var(--markdown-ease),
+      visibility 0s linear 260ms;
+  }
+
+  .markdown-gallery-grid [data-markdown-image]:hover .markdown-image-caption,
+  .markdown-gallery-grid [data-markdown-image]:focus-within .markdown-image-caption,
+  .markdown-gallery-carousel-slide [data-markdown-image]:hover .markdown-image-caption,
+  .markdown-gallery-carousel-slide [data-markdown-image]:focus-within .markdown-image-caption {
+    overflow: visible;
     color: var(--color-foreground);
     text-overflow: clip;
     white-space: normal;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0) scale(1);
+    transition-delay: 0s;
   }
 
   .markdown-gallery-grid[data-grid-layout='mixed-two'] .markdown-gallery-column {
@@ -197,6 +208,10 @@
     margin: 0 !important;
   }
 
+  .markdown-gallery-carousel-slide [data-markdown-image] {
+    position: relative;
+  }
+
   .markdown-gallery-carousel-slide [data-markdown-image] > button {
     height: auto !important;
     min-height: 0 !important;
@@ -208,10 +223,6 @@
     height: auto !important;
     max-height: clamp(16rem, 50vw, 32rem) !important;
     object-fit: contain !important;
-  }
-
-  .markdown-gallery-carousel-slide [data-markdown-image] .mt-2 {
-    display: none !important;
   }
 
   .markdown-gallery-carousel-controls {
@@ -305,6 +316,7 @@
     opacity: 0;
     pointer-events: none;
     overscroll-behavior: contain;
+    touch-action: none;
     transition: opacity 260ms var(--markdown-ease);
   }
 
@@ -321,8 +333,10 @@
     display: flex;
     max-width: 100%;
     max-height: calc(100dvh - 7rem);
+    cursor: zoom-in;
     opacity: 0;
     transform: scale(0.9);
+    touch-action: none;
     transition:
       opacity 260ms var(--markdown-ease),
       transform 320ms var(--markdown-ease);
