@@ -1,6 +1,4 @@
 minimumReleaseAgeExcludePrune: true
-minimumReleaseAgeExclude:
-  - twikoo@1.7.11
 
 trustPolicy: no-downgrade
 trustPolicyExclude:
