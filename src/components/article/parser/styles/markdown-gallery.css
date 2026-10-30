@@ -458,6 +458,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .markdown-tooltip-surface,
+    .markdown-image-caption,
     .markdown-image-preview,
     .markdown-image-preview-image-shell,
     .markdown-image-preview-image-zoom,
