@@ -61,14 +61,14 @@ export interface ExtendedMarkdownAdmonition {
   >
 }
 
-/** Discourse-style image gallery written with `[grid]` tags. */
+/** Discourse-style image gallery written with `[grid]` or `[grid mode=carousel]` tags. */
 export interface ExtendedMarkdownImageGallery {
   type: 'extendedMarkdownImageGallery'
   children: RootContent[]
   data: HtmlNodeData<
     'div',
     {
-      'data-gallery-mode': 'grid'
+      'data-gallery-mode': 'grid' | 'carousel'
     }
   >
 }

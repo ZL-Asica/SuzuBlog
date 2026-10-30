@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic'
 import { isValidElement } from 'react'
 import { SakuraIcon } from '@/components/ui'
 import { generateHierarchicalSlug, slugPrefix } from '@/services/utils'
+import { MarkdownGallery } from './gallery/MarkdownGallery'
 import { KEY_ICONS } from './keyboardIcons'
 import { MarkdownAdmonition } from './MarkdownAdmonition'
 import { MarkdownDetails, MarkdownSummary } from './MarkdownDetails'
-import { MarkdownGallery } from './MarkdownGallery'
 import { MarkdownImage } from './MarkdownImage'
 import {
   MarkdownAbbreviation,
@@ -32,7 +32,7 @@ type MarkdownSectionProps = ComponentPropsWithoutRef<'section'> & {
 }
 
 type MarkdownDivProps = ComponentPropsWithoutRef<'div'> & {
-  'data-gallery-mode'?: 'grid'
+  'data-gallery-mode'?: 'grid' | 'carousel'
   'node'?: unknown
 }
 
