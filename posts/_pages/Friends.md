@@ -302,10 +302,10 @@ showThumbnail: false
 "des": "梦想是去世界各地旅行！"
 },
 {
-"title": "SatouのBlog",
-"link": "https://www.matsusatou.top/",
+"title": "Soki Sugar Life",
+"link": "https://www.soki.moe/",
 "img": "https://cdn.jsdelivr.net/gh/SokiSama/picked@main/avatar.jpg",
-"des": "彼女の愛は、甘くて痛い"
+"des": "月下彼岸花"
 },
 {
 "title": "时隐重工",
@@ -348,12 +348,6 @@ showThumbnail: false
 "link": "https://blog.224418.xyz/",
 "img": "https://blog.224418.xyz/img/favicon.ico",
 "des": "想和你重新认识一次，从你叫什么开始"
-},
-{
-"title": "Soki Sugar Life",
-"link": "https://www.soki.moe/",
-"img": "https://cdn.jsdelivr.net/gh/SokiSama/picked@main/avatar.jpg",
-"des": "月下彼岸花"
 },
 {
 "title": "若愚",
